@@ -1,0 +1,11 @@
+{
+  "name": "rest_api",
+  "version": "1.0.0",
+  "description": "Rest API for interacting with the turbine database",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
