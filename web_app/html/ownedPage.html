@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/ownedPage.css" />
+    <link rel="stylesheet" href="../css/navbar.css" />
+    <link rel="stylesheet" href="../css/filters.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="../javascript/showPopUp.js"></script>
+    <title>Turbine Proprii</title>
+  </head>
+  <body>
+    <ul class="navBar">
+      <li id="title1">
+        Wind
+        <span id="title2">Turbine Management</span>
+      </li>
+      <li><a href="#" style="text-decoration: underline">Proprii</a></li>
+      <li><a href="publicPage.html">Publice</a></li>
+      <li>
+        <div onclick="popUp('notification')">
+          <img src="../images/bell.png" alt="bell icon" />
+          <ul class="notificationPopUp" id="notification">
+            <li>Firm x wantes to purchase your y turbine</li>
+            <li>Firm x accepted your offer for turbine y</li>
+            <li>Turbine x need maintenance</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div onclick="popUp('menu')">
+          <img src="../images/menu.png" alt="3 line menu icon" />
+          <ul class="menuPopUp" id="menu">
+            <li>Account</li>
+            <li onclick="location.href='landingPage.html'">Log out</li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+
+    <!-- ______________________ -->
+
+    <div class="filters">
+      <div class="filter">
+        <p class="filtersSearch" style="font-size: 35px; margin-bottom: 10px">
+          Filtre
+        </p>
+        <input class="searchbar" />
+      </div>
+
+      <div class="filter">
+        <p class="filtersText">Judet</p>
+        <select class="filterBox">
+          <option>Neamt</option>
+          <option>Bacau</option>
+          <option>Iasi</option>
+          <option>Galati</option>
+        </select>
+      </div>
+
+      <div class="filter">
+        <p class="filtersText">Stare</p>
+        <select class="filterBox">
+          <option>Perfecta</option>
+          <option>Buna</option>
+          <option>Rea</option>
+        </select>
+      </div>
+
+      <div class="filter">
+        <p class="filtersText">Firma</p>
+        <select class="filterBox">
+          <option>Rares</option>
+          <option>Vlad</option>
+          <option>Daniel</option>
+        </select>
+      </div>
+
+      <div class="filter">
+        <p class="filtersText">An constructie</p>
+        <div class="filterAni">
+          <p>De la</p>
+          <input class="an" />
+          <p>La</p>
+          <input class="an" />
+        </div>
+      </div>
+    </div>
+
+    <!-- ______________________ -->
+
+    <hr class="hLine" />
+    <main>
+      <ul class="shBar">
+        <li>
+          <div onclick="popUp('stats')">
+            Statistici<img src="../images/down.png" alt="dropdown icon" />
+            <div class="statsPopUp" id="stats">
+              <img src="../images/mockGraph.jpg" alt="graph placeholder" />
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div onclick="popUp('map')">
+            Harta<img src="../images/down.png" alt="dropdown icon" />
+            <div class="mapPopUp" id="map">
+              <img src="../images/map.jpg" alt="map placeholder" />
+            </div>
+          </div>
+        </li>
+        <li><img src="../images/plus.png" alt="Plus icon" /></li>
+      </ul>
+
+      <hr class="hLine" />
+
+      <ul class="cardList">
+        <li>
+          <ul class="cardInfo">
+            <li>Rdv1</li>
+            <li>2008</li>
+            <li>100kvh</li>
+            <li class="dButton"  onclick='location.href="turbineDetails.html"'>Detalii</li>
+          </ul>
+          <ul class="imgs">
+            <li>
+              <img src="../images/mockImage.jpg" alt="Image placeholder" />
+            </li>
+            <li>
+              <img src="../images/mockGraph.jpg" alt="Graph placeholder" />
+            </li>
+          </ul>
+        </li>
+        <li>
+          <ul class="cardInfo">
+            <li>Rdv1</li>
+            <li>2008</li>
+            <li>100kvh</li>
+            <li class="dButton" onclick='location.href="turbineDetails.html"'>Detalii</li>
+          </ul>
+          <ul class="imgs">
+            <li>
+              <img src="../images/mockImage.jpg" alt="Image placeholder" />
+            </li>
+            <li>
+              <img src="../images/mockGraph.jpg" alt="Graph placeholder" />
+            </li>
+          </ul>
+        </li>
+        <li onclick='location.href="turbineDetails.html"'>
+          <ul class="cardInfo">
+            <li>Rdv1</li>
+            <li>2008</li>
+            <li>100kvh</li>
+            <li class="dButton">Detalii</li>
+          </ul>
+          <ul class="imgs">
+            <li>
+              <img src="../images/mockImage.jpg" alt="Image placeholder" />
+            </li>
+            <li>
+              <img src="../images/mockGraph.jpg" alt="Graph placeholder" />
+            </li>
+          </ul>
+        </li>
+        <li>
+          <ul class="cardInfo">
+            <li>Rdv1</li>
+            <li>2008</li>
+            <li>100kvh</li>
+            <li class="dButton" onclick='location.href="turbineDetails.html"'>Detalii</li>
+          </ul>
+          <ul class="imgs">
+            <li>
+              <img src="../images/mockImage.jpg" alt="Image placeholder" />
+            </li>
+            <li>
+              <img src="../images/mockGraph.jpg" alt="Graph placeholder" />
+            </li>
+          </ul>
+        </li>
+        <li>
+          <ul class="cardInfo">
+            <li>Rdv1</li>
+            <li>2008</li>
+            <li>100kvh</li>
+            <li class="dButton" onclick='location.href="turbineDetails.html"'>Detalii</li>
+          </ul>
+          <ul class="imgs">
+            <li>
+              <img src="../images/mockImage.jpg" alt="Image placeholder" />
+            </li>
+            <li>
+              <img src="../images/mockGraph.jpg" alt="Graph placeholder" />
+            </li>
+          </ul>
+        </li>
+        <li>
+          <ul class="cardInfo">
+            <li>Rdv1</li>
+            <li>2008</li>
+            <li>100kvh</li>
+            <li class="dButton" onclick='location.href="turbineDetails.html"'>Detalii</li>
+          </ul>
+          <ul class="imgs">
+            <li>
+              <img src="../images/mockImage.jpg" alt="Image placeholder" />
+            </li>
+            <li>
+              <img src="../images/mockGraph.jpg" alt="Graph placeholder" />
+            </li>
+          </ul>
+        </li>
+        <li>
+          <ul class="cardInfo">
+            <li>Rdv1</li>
+            <li>2008</li>
+            <li>100kvh</li>
+            <li class="dButton" onclick='location.href="turbineDetails.html"'>Detalii</li>
+          </ul>
+          <ul class="imgs">
+            <li>
+              <img src="../images/mockImage.jpg" alt="Image placeholder" />
+            </li>
+            <li>
+              <img src="../images/mockGraph.jpg" alt="Graph placeholder" />
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </main>
+  </body>
+</html>

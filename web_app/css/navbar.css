@@ -1,0 +1,128 @@
+ul.navBar
+{
+    position: sticky;
+    list-style-type: none;
+    top:0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    width: 100%;
+    background-color: #01A1BA;
+    z-index: 3;
+}
+
+ul.navBar li 
+{
+    font-family: Lato;
+    font-weight: 700;
+    font-size: 20px;
+    color: #ECFCFF;
+    padding: 5px;
+    padding-left: 20px;
+}
+
+ul.navBar li a
+{
+    text-decoration: none;
+    color: inherit;
+}
+
+ul.navBar li a:hover, ul.navBar li a:active
+{
+    text-decoration: underline;
+}
+
+ul.navBar li div
+{
+    cursor: pointer;
+}
+
+ul.navBar li div .notificationPopUp
+{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    visibility: hidden;
+    width: 120px;
+    height: auto;
+    background-color: #01A1BA;
+    position: absolute;
+    z-index: 1;
+    top: 50px;
+    margin-left: -130px;
+}
+
+ul.navBar li div .menuPopUp
+{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    visibility: hidden;
+    width: 120px;
+    height: auto;
+    background-color: #01A1BA;
+    position: absolute;
+    z-index: 1;
+    top: 50px;
+    margin-left: -130px;
+}
+
+
+ul.navBar li div .notificationPopUp li, ul.navBar li div .menuPopUp li
+{
+    font-family: Lato;
+    font-weight: bolder;
+    font-size: 15px;
+    color: #ECFCFF;
+}
+
+
+ul.navBar li div .show 
+{
+    visibility: visible;
+}
+
+#title1
+{
+    font-family: Inter;
+    font-weight: bolder;
+    font-size: 30px;
+    color: #ECFCFF;
+    margin-right: auto;
+}
+
+#title2
+{
+    font-family: Inter;
+    font-weight: bolder;
+    font-size: 20px;
+    color: #05595B;
+}
+
+@media screen and (max-width: 500px) 
+{
+    ul.navBar
+    {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    ul.navBar li:nth-child(2), ul.navBar li:nth-child(3)
+    {
+        order: 1;
+    }
+}
+
+

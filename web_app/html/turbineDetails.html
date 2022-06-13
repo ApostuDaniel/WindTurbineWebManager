@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/navbar.css" />
+    <link rel="stylesheet" href="../css/turbineDetails.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Imprima&display=swap"
+      rel="stylesheet"
+    />
+    <script src="../javascript/mapOnClick.js"></script>
+    <title>Turbine Details</title>
+  </head>
+
+  <body>
+    <ul class="navBar">
+      <li id="title1">
+        Wind
+        <span id="title2">Turbine Management</span>
+      </li>
+      <li><a href="ownedPage.html" >Proprii</a></li>
+      <li><a href="publicPage.html" >Publice</a></li>
+      <li>
+        <div onclick="showMapOnClick('notification')">
+          <img src="../images/bell.png" alt="bell icon" />
+          <ul class="notificationPopUp" id="notification">
+            <li>Firm x wantes to purchase your y turbine</li>
+            <li>Firm x accepted your offer for turbine y</li>
+            <li>Turbine x need maintenance</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div onclick="showMapOnClick('menu')">
+          <img src="../images/menu.png" alt="3 line menu" />
+          <ul class="menuPopUp" id="menu">
+            <li>Account</li>
+            <li onclick="location.href='landingPage.html'">Log out</li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+
+    <ul class="sidenav">
+      <li><a href="#harta">Map</a></li>
+      <li><a href="#stare">Stare</a></li>
+      <li><a href="#vant">Vant</a></li>
+      <li><a href="#energie">Energie</a></li>
+      <li><a href="#eficienta">Eficienta</a></li>
+    </ul>
+
+    <div class="graphs">
+      <div class="info">
+        <div class="fields">
+          <div class="text">
+            <p>Nume: RDV</p>
+            <p>Firma: RDV</p>
+            <p>An constructie: 2022</p>
+            <p>Email: rdv@yahoo.com</p>
+            <p>Telefon:0754343543</p>
+            <p>Medie kw/h:25</p>
+          </div>
+          <img src="/images/mockImage.jpg" alt=" turbine image placeholder" />
+        </div>
+        <div class="buttons">
+          <button>Opreste</button>
+          <button>Seteaza Privat</button>
+          <button>Elimina</button>
+        </div>
+      </div>
+      <div class="graph" id="harta">
+        <img src="/images/map.jpg" alt="map placeholder" />
+      </div>
+      <div class="graph" id="stare">
+        <img src="/images/mockGraph.jpg" alt="graph placeholder" />
+      </div>
+      <div class="graph" id="vant">
+        <img src="/images/mockGraph.jpg" alt="graph placeholder" />
+      </div>
+      <div class="graph" id="energie">
+        <img src="/images/mockGraph.jpg" alt="graph placeholder" />
+      </div>
+      <div class="graph" id="eficienta">
+        <img src="/images/mockGraph.jpg" alt="graph placeholder" />
+      </div>
+    </div>
+  </body>
+</html>
