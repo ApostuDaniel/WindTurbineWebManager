@@ -18,6 +18,21 @@ const server = http.createServer((req, res) => {
       case 'GET':
         if (req.url === '/api/users') {
           userController.getUsers(req, res)
+        } else if (req.url.match(/\/api\/users\/\w+$/)) {
+          const id = req.url.split('/')[3]
+          userController.getUser(req, res, id)
+        } else if (req.url.match(/\/api\/users\/notifications$/)) {
+          const id = req.url.split('/')[3]
+          userController.getUser(req, res, id)
+        } else if (req.url.match(/\/api\/users\/alerts$/)) {
+          const id = req.url.split('/')[3]
+          userController.getUser(req, res, id)
+        } else if (req.url.match(/\/api\/users\/\w+\/notifications$/)) {
+          const id = req.url.split('/')[3]
+          userController.getUserNotifications(req, res, id)
+        } else if (req.url.match(/\/api\/users\/\w+\/alerts$/)) {
+          const id = req.url.split('/')[3]
+          userController.getUserAlerts(req, res, id)
         } else {
           throw new Error('GET route not found')
         }
