@@ -2,12 +2,12 @@ const mongoose = require('mongoose')
 
 const alertSchema = new mongoose.Schema({
   idUser: {
-    type: mongoose.SchemaType.ObjectId,
+    type: mongoose.SchemaTypes.ObjectId,
     ref: 'User',
     required: true,
   },
   idTurbine: {
-    type: mongoose.SchemaType.ObjectId,
+    type: mongoose.SchemaTypes.ObjectId,
     ref: 'Turbine',
     required: true,
   },

@@ -2,9 +2,9 @@ const mongoose = require('mongoose')
 
 const turbineSchema = new mongoose.Schema({
   userId: {
-    type: mongoose.SchemaType.ObjectId,
+    type: mongoose.SchemaTypes.ObjectId,
     ref: 'User',
-    required: true
+    required: true,
   },
   name: { type: String, required: true },
   constructionYear: { type: Date, required: true },

@@ -3,11 +3,11 @@ const TurbineData = require('./TurbineData')
 
 const allTurbineDataSchema = new mongoose.Schema({
   turbineId: {
-    type: mongoose.SchemaType.ObjectId,
+    type: mongoose.SchemaTypes.ObjectId,
     ref: 'Turbine',
     required: true,
   },
   historicData: [TurbineData],
 })
 
-module.exports = mongoose.Model('AllTurbineData', allTurbineDataSchema)
+module.exports = mongoose.model('AllTurbineData', allTurbineDataSchema)
