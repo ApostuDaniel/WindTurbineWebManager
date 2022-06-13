@@ -4,7 +4,8 @@
   "description": "Rest API for interacting with the turbine database",
   "main": "index.js",
   "scripts": {
-    "devStart": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
