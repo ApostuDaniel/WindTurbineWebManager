@@ -1,12 +1,14 @@
 const mongoose = require('mongoose')
 const http = require('http')
 const userController = require('./controllers/UserController')
+const turbineController = require('./controllers/TurbineController')
 const PORT = process.env.port || 5000
-const User = require('./schemas/User')
-const Turbine = require('./schemas/Turbine')
-const AllTurbineData = require('./schemas/AllTurbineData')
-const Notification = require('./schemas/Notification')
-const Alert = require('./schemas/Alert')
+
+// const User = require('./schemas/User')
+// const Turbine = require('./schemas/Turbine')
+// const AllTurbineData = require('./schemas/AllTurbineData')
+// const Notification = require('./schemas/Notification')
+// const Alert = require('./schemas/Alert')
 
 mongoose.connect(
   'mongodb+srv://dandadan:proiect_web@cluster0.6dca8.mongodb.net/?retryWrites=true&w=majority'
@@ -33,6 +35,8 @@ const server = http.createServer((req, res) => {
         } else if (req.url.match(/\/api\/users\/\w+\/alerts$/)) {
           const id = req.url.split('/')[3]
           userController.getUserAlerts(req, res, id)
+        } else if (req.url === '/api/turbines') {
+          turbineController.getTurbines(req, res)
         } else {
           throw new Error('GET route not found')
         }
