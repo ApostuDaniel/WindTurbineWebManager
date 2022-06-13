@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const http = require('http')
-const PORT = 5000
+const userController = require('./controllers/UserController')
+const PORT = process.env.port || 5000
 const User = require('./schemas/User')
 const Turbine = require('./schemas/Turbine')
 const AllTurbineData = require('./schemas/AllTurbineData')
@@ -10,6 +11,40 @@ const Alert = require('./schemas/Alert')
 mongoose.connect(
   'mongodb+srv://dandadan:proiect_web@cluster0.6dca8.mongodb.net/?retryWrites=true&w=majority'
 )
+
+const server = http.createServer((req, res) => {
+  try {
+    switch (req.method) {
+      case 'GET':
+        if (req.url === '/api/users') {
+          userController.getUsers(req, res)
+        } else {
+          throw new Error('GET route not found')
+        }
+        break
+      case 'POST':
+        res.writeHead(200, { 'Content-Type': 'text/html' })
+        res.end('<h1>Header</h1>')
+        break
+      case 'PUT':
+        res.writeHead(200, { 'Content-Type': 'text/html' })
+        res.end('<h1>Header</h1>')
+        break
+      case 'DELETE':
+        res.writeHead(200, { 'Content-Type': 'text/html' })
+        res.end('<h1>Header</h1>')
+        break
+      default:
+        throw new Error('Unacceptable http verb')
+    }
+  } catch (error) {
+    console.log(error)
+    res.writeHead(404, { 'Content-Type': 'application/json' })
+    res.end(JSON.stringify({ message: 'Route Not Found' }))
+  }
+})
+
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 
 // const run = async () => {
 //   try {

@@ -16,6 +16,9 @@ const notificationSchema = new mongoose.Schema({
     ref: 'Turbine',
     required: true,
   },
+  isOfferAccepted: {
+    type: Boolean,
+  },
 })
 
 module.exports = mongoose.model('Notification', notificationSchema)

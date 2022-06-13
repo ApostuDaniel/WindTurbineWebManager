@@ -6,6 +6,7 @@ const allTurbineDataSchema = new mongoose.Schema({
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'Turbine',
     required: true,
+    unique: true,
   },
   historicData: [TurbineData],
 })

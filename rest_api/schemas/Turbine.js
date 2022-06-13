@@ -6,7 +6,7 @@ const turbineSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
-  name: { type: String, required: true },
+  name: { type: String, required: true, unique: true },
   constructionYear: { type: Date, required: true },
   imageLink: { type: String },
   latitude: { type: Number, required: true },

@@ -3,12 +3,13 @@ const mongoose = require('mongoose')
 const userSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  company: { type: String, required: true },
-  CNP: { type: String, required: true },
+  company: { type: String, required: true, unique: true },
+  CNP: { type: String, required: true, unique: true },
   mail: {
     type: String,
     required: true,
     lowercase: true,
+    unique: true,
     validate: {
       validator: (email) =>
         String(email)
@@ -19,7 +20,7 @@ const userSchema = new mongoose.Schema({
       message: (props) => `${props} deemed invalid by email regex`,
     },
   },
-  phone: { type: String, required: true },
+  phone: { type: String, required: true, unique: true },
   adress: String,
   birthDate: Date,
   password: { type: String, required: true },
