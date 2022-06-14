@@ -7,7 +7,7 @@ async function getCreateTurbinePage(req, res) {
   try {
     res.writeHead(200, { 'Content-Type': 'text/html' })
     var htmlContent = fs.readFileSync(
-      __dirname + '/../views/pages/createTurbine.html',
+      __dirname + '/../views/pages/createTurbine.ejs',
       'utf8'
     )
 
