@@ -1,0 +1,95 @@
+<style>
+
+html,body 
+{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Ubuntu;
+}
+
+.wrapper
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+
+.configuration-panel
+{
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to left top, rgba(1, 161, 186, 0.5), rgba(186, 124, 237, 0.5));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.2vw;
+}
+
+#map 
+{
+  height: 100%;
+  width: 50%;
+}
+
+.attribute-wrapper
+{
+  width: 50%;
+  height: auto;
+  border: 1px solid black;
+}
+
+.attribute
+{
+  margin: 20px;
+  padding-left: 15px;
+  font-weight: bold;
+  border-left: 1vw solid rgba(186, 124, 237, 0.5);
+}
+
+.form
+{
+  height: auto;
+  width: 50%;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: left;
+}
+
+
+.form label
+{
+  margin-left: 20px;
+  width: 50%;
+}
+
+.form input
+{
+  margin-bottom: 10px;
+  margin-left: 20px;
+  width: 50%;
+}
+
+
+@media screen and (max-width: 800px) 
+{
+  .attribute-wrapper
+  {
+    width: 70%;
+    height: auto;
+  }
+
+  .configuration-panel
+  {
+    font-size: 2.5vw;
+  }
+}
+
+</style>

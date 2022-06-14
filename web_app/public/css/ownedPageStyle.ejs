@@ -1,0 +1,206 @@
+<style>
+html
+{
+    height: 100%;
+    user-select: none;
+}
+
+body
+{
+    margin: 0;
+    background-color: #ECFCFF;
+}
+
+ul.shBar
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    list-style-type: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    margin-top: 2%;
+    background-color: #ECFCFF;
+}
+
+ul.shBar li
+{
+    color: #01A1BA;
+    font-family: Lato;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 5px;
+    padding-left: 20px;
+}
+
+ul.shBar li img
+{
+    width: 15px;
+    margin-left: 5px;
+}
+
+ul.shBar li:nth-child(3) img
+{
+    width: 30px;
+}
+
+ul.shBar li:nth-child(3)
+{
+    margin-left: 100px;
+}
+
+ul.shBar li div , ul.shBar li div
+{
+    cursor: pointer;
+}
+
+ul.shBar li div .statsPopUp, ul.shBar li div .mapPopUp
+{
+    visibility: hidden;
+    width: 50%;
+    height: 400px;
+    background-color: #B7E4ED;
+    position: absolute;
+    z-index: 1;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media screen and (max-width: 1000px) 
+{
+    ul.shBar li div .statsPopUp, ul.shBar li div .mapPopUp
+    {
+        width: 40%;
+        height: 200px;
+    }
+}
+
+
+
+ul.shBar li div .statsPopUp img, ul.shBar li div .mapPopUp img
+{
+    width: 70%;
+    height: 90%;
+    margin: 0;
+    display: block;
+    margin: auto;
+}
+
+.hLine
+{
+    background-color: #b7e4ed;
+    height: 2px;
+}
+
+
+
+
+
+ul.cardList
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: #ECFCFF;
+    margin: 0;
+    padding: 0;
+}
+
+ul.cardList li
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #b7e4ed;
+    width: 40vw;
+    height: 30vw;
+    margin-top: 3%;
+}
+
+
+
+
+ul.cardInfo
+{
+    background-color: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 40%;
+    height: 100%;
+    border-radius: 5px;
+    border-bottom-left-radius: 30px;
+}
+
+ul.cardInfo li
+{
+    font-family: Lato;
+    font-weight: semibold;
+    font-size: 15px;
+    width: auto;
+    color: #01A1BA;
+    box-shadow: none;
+}
+
+ul.cardInfo li.dButton
+{
+    font-family: Lato;
+    font-weight: semibold;
+    font-size: 15px;
+    background-color: #01A1BA;
+    padding: 5px;
+    height: auto;
+    width: auto;
+    color: #b7e4ed;
+    border-radius: 0;
+}
+
+
+ul.cardInfo li.dButton:hover
+{
+    font-family: Lato;
+    font-weight: semibold;
+    cursor: pointer;
+    font-size: 15px;
+    background-color: #b7e4ed;
+    padding: 5px;
+    height: auto;
+    width: auto;
+    color: #01A1BA;
+    border: 1px solid #01A1BA;
+}
+
+ul.imgs
+{
+    width: 60%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: inherit;
+}
+
+ul.imgs li
+{
+    width: 80%;
+    height: 60%;
+    box-shadow: none;
+}
+
+ul.imgs li img
+{
+    width: 100%;
+    height: 100%;
+}
+
+</style>

@@ -1,0 +1,126 @@
+html
+{
+    height: 100%;
+}
+
+body
+{
+    background-image: url(../images/bgimg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+}
+
+#moto
+{
+    font-family: Inter;
+    font-weight: bolder;
+    font-size: 3vw;
+    color: #01A1BA;
+}
+
+#moto::first-letter
+{
+    transform: rotateX(90deg);
+}
+
+#sidebar
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to left top, rgba(1, 161, 186, 0.5), rgba(186, 124, 237, 0.5));
+    width: 50vw;
+    height: 100%;
+}
+
+#menu
+{
+    display: flex;
+    flex-direction: column;
+    padding-top: 20%;
+    align-items: center;
+}
+
+#register
+{
+    padding: 15px;
+    background-color: #01A1BA;
+    width: 40%;
+    border: 0;
+    margin-top: 40px;
+    font-family: Inter;
+    font-weight: bold;
+    font-size: 15px;
+    color: #ECFCFF;
+    transition: 400ms ease-in-out;
+    border-radius: 50px;
+}
+
+#login
+{
+    padding: 15px;
+    width: 40%;
+    margin-top: 40px;
+    font-family: Inter;
+    font-weight: bold;
+    font-size: 15px;
+    background: none; 
+    border: 1px solid #01a1ba; 
+    color: #01a1ba;
+    transition: 300ms ease-in-out;
+    border-radius: 50px;
+}
+
+#login:hover, #register:hover
+{
+    transform: skewX(-5deg) skewY(-5deg);
+    box-shadow: 5px 5px 0px #05595B;
+}
+
+#title1
+{
+    position: absolute;
+    font-family: Inter;
+    font-weight: semibold;
+    font-size: 3vw;
+    color: #01A1BA;
+    margin-left: 35%;
+    transition: 500ms ease-in-out;
+    z-index: 1;
+}
+
+
+#title2
+{
+    font-family: Inter;
+    font-weight: bolder;
+    font-size: 2vw;
+    color: #05595B;
+}
+
+
+@media screen and (max-width: 800px) 
+{
+    #register
+    {
+        padding: 10px;
+        font-family: Inter;
+        font-size: 9px;
+    }
+
+    #login
+    {
+        padding: 10px;
+        margin-top: 40px;
+        font-size: 9px;
+        background: none; 
+    }
+}
+
+
+/* #windmill
+{
+    width: 70%;
+    height: 200px;
+} */

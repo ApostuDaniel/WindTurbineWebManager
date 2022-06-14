@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <% var dir = process.cwd() %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <%- include(dir+'/public/css/createTurbinePage'); %>
+    <%- include(dir+'/views/scripts/renderMap'); %>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div id="map"></div>
+      <div class="configuration-panel">
+        <div class="attribute-wrapper">
+          <div class="attribute"><span id="location"></span></div>
+          <div class="attribute">Latitude: <span id="lat"></span></div>
+          <div class="attribute">Longitude: <span id="lng"></span></div>
+          <div class="attribute">Wind speed: <span id="wind"></span> mph</div>
+          <div class="attribute">Temperature: <span id="temperature"></span> °C</div>
+          <div class="attribute">Humidity: <span id="humidity"></span> g/m<sup>3</sup></div>
+          <div class="attribute">Altitude: <span id="altitude"></span> m</div>
+          <div class="attribute">Soil moisture: <span id="soil-moisture"></span>%</div>
+        </div>
+          <form class="form" action="">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Turbine name">
+          
+            <label for="image">Image Link</label>
+            <input type="text" id="image" name="image" placeholder="Turbine image link">
+            <input type="submit" value="Create">
+          </form>
+      </div>
+    </div>
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0m_3MppCVS4i2BKqDXvqN_Cev4apSnEw&callback=initMap&v=weekly"
+        defer
+    ></script>
+  </body>
+</html>

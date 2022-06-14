@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ro">
+    <% var dir = process.cwd() %> 
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include(dir+'/public/css/ownedPageStyle'); %>
+    <%- include(dir+'/public/css/navBarStyle'); %>
+    <%- include(dir+'/public/css/filtersStyle'); %>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="../javascript/showPopUp.js"></script>
+    <title>Turbine Proprii</title>
+  </head>
+  <body>
+    <ul class="navBar">
+      <li id="title1">
+        Wind
+        <span id="title2">Turbine Management</span>
+      </li>
+      <li><a href="#">Proprii</a></li>
+      <li><a href="publicPage.html">Publice</a></li>
+      <li>
+        <div onclick="popUp('notification')">
+          <img src="../images/bell.png" alt="bell icon" />
+          <ul class="notificationPopUp" id="notification">
+            <li>Firm x wantes to purchase your y turbine</li>
+            <li>Firm x accepted your offer for turbine y</li>
+            <li>Turbine x need maintenance</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div onclick="popUp('menu')">
+          <img src="../images/menu.png" alt="3 line menu icon" />
+          <ul class="menuPopUp" id="menu">
+            <li>Account</li>
+            <li onclick="location.href='landingPage.html'">Log out</li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+
+    <!-- ______________________ -->
+
+    <div class="filters">
+      <div class="filter">
+        <p class="filtersSearch" style="font-size: 35px; margin-bottom: 10px">
+          Filtre
+        </p>
+        <input class="searchbar" />
+      </div>
+
+      <div class="filter">
+        <p class="filtersText">Judet</p>
+        <select class="filterBox">
+          <option>Neamt</option>
+          <option>Bacau</option>
+          <option>Iasi</option>
+          <option>Galati</option>
+        </select>
+      </div>
+
+      <div class="filter">
+        <p class="filtersText">Stare</p>
+        <select class="filterBox">
+          <option>Perfecta</option>
+          <option>Buna</option>
+          <option>Rea</option>
+        </select>
+      </div>
+
+      <div class="filter">
+        <p class="filtersText">Firma</p>
+        <select class="filterBox">
+          <option>Rares</option>
+          <option>Vlad</option>
+          <option>Daniel</option>
+        </select>
+      </div>
+
+      <div class="filter">
+        <p class="filtersText">An constructie</p>
+        <div class="filterAni">
+          <p>De la</p>
+          <input class="an" />
+          <p>La</p>
+          <input class="an" />
+        </div>
+      </div>
+    </div>
+
+    <!-- ______________________ -->
+
+    <hr class="hLine" />
+    
+    <ul class="cardList">
+        <% for(turbine of turbines) {%> <%-
+            include(dir + "/views/partials/ownedTurbine", {turbine:turbine}) %> <% }
+            %>
+    </ul> 
+   
+    
+  
+    
+  </body>
+</html>
