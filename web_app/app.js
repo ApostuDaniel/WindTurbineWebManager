@@ -10,6 +10,7 @@ const server = http.createServer((req, res) => {
   try {
     if (req.url === '/pages/public') {
       PageController.getPublicPage(req, res)
+<<<<<<< HEAD
     }
     else if (req.url === '/pages/owned')
       {
@@ -17,6 +18,12 @@ const server = http.createServer((req, res) => {
       }
     
     else {
+=======
+    } else 
+    if (req.url === '/pages/createTurbine') {
+      CretaeTurbineController.getCreateTurbinePage(req, res)
+    } else {
+>>>>>>> 7c3821a170978cdd92fe837a89badacb3dc699ec
       res.writeHead(404, { 'Content-Type': 'text/html' })
       res.end('<h1>404 NOT FOUND</h1>')
     }
