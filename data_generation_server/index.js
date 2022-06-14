@@ -27,8 +27,8 @@ async function updateTurbines()
 }
 
 async function updateTurbine(turbine) {
-    const id = turbine.id;
-    const turbine_latest_data_api_url = `localhost:5000/api/turbines/data/${id}`;
+    const id = turbine._id;
+    const turbine_latest_data_api_url = `http://localhost:5000/api/turbines/data/${id}/new`;
 
     const data = await fetch(turbine_latest_data_api_url);
     const turbine_data = await data.json();
