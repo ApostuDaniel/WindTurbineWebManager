@@ -6,7 +6,16 @@ const turbineSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
-  name: { type: String, required: true, unique: true },
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+    validate: {
+      validator: (name) => String(name).match(/\w+/),
+      message: (props) =>
+        `${props} must contain only alpha numeric charachters`,
+    },
+  },
   constructionYear: { type: Date, required: true },
   imageLink: { type: String },
   latitude: { type: Number, required: true },
