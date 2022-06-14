@@ -22,7 +22,7 @@ async function updateTurbines()
             break;
         }
 
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise(resolve => setTimeout(resolve, 5000));
     }
 }
 
@@ -31,23 +31,33 @@ async function updateTurbine(turbine) {
     const turbine_latest_data_api_url = `http://localhost:5000/api/turbines/data/${id}/new`;
 
     const data = await fetch(turbine_latest_data_api_url);
-    const turbine_data = await data.json();
+    const turbineData = await data.json();
 
-    console.log(turbine_data);
+    console.log(turbineData);
 
+    const lat = turbine.latitude;
+    const lng = turbine.longitude;
+    const oldWindSpeed = turbineData.windSpeed;
+    const oldTurbineWear = turbineData.turbineWear;
+    const oldPowerGenerated = turbineData.powerGenerated;
+    const oldEfficiency = turbineData.eficiency;
 
-    // const lat = turbine.latitude;
-    // const lng = turbine.longitude;
+    var newData = {
+        windSpeed: oldWindSpeed + 1,
+        turbineWear: oldTurbineWear + 1,
+        powerGenerated: oldPowerGenerated + 1,
+        eficiency: oldEfficiency + 1
+    }
+
+    console.log(newData);
 
     // const weather_api_url = `http://api.weatherapi.com/v1/current.json?key=2407cb95cd0e4b31971101252221306&q=${lat},${lng}&aqi=no`;
     // const response = await fetch(weather_api_url);
     // const json = await response.json();
-
     // const locat = json.location.country + ', ' + json.location.region + ', ' + json.location.name;
     // const wind = json.current.wind_mph;
     // const temp = json.current.temp_c;
     // const hum = json.current.humidity;
-
     // console.log(locat);
 }
 
