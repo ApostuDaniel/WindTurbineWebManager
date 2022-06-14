@@ -41,6 +41,7 @@
       infoWindow.setContent(locat + " " + lat + " " + lng);
       infoWindow.open(map);
   
+      updateAtributes(locat, lat, lng, wind, temp, hum, alt, sol);
       
     }, {passive: true})
   }
@@ -64,7 +65,26 @@
     return json.results[0].elevation;
   }
   
-  
+  function updateAtributes(locat, lat, lng, wind, temp, hum, alt, sol) {
+    var lc = document.getElementById("location");
+    var lt = document.getElementById("lat");
+    var ln = document.getElementById("lng");
+    var wnd = document.getElementById("wind");
+    var tmp = document.getElementById("temperature");
+    var hm = document.getElementById("humidity");
+    var al = document.getElementById("altitude");
+    var sl = document.getElementById("soil-moisture");
+
+    lt.innerHTML = lat;
+    ln.innerHTML = lng;
+    lc.innerHTML = locat;
+    wnd.innerHTML = wind;
+    tmp.innerHTML = temp;
+    hm.innerHTML = hum;
+    al.innerHTML = alt;
+    sl.innerHTML = sol;
+  }
+
   
   window.initMap = initMap;
   
