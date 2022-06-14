@@ -68,6 +68,9 @@ const server = http.createServer((req, res) => {
 
         break
       case 'POST':
+        if (req.url === 'api/turbines') {
+          turbineController.createTurbine(req, res)
+        }
         res.writeHead(200, { 'Content-Type': 'text/html' })
         res.end('<h1>Header</h1>')
         break

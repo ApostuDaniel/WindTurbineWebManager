@@ -3,6 +3,8 @@ const mongoose = require('mongoose')
 const Turbine = require('./../schemas/Turbine')
 const AllTurbineData = require('./../schemas/AllTurbineData')
 
+//GET
+
 // @desc    Gets All turbines
 // @route   GET /api/turbines
 async function getTurbines(req, res) {
@@ -144,7 +146,7 @@ async function getNewestTurbineData(req, res, id) {
     ) {
       res.writeHead(200, { 'Content-Type': 'application/json' })
 
-      res.end(JSON.stringify(turbineData.historicData.slice(-1)))
+      res.end(JSON.stringify(turbineData.historicData.slice(-1)[0]))
     } else {
       res.writeHead(404, { 'Content-Type': 'application/json' })
       res.end(
@@ -155,6 +157,34 @@ async function getNewestTurbineData(req, res, id) {
     console.log(error)
   }
 }
+
+//POST
+
+// @desc    POSTS a new turbine
+// @route   POST /api/turbines
+//The request body should contain the following elements
+// userId: {
+//   type: mongoose.SchemaType.ObjectId,
+//   ref: 'User',
+// },
+// name: { type: String, required: true },
+// constructionYear: { type: Date, required: true },
+// imageLink: { type: String },
+// latitude: { type: Number, required: true },
+// longitude: { type: Number, required: true },
+// altitude: { type: Number, required: true },
+// terrain: { type: String, required: true },
+// suitability: { type: Number, required: true, min: 0, max: 100 },
+// isPublic: { type: Boolean, required: true },
+// turbineState: {
+//   type: String,
+//   required: true,
+//   validate: {
+//     validator: (state) =>
+//       state === 'Maintenance' || state === 'Stopped' || state === 'Running',
+//     message: (props) => `${props} is not a valid turbine state`,
+//   },
+// },
 
 module.exports = {
   getTurbines,
