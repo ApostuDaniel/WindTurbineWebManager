@@ -9,7 +9,13 @@ const server = http.createServer((req, res) => {
   try {
     if (req.url === '/pages/public') {
       PageController.getPublicPage(req, res)
-    } else {
+    }
+    else if (req.url === '/pages/owned')
+      {
+        PageController.getPrivatePage(req,res)
+      }
+    
+    else {
       res.writeHead(404, { 'Content-Type': 'text/html' })
       res.end('<h1>404 NOT FOUND</h1>')
     }

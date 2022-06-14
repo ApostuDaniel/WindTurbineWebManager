@@ -1,5 +1,15 @@
-<div>
-  <p><%= turbine.name %></p>
-  <p><%= turbine.longitude %></p>
-  <p><%= turbine.latitude %></p>
+
+
+
+
+<div class="turbine">
+  <div class="header">
+    <img src="../../public/images/menu.png" alt="spinner placeholder" />
+    <p><%= turbine.name %></p>
+    <p style="visibility: hidden">ab</p>
+  </div>
+  <div class="content">
+    <p>Longitude:<%= turbine.longitude %></p>
+    <p>Latitude:<%= turbine.latitude %></p>
+  </div>
 </div>

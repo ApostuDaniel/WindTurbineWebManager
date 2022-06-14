@@ -1,3 +1,4 @@
+
 const fs = require('fs')
 const ejs = require('ejs')
 const fetch = (url) =>
@@ -11,6 +12,7 @@ async function getPublicPage(req, res) {
       'utf8'
     )
 
+    
     const turbineData = await getTurbines()
 
     var htmlRenderized = ejs.render(htmlContent, {
@@ -23,6 +25,29 @@ async function getPublicPage(req, res) {
   }
 }
 
+
+async function getPrivatePage(req, res) {
+  try {
+    res.writeHead(200, { 'Content-Type': 'text/html' })
+    var htmlContent = fs.readFileSync(
+      __dirname + '/../views/pages/owned.ejs',
+      'utf8'
+    )
+
+    
+    const ownedTurbineData = await getOwnedTurbines()
+
+    var htmlRenderized = ejs.render(htmlContent, {
+      filename: 'owned.ejs',
+      turbines: ownedTurbineData,
+    })
+    res.end(htmlRenderized)
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
+
 async function getTurbines() {
   const data = await fetch('http://localhost:5000/api/turbines')
   const turbineData = await data.json()
@@ -30,4 +55,12 @@ async function getTurbines() {
   return turbineData
 }
 
-module.exports = { getPublicPage }
+async function getOwnedTurbines()
+{
+  const data=await fetch('http://localhost:5000/api/turbines/private')
+  const ownedTurbineData=await data.json()
+
+  return ownedTurbineData
+}
+
+module.exports = { getPublicPage, getPrivatePage }

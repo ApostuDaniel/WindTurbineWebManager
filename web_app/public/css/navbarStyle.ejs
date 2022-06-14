@@ -1,0 +1,132 @@
+<style>
+ul.navBar
+{
+    position: sticky;
+    list-style-type: none;
+    top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    list-style-type: none;
+    margin: auto;
+    padding: 5px;
+    width: 98%;
+    background: linear-gradient(to left top, rgba(1, 161, 186, 0.8), rgba(186, 124, 237, 0.8));
+    box-shadow: 0px 0px 10px -5px black;
+    z-index: 3;
+    border-radius: 10px;
+}
+
+ul.navBar li 
+{
+    font-family: Lato;
+    font-weight: 700;
+    font-size: 20px;
+    color: #ECFCFF;
+    padding: 5px;
+    padding-left: 20px;
+}
+
+ul.navBar li a
+{
+    text-decoration: none;
+    color: inherit;
+}
+
+ul.navBar li a:hover, ul.navBar li a:active
+{
+    text-decoration: underline;
+}
+
+ul.navBar li div
+{
+    cursor: pointer;
+}
+
+ul.navBar li div .notificationPopUp
+{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    visibility: hidden;
+    width: 120px;
+    height: auto;
+    background-color: #01A1BA;
+    position: absolute;
+    z-index: 1;
+    top: 50px;
+    margin-left: -130px;
+}
+
+ul.navBar li div .menuPopUp
+{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    visibility: hidden;
+    width: 120px;
+    height: auto;
+    background-color: #01A1BA;
+    position: absolute;
+    z-index: 1;
+    top: 50px;
+    margin-left: -130px;
+}
+
+
+ul.navBar li div .notificationPopUp li, ul.navBar li div .menuPopUp li
+{
+    font-family: Lato;
+    font-weight: bolder;
+    font-size: 15px;
+    color: #ECFCFF;
+}
+
+
+ul.navBar li div .show 
+{
+    visibility: visible;
+}
+
+#title1
+{
+    font-family: Inter;
+    font-weight: bolder;
+    font-size: 30px;
+    color: #ECFCFF;
+    margin-right: auto;
+}
+
+#title2
+{
+    font-family: Inter;
+    font-weight: bolder;
+    font-size: 20px;
+    color: #05595B;
+}
+
+@media screen and (max-width: 500px) 
+{
+    ul.navBar
+    {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    ul.navBar li:nth-child(2), ul.navBar li:nth-child(3)
+    {
+        order: 1;
+    }
+}
+
+</style>
+
+
