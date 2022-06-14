@@ -113,6 +113,49 @@ async function getPublicTurbineByName(req, res, name) {
   }
 }
 
+// @desc    Gets all the time data for turbine with :id
+// @route   GET /api/turbines/data/:id
+async function getTurbineData(req, res, id) {
+  try {
+    const turbineData = await AllTurbineData.findOne({ turbineId: id })
+    if (turbineData) {
+      res.writeHead(200, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify(turbineData))
+    } else {
+      res.writeHead(404, { 'Content-Type': 'application/json' })
+      res.end(
+        JSON.stringify({ message: `No Turbine Data for turbine id ${id}` })
+      )
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// @desc    Gets the newest registered data for turbine with :id
+// @route   GET /api/turbines/data/:id/new
+async function getNewestTurbineData(req, res, id) {
+  try {
+    const turbineData = await AllTurbineData.findOne({ turbineId: id })
+    if (
+      turbineData &&
+      turbineData.historicData != null &&
+      turbineData.historicData.length > 0
+    ) {
+      res.writeHead(200, { 'Content-Type': 'application/json' })
+
+      res.end(JSON.stringify(turbineData.historicData.slice(-1)))
+    } else {
+      res.writeHead(404, { 'Content-Type': 'application/json' })
+      res.end(
+        JSON.stringify({ message: `No Turbine Data for turbine id ${id}` })
+      )
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
   getTurbines,
   getTurbine,
@@ -120,4 +163,6 @@ module.exports = {
   getPrivateTurbines,
   getPrivateTurbineByName,
   getPublicTurbineByName,
+  getTurbineData,
+  getNewestTurbineData,
 }

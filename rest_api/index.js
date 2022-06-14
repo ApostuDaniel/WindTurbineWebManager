@@ -23,6 +23,9 @@ const server = http.createServer((req, res) => {
         } else if (req.url.match(/\/api\/users\/\w+$/)) {
           const id = req.url.split('/')[3]
           userController.getUser(req, res, id)
+        } else if (req.url.match(/\/api\/users\/mail\/[A-Za-z0-9_\%]+$/)) {
+          const mail = req.url.split('/')[4]
+          userController.getUserByMail(req, res, mail)
         } else if (req.url.match(/\/api\/users\/notifications$/)) {
           const id = req.url.split('/')[3]
           userController.getUser(req, res, id)
@@ -42,6 +45,12 @@ const server = http.createServer((req, res) => {
         } else if (req.url.match(/\/api\/turbines\/\w+$/)) {
           const id = req.url.split('/')[3]
           turbineController.getTurbine(req, res, id)
+        } else if (req.url.match(/\/api\/turbines\/data\/\w+$/)) {
+          const turbineid = req.url.split('/')[4]
+          turbineController.getTurbineData(req, res, turbineid)
+        } else if (req.url.match(/\/api\/turbines\/data\/\w+\/new$/)) {
+          const turbineid = req.url.split('/')[4]
+          turbineController.getNewestTurbineData(req, res, turbineid)
         } else if (req.url.match(/\/api\/turbines\/private\/\w+$/)) {
           const userId = req.url.split('/')[4]
           turbineController.getPrivateTurbines(req, res, userId)
