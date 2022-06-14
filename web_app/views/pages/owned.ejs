@@ -19,38 +19,10 @@
       href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap"
       rel="stylesheet"
     />
-    <script src="../javascript/showPopUp.js"></script>
     <title>Turbine Proprii</title>
   </head>
   <body>
-    <ul class="navBar">
-      <li id="title1">
-        Wind
-        <span id="title2">Turbine Management</span>
-      </li>
-      <li><a href="#">Proprii</a></li>
-      <li><a href="publicPage.html">Publice</a></li>
-      <li>
-        <div onclick="popUp('notification')">
-          <img src="../images/bell.png" alt="bell icon" />
-          <ul class="notificationPopUp" id="notification">
-            <li>Firm x wantes to purchase your y turbine</li>
-            <li>Firm x accepted your offer for turbine y</li>
-            <li>Turbine x need maintenance</li>
-          </ul>
-        </div>
-      </li>
-      <li>
-        <div onclick="popUp('menu')">
-          <img src="../images/menu.png" alt="3 line menu icon" />
-          <ul class="menuPopUp" id="menu">
-            <li>Account</li>
-            <li onclick="location.href='landingPage.html'">Log out</li>
-          </ul>
-        </div>
-      </li>
-    </ul>
-
+    <%- include(dir + "/views/partials/navBar") %>
     <!-- ______________________ -->
 
     <div class="filters">
