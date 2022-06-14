@@ -2,6 +2,7 @@ const http = require('http')
 const fs = require('fs')
 const ejs = require('ejs')
 const PageController = require('./controllers/PageController')
+const CretaeTurbineController = require('./controllers/CreateTurbineController')
 
 const PORT = process.env.port || 5001
 
@@ -9,6 +10,9 @@ const server = http.createServer((req, res) => {
   try {
     if (req.url === '/pages/public') {
       PageController.getPublicPage(req, res)
+    } else 
+    if (req.url === '/pages/createTurbine') {
+      CretaeTurbineController.getCreateTurbinePage(req, res)
     } else {
       res.writeHead(404, { 'Content-Type': 'text/html' })
       res.end('<h1>404 NOT FOUND</h1>')
