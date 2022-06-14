@@ -21,6 +21,7 @@ async function getPublicPage(req, res) {
       filename: 'public.ejs',
       turbines: turbineData,
     })
+    
     res.end(htmlRenderized)
   } catch (error) {
     console.log(error.message)
@@ -43,6 +44,7 @@ async function getPrivatePage(req, res) {
       filename: 'owned.ejs',
       turbines: ownedTurbineData,
     })
+    
     res.end(htmlRenderized)
   } catch (error) {
     console.log(error.message)
