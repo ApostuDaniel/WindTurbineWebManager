@@ -37,6 +37,10 @@ const server = http.createServer((req, res) => {
           userController.getUserAlerts(req, res, id)
         } else if (req.url === '/api/turbines') {
           turbineController.getTurbines(req, res)
+        } else if (req.url === '/api/turbines/public') {
+          turbineController.getPublicTurbines(req, res)
+        } else if (req.url === '/api/turbines/private') {
+          turbineController.getPrivateTurbines(req, res)
         } else {
           throw new Error('GET route not found')
         }

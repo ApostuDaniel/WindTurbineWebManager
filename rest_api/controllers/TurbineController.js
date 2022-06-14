@@ -18,13 +18,25 @@ async function getTurbines(req, res) {
   }
 }
 
-// @desc    Gets All turbines
-// @route   GET /api/turbines
+// @desc    Gets public turbines
+// @route   GET /api/turbines/public
 async function getPublicTurbines(req, res) {
   try {
-    const turbines = await Turbine.find({})
+    const publicTurbines = await Turbine.find({ isPublic: true })
     res.writeHead(200, { 'Content-Type': 'application/json' })
-    res.end(JSON.stringify(turbines))
+    res.end(JSON.stringify(publicTurbines))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// @desc    Gets private turbines
+// @route   GET /api/turbines/private
+async function getPrivateTurbines(req, res) {
+  try {
+    const privateTurbines = await Turbine.find({ isPublic: false })
+    res.writeHead(200, { 'Content-Type': 'application/json' })
+    res.end(JSON.stringify(privateTurbines))
   } catch (error) {
     console.log(error)
   }
@@ -32,4 +44,6 @@ async function getPublicTurbines(req, res) {
 
 module.exports = {
   getTurbines,
+  getPublicTurbines,
+  getPrivateTurbines,
 }
