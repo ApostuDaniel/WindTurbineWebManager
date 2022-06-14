@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Public Turbines</title>
+  </head>
+</html>
+<body>
+  <main>
+    <div>
+      <% var dir = process.cwd() %> <% for(turbine of turbines) {%> <%-
+      include(dir + "/views/partials/publicTurbine", {turbine:turbine}) %> <% }
+      %>
+    </div>
+  </main>
+</body>
