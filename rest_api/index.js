@@ -17,7 +17,10 @@ mongoose.connect(
 const server = http.createServer((req, res) => {
   try {
     res.setHeader('Access-Control-Allow-Origin', '*')
-    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET')
+    res.setHeader(
+      'Access-Control-Allow-Methods',
+      'OPTIONS, GET, POST, PUT, DELETE'
+    )
     res.setHeader('Access-Control-Max-Age', 2592000) // 30 days
 
     switch (req.method) {
