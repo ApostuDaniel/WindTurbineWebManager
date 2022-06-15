@@ -17,6 +17,10 @@ const server = http.createServer((req, res) => {
     else if(req.url === '/pages/createTurbine') {
       CreateTurbineController.getCreateTurbinePage(req,res)
     }
+    else if (req.url=== '/pages/auth')
+    {
+      PageController.getAuthPage(req,res)
+    }
     else {
       res.writeHead(404, { 'Content-Type': 'text/html' })
       res.end('<h1>404 NOT FOUND</h1>')
