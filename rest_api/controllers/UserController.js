@@ -193,10 +193,12 @@ async function createNotification(req, res) {
     const noSeller = seller === null
     const noTurbine = turbine === null
 
-    console.log(seller._id.oid)
-    console.log(turbine.userId)
-    console.log(seller._id == turbine.userId)
-    if (noBuyer || noSeller || noTurbine || !(seller._id === turbine.userId)) {
+    if (
+      noBuyer ||
+      noSeller ||
+      noTurbine ||
+      !seller._id.equals(turbine.userId)
+    ) {
       res.writeHead(422, { 'Content-Type': 'application/json' })
       const response = { message: '' }
       if (noBuyer) {
