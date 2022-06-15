@@ -2,7 +2,7 @@
 <html>
     <% var dir = process.cwd() %> 
     <%- include(dir+'/public/css/authStyle'); %>
-    <%- include (dir+'/models/User'); %>
+   
 <head>
 	<title>Slide Navbar</title>
 
@@ -12,32 +12,33 @@
 	<div class="main">  	
 		<input type="checkbox" id="chk" aria-hidden="true">
 
-			<div class="signup">
+			<form class="signup">
 				<div>
 					<label for="chk" aria-hidden="true">Sign up</label>
-					<input type="text" name="nume" placeholder="Nume" >
-					<input type="text" name="prenume" placeholder="Prenume" >
-                    <input type="text" name="Firma" placeholder="Firma">
-                    <input type="text" name="CNP" placeholder="CNP" >
-                    <input type="mail" name="mail" placeholder="mail" >
-                    <input type="number" name="phone" placeholder="phone" >
-                    <input type="text" name="adresa" placeholder="adresa" >
-                    <input type="date" name="Data nastere" placeholder="Data nastere">
-					<input type="password" name="pswd" placeholder="Password" >
+					<input type="text" id="nume" name="nume" placeholder="Nume" >
+					<input type="text" id="prenume" name="prenume" placeholder="Prenume" >
+                    <input type="text" id="firma" name="Firma" placeholder="Firma">
+                    <input type="text" id="cnp" name="CNP" placeholder="CNP" >
+                    <input type="mail" id="mail" name="mail" placeholder="mail" >
+                    <input type="number" id="phone" name="phone" placeholder="phone" >
+                    <input type="text" id="adresa" name="adresa" placeholder="adresa" >
+                    <input type="date" id="date" name="Data nastere" placeholder="Data nastere">
+					<input type="password" id="pass" name="pswd" placeholder="Password" >
                     <button id="sign">Sign up</button>
-                </div>
+                </form>
                
 			</div>
 
-			<div class="login">
+			<form class="login">
 				<div>
 					<label for="chk" aria-hidden="true">Login</label>
-					<input type="email" name="email" placeholder="Email" >
-					<input type="password" name="pswd" placeholder="Password" >
+					<input type="email" id="email" name="email" placeholder="Email" >
+					<input type="password" id="password" name="pass" placeholder="Password" >
 					<button id="log">Login</button>
                     <p class="fill"></p>
                 </div>
-			</div>
+			</form>
 	</div>
+	<%- include (dir+'/models/User'); %>
 </body>
 </html>

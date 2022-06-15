@@ -40,7 +40,7 @@ async function getUserByMail(req, res, mail) {
     const decodedMail = decodeURIComponent(mail)
     const user = await User.findOne({ mail: decodedMail })
     if (user) {
-      res.writeHead(200, { 'Content-Type': 'application/json' })
+      res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' })
       res.end(JSON.stringify(user))
     } else {
       res.writeHead(404, { 'Content-Type': 'application/json' })

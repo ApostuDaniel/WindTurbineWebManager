@@ -1,32 +1,82 @@
 <script>
 
-    function test()
-    {
+    class Register{
+        
+        constructor(registerForm,fields)
+        {
+            this.registerForm=registerForm;
+            this.fields=fields;
+            this.validateOnSubmit();
+            
+        }
 
-    let registerButton=document.getElementById("sign");
+        validateOnSubmit()
+        {
+            let self=this;
+
+            this.registerForm.addEventListener("submit",(e)=>{
+               e.preventDefault();
+               self.fields.forEach(element => {
+                    const input=document.querySelector(`#${element}`);
+                    console.log(input.value);
+               });
+            })
+        }
+
+       
+    }
+
+
+
+
+    class Login{
+        constructor(loginForm,fields)
+        {
+            this.loginForm=loginForm;
+            this.fields=fields;
+            this.validateOnSubmit();
+        }
+
+        validateOnSubmit()
+        {
+            let self=this;
+            this.loginForm.addEventListener("submit",(e)=>{
+                e.preventDefault();
+                const input=document.querySelector("#email");
+                
+                console.log(encodeURIComponent(input.value).replace(/\./g, '%2E'));
+                getId(encodeURIComponent(input.value).replace(/\./g, '%2E'));
+            })
+        }
+      
+         
+    }
+ 
+
+    async function getId(mail)
+        {
+            
+const data = await fetch(`http://localhost:5000/api/users/mail/${mail}`,{ mode: 'no-cors'});
+  const userData = await data.json();
+ console.log(userData);
   
-    if (registerButton)
-    {
-        registerButton.addEventListener('click',registerFunction);
-    }
-    else
-    {
-        console.log("nu se gaseste");
-    }
-    // var loginButton=document.getElementById("login").addEventListener("click",login);;
-    
-     console.log("test");
+        }
+
+
+   const loginForm=document.querySelector(".login");
+   if (loginForm)
+   {
+    const fields=["email","password"];
+    const validator=new Login(loginForm,fields);
+   }
    
-    }
-    function registerFunction()
+
+
+   const registerForm=document.querySelector(".signup");
+    if (registerForm)
     {
-        console.log("pressed signup button");
+        const fields=["nume","prenume","firma","cnp","mail","phone","adresa","date","pass"];
+        const validator=new Register(registerForm,fields);
     }
 
-    function login()
-    {
-        console.log("pressed login button");
-    }
-
-   test();
 </script>
