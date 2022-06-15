@@ -14,8 +14,10 @@ const server = http.createServer((req, res) => {
     else if (req.url === '/pages/public') {
       PageController.getPublicPage(req, res)
     }
-    else if (req.url === '/pages/owned') {
-      PageController.getPrivatePage(req,res)
+    else if (req.url.match(/\/pages\/owned\/\w+$/)) {
+      const id=req.url.split('/')[3];
+      
+      PageController.getPrivatePage(req,res,id)
     } 
     else if(req.url === '/pages/createTurbine') {
       CreateTurbineController.getCreateTurbinePage(req,res)

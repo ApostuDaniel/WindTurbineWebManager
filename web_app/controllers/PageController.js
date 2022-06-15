@@ -53,7 +53,7 @@ async function getTurbines() {
   return turbineData
 }
 
-async function getPrivatePage(req, res) {
+async function getPrivatePage(req, res, id) {
   try {
     res.writeHead(200, { 'Content-Type': 'text/html' })
     var htmlContent = fs.readFileSync(
@@ -62,7 +62,7 @@ async function getPrivatePage(req, res) {
     )
 
     
-    const ownedTurbineData = await getOwnedTurbines()
+    const ownedTurbineData = await getOwnedTurbines(id)
 
     var htmlRenderized = ejs.render(htmlContent, {
       filename: 'owned.ejs',
@@ -104,9 +104,9 @@ async function getTurbines() {
   return turbineData
 }
 
-async function getOwnedTurbines()
+async function getOwnedTurbines(id)
 {
-  const data = await fetch('http://localhost:5000/api/turbines/private/62a711fc87d04cb2e5473c4c') // hardcoded user id
+  const data = await fetch('http://localhost:5000/api/turbines/private/'+id) // hardcoded user id
   const ownedTurbineData=await data.json()
 
   return ownedTurbineData
