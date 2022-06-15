@@ -9,6 +9,7 @@ const {
 const User = require('./../schemas/User')
 const Notification = require('./../schemas/Notification')
 const Alert = require('./../schemas/Alert')
+const Turbine = require('./../schemas/Turbine')
 
 // @desc    Gets All Users
 // @route   GET /api/users
@@ -168,6 +169,67 @@ async function createUser(req, res) {
   }
 }
 
+// @desc    POSTS a new notification
+// @route   POST /api/users/notifications
+async function createNotification(req, res) {
+  try {
+    const textBody = await getRequestData(req)
+    const jsonBody = validateJSON(textBody)
+
+    if (!jsonBody) {
+      res.writeHead(400, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ message: 'Invalid request JSON' }))
+      return
+    }
+
+    const { idBuyer, idSeller, idTurbine } = JSON.parse(textBody)
+
+    const buyer = await User.findById(idBuyer)
+    const seller = await User.findById(idSeller)
+    const turbine = await Turbine.findById(idTurbine)
+
+    const noBuyer = buyer === null
+    const noSeller = seller === null
+    const noTurbine = turbine === null
+
+    console.log(seller._id.oid)
+    console.log(turbine.userId)
+    console.log(seller._id == turbine.userId)
+    if (noBuyer || noSeller || noTurbine || !(seller._id === turbine.userId)) {
+      res.writeHead(422, { 'Content-Type': 'application/json' })
+      const response = { message: '' }
+      if (noBuyer) {
+        response.message = `The buyer's id ${idBuyer} doesn't exist in the database`
+      } else if (noSeller) {
+        response.message = `The user's id ${idSeller} doesn't exist in the database`
+      } else if (noTurbine) {
+        response.message = `The turbine with id ${idSeller} doesn't exist in the database`
+      } else {
+        response.message = `The seller with id ${idSeller} doens't own the turbine ${idTurbine}`
+      }
+      res.end(JSON.stringify(response))
+
+      return
+    }
+
+    try {
+      const notification = await Notification.create({
+        idBuyer,
+        idSeller,
+        idTurbine,
+      })
+
+      res.writeHead(201, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify(notification))
+    } catch (error) {
+      res.writeHead(400, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ message: error.message }))
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
   getUsers,
   getUser,
@@ -177,4 +239,5 @@ module.exports = {
   getAlerts,
   getUserByMail,
   createUser,
+  createNotification,
 }

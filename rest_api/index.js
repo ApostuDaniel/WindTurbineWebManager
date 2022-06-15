@@ -76,6 +76,8 @@ const server = http.createServer((req, res) => {
           turbineController.createTurbine(req, res)
         } else if (req.url === '/api/users') {
           userController.createUser(req, res)
+        } else if (req.url === '/api/users/notifications') {
+          userController.createNotification(req, res)
         } else {
           throw new Error('POST route not found')
         }
