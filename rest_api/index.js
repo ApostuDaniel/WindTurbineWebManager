@@ -23,7 +23,7 @@ const server = http.createServer((req, res) => {
         } else if (req.url.match(/\/api\/users\/\w+$/)) {
           const id = req.url.split('/')[3]
           userController.getUser(req, res, id)
-        } else if (req.url.match(/\/api\/users\/mail\/[A-Za-z0-9_\%]+$/)) {
+        } else if (req.url.match(/\/api\/users\/mail\/[A-Za-z0-9_\%\.]+$/)) {
           const mail = req.url.split('/')[4]
           userController.getUserByMail(req, res, mail)
         } else if (req.url.match(/\/api\/users\/notifications$/)) {
@@ -68,11 +68,11 @@ const server = http.createServer((req, res) => {
 
         break
       case 'POST':
-        if (req.url === 'api/turbines') {
+        if (req.url === '/api/turbines') {
           turbineController.createTurbine(req, res)
+        } else {
+          throw new Error('POST route not found')
         }
-        res.writeHead(200, { 'Content-Type': 'text/html' })
-        res.end('<h1>Header</h1>')
         break
       case 'PUT':
         res.writeHead(200, { 'Content-Type': 'text/html' })
@@ -88,7 +88,7 @@ const server = http.createServer((req, res) => {
   } catch (error) {
     console.log(error)
     res.writeHead(404, { 'Content-Type': 'application/json' })
-    res.end(JSON.stringify({ message: 'Route Not Found' }))
+    res.end(JSON.stringify({ message: error.message }))
   }
 })
 
