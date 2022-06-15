@@ -58,6 +58,34 @@ async function getPrivatePage(req, res) {
 }
 
 
+async function getAuthPage(req, res) {
+  try {
+    res.writeHead(200, { 'Content-Type': 'text/html' })
+    var htmlContent = fs.readFileSync(
+      __dirname + '/../views/pages/auth.ejs',
+      'utf8'
+    )
+
+    
+   
+
+    var htmlRenderized = ejs.render(htmlContent, {
+      filename: 'auth.ejs',
+    })
+    
+    res.end(htmlRenderized)
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
+async function getTurbines() {
+  const data = await fetch('http://localhost:5000/api/turbines')
+  const turbineData = await data.json()
+
+  return turbineData
+}
+
 async function getOwnedTurbines()
 {
   const data = await fetch('http://localhost:5000/api/turbines/private')
@@ -66,4 +94,4 @@ async function getOwnedTurbines()
   return ownedTurbineData
 }
 
-module.exports = { getPublicPage, getPrivatePage }
+module.exports = { getPublicPage, getPrivatePage,getAuthPage }

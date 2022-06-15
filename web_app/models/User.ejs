@@ -1,0 +1,32 @@
+<script>
+
+    function test()
+    {
+
+    let registerButton=document.getElementById("sign");
+  
+    if (registerButton)
+    {
+        registerButton.addEventListener('click',registerFunction);
+    }
+    else
+    {
+        console.log("nu se gaseste");
+    }
+    // var loginButton=document.getElementById("login").addEventListener("click",login);;
+    
+     console.log("test");
+   
+    }
+    function registerFunction()
+    {
+        console.log("pressed signup button");
+    }
+
+    function login()
+    {
+        console.log("pressed login button");
+    }
+
+   test();
+</script>
