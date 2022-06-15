@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <% var dir = process.cwd() %> 
-    <%- include(dir+'/public/css/authStyle'); %>
+    <!-- <%- include(dir+'/public/css/authStyle'); %> -->
    
 <head>
 	<title>Slide Navbar</title>
@@ -12,25 +12,25 @@
 	<div class="main">  	
 		<input type="checkbox" id="chk" aria-hidden="true">
 
-			<form class="signup">
+			<!-- <form class="signup">
 				<div>
 					<label for="chk" aria-hidden="true">Sign up</label>
 					<input type="text" id="nume" name="nume" placeholder="Nume" >
 					<input type="text" id="prenume" name="prenume" placeholder="Prenume" >
                     <input type="text" id="firma" name="Firma" placeholder="Firma">
                     <input type="text" id="cnp" name="CNP" placeholder="CNP" >
-                    <input type="mail" id="mail" name="mail" placeholder="mail" >
+                    <input type="mail" id="registermail" name="mail" placeholder="mail" >
                     <input type="number" id="phone" name="phone" placeholder="phone" >
                     <input type="text" id="adresa" name="adresa" placeholder="adresa" >
-					<input type="password" id="pass" name="pswd" placeholder="Password" >
-                    <button id="sign">Sign up</button>
+					<input type="password" id="registerpass" name="pswd" placeholder="Password" >
+                    <button id="sign" >Sign up</button>
                 </form>
                
-			</div>
+			</div> -->
 
 			<form class="login">
 				<div>
-					<label for="chk" aria-hidden="true">Login</label>
+					<label  aria-hidden="true">Login</label>
 					<input type="email" id="email" name="email" placeholder="Email" >
 					<input type="password" id="password" name="pass" placeholder="Password" >
 					<button id="log">Login</button>
@@ -38,6 +38,6 @@
                 </div>
 			</form>
 	</div>
-	<%- include (dir+'/models/User'); %>
+	<%- include (dir+'/views/scripts/loginScript'); %>
 </body>
 </html>

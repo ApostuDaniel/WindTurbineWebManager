@@ -1,0 +1,55 @@
+<script>
+
+  
+    class Login {
+      constructor(loginForm, fields) {
+        this.loginForm = loginForm;
+        this.fields = fields;
+        this.validateOnSubmit();
+      }
+  
+      validateOnSubmit() {
+        let self = this;
+        this.loginForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const input = document.querySelector("#email");
+  
+          console.log(encodeURIComponent(input.value).replace(/\./g, "%2E"));
+          getId(encodeURIComponent(input.value).replace(/\./g, "%2E"));
+        });
+      }
+  
+     
+  
+      //  setCookie(mail)
+      //  {
+      //     const d=new Date();
+      //     d.setMinutes(1);
+      //     let expires="expires="+d.toUTCString();
+      //     document.cookie="name=users;"+ expires+";path=/";
+      //  }
+    }
+  
+  
+    async function getId(mail) {
+        const data = await fetch(`http://localhost:5000/api/users/mail/${mail}`);
+        const userData = await data.json();
+        console.log(userData);
+        window.location.href =
+          `http://localhost:5001/pages/owned/` + userData._id;
+          // setCookie(userData.email);
+      }
+  
+    const loginForm = document.querySelector(".login");
+    
+    
+    if (loginForm) {
+      console.log("login")
+      const fields = ["email", "password"];
+      const validator = new Login(loginForm, fields);
+    }
+  
+    
+  
+  </script>
+  

@@ -76,11 +76,11 @@ async function getPrivatePage(req, res, id) {
 }
 
 
-async function getAuthPage(req, res) {
+async function getLoginPage(req, res) {
   try {
     res.writeHead(200, { 'Content-Type': 'text/html' })
     var htmlContent = fs.readFileSync(
-      __dirname + '/../views/pages/auth.ejs',
+      __dirname + '/../views/pages/login.ejs',
       'utf8'
     )
 
@@ -88,7 +88,7 @@ async function getAuthPage(req, res) {
    
 
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: 'auth.ejs',
+      filename: 'login.ejs',
     })
     
     res.end(htmlRenderized)
@@ -96,6 +96,30 @@ async function getAuthPage(req, res) {
     console.log(error.message)
   }
 }
+
+
+
+async function getRegisterPage(req, res) {
+  try {
+    res.writeHead(200, { 'Content-Type': 'text/html' })
+    var htmlContent = fs.readFileSync(
+      __dirname + '/../views/pages/register.ejs',
+      'utf8'
+    )
+
+    
+   
+
+    var htmlRenderized = ejs.render(htmlContent, {
+      filename: 'register.ejs',
+    })
+    
+    res.end(htmlRenderized)
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
 
 async function getTurbines() {
   const data = await fetch('http://localhost:5000/api/turbines/public')
@@ -112,4 +136,4 @@ async function getOwnedTurbines(id)
   return ownedTurbineData
 }
 
-module.exports = { getPublicPage, getPrivatePage, getAuthPage, getLandingPage, getOwnedTurbines }
+module.exports = { getPublicPage, getPrivatePage, getLoginPage, getLandingPage, getOwnedTurbines,getRegisterPage }

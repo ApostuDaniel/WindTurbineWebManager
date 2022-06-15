@@ -22,9 +22,13 @@ const server = http.createServer((req, res) => {
     else if(req.url === '/pages/createTurbine') {
       CreateTurbineController.getCreateTurbinePage(req,res)
     }
-    else if (req.url=== '/pages/auth')
+    else if (req.url=== '/pages/login')
     {
-      PageController.getAuthPage(req,res)
+      PageController.getLoginPage(req,res)
+    }
+    else if (req.url==='/pages/register')
+    {
+      PageController.getRegisterPage(req,res)
     }
     else {
       res.writeHead(404, { 'Content-Type': 'text/html' })

@@ -144,7 +144,7 @@ async function createUser(req, res) {
 
     const { firstName, lastName, company, CNP, mail, phone, adress, password } =
       JSON.parse(textBody)
-
+  
     try {
       const user = await User.create({
         firstName,
@@ -156,6 +156,7 @@ async function createUser(req, res) {
         adress,
         birthDate: extractDateFromCNP(CNP),
         password: md5(password),
+      
       })
 
       res.writeHead(201, { 'Content-Type': 'application/json' })
