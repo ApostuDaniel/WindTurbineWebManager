@@ -6,6 +6,24 @@ const ejs = require('ejs')
 const fetch = (url) =>
   import('node-fetch').then(({ default: fetch }) => fetch(url))
 
+async function getLandingPage(req, res) {
+  try {
+    res.writeHead(200, { 'Content-Type': 'text/html' })
+    var htmlContent = fs.readFileSync(
+      __dirname + '/../views/pages/landing.ejs',
+      'utf8'
+    )
+
+    var htmlRenderized = ejs.render(htmlContent, {
+      filename: 'landing.ejs',
+    })
+    
+    res.end(htmlRenderized)
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
 async function getPublicPage(req, res) {
   try {
     res.writeHead(200, { 'Content-Type': 'text/html' })
@@ -94,4 +112,4 @@ async function getOwnedTurbines()
   return ownedTurbineData
 }
 
-module.exports = { getPublicPage, getPrivatePage,getAuthPage }
+module.exports = { getPublicPage, getPrivatePage, getAuthPage, getLandingPage }

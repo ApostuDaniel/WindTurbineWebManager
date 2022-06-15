@@ -8,7 +8,10 @@ const PORT = process.env.port || 5001
 
 const server = http.createServer((req, res) => {
   try {
-    if (req.url === '/pages/public') {
+    if(req.url === '/pages') {
+      PageController.getLandingPage(req, res)
+    }
+    else if (req.url === '/pages/public') {
       PageController.getPublicPage(req, res)
     }
     else if (req.url === '/pages/owned') {
