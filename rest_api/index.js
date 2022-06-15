@@ -17,7 +17,10 @@ mongoose.connect(
 const server = http.createServer((req, res) => {
   try {
     res.setHeader('Access-Control-Allow-Origin', '*')
-    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET')
+    res.setHeader(
+      'Access-Control-Allow-Methods',
+      'OPTIONS, GET, POST, PUT, DELETE'
+    )
     res.setHeader('Access-Control-Max-Age', 2592000) // 30 days
 
     switch (req.method) {
@@ -76,6 +79,8 @@ const server = http.createServer((req, res) => {
           turbineController.createTurbine(req, res)
         } else if (req.url === '/api/users') {
           userController.createUser(req, res)
+        } else if (req.url === '/api/users/notifications') {
+          userController.createNotification(req, res)
         } else {
           throw new Error('POST route not found')
         }
