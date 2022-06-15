@@ -112,4 +112,4 @@ async function getOwnedTurbines(id)
   return ownedTurbineData
 }
 
-module.exports = { getPublicPage, getPrivatePage, getAuthPage, getLandingPage }
+module.exports = { getPublicPage, getPrivatePage, getAuthPage, getLandingPage, getOwnedTurbines }
