@@ -23,6 +23,9 @@ const server = http.createServer((req, res) => {
         } else if (req.url.match(/\/api\/users\/\w+$/)) {
           const id = req.url.split('/')[3]
           userController.getUser(req, res, id)
+        } else if (req.url.match(/\/api\/users\/mail\/[A-Za-z0-9_\%]+$/)) {
+          const mail = req.url.split('/')[4]
+          userController.getUserByMail(req, res, mail)
         } else if (req.url.match(/\/api\/users\/notifications$/)) {
           const id = req.url.split('/')[3]
           userController.getUser(req, res, id)
@@ -39,13 +42,35 @@ const server = http.createServer((req, res) => {
           turbineController.getTurbines(req, res)
         } else if (req.url === '/api/turbines/public') {
           turbineController.getPublicTurbines(req, res)
-        } else if (req.url === '/api/turbines/private') {
-          turbineController.getPrivateTurbines(req, res)
+        } else if (req.url.match(/\/api\/turbines\/\w+$/)) {
+          const id = req.url.split('/')[3]
+          turbineController.getTurbine(req, res, id)
+        } else if (req.url.match(/\/api\/turbines\/data\/\w+$/)) {
+          const turbineid = req.url.split('/')[4]
+          turbineController.getTurbineData(req, res, turbineid)
+        } else if (req.url.match(/\/api\/turbines\/data\/\w+\/new$/)) {
+          const turbineid = req.url.split('/')[4]
+          turbineController.getNewestTurbineData(req, res, turbineid)
+        } else if (req.url.match(/\/api\/turbines\/private\/\w+$/)) {
+          const userId = req.url.split('/')[4]
+          turbineController.getPrivateTurbines(req, res, userId)
+        } else if (req.url.match(/\/api\/turbines\/public\/\w+$/)) {
+          const name = req.url.split('/')[4]
+          turbineController.getPublicTurbineByName(req, res, name)
+        } else if (req.url.match(/\/api\/turbines\/private\/\w+\/\w+$/)) {
+          const urlSplit = req.url.split('/')
+          const userId = urlSplit[4]
+          const name = urlSplit[5]
+          turbineController.getPrivateTurbineByName(req, res, userId, name)
         } else {
           throw new Error('GET route not found')
         }
+
         break
       case 'POST':
+        if (req.url === 'api/turbines') {
+          turbineController.createTurbine(req, res)
+        }
         res.writeHead(200, { 'Content-Type': 'text/html' })
         res.end('<h1>Header</h1>')
         break

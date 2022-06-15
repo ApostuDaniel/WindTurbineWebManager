@@ -33,6 +33,26 @@ async function getUser(req, res, id) {
   }
 }
 
+// @desc    Gets user by mail
+// @route   GET /api/users/mail/:mail
+async function getUserByMail(req, res, mail) {
+  try {
+    const decodedMail = decodeURIComponent(mail)
+    const user = await User.findOne({ mail: decodedMail })
+    if (user) {
+      res.writeHead(200, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify(user))
+    } else {
+      res.writeHead(404, { 'Content-Type': 'application/json' })
+      res.end(
+        JSON.stringify({ message: `User with mail ${decodedMail} not found` })
+      )
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 // @desc    Gets All notifications
 // @route   GET /api/users/notifications
 async function getNotifications(req, res) {
@@ -104,4 +124,5 @@ module.exports = {
   getUserAlerts,
   getNotifications,
   getAlerts,
+  getUserByMail,
 }

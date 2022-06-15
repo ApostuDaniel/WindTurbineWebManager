@@ -1,0 +1,31 @@
+
+<% var dir = process.cwd() %> 
+<% var path = dir + "/public/images/bell.png" %>
+<ul class="navBar">
+    <li id="title1">
+      Wind
+      <span id="title2">Turbine Management</span>
+    </li>
+    <li>Proprii</li>
+    <li>Publice</li>
+    <li>
+      <div onclick="showMapOnClick('notification')">
+        <img src=<% path %> alt="bell">
+        <ul class="notificationPopUp" id="notification">
+          <li>Firm x wantes to purchase your y turbine</li>
+          <li>Firm x accepted your offer for turbine y</li>
+          <li>Turbine x need maintenance</li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div onclick="showMapOnClick('menu')">
+      
+        <img src="../../public/images/bell.png" alt="3 line menu" />
+        <ul class="menuPopUp" id="menu">
+          <li>Account</li>
+          <li onclick="location.href='landingPage.html'">Log out</li>
+        </ul>
+      </div>
+    </li>
+</ul>

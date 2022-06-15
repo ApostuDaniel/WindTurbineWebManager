@@ -1,6 +1,8 @@
 
 const fs = require('fs')
 const ejs = require('ejs')
+
+
 const fetch = (url) =>
   import('node-fetch').then(({ default: fetch }) => fetch(url))
 
@@ -12,7 +14,6 @@ async function getPublicPage(req, res) {
       'utf8'
     )
 
-    
     const turbineData = await getTurbines()
 
     var htmlRenderized = ejs.render(htmlContent, {
@@ -26,6 +27,13 @@ async function getPublicPage(req, res) {
   }
 }
 
+
+async function getTurbines() {
+  const data = await fetch('http://localhost:5000/api/turbines')
+  const turbineData = await data.json()
+
+  return turbineData
+}
 
 async function getPrivatePage(req, res) {
   try {
@@ -80,7 +88,7 @@ async function getTurbines() {
 
 async function getOwnedTurbines()
 {
-  const data=await fetch('http://localhost:5000/api/turbines/private')
+  const data = await fetch('http://localhost:5000/api/turbines/private')
   const ownedTurbineData=await data.json()
 
   return ownedTurbineData

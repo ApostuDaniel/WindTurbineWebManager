@@ -3,6 +3,8 @@ const mongoose = require('mongoose')
 const Turbine = require('./../schemas/Turbine')
 const AllTurbineData = require('./../schemas/AllTurbineData')
 
+//GET
+
 // @desc    Gets All turbines
 // @route   GET /api/turbines
 async function getTurbines(req, res) {
@@ -13,6 +15,23 @@ async function getTurbines(req, res) {
       'Access-Control-Allow-Origin': '*',
     })
     res.end(JSON.stringify(turbines))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+//@desc    Gets turbine by id
+// @route   GET /api/turbines/:id
+async function getTurbine(req, res, id) {
+  try {
+    const turbine = await Turbine.findById(id)
+    if (turbine) {
+      res.writeHead(200, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify(turbine))
+    } else {
+      res.writeHead(404, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ message: `Turbine with id ${id} not found` }))
+    }
   } catch (error) {
     console.log(error)
   }
@@ -30,11 +49,14 @@ async function getPublicTurbines(req, res) {
   }
 }
 
-// @desc    Gets private turbines
-// @route   GET /api/turbines/private
-async function getPrivateTurbines(req, res) {
+// @desc    Gets the private turbines for id
+// @route   GET /api/turbines/private/:id
+async function getPrivateTurbines(req, res, userId) {
   try {
-    const privateTurbines = await Turbine.find({ isPublic: false })
+    const privateTurbines = await Turbine.find({
+      userId: userId,
+      isPublic: false,
+    })
     res.writeHead(200, { 'Content-Type': 'application/json' })
     res.end(JSON.stringify(privateTurbines))
   } catch (error) {
@@ -42,8 +64,135 @@ async function getPrivateTurbines(req, res) {
   }
 }
 
+// @desc    Gets a users private turbine with the specified name
+// @route   GET /api/turbines/private/:id/:name
+async function getPrivateTurbineByName(req, res, userId, name) {
+  try {
+    const privateTurbine = await Turbine.findOne({
+      name: new RegExp('^' + name + '$', 'i'),
+      userId: userId,
+      isPublic: false,
+    })
+
+    if (!privateTurbine) {
+      res.writeHead(404, { 'Content-Type': 'application/json' })
+      res.end(
+        JSON.stringify({
+          message: `Private Turbine with name ${name} not found`,
+        })
+      )
+    } else {
+      res.writeHead(200, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify(privateTurbine))
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// @desc    Gets a public turbine with the specified name
+// @route   GET /api/turbines/private/:name
+async function getPublicTurbineByName(req, res, name) {
+  try {
+    const publicTurbine = await Turbine.findOne({
+      name: new RegExp('^' + name + '$', 'i'),
+      isPublic: true,
+    })
+
+    if (!publicTurbine) {
+      res.writeHead(404, { 'Content-Type': 'application/json' })
+      res.end(
+        JSON.stringify({
+          message: `Public Turbine with name ${name} not found`,
+        })
+      )
+    } else {
+      res.writeHead(200, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify(publicTurbine))
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// @desc    Gets all the time data for turbine with :id
+// @route   GET /api/turbines/data/:id
+async function getTurbineData(req, res, id) {
+  try {
+    const turbineData = await AllTurbineData.findOne({ turbineId: id })
+    if (turbineData) {
+      res.writeHead(200, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify(turbineData))
+    } else {
+      res.writeHead(404, { 'Content-Type': 'application/json' })
+      res.end(
+        JSON.stringify({ message: `No Turbine Data for turbine id ${id}` })
+      )
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// @desc    Gets the newest registered data for turbine with :id
+// @route   GET /api/turbines/data/:id/new
+async function getNewestTurbineData(req, res, id) {
+  try {
+    const turbineData = await AllTurbineData.findOne({ turbineId: id })
+    if (
+      turbineData &&
+      turbineData.historicData != null &&
+      turbineData.historicData.length > 0
+    ) {
+      res.writeHead(200, { 'Content-Type': 'application/json' })
+
+      res.end(JSON.stringify(turbineData.historicData.slice(-1)[0]))
+    } else {
+      res.writeHead(404, { 'Content-Type': 'application/json' })
+      res.end(
+        JSON.stringify({ message: `No Turbine Data for turbine id ${id}` })
+      )
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+//POST
+
+// @desc    POSTS a new turbine
+// @route   POST /api/turbines
+//The request body should contain the following elements
+// userId: {
+//   type: mongoose.SchemaType.ObjectId,
+//   ref: 'User',
+// },
+// name: { type: String, required: true },
+// constructionYear: { type: Date, required: true },
+// imageLink: { type: String },
+// latitude: { type: Number, required: true },
+// longitude: { type: Number, required: true },
+// altitude: { type: Number, required: true },
+// terrain: { type: String, required: true },
+// suitability: { type: Number, required: true, min: 0, max: 100 },
+// isPublic: { type: Boolean, required: true },
+// turbineState: {
+//   type: String,
+//   required: true,
+//   validate: {
+//     validator: (state) =>
+//       state === 'Maintenance' || state === 'Stopped' || state === 'Running',
+//     message: (props) => `${props} is not a valid turbine state`,
+//   },
+// },
+
 module.exports = {
   getTurbines,
+  getTurbine,
   getPublicTurbines,
   getPrivateTurbines,
+  getPrivateTurbineByName,
+  getPublicTurbineByName,
+  getTurbineData,
+  getNewestTurbineData,
 }
