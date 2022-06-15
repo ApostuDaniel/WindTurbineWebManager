@@ -80,7 +80,7 @@ async function getAuthPage(req, res) {
 }
 
 async function getTurbines() {
-  const data = await fetch('http://localhost:5000/api/turbines')
+  const data = await fetch('http://localhost:5000/api/turbines/public')
   const turbineData = await data.json()
 
   return turbineData
