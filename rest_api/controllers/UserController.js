@@ -1,5 +1,10 @@
 const mongoose = require('mongoose')
 const md5 = require('md5')
+const {
+  extractDateFromCNP,
+  getRequestData,
+  validateJSON,
+} = require('./../utils')
 
 const User = require('./../schemas/User')
 const Notification = require('./../schemas/Notification')
@@ -41,7 +46,10 @@ async function getUserByMail(req, res, mail) {
     const decodedMail = decodeURIComponent(mail)
     const user = await User.findOne({ mail: decodedMail })
     if (user) {
-      res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' })
+      res.writeHead(200, {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      })
       res.end(JSON.stringify(user))
     } else {
       res.writeHead(404, { 'Content-Type': 'application/json' })
@@ -133,17 +141,8 @@ async function createUser(req, res) {
       return
     }
 
-    const {
-      firstName,
-      lastName,
-      company,
-      CNP,
-      mail,
-      phone,
-      adress,
-      birthDate,
-      password,
-    } = JSON.parse(textBody)
+    const { firstName, lastName, company, CNP, mail, phone, adress, password } =
+      JSON.parse(textBody)
 
     try {
       const user = await User.create({
@@ -154,7 +153,7 @@ async function createUser(req, res) {
         mail,
         phone,
         adress,
-        birthDate,
+        birthDate: extractDateFromCNP(CNP),
         password: md5(password),
       })
 
