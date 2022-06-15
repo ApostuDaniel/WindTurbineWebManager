@@ -41,7 +41,10 @@ html,body
 {
   width: 50%;
   height: auto;
-  border: 1px solid black;
+  border-radius: 10px;
+  border-top: 3px solid rgba(186, 124, 237);
+  border-bottom: 3px solid rgba(186, 124, 237);
+  background: linear-gradient(to left top, rgba(1, 161, 186, 0.3), rgba(186, 124, 237, 0.3));
 }
 
 .attribute
@@ -56,25 +59,31 @@ html,body
 {
   height: auto;
   width: 50%;
-  border: 1px solid black;
+  border-radius: 10px;
+  border-top: 3px solid rgba(186, 124, 237);
+  border-bottom: 3px solid rgba(186, 124, 237);
+  background: linear-gradient(to left top, rgba(1, 161, 186, 0.3), rgba(186, 124, 237, 0.3));
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: left;
+  align-items: center;
 }
-
 
 .form label
 {
-  margin-left: 20px;
   width: 50%;
+  font-weight: bold;
 }
 
 .form input
 {
-  margin-bottom: 10px;
-  margin-left: 20px;
+  margin-bottom: 5px;
   width: 50%;
+  height: 25px;
+  border-radius: 5px;
+  background-color: rgba(186, 124, 237, 0.3);
+  outline: none;
+  border: 1px solid rgba(186, 124, 237, 0.5);
 }
 
 
