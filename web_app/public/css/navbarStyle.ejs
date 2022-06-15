@@ -25,23 +25,20 @@ ul.navBar li
     font-size: 20px;
     color: #ECFCFF;
     padding: 5px;
-    padding-left: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: ease-in-out 200ms;
 }
 
-ul.navBar li a
+.clickable:hover
 {
-    text-decoration: none;
-    color: inherit;
-}
-
-ul.navBar li a:hover, ul.navBar li a:active
-{
-    text-decoration: underline;
-}
-
-ul.navBar li div
-{
+    background-color: white;
+    color: rgba(186, 124, 237, 0.8);
+    border-radius: 50px;
+    opacity: 0.7;
     cursor: pointer;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 ul.navBar li div .notificationPopUp

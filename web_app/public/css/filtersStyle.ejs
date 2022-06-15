@@ -9,6 +9,10 @@
     margin: auto;
     margin-top: 20px;
     height: 100px;
+    border-top: 1px solid rgba(186, 124, 237, 0.5);
+    border-bottom: 1px solid rgba(186, 124, 237, 0.5);
+    border-radius: 10px;
+    background: linear-gradient(to left top, rgba(1, 161, 186, 0.1), rgba(186, 124, 237, 0.1));
 }
 
 .filtersText
@@ -25,11 +29,11 @@
 {
     width: 70%;
     height: 35px;
-    background-color: #B7E4ED;
+    background: linear-gradient(to left top, rgba(1, 161, 186, 0.5), rgba(186, 124, 237, 0.5));
     color: #01A1BA;
     border-radius: 10px;
     margin-top: 10px;
-    border: 0;
+    border: none;
 }
 
 .filterAni
@@ -62,10 +66,12 @@
     margin-top: 10px;
     width: 90%;
     height: 30px;
-    background-color: #B7E4ED;
+    background: linear-gradient(to left top, rgba(1, 161, 186, 0.5), rgba(186, 124, 237, 0.5));
     margin-top: 20px;
     border-radius: 80px;
-    border: 0;
+    padding-left: 10px;
+    border: none;
+    outline: none;
 }
 
 .filterAni p
@@ -76,22 +82,20 @@
 
 .an
 {
-    
     width: 35%;
     height: 20px;
     margin-right: 10px;
-    background-color: #B7E4ED;
+    background: linear-gradient(to left top, rgba(1, 161, 186, 0.5), rgba(186, 124, 237, 0.5));
     border-radius: 80px;
-    padding: 0;
-    border-width: 0px;
-    
+    padding-left: 10px;
+    border: none;
+    outline: none;
 }
 
 .aniposition
 {
     position: absolute;
     right:0;
-
 }
 
 .filter
@@ -105,22 +109,21 @@
     padding: 0;
 }
 
-
 @media screen and (max-width: 600px) 
 {
-        .filters
-        {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            
-        }
-        .filter
-        {
-            align-items: center;
-            width: 60%;
-            margin-top: 3%;
-        }
+    .filters
+    {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        
+    }
+    .filter
+    {
+        align-items: center;
+        width: 60%;
+        margin-top: 3%;
+    }
        
 }
 </style>

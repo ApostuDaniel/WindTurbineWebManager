@@ -1,89 +1,25 @@
 <!DOCTYPE html>
 <html lang="ro">
     <% var dir = process.cwd() %> 
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <%- include(dir+'/public/css/ownedPageStyle'); %>
     <%- include(dir+'/public/css/navBarStyle'); %>
     <%- include(dir+'/public/css/filtersStyle'); %>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap"
-      rel="stylesheet"
-    />
-    <title>Turbine Proprii</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@100&display=swap" rel="stylesheet">
+    <title>Owned turbines</title>
   </head>
   <body>
-    <%- include(dir + "/views/partials/navBar") %>
-    <!-- ______________________ -->
-
-    <div class="filters">
-      <div class="filter">
-        <p class="filtersSearch" style="font-size: 35px; margin-bottom: 10px">
-          Filtre
-        </p>
-        <input class="searchbar" />
-      </div>
-
-      <div class="filter">
-        <p class="filtersText">Judet</p>
-        <select class="filterBox">
-          <option>Neamt</option>
-          <option>Bacau</option>
-          <option>Iasi</option>
-          <option>Galati</option>
-        </select>
-      </div>
-
-      <div class="filter">
-        <p class="filtersText">Stare</p>
-        <select class="filterBox">
-          <option>Perfecta</option>
-          <option>Buna</option>
-          <option>Rea</option>
-        </select>
-      </div>
-
-      <div class="filter">
-        <p class="filtersText">Firma</p>
-        <select class="filterBox">
-          <option>Rares</option>
-          <option>Vlad</option>
-          <option>Daniel</option>
-        </select>
-      </div>
-
-      <div class="filter">
-        <p class="filtersText">An constructie</p>
-        <div class="filterAni">
-          <p>De la</p>
-          <input class="an" />
-          <p>La</p>
-          <input class="an" />
-        </div>
-      </div>
-    </div>
-
-    <!-- ______________________ -->
-
-    <hr class="hLine" />
+    <%- include(dir + "/views/partials/navBar") %>  
+    <%- include(dir + "/views/partials/filters") %>
     
     <ul class="cardList">
-        <% for(turbine of turbines) {%> <%-
-            include(dir + "/views/partials/ownedTurbine", {turbine:turbine}) %> <% }
-            %>
+      <% for(turbine of turbines) {%> <%-
+          include(dir + "/views/partials/ownedTurbine", {turbine:turbine}) %> <% }
+      %>
     </ul> 
-   
-    
-  
-    
   </body>
 </html>
