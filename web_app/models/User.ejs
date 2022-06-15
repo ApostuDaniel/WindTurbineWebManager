@@ -1,82 +1,78 @@
 <script>
-
-    class Register{
-        
-        constructor(registerForm,fields)
-        {
-            this.registerForm=registerForm;
-            this.fields=fields;
-            this.validateOnSubmit();
-            
-        }
-
-        validateOnSubmit()
-        {
-            let self=this;
-
-            this.registerForm.addEventListener("submit",(e)=>{
-               e.preventDefault();
-               self.fields.forEach(element => {
-                    const input=document.querySelector(`#${element}`);
-                    console.log(input.value);
-               });
-            })
-        }
-
-       
+  class Register {
+    constructor(registerForm, fields) {
+      this.registerForm = registerForm;
+      this.fields = fields;
+      this.validateOnSubmit();
     }
 
+    validateOnSubmit() {
+      let self = this;
 
-
-
-    class Login{
-        constructor(loginForm,fields)
-        {
-            this.loginForm=loginForm;
-            this.fields=fields;
-            this.validateOnSubmit();
-        }
-
-        validateOnSubmit()
-        {
-            let self=this;
-            this.loginForm.addEventListener("submit",(e)=>{
-                e.preventDefault();
-                const input=document.querySelector("#email");
-                
-                console.log(encodeURIComponent(input.value).replace(/\./g, '%2E'));
-                getId(encodeURIComponent(input.value).replace(/\./g, '%2E'));
-            })
-        }
-      
-         
+      this.registerForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        self.fields.forEach((element) => {
+          const input = document.querySelector(`#${element}`);
+          console.log(input.value);
+        });
+      });
     }
- 
+  }
 
-    async function getId(mail)
-        {
-            
-const data = await fetch(`http://localhost:5000/api/users/mail/${mail}`,{ mode: 'no-cors'});
-  const userData = await data.json();
- console.log(userData);
-  
-        }
-
-
-   const loginForm=document.querySelector(".login");
-   if (loginForm)
-   {
-    const fields=["email","password"];
-    const validator=new Login(loginForm,fields);
-   }
-   
-
-
-   const registerForm=document.querySelector(".signup");
-    if (registerForm)
-    {
-        const fields=["nume","prenume","firma","cnp","mail","phone","adresa","date","pass"];
-        const validator=new Register(registerForm,fields);
+  class Login {
+    constructor(loginForm, fields) {
+      this.loginForm = loginForm;
+      this.fields = fields;
+      this.validateOnSubmit();
     }
 
+    validateOnSubmit() {
+      let self = this;
+      this.loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const input = document.querySelector("#email");
+
+        console.log(encodeURIComponent(input.value).replace(/\./g, "%2E"));
+        getId(encodeURIComponent(input.value).replace(/\./g, "%2E"));
+      });
+    }
+
+    async getId(mail) {
+      const data = await fetch(`http://localhost:5000/api/users/mail/${mail}`);
+      const userData = await data.json();
+      console.log(userData);
+      window.location.href =
+        `http://localhost:5001/pages/owned/` + userData._id;
+        setCookie(userData.email);
+    }
+
+     setCookie(mail)
+     {
+        const d=new Date();
+        d.setMinutes(1);
+        let expires="expires="+d.toUTCString();
+        document.cookie="name=users;"+ expires+";path=/";
+     }
+  }
+
+  const loginForm = document.querySelector(".login");
+  if (loginForm) {
+    const fields = ["email", "password"];
+    const validator = new Login(loginForm, fields);
+  }
+
+  const registerForm = document.querySelector(".signup");
+  if (registerForm) {
+    const fields = [
+      "nume",
+      "prenume",
+      "firma",
+      "cnp",
+      "mail",
+      "phone",
+      "adresa",
+      "pass",
+    ];
+    const validator = new Register(registerForm, fields);
+  }
 </script>

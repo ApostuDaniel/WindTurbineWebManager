@@ -6,6 +6,24 @@ const ejs = require('ejs')
 const fetch = (url) =>
   import('node-fetch').then(({ default: fetch }) => fetch(url))
 
+async function getLandingPage(req, res) {
+  try {
+    res.writeHead(200, { 'Content-Type': 'text/html' })
+    var htmlContent = fs.readFileSync(
+      __dirname + '/../views/pages/landing.ejs',
+      'utf8'
+    )
+
+    var htmlRenderized = ejs.render(htmlContent, {
+      filename: 'landing.ejs',
+    })
+    
+    res.end(htmlRenderized)
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
 async function getPublicPage(req, res) {
   try {
     res.writeHead(200, { 'Content-Type': 'text/html' })
@@ -35,7 +53,7 @@ async function getTurbines() {
   return turbineData
 }
 
-async function getPrivatePage(req, res) {
+async function getPrivatePage(req, res, id) {
   try {
     res.writeHead(200, { 'Content-Type': 'text/html' })
     var htmlContent = fs.readFileSync(
@@ -44,7 +62,7 @@ async function getPrivatePage(req, res) {
     )
 
     
-    const ownedTurbineData = await getOwnedTurbines()
+    const ownedTurbineData = await getOwnedTurbines(id)
 
     var htmlRenderized = ejs.render(htmlContent, {
       filename: 'owned.ejs',
@@ -86,12 +104,12 @@ async function getTurbines() {
   return turbineData
 }
 
-async function getOwnedTurbines()
+async function getOwnedTurbines(id)
 {
-  const data = await fetch('http://localhost:5000/api/turbines/private/62a711fc87d04cb2e5473c4c') // hardcoded user id
+  const data = await fetch('http://localhost:5000/api/turbines/private/'+id) // hardcoded user id
   const ownedTurbineData=await data.json()
 
   return ownedTurbineData
 }
 
-module.exports = { getPublicPage, getPrivatePage,getAuthPage }
+module.exports = { getPublicPage, getPrivatePage, getAuthPage, getLandingPage, getOwnedTurbines }
