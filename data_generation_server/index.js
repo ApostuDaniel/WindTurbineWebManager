@@ -1,4 +1,3 @@
-
 const fetch = (url) =>
   import('node-fetch').then(({ default: fetch }) => fetch(url))
 
@@ -16,6 +15,7 @@ async function getTurbines() {
 
     return turbines;
 }
+
 /**
  * Gets all the turbines and updates the data for each one
  */
@@ -26,12 +26,36 @@ async function updateTurbines()
         const turbines = await getTurbines();
 
         for(turbine of turbines) {
-            await updateTurbine(turbine);
-            break;
+            const state = turbine.turbineState;
+            if(state === 'Running') {
+                console.log('Running');
+                // await updateTurbine(turbine);
+            }
+            else {
+                console.log('Not Running');
+                // await stopTurbine(turbine);
+            }
         }
 
         await new Promise(resolve => setTimeout(resolve, UPDATE_TIME_DELAY));
     }
+}
+
+/**
+ * Sets all values for the turbine to 0
+ * @param {JSON} turbine 
+ */
+async function stopTurbine(turbine) {
+    const id = turbine._id;
+
+    var newData = {
+        windSpeed: 0,
+        turbineWear: 0,
+        powerGenerated: 0,
+        eficiency: 0
+    }
+
+    await postNewData(id, newData);
 }
 
 /**
@@ -62,25 +86,59 @@ async function updateTurbine(turbine) {
     const currentTemperature = json.current.temp_c;
     const currentHummidity = json.current.humidity;
 
+
+    const newWindSpeed = getNewWindSpeed(oldWindSpeed, currentWindSpeed);
+    const newTurbineWear = getNewTurbineWear(oldTurbineWear, newWindSpeed, currentTemperature, currentHummidity);
+    const newPowerGenerated = getNewPowerGenerated(oldPowerGenerated, windSpeed);
     var newData = {
-        windSpeed: getNewWindSpeed(oldWindSpeed, currentWindSpeed),
-        turbineWear: oldTurbineWear + 1,
-        powerGenerated: oldPowerGenerated + 1,
+        windSpeed: newWindSpeed,
+        turbineWear: newTurbineWear,
+        powerGenerated: newPowerGenerated,
         eficiency: oldEfficiency + 1
     }
 
+    await postNewData(id, newData);
+
+    console.log(JSON.stringify(newData));
+}
+
+function getNewWindSpeed(oldWindSpeed, currentWindSpeed) {
+    return oldWindSpeed + currentWindSpeed / 2;
+}
+
+function getNewTurbineWear(oldTurbineWear, windSpeed, temperature, humidity) {
+    let newTurbineWear = oldTurbineWear;
+
+    if(windSpeed > 50) {
+        newTurbineWear += 0.3;
+    }
+
+    if(temperature > 30) {
+        newTurbineWear += 0.1;
+    }
+
+    if(humidity > 60) {
+        newTurbineWear += 0.2;
+    }
+
+    return newTurbineWear;
+}
+
+function getNewPowerGenerated(oldPowerGenerated, windSpeed) {
+    return oldPowerGenerated + windSpeed;
+}
+
+// function getNewEfficiency() {
+//     reutrn 
+// }
+
+async function postNewData(id, newData) {
     // const turbine_post_new_data_api_url = `http://localhost:5000/turbines/${id}`;
     // await fetch(turbine_post_new_data_api_url, {
     //     method: "POST",
     //     body: JSON.stringify(newData),
     //     headers: { "Content-Type": "application/json" }
     // });
-
-    console.log(JSON.stringify(newData));
-}
-
-function getNewWindSpeed(oldWindSpeed, currentWindSpeed) {
-
 }
 
 updateTurbines();
