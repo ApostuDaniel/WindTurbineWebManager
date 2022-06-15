@@ -15,7 +15,6 @@ async function getTurbines(req, res) {
     const turbines = await Turbine.find()
     res.writeHead(200, {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
     })
     res.end(JSON.stringify(turbines))
   } catch (error) {
