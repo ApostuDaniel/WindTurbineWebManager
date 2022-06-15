@@ -31,8 +31,7 @@
       const hum = json.current.humidity;
   
       const alt = await getAltitude(lat, lng);
-      // const sol = await getSoilData(lat, lng);
-      const sol = 0;
+      const sol = await getSoilData();
   
       infoWindow = new google.maps.InfoWindow({
         position: {lat, lng},
@@ -46,15 +45,11 @@
     }, {passive: true})
   }
   
-  async function getSoilData(lat, lng) {
-    const elevation_api_url = `https://api.ambeedata.com/soil/latest/by-lat-lng?lat=${lat}&lng=${lng}`;
-    const response = await fetch(elevation_api_url, {headers: {
-      "x-api-key": "d80201c96c4e7017bd4e5fca3664a217fc4eae84a37f16a376b7406f8f1e16b2",
-      "Content-type": "application/json"
-    }});
-    const json = await response.json();
+  async function getSoilData() {
+    const soilType = ['Sandy', 'Chalk', 'Clay', 'Loamy', 'Peaty', 'Silty'];
   
-    return json.data[0].soil_moisture;
+    const index = Math.floor(Math.random() * soilType.length);
+    return soilType[index];
   }
   
   async function getAltitude(lat, lng) {
@@ -73,7 +68,7 @@
     var tmp = document.getElementById("temperature");
     var hm = document.getElementById("humidity");
     var al = document.getElementById("altitude");
-    var sl = document.getElementById("soil-moisture");
+    var sl = document.getElementById("soil-type");
 
     lt.innerHTML = lat;
     ln.innerHTML = lng;
