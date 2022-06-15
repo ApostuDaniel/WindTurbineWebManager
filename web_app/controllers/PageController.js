@@ -88,7 +88,7 @@ async function getTurbines() {
 
 async function getOwnedTurbines()
 {
-  const data = await fetch('http://localhost:5000/api/turbines/private')
+  const data = await fetch('http://localhost:5000/api/turbines/private/62a711fc87d04cb2e5473c4c') // hardcoded user id
   const ownedTurbineData=await data.json()
 
   return ownedTurbineData

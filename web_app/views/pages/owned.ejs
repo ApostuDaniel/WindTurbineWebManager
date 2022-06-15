@@ -19,10 +19,12 @@
       href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap"
       rel="stylesheet"
     />
-    <title>Turbine Proprii</title>
+    <title>Owned turbines</title>
   </head>
   <body>
     <%- include(dir + "/views/partials/navBar") %>
+
+    
     <!-- ______________________ -->
 
     <div class="filters">
@@ -81,9 +83,5 @@
             include(dir + "/views/partials/ownedTurbine", {turbine:turbine}) %> <% }
             %>
     </ul> 
-   
-    
-  
-    
   </body>
 </html>

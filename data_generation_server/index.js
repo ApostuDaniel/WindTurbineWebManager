@@ -2,6 +2,7 @@
 const fetch = (url) =>
   import('node-fetch').then(({ default: fetch }) => fetch(url))
 
+const UPDATE_TIME_DELAY = 5000;
 
 /**
  * Gets all the turbines from the api
@@ -29,7 +30,7 @@ async function updateTurbines()
             break;
         }
 
-        await new Promise(resolve => setTimeout(resolve, 5000));
+        await new Promise(resolve => setTimeout(resolve, UPDATE_TIME_DELAY));
     }
 }
 
@@ -67,6 +68,13 @@ async function updateTurbine(turbine) {
         powerGenerated: oldPowerGenerated + 1,
         eficiency: oldEfficiency + 1
     }
+
+    // const turbine_post_new_data_api_url = `http://localhost:5000/turbines/${id}`;
+    // await fetch(turbine_post_new_data_api_url, {
+    //     method: "POST",
+    //     body: JSON.stringify(newData),
+    //     headers: { "Content-Type": "application/json" }
+    // });
 
     console.log(JSON.stringify(newData));
 }
