@@ -2,6 +2,9 @@ const mongoose = require('mongoose')
 
 const Turbine = require('./../schemas/Turbine')
 const AllTurbineData = require('./../schemas/AllTurbineData')
+const User = require('./../schemas/User')
+
+const { getRequestData, validateJSON } = require('../utils')
 
 //GET
 
@@ -163,10 +166,7 @@ async function getNewestTurbineData(req, res, id) {
 // @desc    POSTS a new turbine
 // @route   POST /api/turbines
 //The request body should contain the following elements
-// userId: {
-//   type: mongoose.SchemaType.ObjectId,
-//   ref: 'User',
-// },
+// userId: {type: mongoose.SchemaType.ObjectId},
 // name: { type: String, required: true },
 // constructionYear: { type: Date, required: true },
 // imageLink: { type: String },
@@ -176,15 +176,79 @@ async function getNewestTurbineData(req, res, id) {
 // terrain: { type: String, required: true },
 // suitability: { type: Number, required: true, min: 0, max: 100 },
 // isPublic: { type: Boolean, required: true },
-// turbineState: {
-//   type: String,
-//   required: true,
-//   validate: {
-//     validator: (state) =>
-//       state === 'Maintenance' || state === 'Stopped' || state === 'Running',
-//     message: (props) => `${props} is not a valid turbine state`,
-//   },
+// turbineState: { type: String,required: true , 'Maintenance' || 'Stopped' || 'Running'},
 // },
+
+async function createTurbine(req, res) {
+  try {
+    const textBody = await getRequestData(req)
+    const jsonBody = validateJSON(textBody)
+
+    if (!jsonBody) {
+      res.writeHead(400, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ message: 'Invalid request JSON' }))
+      return
+    }
+
+    const {
+      userId,
+      name,
+      constructionYear,
+      imageLink,
+      latitude,
+      longitude,
+      altitude,
+      terrain,
+      suitability,
+      isPublic,
+      turbineState,
+    } = JSON.parse(textBody)
+
+    const user = await User.findById(userId)
+
+    if (user == null) {
+      res.writeHead(422, { 'Content-Type': 'application/json' })
+      res.end(
+        JSON.stringify({
+          message: `The referenced userId ${userId} doesn't exist in the database`,
+        })
+      )
+      console.log(userId)
+      console.log(user)
+      return
+    }
+
+    try {
+      const turbine = await Turbine.create({
+        userId,
+        name,
+        constructionYear,
+        imageLink,
+        latitude,
+        longitude,
+        altitude,
+        terrain,
+        suitability,
+        isPublic,
+        turbineState,
+      })
+
+      const turbineData = await AllTurbineData.create({
+        turbineId: turbine._id,
+        historicData: [],
+      })
+      console.log(turbineData)
+
+      res.writeHead(201, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify(turbine))
+    } catch (error) {
+      res.writeHead(400, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ message: error.message }))
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 module.exports = {
   getTurbines,
@@ -195,4 +259,5 @@ module.exports = {
   getPublicTurbineByName,
   getTurbineData,
   getNewestTurbineData,
+  createTurbine,
 }

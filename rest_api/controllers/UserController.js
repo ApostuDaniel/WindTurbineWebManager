@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const md5 = require('md5')
 
 const User = require('./../schemas/User')
 const Notification = require('./../schemas/Notification')
@@ -117,6 +118,57 @@ async function getUserAlerts(req, res, id) {
   }
 }
 
+//POST
+
+// @desc    POSTS a new user
+// @route   POST /api/users
+async function createUser(req, res) {
+  try {
+    const textBody = await getRequestData(req)
+    const jsonBody = validateJSON(textBody)
+
+    if (!jsonBody) {
+      res.writeHead(400, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ message: 'Invalid request JSON' }))
+      return
+    }
+
+    const {
+      firstName,
+      lastName,
+      company,
+      CNP,
+      mail,
+      phone,
+      adress,
+      birthDate,
+      password,
+    } = JSON.parse(textBody)
+
+    try {
+      const user = await User.create({
+        firstName,
+        lastName,
+        company,
+        CNP,
+        mail,
+        phone,
+        adress,
+        birthDate,
+        password: md5(password),
+      })
+
+      res.writeHead(201, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify(user))
+    } catch (error) {
+      res.writeHead(400, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ message: error.message }))
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
   getUsers,
   getUser,
@@ -125,4 +177,5 @@ module.exports = {
   getNotifications,
   getAlerts,
   getUserByMail,
+  createUser,
 }
