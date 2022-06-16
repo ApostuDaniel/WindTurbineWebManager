@@ -28,7 +28,7 @@ html,body
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  font-size: 1.2vw;
+  font-size: 1.1vw;
 }
 
 #map 
@@ -49,13 +49,13 @@ html,body
 
 .attribute
 {
-  margin: 20px;
+  margin: 15px;
   padding-left: 15px;
   font-weight: bold;
   border-left: 1vw solid rgba(186, 124, 237, 0.5);
 }
 
-.form
+#form
 {
   height: auto;
   width: 50%;
@@ -69,13 +69,13 @@ html,body
   align-items: center;
 }
 
-.form label
+#form label
 {
   width: 50%;
-  font-weight: bold;
+  font-weight: bolder;
 }
 
-.form input
+#form input
 {
   margin-bottom: 5px;
   width: 50%;
@@ -86,6 +86,12 @@ html,body
   border: 1px solid rgba(186, 124, 237, 0.5);
 }
 
+#err
+{
+  color: red;
+  font-weight: bold;
+  font-size: 15px;
+}
 
 @media screen and (max-width: 800px) 
 {
@@ -97,7 +103,7 @@ html,body
 
   .configuration-panel
   {
-    font-size: 2.5vw;
+    font-size: 2vw;
   }
 }
 

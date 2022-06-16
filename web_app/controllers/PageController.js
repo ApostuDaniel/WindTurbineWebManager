@@ -1,139 +1,142 @@
-
-const fs = require('fs')
-const ejs = require('ejs')
-
+const fs = require("fs");
+const ejs = require("ejs");
 
 const fetch = (url) =>
-  import('node-fetch').then(({ default: fetch }) => fetch(url))
+  import("node-fetch").then(({ default: fetch }) => fetch(url));
 
 async function getLandingPage(req, res) {
   try {
-    res.writeHead(200, { 'Content-Type': 'text/html' })
+    res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + '/../views/pages/landing.ejs',
-      'utf8'
-    )
+      __dirname + "/../views/pages/landing.ejs",
+      "utf8"
+    );
 
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: 'landing.ejs',
-    })
-    
-    res.end(htmlRenderized)
+      filename: "landing.ejs",
+    });
+
+    res.end(htmlRenderized);
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
   }
 }
 
 async function getPublicPage(req, res) {
   try {
-    res.writeHead(200, { 'Content-Type': 'text/html' })
+    res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + '/../views/pages/public.ejs',
-      'utf8'
-    )
+      __dirname + "/../views/pages/public.ejs",
+      "utf8"
+    );
 
-    const turbineData = await getTurbines()
+    const turbineData = await getTurbines();
 
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: 'public.ejs',
+      filename: "public.ejs",
       turbines: turbineData,
-    })
-    
-    res.end(htmlRenderized)
+    });
+
+    res.end(htmlRenderized);
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
   }
-}
-
-
-async function getTurbines() {
-  const data = await fetch('http://localhost:5000/api/turbines')
-  const turbineData = await data.json()
-
-  return turbineData
 }
 
 async function getPrivatePage(req, res, id) {
   try {
-    res.writeHead(200, { 'Content-Type': 'text/html' })
+    res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + '/../views/pages/owned.ejs',
-      'utf8'
-    )
+      __dirname + "/../views/pages/owned.ejs",
+      "utf8"
+    );
 
-    
-    const ownedTurbineData = await getOwnedTurbines(id)
+    const ownedTurbineData = await getOwnedTurbines(id);
 
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: 'owned.ejs',
+      filename: "owned.ejs",
       turbines: ownedTurbineData,
-    })
-    
-    res.end(htmlRenderized)
+    });
+
+    res.end(htmlRenderized);
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
   }
 }
-
 
 async function getLoginPage(req, res) {
   try {
-    res.writeHead(200, { 'Content-Type': 'text/html' })
+    res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + '/../views/pages/login.ejs',
-      'utf8'
-    )
-
-    
-   
+      __dirname + "/../views/pages/login.ejs",
+      "utf8"
+    );
 
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: 'login.ejs',
-    })
-    
-    res.end(htmlRenderized)
+      filename: "login.ejs",
+    });
+
+    res.end(htmlRenderized);
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
   }
 }
-
-
 
 async function getRegisterPage(req, res) {
   try {
-    res.writeHead(200, { 'Content-Type': 'text/html' })
+    res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + '/../views/pages/register.ejs',
-      'utf8'
-    )
-
-    
-   
+      __dirname + "/../views/pages/register.ejs",
+      "utf8"
+    );
 
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: 'register.ejs',
-    })
-    
-    res.end(htmlRenderized)
+      filename: "register.ejs",
+    });
+
+    res.end(htmlRenderized);
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
   }
 }
 
+async function getCreateTurbinePage(req, res) {
+  try {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    var htmlContent = fs.readFileSync(
+      __dirname + "/../views/pages/createTurbine.ejs",
+      "utf8"
+    );
+
+    var htmlRenderized = ejs.render(htmlContent, {
+      filename: "createTurbine.ejs",
+    });
+    res.end(htmlRenderized);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 
 async function getTurbines() {
-  const data = await fetch('http://localhost:5000/api/turbines/public')
-  const turbineData = await data.json()
+  const data = await fetch("http://localhost:5000/api/turbines/public");
+  const turbineData = await data.json();
 
-  return turbineData
+  return turbineData;
 }
 
-async function getOwnedTurbines(id)
-{
-  const data = await fetch('http://localhost:5000/api/turbines/private/'+id) // hardcoded user id
-  const ownedTurbineData=await data.json()
+async function getOwnedTurbines(id) {
+  const data = await fetch("http://localhost:5000/api/turbines/private/" + id);
+  const ownedTurbineData = await data.json();
 
-  return ownedTurbineData
+  return ownedTurbineData;
 }
 
-module.exports = { getPublicPage, getPrivatePage, getLoginPage, getLandingPage, getOwnedTurbines,getRegisterPage }
+module.exports = {
+  getPublicPage,
+  getPrivatePage,
+  getLoginPage,
+  getLandingPage,
+  getOwnedTurbines,
+  getRegisterPage,
+  getCreateTurbinePage,
+};
