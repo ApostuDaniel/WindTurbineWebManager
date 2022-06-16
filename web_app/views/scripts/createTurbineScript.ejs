@@ -1,0 +1,51 @@
+<script>
+    async function postTurbine(turbine) {
+        // var newData = {
+    //   "userId": "62a711fc87d04cb2e5473c4c",
+    //   "name": "Turbine_Moldova",
+    //   "constructionYear": "1455127102000",
+    //   "imageLink": " https://www.example.com/images/dinosaur.jpg",
+    //   "latitude": 47.45,
+    //   "longitude": 42.12,
+    //   "altitude": 150,
+    //   "terrain": "Peaty",
+    //   "suitability": 45,
+    //   "isPublic": true,
+    //   "turbineState": "Running"
+    // }
+
+        const turbine_post_new_data_api_url = `http://localhost:5000/api/turbines`;
+        const response = await fetch(turbine_post_new_data_api_url, {
+            method: "POST",
+            mode: "cors",
+            body: JSON.stringify(turbine),
+            headers: { "Content-Type": "application/json" }
+        });
+
+        console.log(response);
+    }
+
+    function getCreateTurbineData() {
+        const form = document.querySelector('form');
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const fields = [
+                document.getElementById("name"),
+                document.getElementById("cons-date"),
+                document.getElementById("image"),
+                document.getElementById("lat"),
+                document.getElementById("lng"),
+                document.getElementById("altitude"),
+                document.getElementById("soil-type"),
+                document.getElementById("suitability"),
+                document.getElementById("wind"),
+                document.getElementById("temperature"),
+                document.getElementById("humidity"),
+            ];
+
+
+        })
+    }
+
+    getCreateTurbineData();
+</script>
