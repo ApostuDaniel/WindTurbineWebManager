@@ -144,7 +144,7 @@ async function createUser(req, res) {
 
     const { firstName, lastName, company, CNP, mail, phone, adress, password } =
       JSON.parse(textBody)
-  
+
     try {
       const user = await User.create({
         firstName,
@@ -156,7 +156,6 @@ async function createUser(req, res) {
         adress,
         birthDate: extractDateFromCNP(CNP),
         password: md5(password),
-      
       })
 
       res.writeHead(201, { 'Content-Type': 'application/json' })
@@ -233,6 +232,59 @@ async function createNotification(req, res) {
   }
 }
 
+// @desc    POSTS a new alert
+// @route   POST /api/users/alerts
+async function createAlert(req, res) {
+  try {
+    const textBody = await getRequestData(req)
+    const jsonBody = validateJSON(textBody)
+
+    if (!jsonBody) {
+      res.writeHead(400, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ message: 'Invalid request JSON' }))
+      return
+    }
+
+    const { idUser, idTurbine, timestamp } = JSON.parse(textBody)
+
+    const user = await User.findById(idUser)
+    const turbine = await Turbine.findById(idTurbine)
+
+    const noUser = user === null
+    const noTurbine = turbine === null
+
+    if (noUser || noTurbine || !user._id.equals(turbine.userId)) {
+      res.writeHead(422, { 'Content-Type': 'application/json' })
+      const response = { message: '' }
+      if (noUser) {
+        response.message = `The user's id ${idUser} doesn't exist in the database`
+      } else if (noTurbine) {
+        response.message = `The turbine with id ${idTurbine} doesn't exist in the database`
+      } else {
+        response.message = `The user with id ${idUser} doens't own the turbine ${idTurbine}`
+      }
+      res.end(JSON.stringify(response))
+      return
+    }
+
+    try {
+      const alert = await Alert.create({
+        idUser,
+        idTurbine,
+        timestamp,
+      })
+
+      res.writeHead(201, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify(alert))
+    } catch (error) {
+      res.writeHead(400, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ message: error.message }))
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
   getUsers,
   getUser,
@@ -243,4 +295,5 @@ module.exports = {
   getUserByMail,
   createUser,
   createNotification,
+  createAlert,
 }
