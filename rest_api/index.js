@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const http = require('http')
 const userController = require('./controllers/UserController')
 const turbineController = require('./controllers/TurbineController')
-const { uuidRegex } = require('./utils')
 const PORT = process.env.port || 5000
 
 // const User = require('./schemas/User')
@@ -31,7 +30,7 @@ const server = http.createServer((req, res) => {
       case 'GET':
         if (req.url === '/api/users') {
           userController.getUsers(req, res)
-        } else if (req.url.match(/\/api\/users\/\w+$/)) {
+        } else if (req.url.match(/\/api\/users\/[0-9a-f]{24}$/)) {
           const id = req.url.split('/')[3]
           userController.getUser(req, res, id)
         } else if (req.url.match(/\/api\/users\/mail\/[A-Za-z0-9_\%\.]+$/)) {
@@ -43,32 +42,36 @@ const server = http.createServer((req, res) => {
         } else if (req.url.match(/\/api\/users\/alerts$/)) {
           const id = req.url.split('/')[3]
           userController.getUser(req, res, id)
-        } else if (req.url.match(/\/api\/users\/\w+\/notifications$/)) {
+        } else if (
+          req.url.match(/\/api\/users\/[0-9a-f]{24}\/notifications$/)
+        ) {
           const id = req.url.split('/')[3]
           userController.getUserNotifications(req, res, id)
-        } else if (req.url.match(/\/api\/users\/\w+\/alerts$/)) {
+        } else if (req.url.match(/\/api\/users\/[0-9a-f]{24}\/alerts$/)) {
           const id = req.url.split('/')[3]
           userController.getUserAlerts(req, res, id)
         } else if (req.url === '/api/turbines') {
           turbineController.getTurbines(req, res)
         } else if (req.url === '/api/turbines/public') {
           turbineController.getPublicTurbines(req, res)
-        } else if (req.url.match(/\/api\/turbines\/\w+$/)) {
+        } else if (req.url.match(/\/api\/turbines\/[0-9a-f]{24}$/)) {
           const id = req.url.split('/')[3]
           turbineController.getTurbine(req, res, id)
-        } else if (req.url.match(/\/api\/turbines\/data\/\w+$/)) {
+        } else if (req.url.match(/\/api\/turbines\/data\/[0-9a-f]{24}$/)) {
           const turbineid = req.url.split('/')[4]
           turbineController.getTurbineData(req, res, turbineid)
-        } else if (req.url.match(/\/api\/turbines\/data\/\w+\/new$/)) {
+        } else if (req.url.match(/\/api\/turbines\/data\/[0-9a-f]{24}\/new$/)) {
           const turbineid = req.url.split('/')[4]
           turbineController.getNewestTurbineData(req, res, turbineid)
-        } else if (req.url.match(/\/api\/turbines\/private\/\w+$/)) {
+        } else if (req.url.match(/\/api\/turbines\/private\/[0-9a-f]{24}$/)) {
           const userId = req.url.split('/')[4]
           turbineController.getPrivateTurbines(req, res, userId)
         } else if (req.url.match(/\/api\/turbines\/public\/\w+$/)) {
           const name = req.url.split('/')[4]
           turbineController.getPublicTurbineByName(req, res, name)
-        } else if (req.url.match(/\/api\/turbines\/private\/\w+\/\w+$/)) {
+        } else if (
+          req.url.match(/\/api\/turbines\/private\/[0-9a-f]{24}\/\w+$/)
+        ) {
           const urlSplit = req.url.split('/')
           const userId = urlSplit[4]
           const name = urlSplit[5]
@@ -92,10 +95,10 @@ const server = http.createServer((req, res) => {
         }
         break
       case 'PUT':
-        if (req.url.match(/\/api\/turbines\/newdata\/\w+$/)) {
+        if (req.url.match(/\/api\/turbines\/newdata\/[0-9a-f]{24}$/)) {
           const turbineId = req.url.split('/')[4]
           turbineController.postNewData(req, res, turbineId)
-        } else if (req.url.match(/\/api\/turbines\/\w+$/)) {
+        } else if (req.url.match(/\/api\/turbines\/[0-9a-f]{24}$/)) {
           const turbineId = req.url.split('/')[3]
           turbineController.updateTurbine(req, res, turbineId)
         } else {

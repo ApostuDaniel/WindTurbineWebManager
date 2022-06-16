@@ -69,12 +69,9 @@ function extractDateFromCNP(cnp) {
   return new Date(year, month, day)
 }
 
-const uuidRegex = /[0-9a-f]{24}/
-
 module.exports = {
   getRequestData,
   validateJSON,
   verificareCNP,
   extractDateFromCNP,
-  uuidRegex,
 }
