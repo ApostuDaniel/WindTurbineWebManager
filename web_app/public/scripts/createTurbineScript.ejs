@@ -1,19 +1,5 @@
 <script>
     async function postTurbine(turbine) {
-        // var newData = {
-    //   "userId": "62a711fc87d04cb2e5473c4c",
-    //   "name": "Turbine_Moldova",
-    //   "constructionYear": "1455127102000",
-    //   "imageLink": " https://www.example.com/images/dinosaur.jpg",
-    //   "latitude": 47.45,
-    //   "longitude": 42.12,
-    //   "altitude": 150,
-    //   "terrain": "Peaty",
-    //   "suitability": 45,
-    //   "isPublic": true,
-    //   "turbineState": "Running"
-    // }
-
         const turbine_post_new_data_api_url = `http://localhost:5000/api/turbines`;
         const response = await fetch(turbine_post_new_data_api_url, {
             method: "POST",
@@ -35,34 +21,56 @@
 
         form.addEventListener('submit', e => {
             e.preventDefault();
+            let canPost = true;
             const fields = [
                 document.getElementById("lat"),
                 document.getElementById("lng"),
                 document.getElementById("altitude"),
                 document.getElementById("soil-type"),
-                document.getElementById("suitability"),
+                document.getElementById("suitability")
             ];
 
             const formFields = [
                 document.getElementById("name"),
                 document.getElementById("cons-date"),
-                document.getElementById("image"),
+                document.getElementById("image")
             ];
             
             for(field of fields) {
                 const text = field.innerText;
                 if(text.length === 0) {
-                    err.innerHTML = 'Fields can\'t be empty';
+                    err.innerHTML = '*Fields can\'t be empty';
+                    canPost = false;
                 }
             }
 
             for(field of formFields) {
                 const value = field.value;
                 if(value.length === 0) {
-                    err.innerHTML = 'Fields can\'t be empty';
+                    err.innerHTML = '*Fields can\'t be empty';
+                    canPost = false;
                 }
             }
 
+            if(canPost) {
+                const creatationDate = new Date(formFields[1].value);
+                const turbine = {
+                    "userId": "62a711fc87d04cb2e5473c4c", // hardcoded
+                    "name": formFields[0].value,
+                    "constructionYear": creatationDate.valueOf(),
+                    "imageLink": formFields[2].value,
+                    "latitude": fields[0].innerText,
+                    "longitude": fields[1].innerText,
+                    "altitude": fields[2].innerText,
+                    "terrain": fields[3].innerText,
+                    "suitability": fields[4].innerText,
+                    "isPublic": true,
+                    "turbineState": "Running"
+                };
+
+                postTurbine(turbine);
+                console.log(turbine);
+            }
         })
     }
 

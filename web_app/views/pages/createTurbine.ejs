@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@100&display=swap" rel="stylesheet">
     <%- include(dir+'/public/css/createTurbinePage'); %>
-    <%- include(dir+'/views/scripts/renderMap'); %>
+    <%- include(dir+'/public/scripts/renderMap'); %>
   </head>
   <body>
     <div class="wrapper">
@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <%- include(dir+'/views/scripts/createTurbineScript'); %>
+    <%- include(dir+'/public/scripts/createTurbineScript'); %>
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0m_3MppCVS4i2BKqDXvqN_Cev4apSnEw&callback=initMap&v=weekly"
         defer
