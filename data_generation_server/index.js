@@ -1,6 +1,8 @@
 const fetch = (url) =>
   import('node-fetch').then(({ default: fetch }) => fetch(url))
 
+const { default: axios } = require('axios');
+
 const UPDATE_TIME_DELAY = 5000;
 
 /**
@@ -78,7 +80,8 @@ async function updateTurbine(turbine) {
     console.log('Turbine old: ');
     console.log(turbineData);
 
-    if(turbineData.message === null) {
+    if(turbineData.message === undefined) {
+        // console.log("Old");
         const oldWindSpeed = turbineData.windSpeed;
         const oldTurbineWear = turbineData.turbineWear;
         const oldPowerGenerated = turbineData.powerGenerated;
@@ -106,6 +109,7 @@ async function updateTurbine(turbine) {
             "timeStamp": date.valueOf()
         }
     } else {
+        // console.log("New");
         const weather_api_url = `http://api.weatherapi.com/v1/current.json?key=2407cb95cd0e4b31971101252221306&q=${lat},${lng}&aqi=no`;
         const response = await fetch(weather_api_url);
         const json = await response.json();
@@ -133,7 +137,7 @@ async function updateTurbine(turbine) {
 }
 
 function getNewWindSpeed(oldWindSpeed, currentWindSpeed) {
-    return oldWindSpeed + currentWindSpeed / 2;
+    return (oldWindSpeed + currentWindSpeed) / 2;
 }
 
 function getNewTurbineWear(oldTurbineWear, windSpeed, temperature, humidity) {
@@ -159,21 +163,19 @@ function getNewPowerGenerated(oldPowerGenerated, windSpeed) {
 }
 
 function getNewEfficiency(oldEfficiency, oldPowerGenerated, newPowerGenerated) {
-    return (newPowerGenerated - oldPowerGenerated > 20) ? oldEfficiency + 0.01 : oldEfficiency - 0.01;
+    return (newPowerGenerated - oldPowerGenerated > 20) ? (oldEfficiency <= 0.9 ? oldEfficiency + 0.01 : 1) : oldEfficiency - 0.01;
 }
 
 async function postNewData(id, newData) {
     console.log('Turbine new: ');
     console.log(newData);
-    const turbine_post_new_data_api_url = `http://localhost:5000/turbines/newdata/${id}`;
-    const response = await fetch(turbine_post_new_data_api_url, {
-        method: "PUT",
-        mode: "cors",
-        body: JSON.stringify(newData),
-        headers: { "Content-Type": "application/json" }
-    });
-
-    console.log(response);
+    const response = await axios({
+        method: 'put',
+        url: `http://localhost:5000/api/turbines/newdata/${id}`,
+        data: JSON.stringify(newData)
+      });
+  
+      console.log(response.data);
 }
 
 updateTurbines();
