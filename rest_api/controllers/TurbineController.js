@@ -288,6 +288,50 @@ async function postNewData(req, res, id) {
   }
 }
 
+// @desc    UPDATES a turbine
+// @route   PUT /api/turbines/:id
+
+async function updateTurbine(req, res, id) {
+  try {
+    const textBody = await getRequestData(req)
+    const jsonBody = validateJSON(textBody)
+
+    if (!jsonBody) {
+      res.writeHead(400, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ message: 'Invalid request JSON' }))
+      return
+    }
+
+    const turbine = await Turbine.findById(id)
+
+    if (turbine == null) {
+      res.writeHead(422, { 'Content-Type': 'application/json' })
+      res.end(
+        JSON.stringify({
+          message: `Turbine with id ${userId} doesn't exist in the database`,
+        })
+      )
+      return
+    }
+
+    try {
+      for (prop in turbine) {
+        turbine[prop] = jsonBody[prop] ?? turbine[prop]
+      }
+
+      await turbine.save()
+
+      res.writeHead(201, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify(turbine))
+    } catch (error) {
+      res.writeHead(400, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ message: error.message }))
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
   getTurbines,
   getTurbine,
@@ -299,4 +343,5 @@ module.exports = {
   getNewestTurbineData,
   createTurbine,
   postNewData,
+  updateTurbine,
 }
