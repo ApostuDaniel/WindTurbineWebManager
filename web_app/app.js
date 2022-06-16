@@ -2,7 +2,6 @@ const http = require('http')
 const fs = require('fs')
 const ejs = require('ejs')
 const PageController = require('./controllers/PageController')
-const CreateTurbineController = require('./controllers/CreateTurbineController')
 
 const PORT = process.env.port || 5001
 
@@ -20,7 +19,7 @@ const server = http.createServer((req, res) => {
       PageController.getPrivatePage(req,res,id)
     } 
     else if(req.url === '/pages/createTurbine') {
-      CreateTurbineController.getCreateTurbinePage(req,res)
+      PageController.getCreateTurbinePage(req,res)
     }
     else if (req.url=== '/pages/login')
     {

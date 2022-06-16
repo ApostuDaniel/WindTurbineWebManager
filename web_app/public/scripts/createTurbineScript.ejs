@@ -13,7 +13,28 @@
 
     function getCreateTurbineData() {
         const form = document.querySelector('form');
-        const err = document.getElementById('err');
+        let err = document.getElementById('err');
+        let fields = [
+            document.getElementById("lat"),
+            document.getElementById("lng"),
+            document.getElementById("altitude"),
+            document.getElementById("soil-type"),
+            document.getElementById("suitability")
+        ];
+
+        let formFields = [
+            document.getElementById("name"),
+            document.getElementById("cons-date"),
+            document.getElementById("image")
+        ];
+
+        for(field of fields) {
+            field.innerText = '';
+        }
+
+        for(field of formFields) {
+            field.value = '';
+        }
 
         document.addEventListener('click', e => {
             err.innerHTML = '';
@@ -22,19 +43,6 @@
         form.addEventListener('submit', e => {
             e.preventDefault();
             let canPost = true;
-            const fields = [
-                document.getElementById("lat"),
-                document.getElementById("lng"),
-                document.getElementById("altitude"),
-                document.getElementById("soil-type"),
-                document.getElementById("suitability")
-            ];
-
-            const formFields = [
-                document.getElementById("name"),
-                document.getElementById("cons-date"),
-                document.getElementById("image")
-            ];
             
             for(field of fields) {
                 const text = field.innerText;
@@ -69,6 +77,8 @@
                 };
 
                 postTurbine(turbine);
+
+                window.location.href = '/pages/public';
                 console.log(turbine);
             }
         })
