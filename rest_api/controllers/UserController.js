@@ -143,7 +143,7 @@ async function createUser(req, res) {
     }
 
     const { firstName, lastName, company, CNP, mail, phone, adress, password } =
-      JSON.parse(textBody)
+      jsonBody
 
     try {
       const user = await User.create({
@@ -182,7 +182,7 @@ async function createNotification(req, res) {
       return
     }
 
-    const { idBuyer, idSeller, idTurbine } = JSON.parse(textBody)
+    const { idBuyer, idSeller, idTurbine } = jsonBody
 
     const buyer = await User.findById(idBuyer)
     const seller = await User.findById(idSeller)
@@ -245,7 +245,7 @@ async function createAlert(req, res) {
       return
     }
 
-    const { idUser, idTurbine, timestamp } = JSON.parse(textBody)
+    const { idUser, idTurbine, timestamp } = jsonBody
 
     const user = await User.findById(idUser)
     const turbine = await Turbine.findById(idTurbine)
