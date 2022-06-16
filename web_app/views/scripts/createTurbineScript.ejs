@@ -27,22 +27,41 @@
 
     function getCreateTurbineData() {
         const form = document.querySelector('form');
+        const err = document.getElementById('err');
+
+        document.addEventListener('click', e => {
+            err.innerHTML = '';
+        })
+
         form.addEventListener('submit', e => {
             e.preventDefault();
             const fields = [
-                document.getElementById("name"),
-                document.getElementById("cons-date"),
-                document.getElementById("image"),
                 document.getElementById("lat"),
                 document.getElementById("lng"),
                 document.getElementById("altitude"),
                 document.getElementById("soil-type"),
                 document.getElementById("suitability"),
-                document.getElementById("wind"),
-                document.getElementById("temperature"),
-                document.getElementById("humidity"),
             ];
 
+            const formFields = [
+                document.getElementById("name"),
+                document.getElementById("cons-date"),
+                document.getElementById("image"),
+            ];
+            
+            for(field of fields) {
+                const text = field.innerText;
+                if(text.length === 0) {
+                    err.innerHTML = 'Fields can\'t be empty';
+                }
+            }
+
+            for(field of formFields) {
+                const value = field.value;
+                if(value.length === 0) {
+                    err.innerHTML = 'Fields can\'t be empty';
+                }
+            }
 
         })
     }
