@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-
 const Turbine = require('./../schemas/Turbine')
 const AllTurbineData = require('./../schemas/AllTurbineData')
 const User = require('./../schemas/User')
@@ -164,19 +163,6 @@ async function getNewestTurbineData(req, res, id) {
 
 // @desc    POSTS a new turbine
 // @route   POST /api/turbines
-//The request body should contain the following elements
-// userId: {type: mongoose.SchemaType.ObjectId},
-// name: { type: String, required: true },
-// constructionYear: { type: Date, required: true },
-// imageLink: { type: String },
-// latitude: { type: Number, required: true },
-// longitude: { type: Number, required: true },
-// altitude: { type: Number, required: true },
-// terrain: { type: String, required: true },
-// suitability: { type: Number, required: true, min: 0, max: 100 },
-// isPublic: { type: Boolean, required: true },
-// turbineState: { type: String,required: true , 'Maintenance' || 'Stopped' || 'Running'},
-// },
 
 async function createTurbine(req, res) {
   try {
@@ -201,7 +187,7 @@ async function createTurbine(req, res) {
       suitability,
       isPublic,
       turbineState,
-    } = JSON.parse(textBody)
+    } = jsonBody
 
     const user = await User.findById(userId)
 
@@ -212,8 +198,6 @@ async function createTurbine(req, res) {
           message: `The referenced userId ${userId} doesn't exist in the database`,
         })
       )
-      console.log(userId)
-      console.log(user)
       return
     }
 
@@ -236,10 +220,65 @@ async function createTurbine(req, res) {
         turbineId: turbine._id,
         historicData: [],
       })
-      console.log(turbineData)
 
       res.writeHead(201, { 'Content-Type': 'application/json' })
       res.end(JSON.stringify(turbine))
+    } catch (error) {
+      res.writeHead(400, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ message: error.message }))
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+//PUT
+
+// @desc    Puts a new turbine data instance in AllTurbineData
+// @route   PUT /api/turbines/newdata/:id
+//id - AllTurbineData.turbineId
+
+async function postNewData(req, res, id) {
+  try {
+    const textBody = await getRequestData(req)
+    const jsonBody = validateJSON(textBody)
+
+    if (!jsonBody) {
+      res.writeHead(400, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ message: 'Invalid request JSON' }))
+      return
+    }
+
+    let turbineData = await AllTurbineData.findOne({ turbineId: id })
+    const turbine = await Turbine.findById(id)
+
+    if (turbine === null) {
+      res.writeHead(422, { 'Content-Type': 'application/json' })
+      res.end(
+        JSON.stringify({
+          message: `The referenced turbine with id ${id} doesn't exist in the database`,
+        })
+      )
+      return
+    } else if (turbineData === null) {
+      turbineData = await AllTurbineData.create({
+        turbineId: turbine._id,
+        historicData: [],
+      })
+    }
+
+    try {
+      const newTurbineData = jsonBody
+
+      if (turbineData.historicData.length >= 144) {
+        turbineData.historicData.shift()
+      }
+
+      turbineData.historicData.push(newTurbineData)
+      await turbineData.save()
+
+      res.writeHead(201, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify(turbineData.historicData.slice(-1)[0]))
     } catch (error) {
       res.writeHead(400, { 'Content-Type': 'application/json' })
       res.end(JSON.stringify({ message: error.message }))
@@ -259,4 +298,5 @@ module.exports = {
   getTurbineData,
   getNewestTurbineData,
   createTurbine,
+  postNewData,
 }

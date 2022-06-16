@@ -91,8 +91,12 @@ const server = http.createServer((req, res) => {
         }
         break
       case 'PUT':
-        res.writeHead(200, { 'Content-Type': 'text/html' })
-        res.end('<h1>Header</h1>')
+        if (req.url.match(/\/api\/turbines\/newdata\/\w+$/)) {
+          const turbineId = req.url.split('/')[4]
+          turbineController.postNewData(req, res, turbineId)
+        } else {
+          throw new Error('PUT route not found')
+        }
         break
       case 'DELETE':
         res.writeHead(200, { 'Content-Type': 'text/html' })
