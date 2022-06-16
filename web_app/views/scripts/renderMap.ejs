@@ -79,27 +79,27 @@
     al.innerHTML = alt;
     sl.innerHTML = sol;
 
-    var newData = {
-      "userId": "62a711fc87d04cb2e5473c4c",
-      "name": "Turbine_Moldova",
-      "constructionYear": "1455127102000",
-      "imageLink": " https://www.example.com/images/dinosaur.jpg",
-      "latitude": 47.45,
-      "longitude": 42.12,
-      "altitude": 150,
-      "terrain": "Peaty",
-      "suitability": 45,
-      "isPublic": true,
-      "turbineState": "Running"
-    }
+    // var newData = {
+    //   "userId": "62a711fc87d04cb2e5473c4c",
+    //   "name": "Turbine_Moldova",
+    //   "constructionYear": "1455127102000",
+    //   "imageLink": " https://www.example.com/images/dinosaur.jpg",
+    //   "latitude": 47.45,
+    //   "longitude": 42.12,
+    //   "altitude": 150,
+    //   "terrain": "Peaty",
+    //   "suitability": 45,
+    //   "isPublic": true,
+    //   "turbineState": "Running"
+    // }
 
-    const turbine_post_new_data_api_url = `http://localhost:5000/api/turbines/`;
-    await fetch(turbine_post_new_data_api_url, {
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify(newData),
-        headers: { "Content-Type": "application/json" }
-    });
+    // const turbine_post_new_data_api_url = `http://localhost:5000/api/turbines`;
+    // await fetch(turbine_post_new_data_api_url, {
+    //     method: "POST",
+    //     mode: "cors",
+    //     body: JSON.stringify(newData),
+    //     headers: { "Content-Type": "application/json" }
+    // });
   }
 
   
