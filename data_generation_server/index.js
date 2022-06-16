@@ -28,12 +28,10 @@ async function updateTurbines()
         for(turbine of turbines) {
             const state = turbine.turbineState;
             if(state === 'Running') {
-                console.log('Running');
-                // await updateTurbine(turbine);
+                await updateTurbine(turbine);
             }
             else {
-                console.log('Not Running');
-                // await stopTurbine(turbine);
+                await stopTurbine(turbine);
             }
         }
 
@@ -48,11 +46,13 @@ async function updateTurbines()
 async function stopTurbine(turbine) {
     const id = turbine._id;
 
+    const date = Date.now();
     var newData = {
-        windSpeed: 0,
-        turbineWear: 0,
-        powerGenerated: 0,
-        eficiency: 0
+        "windSpeed": 0,
+        "turbineWear": 0,
+        "powerGenerated": 0,
+        "eficiency": 0,
+        "timeStamp": date.valueOf()
     }
 
     await postNewData(id, newData);
@@ -87,19 +87,19 @@ async function updateTurbine(turbine) {
     const currentHummidity = json.current.humidity;
 
 
+    const date = Date.now();
     const newWindSpeed = getNewWindSpeed(oldWindSpeed, currentWindSpeed);
     const newTurbineWear = getNewTurbineWear(oldTurbineWear, newWindSpeed, currentTemperature, currentHummidity);
-    const newPowerGenerated = getNewPowerGenerated(oldPowerGenerated, windSpeed);
+    const newPowerGenerated = getNewPowerGenerated(oldPowerGenerated, newWindSpeed);
     var newData = {
-        windSpeed: newWindSpeed,
-        turbineWear: newTurbineWear,
-        powerGenerated: newPowerGenerated,
-        eficiency: oldEfficiency + 1
+        "windSpeed": newWindSpeed,
+        "turbineWear": newTurbineWear,
+        "powerGenerated": newPowerGenerated,
+        "eficiency": oldEfficiency + 1,
+        "timeStamp": date.valueOf()
     }
 
     await postNewData(id, newData);
-
-    console.log(JSON.stringify(newData));
 }
 
 function getNewWindSpeed(oldWindSpeed, currentWindSpeed) {
@@ -133,7 +133,8 @@ function getNewPowerGenerated(oldPowerGenerated, windSpeed) {
 // }
 
 async function postNewData(id, newData) {
-    // const turbine_post_new_data_api_url = `http://localhost:5000/turbines/${id}`;
+    console.log(JSON.stringify(newData));
+    // const turbine_post_new_data_api_url = `http://localhost:5000/turbines/newdata/${id}`;
     // await fetch(turbine_post_new_data_api_url, {
     //     method: "POST",
     //     body: JSON.stringify(newData),
