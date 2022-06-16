@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const http = require('http')
 const userController = require('./controllers/UserController')
 const turbineController = require('./controllers/TurbineController')
+const { uuidRegex } = require('./utils')
 const PORT = process.env.port || 5000
 
 // const User = require('./schemas/User')
@@ -94,6 +95,9 @@ const server = http.createServer((req, res) => {
         if (req.url.match(/\/api\/turbines\/newdata\/\w+$/)) {
           const turbineId = req.url.split('/')[4]
           turbineController.postNewData(req, res, turbineId)
+        } else if (req.url.match(/\/api\/turbines\/\w+$/)) {
+          const turbineId = req.url.split('/')[3]
+          turbineController.updateTurbine(req, res, turbineId)
         } else {
           throw new Error('PUT route not found')
         }
