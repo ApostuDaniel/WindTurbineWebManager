@@ -334,6 +334,16 @@ async function updateTurbine(req, res, id) {
   }
 }
 
+async function deleteTurbine(req, res, id) {
+  try {
+    await helperDeleteTurbineRelatedData(id)
+    res.writeHead(204, { 'Content-Type': 'application/json' })
+    res.end()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 async function helperDeleteTurbineRelatedData(id) {
   await AllTurbineData.findOneAndDelete({ turbineId: id })
   await Alert.deleteMany({ idTurbine: id })
@@ -354,4 +364,5 @@ module.exports = {
   postNewData,
   updateTurbine,
   helperDeleteTurbineRelatedData,
+  deleteTurbine,
 }
