@@ -190,7 +190,6 @@ async function getTurbineNewData(id) {
   const data = await fetch(`http://localhost:5000/api/turbines/data/${id}/new`);
   const turbineData = await data.json();
 
-  console.log(turbineData);
   return turbineData;
 }
 
