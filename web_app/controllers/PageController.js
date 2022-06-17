@@ -22,6 +22,8 @@ async function getLandingPage(req, res) {
   }
 }
 
+
+
 async function getPublicPage(req, res) {
   try {
     res.writeHead(200, { "Content-Type": "text/html" });
@@ -75,9 +77,11 @@ async function getLoginPage(req, res) {
     var htmlRenderized = ejs.render(htmlContent, {
       filename: "login.ejs",
     });
-
+        
     res.end(htmlRenderized);
+   
   } catch (error) {
+    
     console.log(error.message);
   }
 }
@@ -117,23 +121,17 @@ async function getCreateTurbinePage(req, res) {
   }
 }
 
-async function getTurbineDetailsPage(req, res, id) {
+
+async function getUnauthorizedPage(req, res) {
   try {
     res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + "/../views/pages/turbineDetails.ejs",
+      __dirname + "/../views/pages/unauthorized.ejs",
       "utf8"
     );
 
-    const turbineData = await getTurbine(id);
-    const userData = await getUser(turbineData.userId);
-    const turbineNewData = await getTurbineNewData(id);
-    
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: "turbineDetails.ejs",
-      turbine: turbineData,
-      user: userData,
-      turbineData: turbineNewData
+      filename: "unauthorized.ejs",
     });
     res.end(htmlRenderized);
   } catch (error) {
@@ -184,5 +182,5 @@ module.exports = {
   getOwnedTurbines,
   getRegisterPage,
   getCreateTurbinePage,
-  getTurbineDetailsPage
+  getUnauthorizedPage,
 };
