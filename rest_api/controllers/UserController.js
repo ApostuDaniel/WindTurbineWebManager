@@ -285,6 +285,50 @@ async function createAlert(req, res) {
   }
 }
 
+// @desc    UPDATES a user
+// @route   PUT /api/users/:id
+
+async function updateUser(req, res, id) {
+  try {
+    const textBody = await getRequestData(req)
+    const jsonBody = validateJSON(textBody)
+
+    if (!jsonBody) {
+      res.writeHead(400, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ message: 'Invalid request JSON' }))
+      return
+    }
+
+    const user = await User.findById(id)
+
+    if (user == null) {
+      res.writeHead(422, { 'Content-Type': 'application/json' })
+      res.end(
+        JSON.stringify({
+          message: `User with id ${id} doesn't exist in the database`,
+        })
+      )
+      return
+    }
+
+    try {
+      for (prop in user) {
+        user[prop] = jsonBody[prop] ?? user[prop]
+      }
+
+      await user.save()
+
+      res.writeHead(201, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify(turbine))
+    } catch (error) {
+      res.writeHead(400, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ message: error.message }))
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
   getUsers,
   getUser,
@@ -296,4 +340,5 @@ module.exports = {
   createUser,
   createNotification,
   createAlert,
+  updateUser,
 }
