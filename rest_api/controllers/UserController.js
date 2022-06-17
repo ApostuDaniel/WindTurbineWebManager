@@ -340,10 +340,11 @@ async function updateUser(req, res, id) {
         user[prop] = jsonBody[prop] ?? user[prop]
       }
 
+      user.birthDate = extractDateFromCNP(user.CNP)
       await user.save()
 
       res.writeHead(201, { 'Content-Type': 'application/json' })
-      res.end(JSON.stringify(turbine))
+      res.end(JSON.stringify(user))
     } catch (error) {
       res.writeHead(400, { 'Content-Type': 'application/json' })
       res.end(JSON.stringify({ message: error.message }))

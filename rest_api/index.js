@@ -108,6 +108,9 @@ const server = http.createServer((req, res) => {
         } else if (req.url.match(/\/api\/turbines\/[0-9a-f]{24}$/)) {
           const turbineId = req.url.split('/')[3]
           turbineController.updateTurbine(req, res, turbineId)
+        } else if (req.url.match(/\/api\/users\/[0-9a-f]{24}$/)) {
+          const userId = req.url.split('/')[3]
+          userController.updateUser(req, res, userId)
         } else {
           throw new Error('PUT route not found')
         }
