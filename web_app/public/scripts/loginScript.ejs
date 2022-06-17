@@ -18,7 +18,6 @@
           encodeURIComponent(email.value).replace(/\./g, "%2E"),
           password.value
         );
-       
       });
     }
   }
@@ -36,15 +35,14 @@
   // function for getting the user data to theck the login
   async function getId(mail, password) {
     const response = await fetch(
-        `http://localhost:5000/api/users/login/${mail}/${password}`
-      );
-      const data = await response.json();
+      `http://localhost:5000/api/users/login/${mail}/${password}`
+    );
+    const data = await response.json();
     if (mail != "" || password != "") {
-     
       console.log(data.message);
       if (response.status == 200) {
-        console.log("Login succesful");
-       setCookie("user_id", data._id, 1 / 48);
+        console.log("Login successful");
+        setCookie("user_id", data._id, 1 / 48);
         window.location.href = `http://localhost:5001/pages/owned/` + data._id;
       } else {
         const printError = document.getElementById("errormessage");

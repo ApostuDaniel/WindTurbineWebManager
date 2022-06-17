@@ -7,15 +7,15 @@ function getNewTurbineWear(oldTurbineWear, windSpeed, temperature, humidity) {
     let newTurbineWear = oldTurbineWear;
 
     if(windSpeed > 50) {
-        newTurbineWear += 0.1;
+        newTurbineWear += 0.02;
     }
 
-    if(temperature > 30) {
-        newTurbineWear += 0.05;
+    if(temperature > 32) {
+        newTurbineWear += 0.01;
     }
 
     if(humidity > 60) {
-        newTurbineWear += 0.04;
+        newTurbineWear += 0.01;
     }
     return newTurbineWear;
 }

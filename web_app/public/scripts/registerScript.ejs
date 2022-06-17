@@ -1,81 +1,159 @@
 <script>
-class Register {
+  class Register {
     constructor(registerForm, fields) {
       this.registerForm = registerForm;
       this.fields = fields;
+      
       this.validateOnSubmit();
+    
     }
 
-     validateOnSubmit() {
+    validateOnSubmit() {
       let self = this;
 
       this.registerForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        const nume = document.querySelector("#nume").value;
-        
-        const prenume=document.querySelector("#prenume").value;
-        const firma=document.querySelector("#firma").value;
-        const cnp=document.querySelector("#cnp").value;
-        const mail=document.querySelector("#registermail").value;
-        const phone=document.querySelector("#phone").value;
-        const adresa=document.querySelector("#adresa").value;
-        const pass=document.querySelector("#registerpass").value;
-        console.log(nume,prenume,cnp);
-        postTheData(nume,prenume,firma,cnp,mail,phone,adresa,pass);
+
+        var nume = document.querySelector("#nume").value;
+        var prenume = document.querySelector("#prenume").value;
+        var firma = document.querySelector("#firma").value;
+        var cnp = document.querySelector("#cnp").value;
+        var mail = document.querySelector("#registermail").value;
+        var phone = document.querySelector("#phone").value;
+        var adresa = document.querySelector("#adresa").value;
+        var pass = document.querySelector("#registerpass").value;
+        nume = "Rares";
+        prenume = "Bancescu";
+        firma = "raresBancescu.srl";
+        cnp = "1951028106931";
+        mail = "raresrares@gmail.com";
+        phone = "0765434563";
+        adresa = "dsadsdsa";
+        pass = "rrrrrrrr";
+        //validate the input
+        if (
+          nume == "" ||
+          prenume == "" ||
+          firma == "" ||
+          cnp == "" ||
+          mail == "" ||
+          phone == "" ||
+          adresa == "" ||
+          pass == ""
+        ) {
+          const displayError = document.getElementById("errormessage");
+          displayError.innerHTML = "The fields must be completed";
+        } else {
+          var validationMessage ="";
+
+          //validation for name
+          // Username consists of alphanumeric characters (a-zA-Z0-9), lowercase, or uppercase.
+          // Username allowed of the dot (.), underscore (_), and hyphen (-).
+          // The dot (.), underscore (_), or hyphen (-) must not be the first or last character.
+          // The dot (.), underscore (_), or hyphen (-) does not appear consecutively, e.g., java..regex
+          // The number of characters must be between 5 to 20.
+
+          if (!nume.match(/^[A-Z][a-z]+$/)) {
+            validationMessage =
+              "First name is not correct! It should contain only letters";
+          }
+          if (!prenume.match(/^[A-Z][a-z]+$/)) {
+            validationMessage =
+              "Second name is not correct! It should contain only letters";
+          }
+          if (!firma.match(/^[a-zA-Z0-9_/-/.]+$/)) {
+            validationMessage = "Company name is not correct!";
+          }
+          if (!cnp.match(/[0-9]{13}/)) {
+            validationMessage = "Cnp should have 13 digits";
+          }
+          if (!phone.match(/[0-9]{10}/)) {
+            validationMessage = "Phone should have 10 digits";
+          }
+          if (!adresa.match(/^[a-zA-Z0-9_/-/./=/_]+$/)) {
+            validationMessage = "Address should be correct";
+          }
+          if (!pass.match(/^[a-zA-Z0-9_/-/./=/_]{8}/))
+          {
+            validationMessage="Password must be 8 characters long";
+          }
+          const displayError = document.getElementById("errormessage");
+          displayError.innerHTML = validationMessage;
+          // check if all the tests passed
+          
+          if (validationMessage=="")
+          {
+            postTheData(nume, prenume, firma, cnp, mail, phone, adresa, pass);
+          }
+        }
+       
+       
       });
     }
-    
-   
-
   }
-
 
   function getCookie(name) {
     var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    var ca = document.cookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == " ") c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
     }
     return null;
-}
-
-  async function postTheData(nume,prenume,firma,cnp,mail,phone,adresa,pass)
-    {
-     const data=await fetch('http://localhost:5000/api/users', {
-  method: 'POST',
-  body: JSON.stringify({
-    firstName:nume,
-    lastName:prenume,
-    company:firma,
-    CNP:cnp,
-    mail:mail,
-    phone:phone,
-    adress:adresa,
-    password:pass,
-
-  }),
-  headers: {
-    'Content-type': 'application/json;',
-
   }
-  })
-  const getData=await data.json();
-  console.log(getData)
-  
-  
 
-  
+  async function postTheData(
+    nume,
+    prenume,
+    firma,
+    cnp,
+    mail,
+    phone,
+    adresa,
+    pass
+  ) {
+    const response = await fetch("http://localhost:5000/api/users", {
+      method: "POST",
+      body: JSON.stringify({
+        firstName: nume,
+        lastName: prenume,
+        company: firma,
+        CNP: cnp,
+        mail: mail,
+        phone: phone,
+        adress: adresa,
+        password: pass,
+      }),
+      headers: {
+        "Content-type": "application/json;",
+      },
+    });
+    
+    const data = await response.json();
+    console.log(response);
+    if (response.status==201)
+    {
+      console.log("Register successful")
+        window.location.href=`http://localhost:5001/pages/login/`
+    }
+    else
+    {
+      console.log("User with this data already exists");
+      
 
-}
+      const displayError = document.getElementById("errormessage");
+          displayError.innerHTML = "A field is duplicate";
+    }
+    
+  }
 
-const registerForm = document.querySelector(".signup");
-var cookie_value=getCookie("user_id");
+  const registerForm = document.querySelector(".signup");
+  var cookie_value = getCookie("user_id");
   console.log(cookie_value);
   console.log("aici");
-if (registerForm) {
-    console.log("register")
+  if (registerForm) {
+   
     const fields = [
       "nume",
       "prenume",
@@ -88,6 +166,4 @@ if (registerForm) {
     ];
     const validator = new Register(registerForm, fields);
   }
-  
-
 </script>
