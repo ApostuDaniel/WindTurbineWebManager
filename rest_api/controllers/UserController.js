@@ -5,11 +5,11 @@ const {
   getRequestData,
   validateJSON,
 } = require('./../utils')
-
 const User = require('./../schemas/User')
 const Notification = require('./../schemas/Notification')
 const Alert = require('./../schemas/Alert')
 const Turbine = require('./../schemas/Turbine')
+const { helperDeleteTurbineRelatedData } = require('./TurbineController')
 
 // @desc    Gets All Users
 // @route   GET /api/users
@@ -56,6 +56,30 @@ async function getUserByMail(req, res, mail) {
       res.writeHead(404, { 'Content-Type': 'application/json' })
       res.end(
         JSON.stringify({ message: `User with mail ${decodedMail} not found` })
+      )
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// @desc    Gets data for user if mail and password correct
+// @route   GET /api/users/login/:mail/:password
+async function userLogin(req, res, mail, password) {
+  try {
+    const decodedMail = decodeURIComponent(mail)
+    const user = await User.findOne({ mail: decodedMail })
+    if (user && user.password === md5(password)) {
+      res.writeHead(200, {
+        'Content-Type': 'application/json',
+      })
+      res.end(JSON.stringify(user))
+    } else {
+      res.writeHead(404, { 'Content-Type': 'application/json' })
+      res.end(
+        JSON.stringify({
+          message: `User with mail ${decodedMail} not found or wrong password`,
+        })
       )
     }
   } catch (error) {
@@ -285,6 +309,81 @@ async function createAlert(req, res) {
   }
 }
 
+// @desc    UPDATES a user
+// @route   PUT /api/users/:id
+
+async function updateUser(req, res, id) {
+  try {
+    const textBody = await getRequestData(req)
+    const jsonBody = validateJSON(textBody)
+
+    if (!jsonBody) {
+      res.writeHead(400, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ message: 'Invalid request JSON' }))
+      return
+    }
+
+    const user = await User.findById(id)
+
+    if (user == null) {
+      res.writeHead(422, { 'Content-Type': 'application/json' })
+      res.end(
+        JSON.stringify({
+          message: `User with id ${id} doesn't exist in the database`,
+        })
+      )
+      return
+    }
+
+    try {
+      for (prop in user) {
+        user[prop] = jsonBody[prop] ?? user[prop]
+      }
+
+      user.birthDate = extractDateFromCNP(user.CNP)
+      await user.save()
+
+      res.writeHead(201, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify(user))
+    } catch (error) {
+      res.writeHead(400, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ message: error.message }))
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+//DELETE
+
+// @desc    Deletes a user
+// @route   DELETE /api/users/:id
+async function deleteUser(req, res, id) {
+  try {
+    const user = await User.findById(id)
+
+    if (user) {
+      const turbines = await Turbine.find({ userId: id })
+      for (const turbine of turbines) {
+        await helperDeleteTurbineRelatedData(turbine)
+      }
+
+      await Notification.deleteMany({
+        $or: [{ idBuyer: id }, { idSeller: id }],
+      })
+
+      await Alert.deleteMany({ idUser: id })
+
+      await User.findByIdAndDelete(id)
+    }
+
+    res.writeHead(204, { 'Content-Type': 'application/json' })
+    res.end()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
   getUsers,
   getUser,
@@ -296,4 +395,7 @@ module.exports = {
   createUser,
   createNotification,
   createAlert,
+  updateUser,
+  userLogin,
+  deleteUser,
 }

@@ -2,6 +2,8 @@ const mongoose = require('mongoose')
 const Turbine = require('./../schemas/Turbine')
 const AllTurbineData = require('./../schemas/AllTurbineData')
 const User = require('./../schemas/User')
+const Alert = require('./../schemas/Alert')
+const Notification = require('./../schemas/Notification')
 
 const { getRequestData, validateJSON } = require('../utils')
 
@@ -308,7 +310,7 @@ async function updateTurbine(req, res, id) {
       res.writeHead(422, { 'Content-Type': 'application/json' })
       res.end(
         JSON.stringify({
-          message: `Turbine with id ${userId} doesn't exist in the database`,
+          message: `Turbine with id ${id} doesn't exist in the database`,
         })
       )
       return
@@ -332,6 +334,13 @@ async function updateTurbine(req, res, id) {
   }
 }
 
+async function helperDeleteTurbineRelatedData(id) {
+  await AllTurbineData.findOneAndDelete({ turbineId: id })
+  await Alert.deleteMany({ idTurbine: id })
+  await Notification.deleteMany({ idTurbine: id })
+  await Turbine.findByIdAndDelete(id)
+}
+
 module.exports = {
   getTurbines,
   getTurbine,
@@ -344,4 +353,5 @@ module.exports = {
   createTurbine,
   postNewData,
   updateTurbine,
+  helperDeleteTurbineRelatedData,
 }

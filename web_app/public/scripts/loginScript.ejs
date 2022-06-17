@@ -10,28 +10,48 @@
       let self = this;
       this.loginForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        const input = document.querySelector("#email");
+        const email = document.querySelector("#email");
+        const password = document.querySelector("#password");
 
-        console.log(encodeURIComponent(input.value).replace(/\./g, "%2E"));
-        getId(encodeURIComponent(input.value).replace(/\./g, "%2E"));
+        // console.log(encodeURIComponent(email.value).replace(/\./g, "%2E"));
+        getId(
+          encodeURIComponent(email.value).replace(/\./g, "%2E"),
+          password.value
+        );
       });
     }
-
-    //  setCookie(mail)
-    //  {
-    //     const d=new Date();
-    //     d.setMinutes(1);
-    //     let expires="expires="+d.toUTCString();
-    //     document.cookie="name=users;"+ expires+";path=/";
-    //  }
   }
 
-  async function getId(mail) {
-    const data = await fetch(`http://localhost:5000/api/users/mail/${mail}`);
-    const userData = await data.json();
-    console.log(userData);
-    window.location.href = `http://localhost:5001/pages/owned/` + userData._id;
-    // setCookie(userData.email);
+  function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  }
+
+  // function for getting the user data to theck the login
+  async function getId(mail, password) {
+    const response = await fetch(
+      `http://localhost:5000/api/users/login/${mail}/${password}`
+    );
+    const data = await response.json();
+    if (mail != "" || password != "") {
+      console.log(data.message);
+      if (response.status == 200) {
+        console.log("Login successful");
+        setCookie("user_id", data._id, 1 / 48);
+        window.location.href = `http://localhost:5001/pages/owned/` + data._id;
+      } else {
+        const printError = document.getElementById("errormessage");
+        printError.innerHTML = `${data.message}`;
+      }
+    } else {
+      const printError = document.getElementById("errormessage");
+      printError.innerHTML = "Fields are required";
+    }
   }
 
   const loginForm = document.querySelector(".login");

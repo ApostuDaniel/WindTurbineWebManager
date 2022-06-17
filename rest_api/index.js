@@ -36,6 +36,13 @@ const server = http.createServer((req, res) => {
         } else if (req.url.match(/\/api\/users\/mail\/[A-Za-z0-9_\%\.]+$/)) {
           const mail = req.url.split('/')[4]
           userController.getUserByMail(req, res, mail)
+        } else if (
+          req.url.match(/\/api\/users\/login\/[A-Za-z0-9_\%\.]+\/[a-z0-9]+$/)
+        ) {
+          const splitReq = req.url.split('/')
+          const mail = splitReq[4]
+          const password = splitReq[5]
+          userController.userLogin(req, res, mail, password)
         } else if (req.url.match(/\/api\/users\/notifications$/)) {
           const id = req.url.split('/')[3]
           userController.getUser(req, res, id)
@@ -101,13 +108,20 @@ const server = http.createServer((req, res) => {
         } else if (req.url.match(/\/api\/turbines\/[0-9a-f]{24}$/)) {
           const turbineId = req.url.split('/')[3]
           turbineController.updateTurbine(req, res, turbineId)
+        } else if (req.url.match(/\/api\/users\/[0-9a-f]{24}$/)) {
+          const userId = req.url.split('/')[3]
+          userController.updateUser(req, res, userId)
         } else {
           throw new Error('PUT route not found')
         }
         break
       case 'DELETE':
-        res.writeHead(200, { 'Content-Type': 'text/html' })
-        res.end('<h1>Header</h1>')
+        if (req.url.match(/\/api\/users\/[0-9a-f]{24}$/)) {
+          const id = req.url.split('/')[3]
+          userController.deleteUser(req, res, id)
+        } else {
+          throw new Error('DELETE route not found')
+        }
         break
       default:
         throw new Error('Unacceptable http verb')
@@ -120,64 +134,3 @@ const server = http.createServer((req, res) => {
 })
 
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`))
-
-// const run = async () => {
-//   try {
-//     const user = await User.findById('62a711d36884262d4629fa3d')
-
-//     const turbine = await Turbine.create({
-//       userId: user._id,
-//       name: 'New Turbine',
-//       constructionYear: Date.now(),
-//       imageLink: ' https://www.example.com/images/dinosaur.jpg',
-//       latitude: 25.4,
-//       longitude: 32.5,
-//       altitude: 100,
-//       terrain: 'cernoziom',
-//       suitability: 100,
-//       isPublic: true,
-//       turbineState: 'Running',
-//     })
-
-//     await turbine.save()
-//     const allTurbineData = new AllTurbineData({
-//       turbineId: turbine._id,
-//       historicData: [
-//         {
-//           windSpeed: 50,
-//           turbineWear: 5,
-//           powerGenerated: 15,
-//           eficiency: 0.9,
-//           timeStamp: Date.now(),
-//         },
-//       ],
-//     })
-
-//     await allTurbineData.save()
-
-//     const notification = new Notification({
-//       idBuyer: '62a71082688cdb968577decf',
-//       idSeller: user._id,
-//       idTurbine: turbine._id,
-//     })
-
-//     await notification.save()
-
-//     const alert = new Alert({
-//       idUser: '62a71082688cdb968577decf',
-//       idTurbine: turbine._id,
-//     })
-
-//     await alert.save()
-
-//     console.log(user)
-//     console.log(turbine)
-//     console.log(allTurbineData)
-//     console.log(notification)
-//     console.log(alert)
-//   } catch (e) {
-//     console.log(e.message)
-//   }
-// }
-
-// run()
