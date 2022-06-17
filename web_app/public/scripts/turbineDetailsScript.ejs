@@ -1,25 +1,21 @@
 <script>
+  const buttons = [
+    document.getElementById("state"),
+    document.getElementById("wind"),
+    document.getElementById("energy"),
+    document.getElementById("efficiency"),
+  ];
 
-    const panel = document.getElementById('panel');
-    const state = document.getElementById('state');
-    const wind = document.getElementById('wind');
-    const energy = document.getElementById('energy');
-    const efficiency = document.getElementById('efficiency');
+  const panels = [
+    document.getElementById("statePan"),
+    document.getElementById("windPan"),
+    document.getElementById("energyPan"),
+    document.getElementById("efficiencyPan"),
+  ]
 
-    state.addEventListener('click', event => {
-        panel.innerHTML = 'state';
+  for(let index = 0; index < buttons.length; index++) {
+    buttons[index].addEventListener('click', event => {
+        panels[index].scrollIntoView({behavior: 'smooth'});
     })
-
-    wind.addEventListener('click', event => {
-        panel.innerHTML = 'wind';
-    })
-
-    energy.addEventListener('click', event => {
-        panel.innerHTML = 'energy';
-    })
-
-    efficiency.addEventListener('click', event => {
-        panel.innerHTML = 'efficiency';
-    })
-
+  }
 </script>

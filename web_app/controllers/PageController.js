@@ -22,8 +22,6 @@ async function getLandingPage(req, res) {
   }
 }
 
-
-
 async function getPublicPage(req, res) {
   try {
     res.writeHead(200, { "Content-Type": "text/html" });
@@ -77,11 +75,9 @@ async function getLoginPage(req, res) {
     var htmlRenderized = ejs.render(htmlContent, {
       filename: "login.ejs",
     });
-        
+
     res.end(htmlRenderized);
-   
   } catch (error) {
-    
     console.log(error.message);
   }
 }
@@ -121,6 +117,29 @@ async function getCreateTurbinePage(req, res) {
   }
 }
 
+async function getTurbineDetailsPage(req, res, id) {
+  try {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    var htmlContent = fs.readFileSync(
+      __dirname + "/../views/pages/turbineDetails.ejs",
+      "utf8"
+    );
+
+    const turbineData = await getTurbine(id);
+    const userData = await getUser(turbineData.userId);
+    const turbineNewData = await getTurbineNewData(id);
+    
+    var htmlRenderized = ejs.render(htmlContent, {
+      filename: "turbineDetails.ejs",
+      turbine: turbineData,
+      user: userData,
+      turbineData: turbineNewData
+    });
+    res.end(htmlRenderized);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 
 async function getUnauthorizedPage(req, res) {
   try {
@@ -153,6 +172,26 @@ async function getOwnedTurbines(id) {
   return ownedTurbineData;
 }
 
+async function getTurbine(id) {
+  const data = await fetch("http://localhost:5000/api/turbines/" + id);
+  const turbine = await data.json();
+
+  return turbine;
+}
+
+async function getUser(id) {
+  const data = await fetch("http://localhost:5000/api/users/" + id);
+  const user = await data.json();
+
+  return user;
+}
+
+async function getTurbineNewData(id) {
+  const data = await fetch(`http://localhost:5000/api/turbines/data/${id}/new`);
+  const turbineData = await data.json();
+
+  return turbineData;
+}
 
 module.exports = {
   getPublicPage,
@@ -162,5 +201,6 @@ module.exports = {
   getOwnedTurbines,
   getRegisterPage,
   getCreateTurbinePage,
-  getUnauthorizedPage,
+  getTurbineDetailsPage,
+  getUnauthorizedPage
 };
