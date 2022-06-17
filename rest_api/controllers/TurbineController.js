@@ -308,7 +308,7 @@ async function updateTurbine(req, res, id) {
       res.writeHead(422, { 'Content-Type': 'application/json' })
       res.end(
         JSON.stringify({
-          message: `Turbine with id ${userId} doesn't exist in the database`,
+          message: `Turbine with id ${id} doesn't exist in the database`,
         })
       )
       return

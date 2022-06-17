@@ -63,6 +63,30 @@ async function getUserByMail(req, res, mail) {
   }
 }
 
+// @desc    Gets data for user if mail and password correct
+// @route   GET /api/users/login/:mail/:password
+async function userLogin(req, res, mail, password) {
+  try {
+    const decodedMail = decodeURIComponent(mail)
+    const user = await User.findOne({ mail: decodedMail })
+    if (user && user.password === password) {
+      res.writeHead(200, {
+        'Content-Type': 'application/json',
+      })
+      res.end(JSON.stringify(user))
+    } else {
+      res.writeHead(404, { 'Content-Type': 'application/json' })
+      res.end(
+        JSON.stringify({
+          message: `User with mail ${decodedMail} not found or wrong password`,
+        })
+      )
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 // @desc    Gets All notifications
 // @route   GET /api/users/notifications
 async function getNotifications(req, res) {
@@ -155,7 +179,7 @@ async function createUser(req, res) {
         phone,
         adress,
         birthDate: extractDateFromCNP(CNP),
-        password: md5(password),
+        password,
       })
 
       res.writeHead(201, { 'Content-Type': 'application/json' })
@@ -285,6 +309,51 @@ async function createAlert(req, res) {
   }
 }
 
+// @desc    UPDATES a user
+// @route   PUT /api/users/:id
+
+async function updateUser(req, res, id) {
+  try {
+    const textBody = await getRequestData(req)
+    const jsonBody = validateJSON(textBody)
+
+    if (!jsonBody) {
+      res.writeHead(400, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ message: 'Invalid request JSON' }))
+      return
+    }
+
+    const user = await User.findById(id)
+
+    if (user == null) {
+      res.writeHead(422, { 'Content-Type': 'application/json' })
+      res.end(
+        JSON.stringify({
+          message: `User with id ${id} doesn't exist in the database`,
+        })
+      )
+      return
+    }
+
+    try {
+      for (prop in user) {
+        user[prop] = jsonBody[prop] ?? user[prop]
+      }
+
+      user.birthDate = extractDateFromCNP(user.CNP)
+      await user.save()
+
+      res.writeHead(201, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify(user))
+    } catch (error) {
+      res.writeHead(400, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ message: error.message }))
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
   getUsers,
   getUser,
@@ -296,4 +365,6 @@ module.exports = {
   createUser,
   createNotification,
   createAlert,
+  updateUser,
+  userLogin,
 }
