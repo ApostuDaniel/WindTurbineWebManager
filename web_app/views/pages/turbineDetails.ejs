@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <% var dir = process.cwd() %>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
+    <%- include(dir+'/public/css/turbineDetailsStyle'); %> 
+    <%- include(dir+'/public/css/navBarStyle'); %>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:wght@100&display=swap"
+      rel="stylesheet"
+    />
+    <title>Turbine Details</title>
+  </head>
+
+  <body>
+    <%- include(dir + "/views/partials/navBar") %>  
+
+    <ul class="sidenav">
+      <li id="state"><div>State</div></li>
+      <li id="wind"><div>Wind</div></li>
+      <li id="energy"><div>Energy</div></li>
+      <li id="efficiency"><div>Efficiency</div></li>
+    </ul>
+
+    <div class="wrap">
+      <div id="turbine">
+        <%- include (dir + '/views/partials/turbineDetailsCard'), { turbine : turbine } %>
+      </div>
+      <div id="panel"></div>
+    </div>  
+
+    <%- include(dir + "/public/scripts/turbineDetailsScript") %> 
+  </body>
+</html>

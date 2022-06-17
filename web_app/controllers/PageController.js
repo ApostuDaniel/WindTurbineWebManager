@@ -117,6 +117,26 @@ async function getCreateTurbinePage(req, res) {
   }
 }
 
+async function getTurbineDetailsPage(req, res, id) {
+  try {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    var htmlContent = fs.readFileSync(
+      __dirname + "/../views/pages/turbineDetails.ejs",
+      "utf8"
+    );
+
+    const turbineData = await getTurbine(id);
+
+    var htmlRenderized = ejs.render(htmlContent, {
+      filename: "turbineDetails.ejs",
+      turbine: turbineData
+    });
+    res.end(htmlRenderized);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 async function getTurbines() {
   const data = await fetch("http://localhost:5000/api/turbines/public");
   const turbineData = await data.json();
@@ -131,6 +151,13 @@ async function getOwnedTurbines(id) {
   return ownedTurbineData;
 }
 
+async function getTurbine(id) {
+  const data = await fetch("http://localhost:5000/api/turbines/" + id);
+  const turbine = await data.json();
+
+  return turbine;
+}
+
 module.exports = {
   getPublicPage,
   getPrivatePage,
@@ -139,4 +166,5 @@ module.exports = {
   getOwnedTurbines,
   getRegisterPage,
   getCreateTurbinePage,
+  getTurbineDetailsPage
 };

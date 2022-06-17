@@ -1,0 +1,25 @@
+<script>
+
+    const panel = document.getElementById('panel');
+    const state = document.getElementById('state');
+    const wind = document.getElementById('wind');
+    const energy = document.getElementById('energy');
+    const efficiency = document.getElementById('efficiency');
+
+    state.addEventListener('click', event => {
+        panel.innerHTML = 'state';
+    })
+
+    wind.addEventListener('click', event => {
+        panel.innerHTML = 'wind';
+    })
+
+    energy.addEventListener('click', event => {
+        panel.innerHTML = 'energy';
+    })
+
+    efficiency.addEventListener('click', event => {
+        panel.innerHTML = 'efficiency';
+    })
+
+</script>
