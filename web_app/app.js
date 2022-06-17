@@ -5,8 +5,14 @@ const PageController = require('./controllers/PageController')
 
 const PORT = process.env.port || 5001
 
+
+
+
+ 
+
 const server = http.createServer((req, res) => {
   try {
+   
     if(req.url === '/pages') {
       PageController.getLandingPage(req, res)
     }
@@ -23,11 +29,18 @@ const server = http.createServer((req, res) => {
     }
     else if (req.url=== '/pages/login')
     {
+      
       PageController.getLoginPage(req,res)
+   
+    
     }
     else if (req.url==='/pages/register')
     {
       PageController.getRegisterPage(req,res)
+    }
+    else if (req.url==='/unauthorized')
+    {
+      PageController.getUnauthorizedPage(req,res)
     }
     else {
       res.writeHead(404, { 'Content-Type': 'text/html' })
