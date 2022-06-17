@@ -30,6 +30,17 @@ class Register {
   }
 
 
+  function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
   async function postTheData(nume,prenume,firma,cnp,mail,phone,adresa,pass)
     {
      const data=await fetch('http://localhost:5000/api/users', {
@@ -60,6 +71,9 @@ class Register {
 }
 
 const registerForm = document.querySelector(".signup");
+var cookie_value=getCookie("user_id");
+  console.log(cookie_value);
+  console.log("aici");
 if (registerForm) {
     console.log("register")
     const fields = [
@@ -74,5 +88,6 @@ if (registerForm) {
     ];
     const validator = new Register(registerForm, fields);
   }
+  
 
 </script>
