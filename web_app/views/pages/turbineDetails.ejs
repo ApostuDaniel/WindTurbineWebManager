@@ -31,7 +31,12 @@
         <%- include (dir + '/views/partials/turbineDetailsCard', { turbine :
         turbine, user : user, turbineData : turbineData }) %>
       </div>
-      <div id="panel"></div>
+      <div id="panel">
+        <div id="statePan"></div>
+        <div id="windPan"></div>
+        <div id="energyPan"></div>
+        <div id="efficiencyPan"></div>
+      </div>
     </div>
 
     <%- include(dir + "/public/scripts/turbineDetailsScript") %>
