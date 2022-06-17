@@ -141,6 +141,23 @@ async function getTurbineDetailsPage(req, res, id) {
   }
 }
 
+async function getUnauthorizedPage(req, res) {
+  try {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    var htmlContent = fs.readFileSync(
+      __dirname + "/../views/pages/unauthorized.ejs",
+      "utf8"
+    );
+
+    var htmlRenderized = ejs.render(htmlContent, {
+      filename: "unauthorized.ejs",
+    });
+    res.end(htmlRenderized);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 async function getTurbines() {
   const data = await fetch("http://localhost:5000/api/turbines/public");
   const turbineData = await data.json();
@@ -185,5 +202,6 @@ module.exports = {
   getOwnedTurbines,
   getRegisterPage,
   getCreateTurbinePage,
-  getTurbineDetailsPage
+  getTurbineDetailsPage,
+  getUnauthorizedPage
 };
