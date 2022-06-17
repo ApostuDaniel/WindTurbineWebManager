@@ -1,4 +1,6 @@
+
 <script>
+
   class Login {
     constructor(loginForm, fields) {
       this.loginForm = loginForm;
@@ -10,28 +12,48 @@
       let self = this;
       this.loginForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        const input = document.querySelector("#email");
-
-        console.log(encodeURIComponent(input.value).replace(/\./g, "%2E"));
-        getId(encodeURIComponent(input.value).replace(/\./g, "%2E"));
+        const email = document.querySelector("#email");
+        const password=document.querySelector("password");
+        
+        
+       // console.log(encodeURIComponent(email.value).replace(/\./g, "%2E"));
+        getId(encodeURIComponent(email.value).replace(/\./g, "%2E"),password);
+        setCookie("user_id", input.value, 1 / 48);
       });
     }
-
-    //  setCookie(mail)
-    //  {
-    //     const d=new Date();
-    //     d.setMinutes(1);
-    //     let expires="expires="+d.toUTCString();
-    //     document.cookie="name=users;"+ expires+";path=/";
-    //  }
   }
 
-  async function getId(mail) {
-    const data = await fetch(`http://localhost:5000/api/users/mail/${mail}`);
-    const userData = await data.json();
-    console.log(userData);
-    window.location.href = `http://localhost:5001/pages/owned/` + userData._id;
-    // setCookie(userData.email);
+  function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  }
+
+  // function for getting the user data to theck the login
+  async function getId(mail,password) {
+    const response = await fetch(
+      `http://localhost:5000/api/users/mail/${mail}/${password}`
+    );
+    const data = await response.json();
+    if (response.status == 200) {
+      console.log("login succesful");
+
+      
+
+      
+
+      //window.location.href = `http://localhost:5001/pages/owned/` + data._id;
+      // setCookie(userData.email);
+    } else {
+      const printError=document.getElementById("errormessage");
+      printError.innerHTML="Try to register";
+    }
+
+    
   }
 
   const loginForm = document.querySelector(".login");
