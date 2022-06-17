@@ -36,6 +36,13 @@ const server = http.createServer((req, res) => {
         } else if (req.url.match(/\/api\/users\/mail\/[A-Za-z0-9_\%\.]+$/)) {
           const mail = req.url.split('/')[4]
           userController.getUserByMail(req, res, mail)
+        } else if (
+          req.url.match(/\/api\/users\/login\/[A-Za-z0-9_\%\.]+\/[a-z0-9]+$/)
+        ) {
+          const splitReq = req.url.split('/')
+          const mail = splitReq[4]
+          const password = splitReq[5]
+          userController.userLogin(req, res, mail, password)
         } else if (req.url.match(/\/api\/users\/notifications$/)) {
           const id = req.url.split('/')[3]
           userController.getUser(req, res, id)

@@ -63,6 +63,30 @@ async function getUserByMail(req, res, mail) {
   }
 }
 
+// @desc    Gets data for user if mail and password correct
+// @route   GET /api/users/login/:mail/:password
+async function userLogin(req, res, mail, password) {
+  try {
+    const decodedMail = decodeURIComponent(mail)
+    const user = await User.findOne({ mail: decodedMail })
+    if (user && user.password === password) {
+      res.writeHead(200, {
+        'Content-Type': 'application/json',
+      })
+      res.end(JSON.stringify(user))
+    } else {
+      res.writeHead(404, { 'Content-Type': 'application/json' })
+      res.end(
+        JSON.stringify({
+          message: `User with mail ${decodedMail} not found or wrong password`,
+        })
+      )
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 // @desc    Gets All notifications
 // @route   GET /api/users/notifications
 async function getNotifications(req, res) {
@@ -155,7 +179,7 @@ async function createUser(req, res) {
         phone,
         adress,
         birthDate: extractDateFromCNP(CNP),
-        password: md5(password),
+        password,
       })
 
       res.writeHead(201, { 'Content-Type': 'application/json' })
@@ -341,4 +365,5 @@ module.exports = {
   createNotification,
   createAlert,
   updateUser,
+  userLogin,
 }
