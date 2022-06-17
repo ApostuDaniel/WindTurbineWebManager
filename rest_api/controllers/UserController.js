@@ -69,7 +69,7 @@ async function userLogin(req, res, mail, password) {
   try {
     const decodedMail = decodeURIComponent(mail)
     const user = await User.findOne({ mail: decodedMail })
-    if (user && user.password === password) {
+    if (user && user.password === md5(password)) {
       res.writeHead(200, {
         'Content-Type': 'application/json',
       })
@@ -179,7 +179,7 @@ async function createUser(req, res) {
         phone,
         adress,
         birthDate: extractDateFromCNP(CNP),
-        password,
+        password: md5(password),
       })
 
       res.writeHead(201, { 'Content-Type': 'application/json' })
