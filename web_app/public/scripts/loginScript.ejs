@@ -1,6 +1,4 @@
-
 <script>
-
   class Login {
     constructor(loginForm, fields) {
       this.loginForm = loginForm;
@@ -13,12 +11,14 @@
       this.loginForm.addEventListener("submit", (e) => {
         e.preventDefault();
         const email = document.querySelector("#email");
-        const password=document.querySelector("password");
-        
-        
-       // console.log(encodeURIComponent(email.value).replace(/\./g, "%2E"));
-        getId(encodeURIComponent(email.value).replace(/\./g, "%2E"),password);
-        setCookie("user_id", input.value, 1 / 48);
+        const password = document.querySelector("#password");
+
+        // console.log(encodeURIComponent(email.value).replace(/\./g, "%2E"));
+        getId(
+          encodeURIComponent(email.value).replace(/\./g, "%2E"),
+          password.value
+        );
+        //setCookie("user_id", input.value, 1 / 48);
       });
     }
   }
@@ -34,26 +34,26 @@
   }
 
   // function for getting the user data to theck the login
-  async function getId(mail,password) {
+  async function getId(mail, password) {
     const response = await fetch(
-      `http://localhost:5000/api/users/mail/${mail}/${password}`
-    );
-    const data = await response.json();
-    if (response.status == 200) {
-      console.log("login succesful");
-
-      
-
-      
-
-      //window.location.href = `http://localhost:5001/pages/owned/` + data._id;
-      // setCookie(userData.email);
+        `http://localhost:5000/api/users/login/${mail}/${password}`
+      );
+      const data = await response.json();
+    if (mail != "" || password != "") {
+     
+      console.log(data.message);
+      if (response.status == 200) {
+        console.log("Login succesful");
+        setCookie(data._id);
+        window.location.href = `http://localhost:5001/pages/owned/` + data._id;
+      } else {
+        const printError = document.getElementById("errormessage");
+        printError.innerHTML = `${data.message}`;
+      }
     } else {
-      const printError=document.getElementById("errormessage");
-      printError.innerHTML="Try to register";
+      const printError = document.getElementById("errormessage");
+      printError.innerHTML = "Fields are required";
     }
-
-    
   }
 
   const loginForm = document.querySelector(".login");
