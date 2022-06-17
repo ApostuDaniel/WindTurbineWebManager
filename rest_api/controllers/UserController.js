@@ -5,11 +5,11 @@ const {
   getRequestData,
   validateJSON,
 } = require('./../utils')
-
 const User = require('./../schemas/User')
 const Notification = require('./../schemas/Notification')
 const Alert = require('./../schemas/Alert')
 const Turbine = require('./../schemas/Turbine')
+const { helperDeleteTurbineRelatedData } = require('./TurbineController')
 
 // @desc    Gets All Users
 // @route   GET /api/users
@@ -354,6 +354,36 @@ async function updateUser(req, res, id) {
   }
 }
 
+//DELETE
+
+// @desc    Deletes a user
+// @route   DELETE /api/users/:id
+async function deleteUser(req, res, id) {
+  try {
+    const user = await User.findById(id)
+
+    if (user) {
+      const turbines = await Turbine.find({ userId: id })
+      for (const turbine of turbines) {
+        await helperDeleteTurbineRelatedData(turbine)
+      }
+
+      await Notification.deleteMany({
+        $or: [{ idBuyer: id }, { idSeller: id }],
+      })
+
+      await Alert.deleteMany({ idUser: id })
+
+      await User.findByIdAndDelete(id)
+    }
+
+    res.writeHead(204, { 'Content-Type': 'application/json' })
+    res.end()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
   getUsers,
   getUser,
@@ -367,4 +397,5 @@ module.exports = {
   createAlert,
   updateUser,
   userLogin,
+  deleteUser,
 }
