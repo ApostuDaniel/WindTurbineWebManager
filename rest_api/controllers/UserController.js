@@ -384,6 +384,30 @@ async function deleteUser(req, res, id) {
   }
 }
 
+// @desc    Deletes a Alert
+// @route   DELETE /api/users/alerts/:id
+async function deleteAlert(req, res, id) {
+  try {
+    await Alert.findByIdAndDelete(id)
+    res.writeHead(204, { 'Content-Type': 'application/json' })
+    res.end()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// @desc    Deletes a Notification
+// @route   DELETE /api/users/alerts/:id
+async function deleteNotification(req, res, id) {
+  try {
+    await Notification.findByIdAndDelete(id)
+    res.writeHead(204, { 'Content-Type': 'application/json' })
+    res.end()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
   getUsers,
   getUser,
@@ -398,4 +422,6 @@ module.exports = {
   updateUser,
   userLogin,
   deleteUser,
+  deleteAlert,
+  deleteNotification,
 }

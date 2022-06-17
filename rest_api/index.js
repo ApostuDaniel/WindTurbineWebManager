@@ -119,6 +119,14 @@ const server = http.createServer((req, res) => {
         if (req.url.match(/\/api\/users\/[0-9a-f]{24}$/)) {
           const id = req.url.split('/')[3]
           userController.deleteUser(req, res, id)
+        } else if (req.url.match(/\/api\/users\/alerts\/[0-9a-f]{24}$/)) {
+          const id = req.url.split('/')[3]
+          userController.deleteAlert(req, res, id)
+        } else if (
+          req.url.match(/\/api\/users\/notifications\/[0-9a-f]{24}$/)
+        ) {
+          const id = req.url.split('/')[3]
+          userController.deleteNotification(req, res, id)
         } else if (req.url.match(/\/api\/turbines\/[0-9a-f]{24}$/)) {
           const id = req.url.split('/')[3]
           turbineController.deleteTurbine(req, res, id)
