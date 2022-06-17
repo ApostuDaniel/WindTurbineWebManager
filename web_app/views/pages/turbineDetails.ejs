@@ -28,7 +28,7 @@
 
     <div class="wrap">
       <div id="turbine">
-        <%- include (dir + '/views/partials/turbineDetailsCard'), { turbine : turbine } %>
+        <%- include (dir + '/views/partials/turbineDetailsCard', { turbine : turbine, user : user, turbineData : turbineData }) %>
       </div>
       <div id="panel"></div>
     </div>  

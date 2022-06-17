@@ -126,10 +126,14 @@ async function getTurbineDetailsPage(req, res, id) {
     );
 
     const turbineData = await getTurbine(id);
-
+    const userData = await getUser(turbineData.userId);
+    const turbineNewData = await getTurbineNewData(id);
+    
     var htmlRenderized = ejs.render(htmlContent, {
       filename: "turbineDetails.ejs",
-      turbine: turbineData
+      turbine: turbineData,
+      user: userData,
+      turbineData: turbineNewData
     });
     res.end(htmlRenderized);
   } catch (error) {
@@ -156,6 +160,21 @@ async function getTurbine(id) {
   const turbine = await data.json();
 
   return turbine;
+}
+
+async function getUser(id) {
+  const data = await fetch("http://localhost:5000/api/users/" + id);
+  const user = await data.json();
+
+  return user;
+}
+
+async function getTurbineNewData(id) {
+  const data = await fetch(`http://localhost:5000/api/turbines/data/${id}/new`);
+  const turbineData = await data.json();
+
+  console.log(turbineData);
+  return turbineData;
 }
 
 module.exports = {
