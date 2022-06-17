@@ -2,6 +2,7 @@ const fetch = (url) =>
   import('node-fetch').then(({ default: fetch }) => fetch(url))
 const { default: axios } = require('axios');
 const UPDATE_TIME_DELAY = 5000;
+const { getNewWindSpeed, getNewTurbineWear, getNewPowerGenerated, getNewEfficiency } = require('./util');
 
 /**
  * Gets all the turbines and updates the data for each one
@@ -79,7 +80,7 @@ async function updateStoppedTurbine(turbine) {
             "timeStamp": date.valueOf()
         }
     }
-    await postNewData(id, newData);
+    await putNewData(id, newData);
 }
 
 /**
@@ -168,39 +169,15 @@ async function updateTurbine(turbine) {
         }
     }
 
-    await postNewData(id, newData);
+    await putNewData(id, newData);
 }
 
-function getNewWindSpeed(oldWindSpeed, currentWindSpeed) {
-    return (oldWindSpeed + currentWindSpeed) / 2;
-}
-
-function getNewTurbineWear(oldTurbineWear, windSpeed, temperature, humidity) {
-    let newTurbineWear = oldTurbineWear;
-
-    if(windSpeed > 50) {
-        newTurbineWear += 0.1;
-    }
-
-    if(temperature > 30) {
-        newTurbineWear += 0.05;
-    }
-
-    if(humidity > 60) {
-        newTurbineWear += 0.04;
-    }
-    return newTurbineWear;
-}
-
-function getNewPowerGenerated(oldPowerGenerated, windSpeed) {
-    return oldPowerGenerated + windSpeed / 10;
-}
-
-function getNewEfficiency(oldEfficiency, oldPowerGenerated, newPowerGenerated) {
-    return (newPowerGenerated - oldPowerGenerated > 5) ? (oldEfficiency <= 0.9 ? oldEfficiency + 0.01 : 1) : oldEfficiency - 0.001;
-}
-
-async function postNewData(id, newData) {
+/**
+ * Puts the newly generated data 
+ * @param {mongoose.SchemaTypes.ObjectId} id 
+ * @param {JSON} newData 
+ */
+async function putNewData(id, newData) {
     console.log('Turbine new: ');
     console.log(newData);
     const response = await axios({
