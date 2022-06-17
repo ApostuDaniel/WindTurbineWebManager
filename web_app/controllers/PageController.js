@@ -154,7 +154,6 @@ async function getOwnedTurbines(id) {
 }
 
 
-
 module.exports = {
   getPublicPage,
   getPrivatePage,

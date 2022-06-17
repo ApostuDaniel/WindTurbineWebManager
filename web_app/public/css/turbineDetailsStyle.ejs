@@ -1,0 +1,138 @@
+<style>
+  body {
+    margin: 0;
+    background-color: #ecfcff;
+    user-select: none;
+    font-family:  'Exo 2', sans-serif;
+  }
+
+  .sidenav {
+    position: fixed;
+    list-style-type: none;
+    width: 20%;
+    background-color: #b7e4ed;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .sidenav li {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: "Exo 2", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: #01a1ba;
+    text-decoration: none;
+    list-style: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: ease-in-out 700ms;
+  }
+
+  .sidenav li:hover {
+    background-color: rgba(186, 124, 237, 0.5);
+  }
+
+  .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 75%;
+    height: 100vh;
+    margin-top: 70px;
+    margin-left: 25%;
+  }
+
+  #turbine {
+    width: 70%;
+    height: auto;
+  }
+
+  #panel {
+    height: auto;
+    width: 100%;
+    background-color: #1991a6;
+  }
+
+  .card {
+    width: 100%;
+    height: auto;
+    background: linear-gradient(to left top, rgba(1, 161, 186, 0.8), rgba(186, 124, 237, 0.8));
+    display: flex;
+    flex-direction: column;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+  }
+
+  .details {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .buttons {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid rgba(186, 124, 237, 0.5);
+    border-bottom: 3px solid rgba(186, 124, 237, 0.5);
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    background: linear-gradient(to left top, rgba(186, 124, 237, 0.6), rgba(1, 161, 186, 0.6));
+  }
+
+  .buttons button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: ease-in-out 400ms;
+    border: none;
+    border-radius: 10px;
+    color: rgba(1, 161, 186, 1);
+  }
+
+  .buttons button:hover {
+    background-color: white;
+    color: rgba(186, 124, 237);
+    border-radius: 50px;
+    cursor: pointer;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: none;
+  }
+
+  .attributes {
+    width: 50%;
+  }
+
+  .attribute {
+    margin: 15px;
+    padding-left: 15px;
+    font-weight: bold;
+    border-left: 1vw solid rgba(186, 124, 237, 0.5);
+    }
+
+  .image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+  }
+
+  .image img {
+    width: inherit;
+    height: inherit;
+  }  
+</style>
