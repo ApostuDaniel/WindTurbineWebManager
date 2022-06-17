@@ -18,7 +18,7 @@
           encodeURIComponent(email.value).replace(/\./g, "%2E"),
           password.value
         );
-        //setCookie("user_id", input.value, 1 / 48);
+       
       });
     }
   }
@@ -44,7 +44,7 @@
       console.log(data.message);
       if (response.status == 200) {
         console.log("Login succesful");
-        setCookie(data._id);
+       setCookie("user_id", data._id, 1 / 48);
         window.location.href = `http://localhost:5001/pages/owned/` + data._id;
       } else {
         const printError = document.getElementById("errormessage");
