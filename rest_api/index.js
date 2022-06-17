@@ -116,8 +116,12 @@ const server = http.createServer((req, res) => {
         }
         break
       case 'DELETE':
-        res.writeHead(200, { 'Content-Type': 'text/html' })
-        res.end('<h1>Header</h1>')
+        if (req.url.match(/\/api\/users\/[0-9a-f]{24}$/)) {
+          const id = req.url.split('/')[3]
+          userController.deleteUser(req, res, id)
+        } else {
+          throw new Error('DELETE route not found')
+        }
         break
       default:
         throw new Error('Unacceptable http verb')
