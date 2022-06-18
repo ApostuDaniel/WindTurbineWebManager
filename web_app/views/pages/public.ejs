@@ -14,19 +14,21 @@
       href="https://fonts.googleapis.com/css2?family=Exo+2:wght@100&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <%- include(dir+'/public/scripts/chartCreation'); %>
     <title>Public turbines</title>
+    
   </head>
-  <body id="body">
+  <body>
     <%- include(dir + "/views/partials/navBar") %> <%- include(dir +
     "/views/partials/filters") %>
 
     <div class="turbines">
       <% for(turbine of turbines) {%> <%- include(dir +
-      "/views/partials/publicTurbine", {turbine:turbine}) %> <% } %>
-
-     
+      "/views/partials/publicTurbine", {turbine:turbine,
+      chart:chartData[turbine._id + 'chart']}) %> <% } %>
     </div>
-    <%- include (dir+'/public/scripts/protectedRouteScript'); %>
-    <%- include (dir+'/public/scripts/publicownedPageScript'); %>
+    <%- include (dir+'/public/scripts/protectedRouteScript'); %> <%- include
+    (dir+'/public/scripts/publicownedPageScript'); %>
   </body>
 </html>

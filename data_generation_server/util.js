@@ -10,7 +10,7 @@ function getNewTurbineWear(oldTurbineWear, windSpeed, temperature, humidity) {
         newTurbineWear += 0.02;
     }
 
-    if(temperature > 32) {
+    if(temperature > 32 || temperature < -32) {
         newTurbineWear += 0.01;
     }
 
