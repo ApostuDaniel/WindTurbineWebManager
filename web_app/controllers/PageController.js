@@ -168,7 +168,7 @@ async function getTurbines() {
 async function getOwnedTurbines(id) {
   const data = await fetch("http://localhost:5000/api/turbines/private/" + id);
   const ownedTurbineData = await data.json();
-
+  
   return ownedTurbineData;
 }
 
