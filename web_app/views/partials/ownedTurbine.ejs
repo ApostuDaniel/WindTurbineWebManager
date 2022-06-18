@@ -3,7 +3,7 @@
     <li>Name:<%= turbine.name %></li>
     <li>Year: <%= turbine.constructionYear %></li>
     <li>Suitability: <%= turbine.suitability %></li>
-    <li class="dButton" onclick='location.href="turbineDetails.html"'>
+    <li class="dButton" onclick='location.href="/pages/turbineDetails/<%= turbine._id %>"'>
       Detalii
     </li>
   </ul>

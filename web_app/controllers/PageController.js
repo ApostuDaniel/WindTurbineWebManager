@@ -125,10 +125,12 @@ async function getTurbineDetailsPage(req, res, id) {
       "utf8"
     );
 
+    console.log(id);
     const turbineData = await getTurbine(id);
     const userData = await getUser(turbineData.userId);
     const turbineNewData = await getTurbineNewData(id);
     
+    console.log(turbineData);
     var htmlRenderized = ejs.render(htmlContent, {
       filename: "turbineDetails.ejs",
       turbine: turbineData,
@@ -173,7 +175,7 @@ async function getOwnedTurbines(id) {
 }
 
 async function getTurbine(id) {
-  const data = await fetch("http://localhost:5000/api/turbines/" + id);
+  const data = await fetch(`http://localhost:5000/api/turbines/${id}`);
   const turbine = await data.json();
 
   return turbine;
