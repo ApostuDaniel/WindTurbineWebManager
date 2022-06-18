@@ -1,120 +1,120 @@
-const fs = require('fs')
-const ejs = require('ejs')
+const fs = require("fs");
+const ejs = require("ejs");
 
 const fetch = (url) =>
-  import('node-fetch').then(({ default: fetch }) => fetch(url))
+  import("node-fetch").then(({ default: fetch }) => fetch(url));
 
 async function getLandingPage(req, res) {
   try {
-    res.writeHead(200, { 'Content-Type': 'text/html' })
+    res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + '/../views/pages/landing.ejs',
-      'utf8'
-    )
+      __dirname + "/../views/pages/landing.ejs",
+      "utf8"
+    );
 
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: 'landing.ejs',
-    })
+      filename: "landing.ejs",
+    });
 
-    res.end(htmlRenderized)
+    res.end(htmlRenderized);
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
   }
 }
 
 async function getPublicPage(req, res) {
   try {
-    res.writeHead(200, { 'Content-Type': 'text/html' })
+    res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + '/../views/pages/public.ejs',
-      'utf8'
-    )
+      __dirname + "/../views/pages/public.ejs",
+      "utf8"
+    );
 
-    const turbineData = await getTurbines()
+    const turbineData = await getTurbines();
 
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: 'public.ejs',
+      filename: "public.ejs",
       turbines: turbineData,
-    })
+    });
 
-    res.end(htmlRenderized)
+    res.end(htmlRenderized);
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
   }
 }
 
 async function getPrivatePage(req, res, id) {
   try {
-    res.writeHead(200, { 'Content-Type': 'text/html' })
+    res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + '/../views/pages/owned.ejs',
-      'utf8'
-    )
+      __dirname + "/../views/pages/owned.ejs",
+      "utf8"
+    );
 
-    const ownedTurbineData = await getOwnedTurbines(id)
+    const ownedTurbineData = await getOwnedTurbines(id);
 
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: 'owned.ejs',
+      filename: "owned.ejs",
       turbines: ownedTurbineData,
-    })
+    });
 
-    res.end(htmlRenderized)
+    res.end(htmlRenderized);
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
   }
 }
 
 async function getLoginPage(req, res) {
   try {
-    res.writeHead(200, { 'Content-Type': 'text/html' })
+    res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + '/../views/pages/login.ejs',
-      'utf8'
-    )
+      __dirname + "/../views/pages/login.ejs",
+      "utf8"
+    );
 
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: 'login.ejs',
-    })
+      filename: "login.ejs",
+    });
 
-    res.end(htmlRenderized)
+    res.end(htmlRenderized);
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
   }
 }
 
 async function getUserDetailsPage(req, res) {
   try {
-    res.writeHead(200, { 'Content-Type': 'text/html' })
+    res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + '/../views/pages/userDetails.ejs',
-      'utf8'
-    )
+      __dirname + "/../views/pages/userDetails.ejs",
+      "utf8"
+    );
 
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: 'userDetails.ejs',
-    })
+      filename: "userDetails.ejs",
+    });
 
-    res.end(htmlRenderized)
+    res.end(htmlRenderized);
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
   }
 }
 
 async function getRegisterPage(req, res) {
   try {
-    res.writeHead(200, { 'Content-Type': 'text/html' })
+    res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + '/../views/pages/register.ejs',
-      'utf8'
-    )
+      __dirname + "/../views/pages/register.ejs",
+      "utf8"
+    );
 
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: 'register.ejs',
-    })
+      filename: "register.ejs",
+    });
 
-    res.end(htmlRenderized)
+    res.end(htmlRenderized);
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
   }
 }
 
@@ -132,7 +132,7 @@ async function getNotificationsPage(req, res, id) {
     var htmlRenderized = ejs.render(htmlContent, {
       filename: "notifications.ejs",
       notifications: nots,
-      alerts: alts
+      alerts: alts,
     });
 
     res.end(htmlRenderized);
@@ -143,24 +143,24 @@ async function getNotificationsPage(req, res, id) {
 
 async function getCreateTurbinePage(req, res) {
   try {
-    res.writeHead(200, { 'Content-Type': 'text/html' })
+    res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + '/../views/pages/createTurbine.ejs',
-      'utf8'
-    )
+      __dirname + "/../views/pages/createTurbine.ejs",
+      "utf8"
+    );
 
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: 'createTurbine.ejs',
-    })
-    res.end(htmlRenderized)
+      filename: "createTurbine.ejs",
+    });
+    res.end(htmlRenderized);
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
   }
 }
 
 async function getTurbineDetailsPage(req, res, id) {
   try {
-    res.writeHead(200, { 'Content-Type': 'text/html' })
+    res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
       __dirname + "/../views/pages/turbineDetails.ejs",
       "utf8"
@@ -169,59 +169,114 @@ async function getTurbineDetailsPage(req, res, id) {
     const turbineData = await getTurbine(id);
     const userData = await getUser(turbineData.userId);
     const turbineNewData = await getTurbineNewData(id);
+    const allTurbineData = await getTurbineAllData(id)
+
+    const timeLabels = allTurbineData.historicData.map((x) =>
+      new Date(x.timeStamp).getTime()
+    );
+
+    const chartData = {};
+    chartData["stateChart"] = {
+      canvasId: "stateChart",
+      timeLabels,
+      data: allTurbineData.historicData.map((x) => x.turbineWear),
+      lineTitle: "Periodic Turbine Wear",
+      chartName: "Turbine Wear Over Time",
+      yAxisLabel: "Time",
+      xAxisLabel: "Turbine Wear",
+      colorPoints: "rgba(255, 0, 0, 1)",
+      colorLine: "rgba(0, 255, 0, 1)",
+      colorUnderLine: "rgba(0, 0, 255, 1)",
+    };
+
+    chartData["windChart"] = {
+      canvasId: "windChart",
+      timeLabels,
+      data: allTurbineData.historicData.map((x) => x.windSpeed),
+      lineTitle: "Measured Wind Speed",
+      chartName: "Wind Speed",
+      yAxisLabel: "Time",
+      xAxisLabel: "Wind Speed (km/h)",
+      isAsccendingGreen: false,
+    };
+
+    chartData["energyChart"] = {
+      canvasId: "energyChart",
+      timeLabels,
+      data: allTurbineData.historicData.map((x) => x.powerGenerated),
+      lineTitle: "Generated Energy",
+      chartName: "Total Generated Energy",
+      yAxisLabel: "Time",
+      xAxisLabel: "Energy Generated (kw)",
+      colorPoints: "rgba(255, 0, 0, 1)",
+      colorLine: "rgba(0, 255, 0, 1)",
+      colorUnderLine: "rgba(0, 0, 255, 1)",
+    };
+
+    chartData["efficiencyChart"] = {
+      canvasId: "efficiencyChart",
+      timeLabels,
+      data: allTurbineData.historicData.map((x) => x.eficiency),
+      lineTitle: "Efficiency",
+      chartName: "Measured Efficiency",
+      yAxisLabel: "Time",
+      xAxisLabel: "Turbine Efficiency (0 to 1)",
+      isAsccendingGreen: true,
+    };
 
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: 'turbineDetails.ejs',
+      filename: "turbineDetails.ejs",
       turbine: turbineData,
       user: userData,
       turbineData: turbineNewData,
+      chartData
     });
     res.end(htmlRenderized);
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
   }
 }
 
 async function getUnauthorizedPage(req, res) {
   try {
-    res.writeHead(200, { 'Content-Type': 'text/html' })
+    res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + '/../views/pages/unauthorized.ejs',
-      'utf8'
-    )
+      __dirname + "/../views/pages/unauthorized.ejs",
+      "utf8"
+    );
 
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: 'unauthorized.ejs',
-    })
-    res.end(htmlRenderized)
+      filename: "unauthorized.ejs",
+    });
+    res.end(htmlRenderized);
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
   }
 }
 
 async function getResetPassPage(req, res) {
   try {
-    res.writeHead(200, { 'Content-Type': 'text/html' })
+    res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + '/../views/pages/resetPassword.ejs',
-      'utf8'
-    )
+      __dirname + "/../views/pages/resetPassword.ejs",
+      "utf8"
+    );
 
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: 'resetPassword.ejs',
-    })
+      filename: "resetPassword.ejs",
+    });
 
-    res.end(htmlRenderized)
+    res.end(htmlRenderized);
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
   }
 }
 
 async function getTurbines() {
-  const data = await fetch('http://localhost:5000/api/turbines/public')
-  const turbineData = await data.json()
+  const data = await fetch("http://localhost:5000/api/turbines/public");
+  const turbineData = await data.json();
 
-  return turbineData
+  return turbineData;
 }
 
 async function getOwnedTurbines(id) {
@@ -232,35 +287,37 @@ async function getOwnedTurbines(id) {
 }
 
 async function getTurbine(id) {
-  const data = await fetch(`http://localhost:5000/api/turbines/${id}`)
-  const turbine = await data.json()
+  const data = await fetch(`http://localhost:5000/api/turbines/${id}`);
+  const turbine = await data.json();
 
-  return turbine
+  return turbine;
 }
 
 async function getUser(id) {
-  const data = await fetch('http://localhost:5000/api/users/' + id)
-  const user = await data.json()
+  const data = await fetch("http://localhost:5000/api/users/" + id);
+  const user = await data.json();
 
-  return user
+  return user;
 }
 
 async function getTurbineNewData(id) {
-  const data = await fetch(`http://localhost:5000/api/turbines/data/${id}/new`)
-  const turbineData = await data.json()
+  const data = await fetch(`http://localhost:5000/api/turbines/data/${id}/new`);
+  const turbineData = await data.json();
 
-  return turbineData
+  return turbineData;
 }
 
 async function getTurbineAllData(id) {
-  const data = await fetch(`http://localhost:5000/api/turbines/data/${id}`)
-  const turbineData = await data.json()
+  const data = await fetch(`http://localhost:5000/api/turbines/data/${id}`);
+  const turbineData = await data.json();
 
-  return turbineData
+  return turbineData;
 }
 
 async function getNotifications(id) {
-  const data = await fetch(`http://localhost:5000/api/users/${id}/notifications`);
+  const data = await fetch(
+    `http://localhost:5000/api/users/${id}/notifications`
+  );
   const notifications = await data.json();
 
   return notifications;
