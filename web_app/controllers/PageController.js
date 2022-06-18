@@ -82,6 +82,24 @@ async function getLoginPage(req, res) {
   }
 }
 
+async function getUserDetailsPage(req, res) {
+  try {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    var htmlContent = fs.readFileSync(
+      __dirname + "/../views/pages/userDetails.ejs",
+      "utf8"
+    );
+
+    var htmlRenderized = ejs.render(htmlContent, {
+      filename: "userDetails.ejs",
+    });
+
+    res.end(htmlRenderized);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 async function getRegisterPage(req, res) {
   try {
     res.writeHead(200, { "Content-Type": "text/html" });
@@ -224,4 +242,5 @@ module.exports = {
   getTurbineDetailsPage,
   getUnauthorizedPage,
   getResetPassPage,
+  getUserDetailsPage,
 };

@@ -20,6 +20,8 @@ const server = http.createServer((req, res) => {
       PageController.getCreateTurbinePage(req, res);
     } else if (req.url === "/pages/login") {
       PageController.getLoginPage(req, res);
+    } else if (req.url === "/pages/userDetails") {
+      PageController.getUserDetailsPage(req, res);
     } else if (req.url === "/pages/register") {
       PageController.getRegisterPage(req, res);
     } else if (req.url === "/pages/resetpass") {
