@@ -13,6 +13,8 @@
       href="https://fonts.googleapis.com/css2?family=Exo+2:wght@100&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <%- include(dir+'/public/scripts/chartCreation'); %>
     <title>Turbine Details</title>
   </head>
 
@@ -32,10 +34,22 @@
         turbine, user : user, turbineData : turbineData }) %>
       </div>
       <div id="panel">
-        <div id="statePan"></div>
-        <div id="windPan"></div>
-        <div id="energyPan"></div>
-        <div id="efficiencyPan"></div>
+        <div id="statePan">
+          <%- include (dir + '/views/partials/cumulativeChart',
+          chartData['stateChart']) %>
+        </div>
+        <div id="windPan">
+          <%- include (dir + '/views/partials/redGreenChart',
+          chartData['windChart']) %>
+        </div>
+        <div id="energyPan">
+          <%- include (dir + '/views/partials/cumulativeChart',
+          chartData['energyChart']) %>
+        </div>
+        <div id="efficiencyPan">
+          <%- include (dir + '/views/partials/redGreenChart',
+          chartData['efficiencyChart']) %>
+        </div>
       </div>
     </div>
 
