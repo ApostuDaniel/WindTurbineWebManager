@@ -2,21 +2,19 @@ const http = require("http");
 const fs = require("fs");
 const ejs = require("ejs");
 const PageController = require("./controllers/PageController");
-const {parseCookies} =require("./utils");
+const { parseCookies } = require("./utils");
 const PORT = process.env.port || 5001;
 
 const server = http.createServer((req, res) => {
-  
   try {
-    
     if (req.url === "/pages") {
       PageController.getLandingPage(req, res);
     } else if (req.url === "/pages/public") {
       PageController.getPublicPage(req, res);
-    } else if (req.url ==="/pages/owned") {
-      const cookies = parseCookies(req);  
-    const id = cookies.user_id;
-  console.log(cookies.user_id);
+    } else if (req.url === "/pages/owned") {
+      const cookies = parseCookies(req);
+      const id = cookies.user_id;
+      console.log(cookies.user_id);
       PageController.getPrivatePage(req, res, id);
     } else if (req.url === "/pages/createTurbine") {
       PageController.getCreateTurbinePage(req, res);
@@ -24,6 +22,8 @@ const server = http.createServer((req, res) => {
       PageController.getLoginPage(req, res);
     } else if (req.url === "/pages/register") {
       PageController.getRegisterPage(req, res);
+    } else if (req.url === "/pages/resetpass") {
+      PageController.getResetPassPage(req, res);
     } else if (req.url === "/unauthorized") {
       PageController.getUnauthorizedPage(req, res);
     } else if (req.url.match(/\/pages\/turbineDetails\/\w+$/)) {

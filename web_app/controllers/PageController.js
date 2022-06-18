@@ -160,6 +160,24 @@ async function getUnauthorizedPage(req, res) {
   }
 }
 
+async function getResetPassPage(req, res) {
+  try {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    var htmlContent = fs.readFileSync(
+      __dirname + "/../views/pages/resetPassword.ejs",
+      "utf8"
+    );
+
+    var htmlRenderized = ejs.render(htmlContent, {
+      filename: "resetPassword.ejs",
+    });
+
+    res.end(htmlRenderized);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 async function getTurbines() {
   const data = await fetch("http://localhost:5000/api/turbines/public");
   const turbineData = await data.json();
@@ -204,5 +222,6 @@ module.exports = {
   getRegisterPage,
   getCreateTurbinePage,
   getTurbineDetailsPage,
-  getUnauthorizedPage
+  getUnauthorizedPage,
+  getResetPassPage,
 };
