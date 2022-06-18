@@ -1,7 +1,7 @@
 const fetch = (url) =>
   import('node-fetch').then(({ default: fetch }) => fetch(url))
 const { default: axios } = require('axios');
-const UPDATE_TIME_DELAY = 5000;
+const UPDATE_TIME_DELAY = 600000;
 const { getNewWindSpeed, getNewTurbineWear, getNewPowerGenerated, getNewEfficiency } = require('./util');
 
 /**
@@ -98,8 +98,6 @@ async function stopTurbine(id) {
         url: put_turbine_api_url,
         data: JSON.stringify(data)
       });
-  
-      console.log(response.data);
 }
 
 /**
@@ -121,7 +119,7 @@ async function updateTurbine(turbine) {
     const response = await fetch(weather_api_url);
     const json = await response.json();
 
-    const currentWindSpeed = json.current.wind_mph;
+    const currentWindSpeed = json.current.wind_kph * 5 / 18;
     const currentTemperature = json.current.temp_c;
     const currentHummidity = json.current.humidity;
 
@@ -132,12 +130,11 @@ async function updateTurbine(turbine) {
 
     if(turbineData.message === undefined) {
         // console.log("Old");
-        const oldWindSpeed = turbineData.windSpeed;
         const oldTurbineWear = turbineData.turbineWear;
         const oldPowerGenerated = turbineData.powerGenerated;
         const oldEfficiency = turbineData.eficiency;
 
-        const newWindSpeed = getNewWindSpeed(oldWindSpeed, currentWindSpeed);
+        const newWindSpeed = currentWindSpeed;
         const newTurbineWear = getNewTurbineWear(oldTurbineWear, newWindSpeed, currentTemperature, currentHummidity);
         const newPowerGenerated = getNewPowerGenerated(oldPowerGenerated, newWindSpeed);
         const newEffieciency = getNewEfficiency(oldEfficiency, oldPowerGenerated, newPowerGenerated);
@@ -157,7 +154,7 @@ async function updateTurbine(turbine) {
         // console.log("New");
         const newWindSpeed = currentWindSpeed;
         const newTurbineWear = 0;
-        const newPowerGenerated = currentWindSpeed;
+        const newPowerGenerated = getNewPowerGenerated(0, newWindSpeed);
         const newEffieciency = 0.5;
 
         newData = {
@@ -185,8 +182,6 @@ async function putNewData(id, newData) {
         url: `http://localhost:5000/api/turbines/newdata/${id}`,
         data: JSON.stringify(newData)
       });
-  
-      console.log(response.data);
 }
 
 updateTurbines();
