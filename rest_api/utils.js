@@ -69,9 +69,54 @@ function extractDateFromCNP(cnp) {
   return new Date(year, month, day)
 }
 
+function createMongooseSearchObject(queryObject) {
+  const searchObject = {}
+  for (prop in queryObject) {
+    const value = queryObject[prop]
+    if (Array.isArray(value)) {
+      const gte = value.find((element) => element.startsWith('gte:'))
+      const lte = value.find((element) => element.startsWith('lte:'))
+      const searchObjectPropValue = {}
+      if (!gte && !lte) continue
+      if (gte) {
+        console.log('In gte if')
+        console.log(gte)
+        console.log(gte.substring(4))
+        searchObjectPropValue['$gte'] = gte.substring(4)
+      }
+      if (lte) {
+        searchObjectPropValue['$lte'] = lte.substring(4)
+      }
+      searchObject[prop] = searchObjectPropValue
+    } else if (value.startsWith('regex:')) {
+      let [option, ...rest] = value.split(':')
+      switch (rest.length) {
+        case 0:
+          rest = ''
+          break
+        case 1:
+          rest = rest[0]
+          break
+        default:
+          rest = rest.join(':')
+      }
+      searchObject[prop] = { $regex: rest, $options: 'i' }
+    } else if (value.startsWith('gte:') || value.startsWith('lte:')) {
+      const propObject = {}
+      propObject['$' + value.substring(0, 3)] = value.substring(4)
+      searchObject[prop] = propObject
+    } else {
+      searchObject[prop] = value
+    }
+  }
+
+  return searchObject
+}
+
 module.exports = {
   getRequestData,
   validateJSON,
   verificareCNP,
   extractDateFromCNP,
+  createMongooseSearchObject,
 }

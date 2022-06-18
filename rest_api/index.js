@@ -83,6 +83,17 @@ const server = http.createServer((req, res) => {
           const userId = urlSplit[4]
           const name = urlSplit[5]
           turbineController.getPrivateTurbineByName(req, res, userId, name)
+        } else if (
+          req.url.match(
+            /\/api\/turbines\/filter\/[0-9a-f]{24}\??(?:&?[^=&]*=[^=&]*)*$/
+          )
+        ) {
+          const turbineId = req.url.split('/')[4].substring(0, 24)
+          turbineController.filterTurbines(req, res, turbineId)
+        } else if (
+          req.url.match(/\/api\/turbines\/filter\??(?:&?[^=&]*=[^=&]*)*$/)
+        ) {
+          turbineController.filterTurbines(req, res, null)
         } else {
           throw new Error('GET route not found')
         }
