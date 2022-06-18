@@ -1,7 +1,7 @@
 const fetch = (url) =>
   import('node-fetch').then(({ default: fetch }) => fetch(url))
 const { default: axios } = require('axios');
-const UPDATE_TIME_DELAY = 5000;
+const UPDATE_TIME_DELAY = 600000;
 const { getNewWindSpeed, getNewTurbineWear, getNewPowerGenerated, getNewEfficiency } = require('./util');
 
 /**
@@ -132,12 +132,11 @@ async function updateTurbine(turbine) {
 
     if(turbineData.message === undefined) {
         // console.log("Old");
-        const oldWindSpeed = turbineData.windSpeed;
         const oldTurbineWear = turbineData.turbineWear;
         const oldPowerGenerated = turbineData.powerGenerated;
         const oldEfficiency = turbineData.eficiency;
 
-        const newWindSpeed = getNewWindSpeed(oldWindSpeed, currentWindSpeed);
+        const newWindSpeed = currentWindSpeed;
         const newTurbineWear = getNewTurbineWear(oldTurbineWear, newWindSpeed, currentTemperature, currentHummidity);
         const newPowerGenerated = getNewPowerGenerated(oldPowerGenerated, newWindSpeed);
         const newEffieciency = getNewEfficiency(oldEfficiency, oldPowerGenerated, newPowerGenerated);
@@ -157,7 +156,7 @@ async function updateTurbine(turbine) {
         // console.log("New");
         const newWindSpeed = currentWindSpeed;
         const newTurbineWear = 0;
-        const newPowerGenerated = currentWindSpeed;
+        const newPowerGenerated = getNewPowerGenerated(0, newWindSpeed);
         const newEffieciency = 0.5;
 
         newData = {
