@@ -15,19 +15,19 @@
 
 <div class="popup" id=<%=turbine._id %>>
   <div class="fields">
-    <p>Name:<%= turbine.name %></p>
+    <p><%= turbine.name %></p>
     <p id="company"></p>
-    <p>Construction:<%= turbine.constructionYear %></p>
+    <p>Construction date: <%= turbine.constructionYear %></p>
     <p id="email" ></p>
     <p id="telefon"></p>
-    <p>Suitability:<%= turbine.suitability %></p>
+    <p>Suitability: <%= turbine.suitability %></p>
     <div class="buttons">
-      <button id="offer">Oferta</button>
-      <button onclick="closePopup(`<%=turbine._id %>`)">Inchide</button>
+      <button id="offer" class="dButton">Purchase</button>
+      <button class="dButton" onclick="closePopup(`<%=turbine._id %>`)">Close</button>
     </div>
   </div>
   <div class="images">
-    <!-- <img src=<%= turbine.imageLink %> alt="turbine image placeholder" />
-    <img src=<%= turbine.imageLink %> alt="wear graph placeholder" /> -->
+    <img src=<%= turbine.imageLink %> alt="turbine image placeholder" />
+    <img src=<%= turbine.imageLink %> alt="wear graph placeholder" />
   </div>
 </div>

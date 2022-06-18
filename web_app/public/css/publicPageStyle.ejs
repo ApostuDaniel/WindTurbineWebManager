@@ -2,6 +2,7 @@
   body {
     margin: 0;
     background-color: #ecfcff;
+    font-family: "Exo 2", sans-serif;
   }
 
   .content {
@@ -109,8 +110,13 @@
     visibility: hidden;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    background-color: #01a1ba;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+      to right top,
+      rgba(1, 161, 186, 1),
+      rgba(1, 161, 186, 0.8)
+    );
     width: 50%;
     height: 400px;
     margin: 0;
@@ -119,7 +125,6 @@
     top: 15%;
     left: 17%;
     margin-left: 100px;
-    border-radius: 3%;
     opacity: 95%;
   }
 
@@ -139,26 +144,26 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin: 0;
+    margin: 15px;
+    padding-left: 15px;
+    font-weight: bold;
+    border-left: 1vw solid rgba(186, 124, 237, 0.5);
     height: 300px;
   }
 
   .images {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: space-around;
     margin: 0;
-  }
-
-  .images p {
-    font-size: 100px;
+    width: 50%;
+    height: 100%;
   }
 
   .images img {
-    width: 180px;
-    height: 180px;
-    border-radius: 5%;
+    width: 80%;
+    height: 40%;
   }
 
   .buttons {
@@ -168,16 +173,19 @@
     width: 100px;
   }
 
-  .buttons button {
-    background-color: #ecfcff;
-    font-family: "Exo 2", sans-serif;
-    font-weight: bolder;
-    font-size: 15px;
-    color: #01a1ba;
+  .dButton {
+    margin: 15px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    outline: none;
     border: none;
-    margin-right: 20px;
-    margin-left: 20px;
-    margin-top: 50px;
+    background-color: rgba(1, 161, 186, 0.8);
+    transition: ease-in-out 300ms;
+  }
+
+  .dButton:hover {
+    background-color: rgba(186, 124, 237, 0.8);
   }
 
   @media screen and (max-width: 800px) {

@@ -24,27 +24,6 @@
       <% for(turbine of turbines) {%> <%- include(dir +
       "/views/partials/publicTurbine", {turbine:turbine}) %> <% } %>
 
-      <div class="popup" id="popupInfo">
-        <div class="fields">
-          <p>Nume:RDV</p>
-          <p>Firma:RDV</p>
-          <p>An Constructie:2022</p>
-          <p>Email:rdv@yahoo.com</p>
-          <p>Telefon:0752342313</p>
-          <p>Medie kw/h:20</p>
-          <div class="buttons">
-            <button>Oferta</button>
-            <button>Inchide</button>
-          </div>
-        </div>
-        <div class="images">
-          <img src=https://webprojectrdv.s3.amazonaws.com/images/mockImage.jpg
-          alt="turbine image placeholder" /> <img
-          src=https://webprojectrdv.s3.amazonaws.com/images/mockGraph.jpg
-          alt="wear graph placeholder" />
-        </div>
-      </div>
-    </div>
     <%- include (dir+'/public/scripts/protectedRouteScript'); %>
     <%- include (dir+'/public/scripts/publicownedPageScript'); %>
   </body>
