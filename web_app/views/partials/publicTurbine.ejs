@@ -1,4 +1,4 @@
-
+<% var dir = process.cwd() %>
 <div onclick="showPublicTurbine(`<%= turbine._id %>`,`<%= turbine.userId %>`)" class="turbine">
   <div class="header">
     <img src=https://webprojectrdv.s3.amazonaws.com/images/menu.png alt="spinner placeholder" />
@@ -28,6 +28,6 @@
   </div>
   <div class="images">
     <img src=<%= turbine.imageLink %> alt="turbine image placeholder" />
-    <img src=<%= turbine.imageLink %> alt="wear graph placeholder" />
+    <%- include (dir + '/views/partials/cumulativeChart', chart) %>
   </div>
 </div>
