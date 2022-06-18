@@ -26,6 +26,7 @@ const server = http.createServer((req, res) => {
     } else if (req.url === "/pages/resetpass") {
       PageController.getResetPassPage(req, res);
     } else if(req.url === "/pages/notifications") {
+      const cookies = parseCookies(req);
       const id = cookies.user_id;
       PageController.getNotificationsPage(req, res, id);
     } else if (req.url.match(/\/pages\/turbineDetails\/\w+$/)) {

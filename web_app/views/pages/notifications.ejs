@@ -4,9 +4,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href=https://webprojectrdv.s3.amazonaws.com/favicon.png> 
-    <%- include(dir + '/public/css/navBarStyle'); %> 
-    <%- include(dir + '/public/css/notificationsStyle'); %> 
+    <link rel="icon" href=https://webprojectrdv.s3.amazonaws.com/favicon.png>
+    <%- include(dir + '/public/css/navBarStyle'); %> <%- include(dir +
+    '/public/css/notificationsStyle'); %>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,5 +17,12 @@
   </head>
   <body>
     <%- include(dir + "/views/partials/navBar") %>
+
+    <div class="notification-wrapper">
+        <%- include(dir + "/views/partials/notification") %>
+        <%- include(dir + "/views/partials/notification") %>
+        <%- include(dir + "/views/partials/notification") %>
+    </div>
+    <%- include (dir+'/public/scripts/publicownedPageScript'); %>
   </body>
 </html>

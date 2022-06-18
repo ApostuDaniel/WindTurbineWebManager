@@ -122,7 +122,7 @@ async function getNotificationsPage(req, res, id) {
   try {
     res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + "/../views/pages/owned.ejs",
+      __dirname + "/../views/pages/notifications.ejs",
       "utf8"
     );
 
@@ -130,7 +130,7 @@ async function getNotificationsPage(req, res, id) {
     const alts = await getAlerts(id);
 
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: "owned.ejs",
+      filename: "notifications.ejs",
       notifications: nots,
       alerts: alts
     });
