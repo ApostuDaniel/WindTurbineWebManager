@@ -125,10 +125,12 @@ async function getTurbineDetailsPage(req, res, id) {
       "utf8"
     );
 
+    console.log(id);
     const turbineData = await getTurbine(id);
     const userData = await getUser(turbineData.userId);
     const turbineNewData = await getTurbineNewData(id);
     
+    console.log(turbineData);
     var htmlRenderized = ejs.render(htmlContent, {
       filename: "turbineDetails.ejs",
       turbine: turbineData,
@@ -158,6 +160,24 @@ async function getUnauthorizedPage(req, res) {
   }
 }
 
+async function getResetPassPage(req, res) {
+  try {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    var htmlContent = fs.readFileSync(
+      __dirname + "/../views/pages/resetPassword.ejs",
+      "utf8"
+    );
+
+    var htmlRenderized = ejs.render(htmlContent, {
+      filename: "resetPassword.ejs",
+    });
+
+    res.end(htmlRenderized);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 async function getTurbines() {
   const data = await fetch("http://localhost:5000/api/turbines/public");
   const turbineData = await data.json();
@@ -168,12 +188,12 @@ async function getTurbines() {
 async function getOwnedTurbines(id) {
   const data = await fetch("http://localhost:5000/api/turbines/private/" + id);
   const ownedTurbineData = await data.json();
-
+  
   return ownedTurbineData;
 }
 
 async function getTurbine(id) {
-  const data = await fetch("http://localhost:5000/api/turbines/" + id);
+  const data = await fetch(`http://localhost:5000/api/turbines/${id}`);
   const turbine = await data.json();
 
   return turbine;
@@ -202,5 +222,6 @@ module.exports = {
   getRegisterPage,
   getCreateTurbinePage,
   getTurbineDetailsPage,
-  getUnauthorizedPage
+  getUnauthorizedPage,
+  getResetPassPage,
 };

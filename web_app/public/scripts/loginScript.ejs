@@ -29,7 +29,7 @@
       date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
       expires = "; expires=" + date.toUTCString();
     }
-    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    document.cookie = name + "=" + (value || "") + expires + "; path=/"; // no expires for session cookie expires=0
   }
 
   // function for getting the user data to theck the login
@@ -42,8 +42,8 @@
       console.log(data.message);
       if (response.status == 200) {
         console.log("Login successful");
-        setCookie("user_id", data._id, 1 / 48);
-        window.location.href = `http://localhost:5001/pages/owned/` + data._id;
+        setCookie("user_id", data._id, 0);
+        window.location.href = `http://localhost:5001/pages/owned`;
       } else {
         const printError = document.getElementById("errormessage");
         printError.innerHTML = `${data.message}`;
