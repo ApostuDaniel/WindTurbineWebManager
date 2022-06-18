@@ -1,14 +1,18 @@
 <html>
   <head>
     <title>Create Turbine</title>
-    <% var dir = process.cwd() %>
+    <link rel="icon" href=https://webprojectrdv.s3.amazonaws.com/favicon.png> <%
+    var dir = process.cwd() %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="UTF-8" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@100&display=swap" rel="stylesheet">
-    <%- include(dir+'/public/css/createTurbinePage'); %>
-    <%- include(dir+'/public/scripts/renderMap'); %>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:wght@100&display=swap"
+      rel="stylesheet"
+    />
+    <%- include(dir+'/public/css/createTurbinePage'); %> <%-
+    include(dir+'/public/scripts/renderMap'); %>
   </head>
   <body>
     <div class="wrapper">
@@ -20,32 +24,48 @@
           <div class="attribute">Longitude: <span id="lng"></span></div>
           <div class="attribute">Weather: <span id="wd"></span></div>
           <div class="attribute">Wind speed: <span id="wind"></span> mph</div>
-          <div class="attribute">Temperature: <span id="temperature"></span> °C</div>
-          <div class="attribute">Humidity: <span id="humidity"></span> g/m<sup>3</sup></div>
+          <div class="attribute">
+            Temperature: <span id="temperature"></span> °C
+          </div>
+          <div class="attribute">
+            Humidity: <span id="humidity"></span> g/m<sup>3</sup>
+          </div>
           <div class="attribute">Altitude: <span id="altitude"></span> m</div>
           <div class="attribute">Soil type: <span id="soil-type"></span></div>
-          <div class="attribute">Suitability: <span id="suitability"></span></div>
+          <div class="attribute">
+            Suitability: <span id="suitability"></span>
+          </div>
         </div>
-          <form id="form">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Turbine name">
-          
-            <label for="cons-date">Construction date</label>
-            <input type="date" id="cons-date" name="cons-date" placeholder="Turbine Construction date">
+        <form id="form">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Turbine name" />
 
-            <label for="image">Image Link</label>
-            <input type="text" id="image" name="image" placeholder="Turbine image link">
+          <label for="cons-date">Construction date</label>
+          <input
+            type="date"
+            id="cons-date"
+            name="cons-date"
+            placeholder="Turbine Construction date"
+          />
 
-            <input type="submit" value="Create">
-          </form>
-          <div id="err"></div>
+          <label for="image">Image Link</label>
+          <input
+            type="text"
+            id="image"
+            name="image"
+            placeholder="Turbine image link"
+          />
+
+          <input type="submit" value="Create" />
+        </form>
+        <div id="err"></div>
       </div>
     </div>
 
     <%- include(dir+'/public/scripts/createTurbineScript'); %>
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0m_3MppCVS4i2BKqDXvqN_Cev4apSnEw&callback=initMap&v=weekly"
-        defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0m_3MppCVS4i2BKqDXvqN_Cev4apSnEw&callback=initMap&v=weekly"
+      defer
     ></script>
 
     <%- include (dir+'/public/scripts/protectedRouteScript'); %>
