@@ -1,11 +1,16 @@
 const mongoose = require('mongoose')
+const url = require('url')
 const Turbine = require('./../schemas/Turbine')
 const AllTurbineData = require('./../schemas/AllTurbineData')
 const User = require('./../schemas/User')
 const Alert = require('./../schemas/Alert')
 const Notification = require('./../schemas/Notification')
 
-const { getRequestData, validateJSON } = require('../utils')
+const {
+  getRequestData,
+  validateJSON,
+  createMongooseSearchObject,
+} = require('../utils')
 
 //GET
 
@@ -153,6 +158,40 @@ async function getNewestTurbineData(req, res, id) {
       res.end(
         JSON.stringify({ message: `No Turbine Data for turbine id ${id}` })
       )
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// @desc    Gets filtered
+// @route   GET /api/turbines/data/:id/new
+async function filterTurbines(req, res, id) {
+  try {
+    const queryObject = url.parse(req.url, true).query
+    if (!queryObject) {
+      if (!id) {
+        await getPublicTurbines(req, res)
+      } else {
+        await getPrivateTurbines(req, res, id)
+      }
+    } else {
+      try {
+        const searchObject = createMongooseSearchObject(queryObject)
+        if (id) {
+          searchObject['userId'] = id
+        } else {
+          searchObject['isPublic'] = true
+        }
+        console.log(searchObject)
+        const turbines = await Turbine.find(searchObject)
+        res.writeHead(200, { 'Content-Type': 'application/json' })
+        res.end(JSON.stringify(turbines))
+      } catch (err) {
+        console.log(err)
+        res.writeHead(404, { 'Content-Type': 'application/json' })
+        res.end(JSON.stringify(err.message))
+      }
     }
   } catch (error) {
     console.log(error)
@@ -363,4 +402,5 @@ module.exports = {
   updateTurbine,
   helperDeleteTurbineRelatedData,
   deleteTurbine,
+  filterTurbines,
 }

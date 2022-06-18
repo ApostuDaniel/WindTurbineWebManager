@@ -1,206 +1,99 @@
 <style>
-html
-{
+  html {
     height: 100%;
     user-select: none;
-}
-
-body
-{
-    margin: 0;
-    background-color: #ECFCFF;
-}
-
-ul.shBar
-{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    list-style-type: none;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    margin-top: 2%;
-    background-color: #ECFCFF;
-}
-
-ul.shBar li
-{
-    color: #01A1BA;
     font-family: 'Exo 2', sans-serif;
     font-weight: bold;
-    font-size: 20px;
-    padding: 5px;
-    padding-left: 20px;
-}
+  }
 
-ul.shBar li img
-{
-    width: 15px;
-    margin-left: 5px;
-}
-
-ul.shBar li:nth-child(3) img
-{
-    width: 30px;
-}
-
-ul.shBar li:nth-child(3)
-{
-    margin-left: 100px;
-}
-
-ul.shBar li div , ul.shBar li div
-{
-    cursor: pointer;
-}
-
-ul.shBar li div .statsPopUp, ul.shBar li div .mapPopUp
-{
-    visibility: hidden;
-    width: 50%;
-    height: 400px;
-    background-color: #B7E4ED;
-    position: absolute;
-    z-index: 1;
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-@media screen and (max-width: 1000px) 
-{
-    ul.shBar li div .statsPopUp, ul.shBar li div .mapPopUp
-    {
-        width: 40%;
-        height: 200px;
-    }
-}
-
-
-
-ul.shBar li div .statsPopUp img, ul.shBar li div .mapPopUp img
-{
-    width: 70%;
-    height: 90%;
+  body {
     margin: 0;
-    display: block;
-    margin: auto;
-}
+    background-color: #ecfcff;
+  }
 
-.hLine
-{
-    background-color: #b7e4ed;
-    height: 2px;
-}
-
-
-
-
-
-ul.cardList
-{
+  .cardList {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    align-items: center;
     flex-wrap: wrap;
-    align-items: center;
-    background-color: #ECFCFF;
-    margin: 0;
-    padding: 0;
-}
+    width: 100%;
+    margin-top: 40px;
+  }
 
-ul.cardList li
-{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #b7e4ed;
-    width: 40vw;
-    height: 30vw;
-    margin-top: 3%;
-}
-
-
-
-
-ul.cardInfo
-{
-    background-color: inherit;
+  .card {
+    width: 600px;
+    height: auto;
+    background: linear-gradient(
+      to left top,
+      rgba(1, 161, 186, 0.8),
+      rgba(186, 124, 237, 0.8)
+    );
+    margin-bottom: 100px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+  }
+
+  .header {
+    height: 10%;
+    width: 100%;
+    display: flex;
     align-items: center;
-    width: 40%;
-    height: 100%;
-    border-radius: 5px;
-    border-bottom-left-radius: 30px;
-}
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(186, 124, 237, 0.8);
+  }
 
-ul.cardInfo li
-{
-    font-family: 'Exo 2', sans-serif;
-    font-weight: semibold;
-    font-size: 15px;
-    width: auto;
-    color: #01A1BA;
-    box-shadow: none;
-}
-
-ul.cardInfo li.dButton
-{
-    font-family: 'Exo 2', sans-serif;
-    font-weight: semibold;
-    font-size: 15px;
-    background-color: #01A1BA;
-    padding: 5px;
-    height: auto;
-    width: auto;
-    color: #b7e4ed;
-    border-radius: 0;
-}
-
-
-ul.cardInfo li.dButton:hover
-{
-    font-family: 'Exo 2', sans-serif;
-    font-weight: semibold;
-    cursor: pointer;
-    font-size: 15px;
-    background-color: #b7e4ed;
-    padding: 5px;
-    height: auto;
-    width: auto;
-    color: #01A1BA;
-    border: 1px solid #01A1BA;
-}
-
-ul.imgs
-{
-    width: 60%;
+  .panel {
     height: 90%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .attributes {
+    height: 100%;
+    width: 50%;
+    border-right: 2px solid rgba(186, 124, 237, 0.8);
+    flex-direction: column;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .attribute {
+    margin: 15px;
+    padding-left: 15px;
+    font-weight: bold;
+    border-left: 1vw solid rgba(186, 124, 237, 0.5);
+  }
+
+  .imgs {
+    height: 100%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background-color: inherit;
-}
+  }
 
-ul.imgs li
-{
-    width: 80%;
-    height: 60%;
-    box-shadow: none;
-}
+  .imgs img {
+    width: 60%;
+    height: 45%;
+  }
 
-ul.imgs li img
-{
-    width: 100%;
-    height: 100%;
-}
+  .dButton {
+    margin: 15px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    outline: none;
+    border: none;
+    background-color: rgba(1, 161, 186, 0.8);
+    transition: ease-in-out 300ms;
+  }
 
+  .dButton:hover {
+    background-color: rgba(186, 124, 237, 0.8);
+  }
 </style>

@@ -1,4 +1,15 @@
 <script>
+  function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == " ") c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  }
+
   async function postTurbine(turbine) {
     const turbine_post_new_data_api_url = `http://localhost:5000/api/turbines`;
     const response = await fetch(turbine_post_new_data_api_url, {
@@ -60,10 +71,12 @@
         }
       }
 
+      var uid = getCookie('user_id');
+
       if (canPost) {
         const creatationDate = new Date(formFields[1].value);
         const turbine = {
-          userId: "62a711fc87d04cb2e5473c4c", // hardcoded
+          userId: uid,
           name: formFields[0].value,
           constructionYear: creatationDate.valueOf(),
           imageLink: formFields[2].value,
@@ -76,6 +89,7 @@
           turbineState: "Running",
         };
 
+        console.log(turbine);
         postTurbine(turbine);
 
         window.location.href = "/pages/public";

@@ -121,7 +121,7 @@ async function updateTurbine(turbine) {
     const response = await fetch(weather_api_url);
     const json = await response.json();
 
-    const currentWindSpeed = json.current.wind_mph;
+    const currentWindSpeed = json.current.wind_kph * 5 / 18;
     const currentTemperature = json.current.temp_c;
     const currentHummidity = json.current.humidity;
 
