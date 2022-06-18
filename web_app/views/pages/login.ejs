@@ -18,11 +18,11 @@
       <input id="log" type="submit" value="Log in" />
       <p id="errormessage"></p>
       <div class="buttons">
-        <button class="bottomButtons">Forgot Password</button>
-        <button class="bottomButtons" onclick="location.href='/pages/register'">Register</button>
+        <button class="bottomButtons" type="button">Forgot Password</button>
+        <button class="bottomButtons" type="button" onclick="location.href='/pages/register'">Register</button>
       </div>
     </form>
-
+   
     <%- include (dir+'/public/scripts/loginScript'); %> <%- include
     (dir+'/public/scripts/protectedRouteLoginScript'); %>
   </body>

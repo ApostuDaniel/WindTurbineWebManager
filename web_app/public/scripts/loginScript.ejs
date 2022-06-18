@@ -42,8 +42,8 @@
       console.log(data.message);
       if (response.status == 200) {
         console.log("Login successful");
-        setCookie("user_id", data._id, 1 / 48);
-        window.location.href = `http://localhost:5001/pages/owned/` + data._id;
+        setCookie("user_id", data._id, 0);
+        window.location.href = `http://localhost:5001/pages/owned`;
       } else {
         const printError = document.getElementById("errormessage");
         printError.innerHTML = `${data.message}`;
