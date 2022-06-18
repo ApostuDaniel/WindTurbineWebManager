@@ -20,6 +20,8 @@ const server = http.createServer((req, res) => {
       PageController.getLoginPage(req, res);
     } else if (req.url === "/pages/register") {
       PageController.getRegisterPage(req, res);
+    } else if (req.url === "/unauthorized") {
+      PageController.getUnauthorizedPage(req, res);
     } else if (req.url.match(/\/pages\/turbineDetails\/\w+$/)) {
       const id = req.url.split("/")[3];
       PageController.getTurbineDetailsPage(req, res, id);

@@ -1,6 +1,5 @@
 <style>
-ul.navBar
-{
+  ul.navBar {
     position: sticky;
     list-style-type: none;
     top: 10px;
@@ -12,26 +11,28 @@ ul.navBar
     margin: auto;
     padding: 5px;
     width: 98%;
-    background: linear-gradient(to left top, rgba(1, 161, 186, 0.8), rgba(186, 124, 237, 0.8));
+    background: linear-gradient(
+      to left top,
+      rgba(1, 161, 186, 0.8),
+      rgba(186, 124, 237, 0.8)
+    );
     box-shadow: 0px 0px 10px -5px black;
     z-index: 3;
     border-radius: 10px;
-}
+  }
 
-ul.navBar li 
-{
-    font-family: 'Exo 2', sans-serif;
+  ul.navBar li {
+    font-family: "Exo 2", sans-serif;
     font-weight: 700;
     font-size: 20px;
-    color: #ECFCFF;
+    color: #ecfcff;
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
     transition: ease-in-out 200ms;
-}
+  }
 
-.clickable:hover
-{
+  .clickable:hover {
     background-color: white;
     color: rgba(186, 124, 237, 0.8);
     border-radius: 50px;
@@ -39,10 +40,9 @@ ul.navBar li
     cursor: pointer;
     padding-left: 15px;
     padding-right: 15px;
-}
+  }
 
-ul.navBar li div .notificationPopUp
-{
+  ul.navBar li div .notificationPopUp {
     list-style-type: none;
     display: flex;
     flex-direction: column;
@@ -51,15 +51,14 @@ ul.navBar li div .notificationPopUp
     visibility: hidden;
     width: 120px;
     height: auto;
-    background-color: #01A1BA;
+    background-color: #01a1ba;
     position: absolute;
     z-index: 1;
     top: 50px;
     margin-left: -130px;
-}
+  }
 
-ul.navBar li div .menuPopUp
-{
+  ul.navBar li div .menuPopUp {
     list-style-type: none;
     display: flex;
     flex-direction: column;
@@ -68,62 +67,52 @@ ul.navBar li div .menuPopUp
     visibility: hidden;
     width: 120px;
     height: auto;
-    background-color: #01A1BA;
+    background-color: #01a1ba;
     position: absolute;
     z-index: 1;
     top: 50px;
     margin-left: -130px;
-}
+  }
 
-
-ul.navBar li div .notificationPopUp li, ul.navBar li div .menuPopUp li
-{
-    font-family: 'Exo 2', sans-serif;
+  ul.navBar li div .notificationPopUp li,
+  ul.navBar li div .menuPopUp li {
+    font-family: "Exo 2", sans-serif;
     font-weight: bolder;
     font-size: 15px;
-    color: #ECFCFF;
-}
+    color: #ecfcff;
+  }
 
-
-ul.navBar li div .show 
-{
+  ul.navBar li div .show {
     visibility: visible;
-}
+  }
 
-#title1
-{
-    font-family: 'Exo 2', sans-serif;
+  #title1 {
+    font-family: "Exo 2", sans-serif;
     font-weight: bold;
     font-size: 30px;
-    color: #ECFCFF;
+    color: #ecfcff;
     margin-right: auto;
-}
+  }
 
-#title2
-{
-    font-family: 'Exo 2', sans-serif;
+  #title2 {
+    font-family: "Exo 2", sans-serif;
     font-weight: bold;
     font-size: 20px;
-    color: #05595B;
-}
+    color: #05595b;
+  }
 
-@media screen and (max-width: 500px) 
-{
-    ul.navBar
-    {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
+  @media screen and (max-width: 500px) {
+    ul.navBar {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
     }
 
-    ul.navBar li:nth-child(2), ul.navBar li:nth-child(3)
-    {
-        order: 1;
+    ul.navBar li:nth-child(2),
+    ul.navBar li:nth-child(3) {
+      order: 1;
     }
-}
-
+  }
 </style>
-
-

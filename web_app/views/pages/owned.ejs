@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="ro">
-    <% var dir = process.cwd() %> 
+  <% var dir = process.cwd() %> <link rel="icon"
+  href=https://webprojectrdv.s3.amazonaws.com/favicon.png>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%- include(dir+'/public/css/ownedPageStyle'); %>
-    <%- include(dir+'/public/css/navBarStyle'); %>
-    <%- include(dir+'/public/css/filtersStyle'); %>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@100&display=swap" rel="stylesheet">
+    <%- include(dir+'/public/css/ownedPageStyle'); %> <%-
+    include(dir+'/public/css/navBarStyle'); %> <%-
+    include(dir+'/public/css/filtersStyle'); %>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:wght@100&display=swap"
+      rel="stylesheet"
+    />
     <title>Owned turbines</title>
   </head>
   <body>
-    <%- include(dir + "/views/partials/navBar") %>  
-    <%- include(dir + "/views/partials/filters") %>
-    
+    <%- include(dir + "/views/partials/navBar") %> <%- include(dir +
+    "/views/partials/filters") %>
+
     <ul class="cardList">
-      <% for(turbine of turbines) {%> <%-
-          include(dir + "/views/partials/ownedTurbine", {turbine:turbine}) %> <% }
-      %>
-    </ul> 
+      <% for(turbine of turbines) {%> <%- include(dir +
+      "/views/partials/ownedTurbine", {turbine:turbine}) %> <% } %>
+    </ul>
+    <%- include (dir+'/public/scripts/protectedRouteScript'); %>
   </body>
 </html>

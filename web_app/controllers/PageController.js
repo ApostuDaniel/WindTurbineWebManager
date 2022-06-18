@@ -126,10 +126,31 @@ async function getTurbineDetailsPage(req, res, id) {
     );
 
     const turbineData = await getTurbine(id);
-
+    const userData = await getUser(turbineData.userId);
+    const turbineNewData = await getTurbineNewData(id);
+    
     var htmlRenderized = ejs.render(htmlContent, {
       filename: "turbineDetails.ejs",
-      turbine: turbineData
+      turbine: turbineData,
+      user: userData,
+      turbineData: turbineNewData
+    });
+    res.end(htmlRenderized);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+async function getUnauthorizedPage(req, res) {
+  try {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    var htmlContent = fs.readFileSync(
+      __dirname + "/../views/pages/unauthorized.ejs",
+      "utf8"
+    );
+
+    var htmlRenderized = ejs.render(htmlContent, {
+      filename: "unauthorized.ejs",
     });
     res.end(htmlRenderized);
   } catch (error) {
@@ -158,6 +179,20 @@ async function getTurbine(id) {
   return turbine;
 }
 
+async function getUser(id) {
+  const data = await fetch("http://localhost:5000/api/users/" + id);
+  const user = await data.json();
+
+  return user;
+}
+
+async function getTurbineNewData(id) {
+  const data = await fetch(`http://localhost:5000/api/turbines/data/${id}/new`);
+  const turbineData = await data.json();
+
+  return turbineData;
+}
+
 module.exports = {
   getPublicPage,
   getPrivatePage,
@@ -166,5 +201,6 @@ module.exports = {
   getOwnedTurbines,
   getRegisterPage,
   getCreateTurbinePage,
-  getTurbineDetailsPage
+  getTurbineDetailsPage,
+  getUnauthorizedPage
 };

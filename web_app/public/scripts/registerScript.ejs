@@ -3,9 +3,8 @@
     constructor(registerForm, fields) {
       this.registerForm = registerForm;
       this.fields = fields;
-      
+
       this.validateOnSubmit();
-    
     }
 
     validateOnSubmit() {
@@ -44,7 +43,7 @@
           const displayError = document.getElementById("errormessage");
           displayError.innerHTML = "The fields must be completed";
         } else {
-          var validationMessage ="";
+          var validationMessage = "";
 
           //validation for name
           // Username consists of alphanumeric characters (a-zA-Z0-9), lowercase, or uppercase.
@@ -73,34 +72,19 @@
           if (!adresa.match(/^[a-zA-Z0-9_/-/./=/_]+$/)) {
             validationMessage = "Address should be correct";
           }
-          if (!pass.match(/^[a-zA-Z0-9_/-/./=/_]{8}/))
-          {
-            validationMessage="Password must be 8 characters long";
+          if (!pass.match(/^[a-zA-Z0-9_/-/./=/_]{8}/)) {
+            validationMessage = "Password must be 8 characters long";
           }
           const displayError = document.getElementById("errormessage");
           displayError.innerHTML = validationMessage;
           // check if all the tests passed
-          
-          if (validationMessage=="")
-          {
+
+          if (validationMessage == "") {
             postTheData(nume, prenume, firma, cnp, mail, phone, adresa, pass);
           }
         }
-       
-       
       });
     }
-  }
-
-  function getCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(";");
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == " ") c = c.substring(1, c.length);
-      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-    }
-    return null;
   }
 
   async function postTheData(
@@ -129,31 +113,24 @@
         "Content-type": "application/json;",
       },
     });
-    
+
     const data = await response.json();
     console.log(response);
-    if (response.status==201)
-    {
-      console.log("Register successful")
-        window.location.href=`http://localhost:5001/pages/login/`
-    }
-    else
-    {
+    if (response.status == 201) {
+      console.log("Register successful");
+      window.location.href = `http://localhost:5001/pages/login/`;
+    } else {
       console.log("User with this data already exists");
-      
 
       const displayError = document.getElementById("errormessage");
-          displayError.innerHTML = "A field is duplicate";
+      displayError.innerHTML = "A field is duplicate";
     }
-    
   }
 
   const registerForm = document.querySelector(".signup");
-  var cookie_value = getCookie("user_id");
-  console.log(cookie_value);
+ 
   console.log("aici");
   if (registerForm) {
-   
     const fields = [
       "nume",
       "prenume",
