@@ -1,20 +1,26 @@
-<li>
-  <ul class="cardInfo">
-    <li>Name:<%= turbine.name %></li>
-    <li>Year: <%= turbine.constructionYear %></li>
-    <li>Suitability: <%= turbine.suitability %></li>
-    <li class="dButton" onclick='location.href="/pages/turbineDetails/<%= turbine._id %>"'>
-      Detalii
-    </li>
-  </ul>
-  <ul class="imgs">
-    <li>
+<div class="card">
+  <div class="cardInfo">
+    <div class="panel">
+      <div><%= turbine.name %></div>
+      <div>Construction date: <%= turbine.constructionYear %></div>
+      <div>Suitability: <%= turbine.suitability %></div>
+      <button
+        class="dButton"
+        onclick='location.href="/pages/turbineDetails/<%= turbine._id %>"'
+      >
+        Details
+      </button>
+    </div>
+  </div>
+
+  <div class="imgs">
+    <div>
       <img src=https://webprojectrdv.s3.amazonaws.com/images/mockImage.jpg
       alt="Image placeholder" />
-    </li>
-    <li>
+    </div>
+    <div>
       <img src=https://webprojectrdv.s3.amazonaws.com/images/mockGraph.jpg
       alt="Graph placeholder" />
-    </li>
-  </ul>
-</li>
+    </div>
+  </div>
+</div>
