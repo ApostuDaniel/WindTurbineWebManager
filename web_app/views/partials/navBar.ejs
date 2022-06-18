@@ -1,28 +1,29 @@
 <ul class="navBar">
-    <li id="title1">
-      Wind
-      <span id="title2">Turbine Management</span>
-    </li>
-    <li class="clickable" onclick="location.href='/pages/owned'">Owned</li>
-    <li class="clickable" onclick="location.href='/pages/public'">Public</li>
-    <li>
-      <div onclick="showMapOnClick('notification')">
-        <img src=https://webprojectrdv.s3.amazonaws.com/images/bell.png alt="bell">
-        <ul class="notificationPopUp" id="notification">
-          <li>Firm x wantes to purchase your y turbine</li>
-          <li>Firm x accepted your offer for turbine y</li>
-          <li>Turbine x need maintenance</li>
-        </ul>
+  <li id="title1">
+    Wind
+    <span id="title2">Turbine Management</span>
+  </li>
+  <li class="clickable" onclick="location.href='/pages/owned'">Owned</li>
+  <li class="clickable" onclick="location.href='/pages/public'">Public</li>
+  <li>
+    <div onclick="showMapOnClick('notification')">
+      <img src=https://webprojectrdv.s3.amazonaws.com/images/bell.png
+      alt="bell">
+      <div class="notificationPopUp" id="notification">
+        <div>Firm x wantes to purchase your y turbine</div>
+        <div>Firm x accepted your offer for turbine y</div>
+        <div>Turbine x need maintenance</div>
       </div>
-    </li>
-    <li>
-      <div onclick="showMapOnClick('menu')">
-      
-        <img src=https://webprojectrdv.s3.amazonaws.com/images/menu.png alt="3 line menu" />
-        <ul class="menuPopUp" id="menu">
-          <li>Account</li>
-          <li onclick="logoutFunction()">Log out</li>
-        </ul>
+    </div>
+  </li>
+  <li>
+    <div onclick="showMapOnClick('menu')">
+      <img src=https://webprojectrdv.s3.amazonaws.com/images/menu.png alt="3
+      line menu" />
+      <div class="menuPopUp" id="menu">
+        <div>Account</div>
+        <div onclick="logoutFunction()">Log out</div>
       </div>
-    </li>
+    </div>
+  </li>
 </ul>
