@@ -1,43 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <% var dir = process.cwd() %>
-  <!-- <%- include(dir+'/public/css/authStyle'); %> -->
+  <% var dir = process.cwd() %> <%- include(dir+'/public/css/registerStyle'); %>
 
   <head>
-    <title>Slide Navbar</title>
+    <title>Register</title>
   </head>
   <body>
-    <div class="main">
-      <input type="checkbox" id="chk" aria-hidden="true" />
+    <form class="signup">
+      <label for="chk" aria-hidden="true">Sign up</label>
+      <input type="text" id="nume" name="nume" placeholder="Nume" />
+      <input type="text" id="prenume" name="prenume" placeholder="Prenume" />
+      <input type="text" id="firma" name="Firma" placeholder="Firma" />
+      <input type="text" id="cnp" name="CNP" placeholder="CNP" />
+      <input type="mail" id="registermail" name="mail" placeholder="Mail" />
+      <input type="number" id="phone" name="phone" placeholder="Phone number" />
+      <input type="text" id="adresa" name="adresa" placeholder="Address" />
+      <input
+        type="password"
+        id="registerpass"
+        name="pswd"
+        placeholder="Password"
+      />
+      <input id="sign" type="submit" value="Sign Up" />
+      <p id="errormessage"></p>
+    </form>
 
-      <form class="signup">
-        <div>
-          <label for="chk" aria-hidden="true">Sign up</label>
-          <input type="text" id="nume" name="nume" placeholder="Nume" />
-          <input
-            type="text"
-            id="prenume"
-            name="prenume"
-            placeholder="Prenume"
-          />
-          <input type="text" id="firma" name="Firma" placeholder="Firma" />
-          <input type="text" id="cnp" name="CNP" placeholder="CNP" />
-          <input type="mail" id="registermail" name="mail" placeholder="mail" />
-          <input type="number" id="phone" name="phone" placeholder="phone" />
-          <input type="text" id="adresa" name="adresa" placeholder="adresa" />
-          <input
-            type="password"
-            id="registerpass"
-            name="pswd"
-            placeholder="Password"
-          />
-          <button id="sign">Sign up</button>
-          <p id="errormessage"></p>
-        </div>
-      </form>
-
-     
-    </div>
     <%- include (dir+'/public/scripts/registerScript'); %>
   </body>
 </html>

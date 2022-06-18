@@ -3,9 +3,8 @@
     constructor(registerForm, fields) {
       this.registerForm = registerForm;
       this.fields = fields;
-      
+
       this.validateOnSubmit();
-    
     }
 
     validateOnSubmit() {
@@ -44,7 +43,7 @@
           const displayError = document.getElementById("errormessage");
           displayError.innerHTML = "The fields must be completed";
         } else {
-          var validationMessage ="";
+          var validationMessage = "";
 
           //validation for name
           // Username consists of alphanumeric characters (a-zA-Z0-9), lowercase, or uppercase.
@@ -73,26 +72,20 @@
           if (!adresa.match(/^[a-zA-Z0-9_/-/./=/_]+$/)) {
             validationMessage = "Address should be correct";
           }
-          if (!pass.match(/^[a-zA-Z0-9_/-/./=/_]{8}/))
-          {
-            validationMessage="Password must be 8 characters long";
+          if (!pass.match(/^[a-zA-Z0-9_/-/./=/_]{8}/)) {
+            validationMessage = "Password must be 8 characters long";
           }
           const displayError = document.getElementById("errormessage");
           displayError.innerHTML = validationMessage;
           // check if all the tests passed
-          
-          if (validationMessage=="")
-          {
+
+          if (validationMessage == "") {
             postTheData(nume, prenume, firma, cnp, mail, phone, adresa, pass);
           }
         }
-       
-       
       });
     }
   }
-
- 
 
   async function postTheData(
     nume,
@@ -120,23 +113,18 @@
         "Content-type": "application/json;",
       },
     });
-    
+
     const data = await response.json();
     console.log(response);
-    if (response.status==201)
-    {
-      console.log("Register successful")
-        window.location.href=`http://localhost:5001/pages/login/`
-    }
-    else
-    {
+    if (response.status == 201) {
+      console.log("Register successful");
+      window.location.href = `http://localhost:5001/pages/login/`;
+    } else {
       console.log("User with this data already exists");
-      
 
       const displayError = document.getElementById("errormessage");
-          displayError.innerHTML = "A field is duplicate";
+      displayError.innerHTML = "A field is duplicate";
     }
-    
   }
 
   const registerForm = document.querySelector(".signup");
@@ -144,7 +132,6 @@
   console.log(cookie_value);
   console.log("aici");
   if (registerForm) {
-   
     const fields = [
       "nume",
       "prenume",

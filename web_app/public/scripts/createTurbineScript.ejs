@@ -1,88 +1,88 @@
 <script>
-    async function postTurbine(turbine) {
-        const turbine_post_new_data_api_url = `http://localhost:5000/api/turbines`;
-        const response = await fetch(turbine_post_new_data_api_url, {
-            method: "POST",
-            mode: "cors",
-            body: JSON.stringify(turbine),
-            headers: { "Content-Type": "application/json" }
-        });
+  async function postTurbine(turbine) {
+    const turbine_post_new_data_api_url = `http://localhost:5000/api/turbines`;
+    const response = await fetch(turbine_post_new_data_api_url, {
+      method: "POST",
+      mode: "cors",
+      body: JSON.stringify(turbine),
+      headers: { "Content-Type": "application/json" },
+    });
 
-        console.log(response);
+    console.log(response);
+  }
+
+  function getCreateTurbineData() {
+    const form = document.querySelector("form");
+    let err = document.getElementById("err");
+    let fields = [
+      document.getElementById("lat"),
+      document.getElementById("lng"),
+      document.getElementById("altitude"),
+      document.getElementById("soil-type"),
+      document.getElementById("suitability"),
+    ];
+
+    let formFields = [
+      document.getElementById("name"),
+      document.getElementById("cons-date"),
+      document.getElementById("image"),
+    ];
+
+    for (field of fields) {
+      field.innerText = "";
     }
 
-    function getCreateTurbineData() {
-        const form = document.querySelector('form');
-        let err = document.getElementById('err');
-        let fields = [
-            document.getElementById("lat"),
-            document.getElementById("lng"),
-            document.getElementById("altitude"),
-            document.getElementById("soil-type"),
-            document.getElementById("suitability")
-        ];
-
-        let formFields = [
-            document.getElementById("name"),
-            document.getElementById("cons-date"),
-            document.getElementById("image")
-        ];
-
-        for(field of fields) {
-            field.innerText = '';
-        }
-
-        for(field of formFields) {
-            field.value = '';
-        }
-
-        document.addEventListener('click', e => {
-            err.innerHTML = '';
-        })
-
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            let canPost = true;
-            
-            for(field of fields) {
-                const text = field.innerText;
-                if(text.length === 0) {
-                    err.innerHTML = '*Fields can\'t be empty';
-                    canPost = false;
-                }
-            }
-
-            for(field of formFields) {
-                const value = field.value;
-                if(value.length === 0) {
-                    err.innerHTML = '*Fields can\'t be empty';
-                    canPost = false;
-                }
-            }
-
-            if(canPost) {
-                const creatationDate = new Date(formFields[1].value);
-                const turbine = {
-                    "userId": "62a711fc87d04cb2e5473c4c", // hardcoded
-                    "name": formFields[0].value,
-                    "constructionYear": creatationDate.valueOf(),
-                    "imageLink": formFields[2].value,
-                    "latitude": fields[0].innerText,
-                    "longitude": fields[1].innerText,
-                    "altitude": fields[2].innerText,
-                    "terrain": fields[3].innerText,
-                    "suitability": fields[4].innerText,
-                    "isPublic": true,
-                    "turbineState": "Running"
-                };
-
-                postTurbine(turbine);
-
-                window.location.href = '/pages/public';
-                console.log(turbine);
-            }
-        })
+    for (field of formFields) {
+      field.value = "";
     }
 
-    getCreateTurbineData();
+    document.addEventListener("click", (e) => {
+      err.innerHTML = "";
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      let canPost = true;
+
+      for (field of fields) {
+        const text = field.innerText;
+        if (text.length === 0) {
+          err.innerHTML = "*Fields can't be empty";
+          canPost = false;
+        }
+      }
+
+      for (field of formFields) {
+        const value = field.value;
+        if (value.length === 0) {
+          err.innerHTML = "*Fields can't be empty";
+          canPost = false;
+        }
+      }
+
+      if (canPost) {
+        const creatationDate = new Date(formFields[1].value);
+        const turbine = {
+          userId: "62a711fc87d04cb2e5473c4c", // hardcoded
+          name: formFields[0].value,
+          constructionYear: creatationDate.valueOf(),
+          imageLink: formFields[2].value,
+          latitude: fields[0].innerText,
+          longitude: fields[1].innerText,
+          altitude: fields[2].innerText,
+          terrain: fields[3].innerText,
+          suitability: fields[4].innerText,
+          isPublic: true,
+          turbineState: "Running",
+        };
+
+        postTurbine(turbine);
+
+        window.location.href = "/pages/public";
+        console.log(turbine);
+      }
+    });
+  }
+
+  getCreateTurbineData();
 </script>
