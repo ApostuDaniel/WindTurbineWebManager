@@ -2,6 +2,8 @@
   html {
     height: 100%;
     user-select: none;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: bold;
   }
 
   body {
@@ -19,14 +21,79 @@
   }
 
   .card {
-    width: 30%;
-    border: 1px solid black;
+    width: 600px;
+    height: auto;
+    background: linear-gradient(
+      to left top,
+      rgba(1, 161, 186, 0.8),
+      rgba(186, 124, 237, 0.8)
+    );
+    margin-bottom: 100px;
     display: flex;
     flex-direction: column;
-    
   }
 
   .header {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(186, 124, 237, 0.8);
+  }
 
+  .panel {
+    height: 90%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .attributes {
+    height: 100%;
+    width: 50%;
+    border-right: 2px solid rgba(186, 124, 237, 0.8);
+    flex-direction: column;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .attribute {
+    margin: 15px;
+    padding-left: 15px;
+    font-weight: bold;
+    border-left: 1vw solid rgba(186, 124, 237, 0.5);
+  }
+
+  .imgs {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .imgs img {
+    width: 60%;
+    height: 45%;
+  }
+
+  .dButton {
+    margin: 15px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    outline: none;
+    border: none;
+    background-color: rgba(1, 161, 186, 0.8);
+    transition: ease-in-out 300ms;
+  }
+
+  .dButton:hover {
+    background-color: rgba(186, 124, 237, 0.8);
   }
 </style>
