@@ -118,6 +118,29 @@ async function getRegisterPage(req, res) {
   }
 }
 
+async function getNotificationsPage(req, res, id) {
+  try {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    var htmlContent = fs.readFileSync(
+      __dirname + "/../views/pages/owned.ejs",
+      "utf8"
+    );
+
+    const nots = await getNotifications(id);
+    const alts = await getAlerts(id);
+
+    var htmlRenderized = ejs.render(htmlContent, {
+      filename: "owned.ejs",
+      notifications: nots,
+      alerts: alts
+    });
+
+    res.end(htmlRenderized);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 async function getCreateTurbinePage(req, res) {
   try {
     res.writeHead(200, { "Content-Type": "text/html" });
@@ -143,17 +166,15 @@ async function getTurbineDetailsPage(req, res, id) {
       "utf8"
     );
 
-    console.log(id);
     const turbineData = await getTurbine(id);
     const userData = await getUser(turbineData.userId);
     const turbineNewData = await getTurbineNewData(id);
-    
-    console.log(turbineData);
+
     var htmlRenderized = ejs.render(htmlContent, {
       filename: "turbineDetails.ejs",
       turbine: turbineData,
       user: userData,
-      turbineData: turbineNewData
+      turbineData: turbineNewData,
     });
     res.end(htmlRenderized);
   } catch (error) {
@@ -206,7 +227,7 @@ async function getTurbines() {
 async function getOwnedTurbines(id) {
   const data = await fetch("http://localhost:5000/api/turbines/private/" + id);
   const ownedTurbineData = await data.json();
-  
+
   return ownedTurbineData;
 }
 
@@ -231,6 +252,20 @@ async function getTurbineNewData(id) {
   return turbineData;
 }
 
+async function getNotifications(id) {
+  const data = await fetch(`http://localhost:5000/api/users/${id}/notifications`);
+  const notifications = await data.json();
+
+  return notifications;
+}
+
+async function getAlerts(id) {
+  const data = await fetch(`http://localhost:5000/api/users/${id}/alerts`);
+  const alerts = await data.json();
+
+  return alerts;
+}
+
 module.exports = {
   getPublicPage,
   getPrivatePage,
@@ -243,4 +278,5 @@ module.exports = {
   getUnauthorizedPage,
   getResetPassPage,
   getUserDetailsPage,
+  getNotificationsPage,
 };
