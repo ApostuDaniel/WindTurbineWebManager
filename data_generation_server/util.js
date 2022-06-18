@@ -6,7 +6,7 @@ const SECTIONAL_AREA = 400;
 function getNewTurbineWear(oldTurbineWear, windSpeed, temperature, humidity) {
     let newTurbineWear = oldTurbineWear;
 
-    if(windSpeed > 25) {
+    if(windSpeed > 20) {
         newTurbineWear += 0.02;
     }
 
@@ -31,7 +31,7 @@ function getNewPowerGenerated(oldPowerGenerated, windSpeed) {
 }
 
 function getNewEfficiency(oldEfficiency, oldPowerGenerated, newPowerGenerated) {
-    return (newPowerGenerated - oldPowerGenerated > 200) ? (oldEfficiency <= 0.9 ? oldEfficiency + 0.01 : 1) : oldEfficiency - 0.001;
+    return (newPowerGenerated - oldPowerGenerated > 200) ? (oldEfficiency <= 0.9 ? oldEfficiency + 0.1 : 1) : oldEfficiency - 0.001;
 }
 
 module.exports = { getNewTurbineWear, getNewPowerGenerated, getNewEfficiency };

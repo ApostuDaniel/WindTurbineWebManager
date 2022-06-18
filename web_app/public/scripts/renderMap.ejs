@@ -70,7 +70,7 @@ api.weatherbit.io/v2.0/current -- air quality
     var suitability = 100;
     suitability -= airQuality % 10 / 2;
 
-    if(wind > 50 || temp > 30) {
+    if(wind > 20 || temp > 30) {
       suitability -= 5;
     }
     

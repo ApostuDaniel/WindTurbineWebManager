@@ -98,8 +98,6 @@ async function stopTurbine(id) {
         url: put_turbine_api_url,
         data: JSON.stringify(data)
       });
-  
-      console.log(response.data);
 }
 
 /**
@@ -184,8 +182,6 @@ async function putNewData(id, newData) {
         url: `http://localhost:5000/api/turbines/newdata/${id}`,
         data: JSON.stringify(newData)
       });
-  
-      console.log(response.data);
 }
 
 updateTurbines();
