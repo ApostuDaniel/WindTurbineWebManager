@@ -1,5 +1,5 @@
 
-<div class="turbine">
+<div onclick="showPublicTurbine(`<%= turbine._id %>`,`<%= turbine.userId %>`)" class="turbine">
   <div class="header">
     <img src=https://webprojectrdv.s3.amazonaws.com/images/menu.png alt="spinner placeholder" />
     <p><%= turbine.name %></p>
@@ -10,5 +10,24 @@
     <p>Longitude: <%= turbine.longitude %></p>
     <p>Terrain: <%= turbine.terrain %></p>
     
+  </div>
+</div>
+
+<div class="popup" id=<%=turbine._id %>>
+  <div class="fields">
+    <p>Name:<%= turbine.name %></p>
+    <p id="company"></p>
+    <p>Construction:<%= turbine.constructionYear %></p>
+    <p id="email" ></p>
+    <p id="telefon"></p>
+    <p>Suitability:<%= turbine.suitability %></p>
+    <div class="buttons">
+      <button id="offer">Oferta</button>
+      <button onclick="closePopup(`<%=turbine._id %>`)">Inchide</button>
+    </div>
+  </div>
+  <div class="images">
+    <img src=<%= turbine.imageLink %> alt="turbine image placeholder" />
+    <img src=<%= turbine.imageLink %> alt="wear graph placeholder" />
   </div>
 </div>
