@@ -1,31 +1,20 @@
 <!DOCTYPE html>
 <html>
-  <% var dir = process.cwd() %>
-  <!-- <%- include(dir+'/public/css/authStyle'); %> -->
-
+  <% var dir = process.cwd() %> <%- include(dir+'/public/css/loginStyle'); %>
+  <link rel="icon" href=https://webprojectrdv.s3.amazonaws.com/favicon.png>
   <head>
-    <title>Slide Navbar</title>
+    <title>Log in</title>
   </head>
   <body>
-    <div class="main">
-      <input type="checkbox" id="chk" aria-hidden="true" />
+    <form class="login">
+      <label aria-hidden="true">Login</label>
+      <input type="email" id="email" name="email" placeholder="Email" />
+      <input type="password" id="password" name="pass" placeholder="Password" />
+      <input id="log" type="submit" value="Log in" />
+      <p id="errormessage"></p>
+    </form>
 
-      <form class="login">
-        <div>
-          <label aria-hidden="true">Login</label>
-          <input type="email" id="email" name="email" placeholder="Email" />
-          <input
-            type="password"
-            id="password"
-            name="pass"
-            placeholder="Password"
-          />
-          <button id="log">Login</button>
-          <p id="errormessage"></p>
-        </div>
-      </form>
-    </div>
-    <%- include (dir+'/public/scripts/loginScript'); %>
-    <%- include (dir+'/public/scripts/protectedRouteLoginScript'); %>
+    <%- include (dir+'/public/scripts/loginScript'); %> <%- include
+    (dir+'/public/scripts/protectedRouteLoginScript'); %>
   </body>
 </html>

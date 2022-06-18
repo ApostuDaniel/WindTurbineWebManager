@@ -58,7 +58,6 @@ async function getPrivateTurbines(req, res, userId) {
   try {
     const privateTurbines = await Turbine.find({
       userId: userId,
-      isPublic: false,
     })
     res.writeHead(200, { 'Content-Type': 'application/json' })
     res.end(JSON.stringify(privateTurbines))
@@ -74,7 +73,6 @@ async function getPrivateTurbineByName(req, res, userId, name) {
     const privateTurbine = await Turbine.findOne({
       name: new RegExp('^' + name + '$', 'i'),
       userId: userId,
-      isPublic: false,
     })
 
     if (!privateTurbine) {
