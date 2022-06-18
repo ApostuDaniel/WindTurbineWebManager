@@ -6,6 +6,10 @@
     <title>Register</title>
   </head>
   <body>
+    <p id="title1">
+      Wind
+      <span id="title2">Turbine Management</span>
+    </p>
     <form class="signup">
       <label for="chk" aria-hidden="true">Sign up</label>
       <input type="text" id="nume" name="nume" placeholder="Nume" />
@@ -23,9 +27,26 @@
       />
       <input id="sign" type="submit" value="Sign Up" />
       <p id="errormessage"></p>
+
+      <div class="buttons">
+        <button
+          class="bottomButtons"
+          type="button"
+          onclick="location.href='/pages/resetpass'"
+        >
+          Forgot Password
+        </button>
+        <button
+          class="bottomButtons"
+          type="button"
+          onclick="location.href='/pages/login'"
+        >
+          Login
+        </button>
+      </div>
     </form>
 
-    <%- include (dir+'/public/scripts/registerScript'); %>
-    <%- include (dir+'/public/scripts/protectedRouteLoginScript'); %>
+    <%- include (dir+'/public/scripts/registerScript'); %> <%- include
+    (dir+'/public/scripts/protectedRouteLoginScript'); %>
   </body>
 </html>
