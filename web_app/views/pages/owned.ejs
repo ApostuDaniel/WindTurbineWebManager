@@ -20,6 +20,7 @@
       <% for(turbine of turbines) {%> <%-
           include(dir + "/views/partials/ownedTurbine", {turbine:turbine}) %> <% }
       %>
-    </ul> 
+    </ul>
+    <%- include (dir+'/public/scripts/protectedRouteScript'); %> 
   </body>
 </html>
