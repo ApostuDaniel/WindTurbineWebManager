@@ -5,13 +5,22 @@
   <head>
     <title>Log in</title>
   </head>
+ 
   <body>
+    <p id="title1">
+      Wind
+      <span id="title2">Turbine Management</span>
+    </p>
     <form class="login">
       <label aria-hidden="true">Login</label>
       <input type="email" id="email" name="email" placeholder="Email" />
       <input type="password" id="password" name="pass" placeholder="Password" />
       <input id="log" type="submit" value="Log in" />
       <p id="errormessage"></p>
+      <div class="buttons">
+        <button class="bottomButtons">Forgot Password</button>
+        <button class="bottomButtons" onclick="location.href='/pages/register'">Register</button>
+      </div>
     </form>
 
     <%- include (dir+'/public/scripts/loginScript'); %> <%- include
