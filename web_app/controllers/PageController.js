@@ -31,10 +31,31 @@ async function getPublicPage(req, res) {
     )
 
     const turbineData = await getTurbines()
+    const chartData = {}
+
+    for (turbine of turbineData) {
+      const allTurbineData = await getTurbineAllData(turbine._id)
+      let timeLabels = allTurbineData.historicData.map((x) =>
+        new Date(x.timeStamp).getTime()
+      )
+      chartData[turbine._id + 'chart'] = {
+        canvasId: turbine._id + 'chart',
+        timeLabels: timeLabels,
+        data: allTurbineData.historicData.map((x) => x.turbineWear),
+        lineTitle: 'Periodic Turbine Wear',
+        chartName: 'Turbine Wear Over Time',
+        yAxisLabel: 'Time',
+        xAxisLabel: 'Turbine Wear',
+        colorPoints: 'rgba(255, 0, 0, 1)',
+        colorLine: 'rgba(0, 255, 0, 1)',
+        colorUnderLine: 'rgba(0, 0, 255, 1)',
+      }
+    }
 
     var htmlRenderized = ejs.render(htmlContent, {
       filename: 'public.ejs',
       turbines: turbineData,
+      chartData,
     })
 
     res.end(htmlRenderized)
