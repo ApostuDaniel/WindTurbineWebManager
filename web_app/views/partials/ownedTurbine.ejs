@@ -1,3 +1,4 @@
+<% var dir = process.cwd() %>
 <div class="card">
   <div class="header"><%= turbine.name %></div>
   <div class="panel">
@@ -15,8 +16,9 @@
 
     <div class="imgs">
       <img src=<%= turbine.imageLink %> alt="Image placeholder" /> 
-      <img src=https://webprojectrdv.s3.amazonaws.com/images/mockGraph.jpg alt="Graph
-      placeholder" />
+      <!--<img src=https://webprojectrdv.s3.amazonaws.com/images/mockGraph.jpg alt="Graph
+      placeholder" />-->
+      <%- include (dir + '/views/partials/cumulativeChart', chart) %>
     </div>
   </div>
 </div>
