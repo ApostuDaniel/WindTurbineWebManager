@@ -6,7 +6,7 @@
       <input class="searchbar" type="text" placeholder="Search..."/>
     </div>
 
-    <div class="filter">
+    <!-- <div class="filter">
       <p class="filtersText">Location</p>
       <select id="filter-judet" class="filterBox">
         <option>Neamt</option>
@@ -14,7 +14,7 @@
         <option>Iasi</option>
         <option>Galati</option>
       </select>
-    </div>
+    </div> -->
 
     <div class="filter">
       <p class="filtersText">Condition</p>
@@ -28,9 +28,9 @@
     <div class="filter">
       <p class="filtersText">Company</p>
       <select id="filter-firma" class="filterBox">
-        <option>Rares</option>
-        <option>Vlad</option>
-        <option>Daniel</option>
+        <% for(company of companies) {%>  
+          <option><%= company %></option>
+        <% } %>
       </select>
     </div>
 
