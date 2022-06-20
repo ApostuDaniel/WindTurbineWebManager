@@ -89,18 +89,16 @@ async function updateStoppedTurbine(turbine) {
  * @param {mongoose.SchemaTypes.ObjectId} id
  */
 async function stopTurbine(turbine) {
-  const put_turbine_api_url = `http://localhost:5000/api/turbines/${turbine._id}`;
-  const data = {
+  const id = turbine._id;
+  const put_turbine_api_url = `http://localhost:5000/api/turbines/${id}`;
+  const newState = {
     turbineState: "Stopped",
   };
 
-  const response = await axios({
-    method: "put",
-    url: put_turbine_api_url,
-    data: JSON.stringify(data),
+  await fetch(put_turbine_api_url, {
+    method: "PUT",
+    body: JSON.stringify(newState),
   });
-
-  postNewAlert(turbine);
 }
 
 /**
@@ -153,14 +151,17 @@ async function updateTurbine(turbine) {
       newPowerGenerated
     );
 
+    if (newTurbineWear >= 10) {
+      await stopTurbine(turbine);
+    }
+
     if (
-      newTurbineWear >= 10 ||
       currentWindSpeed > 20 ||
       currentTemperature > 32 ||
       currentTemperature < -32 ||
       currentHummidity > 60
     ) {
-      await stopTurbine(turbine);
+      await postNewAlert(turbine);
     }
 
     newData = {
@@ -196,11 +197,15 @@ async function updateTurbine(turbine) {
 async function putNewData(id, newData) {
   //   console.log("Turbine new: ");
   //   console.log(newData);
-  const response = await axios({
-    method: "put",
-    url: `http://localhost:5000/api/turbines/newdata/${id}`,
-    data: JSON.stringify(newData),
-  });
+  try {
+    const response = await axios({
+      method: "put",
+      url: `http://localhost:5000/api/turbines/newdata/${id}`,
+      data: JSON.stringify(newData),
+    });
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 /**
@@ -210,20 +215,21 @@ async function putNewData(id, newData) {
 async function postNewAlert(turbine) {
   const post_alert_api_url = "http://localhost:5000/api/users/alerts";
 
-  const date = Date.now();
-
   const newAlert = {
     idUser: turbine.userId,
     idTurbine: turbine._id,
-    timeStamp: date.valueOf(),
   };
 
-  const response = await fetch(post_alert_api_url, {
-    method: "POST",
-    body: JSON.stringify(newAlert),
-  });
-
-  console.log(response);
+  console.log(newAlert);
+  try {
+    const response = await axios({
+      method: "POST",
+      url: post_alert_api_url,
+      data: JSON.stringify(newAlert),
+    });
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 updateTurbines();

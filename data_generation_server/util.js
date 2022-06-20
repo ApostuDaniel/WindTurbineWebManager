@@ -31,7 +31,7 @@ function getNewPowerGenerated(oldPowerGenerated, windSpeed) {
 }
 
 function getNewEfficiency(oldEfficiency, oldPowerGenerated, newPowerGenerated) {
-    return (newPowerGenerated - oldPowerGenerated > 200) ? (oldEfficiency <= 0.9 ? oldEfficiency + 0.1 : 1) : oldEfficiency - 0.001;
+    return (newPowerGenerated - oldPowerGenerated > 200) ? (oldEfficiency <= 0.9 ? oldEfficiency + 0.1 : 1) : (oldEfficiency >= 0.001 ? oldEfficiency - 0.001 : 0);
 }
 
 module.exports = { getNewTurbineWear, getNewPowerGenerated, getNewEfficiency };
