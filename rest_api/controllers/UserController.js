@@ -341,6 +341,7 @@ async function updateUser(req, res, id) {
       }
 
       user.birthDate = extractDateFromCNP(user.CNP)
+      user.password=md5(user.password);
       await user.save()
 
       res.writeHead(201, { 'Content-Type': 'application/json' })
