@@ -104,16 +104,17 @@
               "8 characters minimum";
           } else {
             if (password == confirmPassword) {
-              putTheData(
-                firstName,
-                secondName,
-                company,
-                cnp,
-                mail,
-                phone,
-                address,
-                current_password,
-              );
+              // putTheData(
+              //   firstName,
+              //   secondName,
+              //   company,
+              //   cnp,
+              //   mail,
+              //   phone,
+              //   address,
+              //   current_password,
+              // );
+              console.log(current_password);
               console.log("s a reusit");
             } else {
               document.getElementById("passvalidation").innerText =
@@ -121,16 +122,17 @@
             }
           }
         } else {
-          putTheData(
-            firstName,
-            secondName,
-            company,
-            cnp,
-            mail,
-            phone,
-            address,
-            current_password
-          );
+          console.log(password);
+          // putTheData(
+          //   firstName,
+          //   secondName,
+          //   company,
+          //   cnp,
+          //   mail,
+          //   phone,
+          //   address,
+          //   password,
+          // );
           console.log("s a reusit");
         }
       }
