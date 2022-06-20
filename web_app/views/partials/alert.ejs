@@ -1,7 +1,7 @@
-<div class="alert">
+<div class="alert" id="`id<%= alert.id %>`">
     <%= alert.user.firstName %> <%= alert.user.lastName %>, there seems to be a
     problem with your turbine <%=alert.turbine.name %>
   <div>
-    <button>Check it out</button>
+    <button onClick="redirectToDetailsPage(`<%= alert.turbine._id %>`, `<%= alert.id %>`)">Check it out</button>
   </div>
 </div>

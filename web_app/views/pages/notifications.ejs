@@ -29,6 +29,8 @@
       <% for(alert of alerts) {%> <%- include(dir +
         "/views/partials/alert", {alert:alert}) %> <% } %>
     </div>
+
+    <%-include (dir+'/public/scripts/notificationsScript'); %>
     <%- include (dir+'/public/scripts/publicownedPageScript'); %>
   </body>
 </html>
