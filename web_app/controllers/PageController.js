@@ -197,9 +197,6 @@ async function getNotificationsPage(req, res, id) {
       });
     }
 
-    console.log(notificationsWithNames);
-    console.log(alertsWithNames);
-
     var htmlRenderized = ejs.render(htmlContent, {
       filename: "notifications.ejs",
       notifications: notificationsWithNames,

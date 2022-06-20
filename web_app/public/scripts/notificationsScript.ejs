@@ -1,9 +1,19 @@
 <script>
     function redirectToDetailsPage(id, alertId) {
-        console.log('id' + alertId);
-        const alert = document.getElementById(String(alertId));
+        const alert = document.getElementById('id' + alertId);
         console.log(alert);
-        // alert.parentNode.removeChild(alert);
-        // location.reload();
+        removeAlert(alertId);   
+        alert.parentNode.removeChild(alert);
+        location.href = `http://localhost:5001/pages/turbineDetails/${id}`;
+    }
+
+    async function removeAlert(id) {
+        const delete_alert_api_url = `http://localhost:5000/api/users/alerts/${id}`;
+
+        const response = await fetch(delete_alert_api_url, {
+            method: 'DELETE'
+        });
+
+        console.log(response);
     }
 </script>

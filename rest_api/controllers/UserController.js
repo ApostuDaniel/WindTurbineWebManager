@@ -398,7 +398,7 @@ async function deleteAlert(req, res, id) {
 }
 
 // @desc    Deletes a Notification
-// @route   DELETE /api/users/alerts/:id
+// @route   DELETE /api/users/notifications/:id
 async function deleteNotification(req, res, id) {
   try {
     await Notification.findByIdAndDelete(id)
