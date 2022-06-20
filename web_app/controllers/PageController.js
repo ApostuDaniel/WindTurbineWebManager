@@ -30,33 +30,33 @@ async function getPublicPage(req, res) {
       "utf8"
     );
 
-    const turbineData = await getTurbines()
-    const chartData = {}
+    const turbineData = await getTurbines();
+    const chartData = {};
 
     for (turbine of turbineData) {
-      const allTurbineData = await getTurbineAllData(turbine._id)
+      const allTurbineData = await getTurbineAllData(turbine._id);
       let timeLabels = allTurbineData.historicData.map((x) =>
         new Date(x.timeStamp).getTime()
-      )
-      chartData[turbine._id + 'chart'] = {
-        canvasId: turbine._id + 'chart',
+      );
+      chartData[turbine._id + "chart"] = {
+        canvasId: turbine._id + "chart",
         timeLabels: timeLabels,
         data: allTurbineData.historicData.map((x) => x.turbineWear),
-        lineTitle: 'Periodic Turbine Wear',
-        chartName: 'Turbine Wear Over Time',
-        yAxisLabel: 'Time',
-        xAxisLabel: 'Turbine Wear',
-        colorPoints: 'rgba(255, 0, 0, 1)',
-        colorLine: 'rgba(0, 255, 0, 1)',
-        colorUnderLine: 'rgba(0, 0, 255, 1)',
-      }
+        lineTitle: "Periodic Turbine Wear",
+        chartName: "Turbine Wear Over Time",
+        yAxisLabel: "Time",
+        xAxisLabel: "Turbine Wear",
+        colorPoints: "rgba(255, 0, 0, 1)",
+        colorLine: "rgba(0, 255, 0, 1)",
+        colorUnderLine: "rgba(0, 0, 255, 1)",
+      };
     }
 
     var htmlRenderized = ejs.render(htmlContent, {
       filename: "public.ejs",
       turbines: turbineData,
       chartData,
-    })
+    });
 
     res.end(htmlRenderized);
   } catch (error) {
@@ -73,31 +73,31 @@ async function getPrivatePage(req, res, id) {
     );
 
     const ownedTurbineData = await getOwnedTurbines(id);
-    const chartData = {}
+    const chartData = {};
 
     for (turbine of ownedTurbineData) {
-      const allTurbineData = await getTurbineAllData(turbine._id)
+      const allTurbineData = await getTurbineAllData(turbine._id);
       let timeLabels = allTurbineData.historicData.map((x) =>
         new Date(x.timeStamp).getTime()
-      )
-      chartData[turbine._id + 'chart'] = {
-        canvasId: turbine._id + 'chart',
+      );
+      chartData[turbine._id + "chart"] = {
+        canvasId: turbine._id + "chart",
         timeLabels: timeLabels,
         data: allTurbineData.historicData.map((x) => x.turbineWear),
-        lineTitle: 'Periodic Turbine Wear',
-        chartName: 'Turbine Wear Over Time',
-        yAxisLabel: 'Time',
-        xAxisLabel: 'Turbine Wear',
-        colorPoints: 'rgba(255, 0, 0, 1)',
-        colorLine: 'rgba(0, 255, 0, 1)',
-        colorUnderLine: 'rgba(0, 0, 255, 1)',
-      }
+        lineTitle: "Periodic Turbine Wear",
+        chartName: "Turbine Wear Over Time",
+        yAxisLabel: "Time",
+        xAxisLabel: "Turbine Wear",
+        colorPoints: "rgba(255, 0, 0, 1)",
+        colorLine: "rgba(0, 255, 0, 1)",
+        colorUnderLine: "rgba(0, 0, 255, 1)",
+      };
     }
 
     var htmlRenderized = ejs.render(htmlContent, {
       filename: "owned.ejs",
       turbines: ownedTurbineData,
-      chartData
+      chartData,
     });
 
     res.end(htmlRenderized);
@@ -168,13 +168,40 @@ async function getNotificationsPage(req, res, id) {
       "utf8"
     );
 
-    const nots = await getNotifications(id);
-    const alts = await getAlerts(id);
+    const notifications = await getNotifications(id);
+    const alerts = await getAlerts(id);
+    const notificationsWithNames = [];
+    const alertsWithNames = [];
+
+    for (notification of notifications) {
+      const buyer = await getUser(notification.idBuyer);
+      const seller = await getUser(notification.idSeller);
+      const turbine = await getTurbine(notification.idTurbine);
+      if (seller._id === id) {
+        notificationsWithNames.push({
+          buyer: buyer,
+          seller: seller,
+          turbine: turbine,
+        });
+      }
+    }
+
+    for (alert of alerts) {
+      const user = await getUser(alert.idUser);
+      const turbine = await getTurbine(alert.idTurbine);
+      alertsWithNames.push({
+        user: user,
+        turbine: turbine,
+      });
+    }
+
+    console.log(notificationsWithNames);
+    console.log(alertsWithNames);
 
     var htmlRenderized = ejs.render(htmlContent, {
       filename: "notifications.ejs",
-      notifications: nots,
-      alerts: alts,
+      notifications: notificationsWithNames,
+      alerts: alertsWithNames,
     });
 
     res.end(htmlRenderized);
@@ -211,7 +238,7 @@ async function getTurbineDetailsPage(req, res, id) {
     const turbineData = await getTurbine(id);
     const userData = await getUser(turbineData.userId);
     const turbineNewData = await getTurbineNewData(id);
-    const allTurbineData = await getTurbineAllData(id)
+    const allTurbineData = await getTurbineAllData(id);
 
     const timeLabels = allTurbineData.historicData.map((x) =>
       new Date(x.timeStamp).getTime()
@@ -271,7 +298,7 @@ async function getTurbineDetailsPage(req, res, id) {
       turbine: turbineData,
       user: userData,
       turbineData: turbineNewData,
-      chartData
+      chartData,
     });
     res.end(htmlRenderized);
   } catch (error) {

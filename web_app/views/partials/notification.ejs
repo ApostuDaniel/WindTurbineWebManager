@@ -1,3 +1,8 @@
-
-<div class="notification"></div>
-
+<div class="notification">
+    <%= notification.buyer.firstName %> <%= notification.buyer.lastName %> would
+    like to purchase turbine <%=notification.turbine.name %>
+  <div>
+    <button>Accept</button>
+    <button>Decline</button>
+  </div>
+</div>
