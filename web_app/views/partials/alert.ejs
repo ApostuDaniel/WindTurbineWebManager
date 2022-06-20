@@ -1,5 +1,7 @@
-
 <div class="alert">
-    <div><%= alert.user.firstName %> please check <%=alert.turbine.name %></div>
+    <%= alert.user.firstName %> <%= alert.user.lastName %>, there seems to be a
+    problem with your turbine <%=alert.turbine.name %>
+  <div>
+    <button>Check it out</button>
+  </div>
 </div>
-
