@@ -183,7 +183,8 @@ async function getNotificationsPage(req, res, id) {
           buyer: buyer,
           seller: seller,
           turbine: turbine,
-          id: notification._id
+          id: notification._id,
+          timestamp: timestamp
         });
       }
     }
