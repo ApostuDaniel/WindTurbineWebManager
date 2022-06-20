@@ -194,7 +194,8 @@ async function getNotificationsPage(req, res, id) {
       alertsWithNames.push({
         user: user,
         turbine: turbine,
-        id: alert._id
+        id: alert._id,
+        timeStamp: alert.timeStamp
       });
     }
 
