@@ -4,6 +4,8 @@ const ejs = require("ejs");
 const fetch = (url) =>
   import("node-fetch").then(({ default: fetch }) => fetch(url));
 
+const restAPIInteraction = require("./../models/RestAPIInteraction")
+
 async function getLandingPage(req, res) {
   try {
     res.writeHead(200, { "Content-Type": "text/html" });
@@ -52,12 +54,14 @@ async function getPublicPage(req, res, id) {
       };
     }
 
+    const companies = await restAPIInteraction.getAllCompanies()
+
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: "public.ejs",
+      filename: 'public.ejs',
       turbines: turbineData,
       chartData,
-      userId: id
-    });
+      companies,
+    })
 
     res.end(htmlRenderized);
   } catch (error) {
