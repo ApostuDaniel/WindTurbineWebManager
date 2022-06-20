@@ -4,7 +4,11 @@
 
         removeNotification(notificationId);
   
-        // location.href = `http://localhost:5001/pages/owned`;
+        location.href = `http://localhost:5001/pages/owned`;
+    }
+
+    function refuse(notificationId) {
+        removeNotification(notificationId);
     }
 
     async function removeNotification(notificationId) {
