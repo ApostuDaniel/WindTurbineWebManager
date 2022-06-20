@@ -168,13 +168,38 @@ async function getNotificationsPage(req, res, id) {
       "utf8"
     );
 
-    const nots = await getNotifications(id);
-    const alts = await getAlerts(id);
+    const notifications = await getNotifications(id);
+    const alerts = await getAlerts(id);
+    const notificationsWithNames = [];
+    const alertsWithNames = [];
+
+    for(notification of notifications) {
+      const buyer = await getUser(notification.idBuyer);
+      const seller = await getUser(notification.idSeller);
+      const turbine = await getTurbine(notification.idTurbine);
+      notificationsWithNames.push({
+        buyer: buyer,
+        seller: seller,
+        turbine: turbine
+      })
+    }
+
+    for(alert of alerts) {
+      const user = await getUser(alert.idUser);
+      const turbine = await getTurbine(alert.idTurbine);
+      alertsWithNames.push({
+        user: user,
+        turbine: turbine
+      })
+    }
+
+    console.log(notificationsWithNames);
+    console.log(alertsWithNames);
 
     var htmlRenderized = ejs.render(htmlContent, {
       filename: "notifications.ejs",
-      notifications: nots,
-      alerts: alts,
+      notifications: notificationsWithNames,
+      alerts: alertsWithNames,
     });
 
     res.end(htmlRenderized);

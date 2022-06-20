@@ -19,9 +19,13 @@
     <%- include(dir + "/views/partials/navBar") %>
 
     <div class="notification-wrapper">
-        <%- include(dir + "/views/partials/notification") %>
-        <%- include(dir + "/views/partials/notification") %>
-        <%- include(dir + "/views/partials/notification") %>
+      <% for(notification of notifications) {%> <%- include(dir +
+      "/views/partials/notification", {notification:notification}) %> <% } %>
+    </div>
+
+    <div class="alerts-wrapper">
+      <% for(alerts of alerts) {%> <%- include(dir +
+        "/views/partials/alert", {alert:alert}) %> <% } %>
     </div>
     <%- include (dir+'/public/scripts/publicownedPageScript'); %>
   </body>
