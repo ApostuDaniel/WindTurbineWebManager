@@ -10,7 +10,9 @@ const server = http.createServer((req, res) => {
     if (req.url === "/pages") {
       PageController.getLandingPage(req, res);
     } else if (req.url === "/pages/public") {
-      PageController.getPublicPage(req, res);
+      const cookies = parseCookies(req);
+      const id = cookies.user_id;
+      PageController.getPublicPage(req, res, id);
     } else if (req.url === "/pages/owned") {
       const cookies = parseCookies(req);
       const id = cookies.user_id;

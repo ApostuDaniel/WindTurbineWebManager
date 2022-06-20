@@ -22,7 +22,7 @@ async function getLandingPage(req, res) {
   }
 }
 
-async function getPublicPage(req, res) {
+async function getPublicPage(req, res, id) {
   try {
     res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
@@ -56,6 +56,7 @@ async function getPublicPage(req, res) {
       filename: "public.ejs",
       turbines: turbineData,
       chartData,
+      userId: id
     });
 
     res.end(htmlRenderized);

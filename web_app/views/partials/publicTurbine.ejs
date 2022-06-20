@@ -22,7 +22,7 @@
     <p id="telefon"></p>
     <p>Suitability: <%= turbine.suitability %></p>
     <div class="buttons">
-      <button id="offer" class="dButton">Purchase</button>
+      <button onClick="makeOffer(`<%= userId %>`, `<%= turbine.userId %>`, `<%= turbine._id %>`)" class="dButton">Purchase</button>
       <button class="dButton" onclick="closePopup(`<%=turbine._id %>`)">Close</button>
     </div>
   </div>

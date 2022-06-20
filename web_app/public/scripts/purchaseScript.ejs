@@ -1,0 +1,28 @@
+<script>
+    async function makeOffer(buyerId, sellerId, turbineId) {
+        console.log(buyerId);
+        console.log(sellerId);
+        console.log(turbineId);
+        if(buyerId !== sellerId) {
+            console.log("Can purchase");
+            await createNotification(buyerId, sellerId, turbineId);
+        }
+    }
+
+    async function createNotification(buyerId, sellerId, turbineId) {
+        const post_notification_api_url = "http://localhost:5000/api/users/notifications";
+
+        const requestBody = {
+            idBuyer: buyerId,
+            idSeller: sellerId,
+            idTurbine: turbineId
+        };
+
+        const response = await fetch(post_notification_api_url, {
+            method: "POST",
+            body: JSON.stringify(requestBody)
+        });
+
+        console.log(response);
+    }
+</script>
