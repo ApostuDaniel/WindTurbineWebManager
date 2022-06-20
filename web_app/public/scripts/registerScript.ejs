@@ -21,15 +21,7 @@
         var phone = document.querySelector("#phone").value;
         var adresa = document.querySelector("#adresa").value;
         var pass = document.querySelector("#registerpass").value;
-        nume = "Rares";
-        prenume = "Bancescu";
-        firma = "raresBancescu.srl";
-        cnp = "1951028106931";
-        mail = "raresrares@gmail.com";
-        phone = "0765434563";
-        adresa = "dsadsdsa";
-        pass = "rrrrrrrr";
-        //validate the input
+        
         if (
           nume == "" ||
           prenume == "" ||
@@ -46,21 +38,17 @@
           var validationMessage = "";
 
           //validation for name
-          // Username consists of alphanumeric characters (a-zA-Z0-9), lowercase, or uppercase.
-          // Username allowed of the dot (.), underscore (_), and hyphen (-).
-          // The dot (.), underscore (_), or hyphen (-) must not be the first or last character.
-          // The dot (.), underscore (_), or hyphen (-) does not appear consecutively, e.g., java..regex
-          // The number of characters must be between 5 to 20.
+          
 
-          if (!nume.match(/^[A-Z][a-z]+$/)) {
+          if (!nume.match(/^[A-Za-z ]+$/)) {
             validationMessage =
               "First name is not correct! It should contain only letters";
           }
-          if (!prenume.match(/^[A-Z][a-z]+$/)) {
+          if (!prenume.match(/^[A-Za-z ]+$/)) {
             validationMessage =
               "Second name is not correct! It should contain only letters";
           }
-          if (!firma.match(/^[a-zA-Z0-9_/-/.]+$/)) {
+          if (!firma.match(/[a-zA-Z0-9_/-/.]+$/)) {
             validationMessage = "Company name is not correct!";
           }
           if (!cnp.match(/[0-9]{13}/)) {
@@ -69,7 +57,7 @@
           if (!phone.match(/[0-9]{10}/)) {
             validationMessage = "Phone should have 10 digits";
           }
-          if (!adresa.match(/^[a-zA-Z0-9_/-/./=/_]+$/)) {
+          if (!adresa.match(/[a-zA-Z0-9_/-/./_ ]+$/)) {
             validationMessage = "Address should be correct";
           }
           if (!pass.match(/^[a-zA-Z0-9_/-/./=/_]{8}/)) {

@@ -341,6 +341,7 @@ async function updateUser(req, res, id) {
       }
 
       user.birthDate = extractDateFromCNP(user.CNP)
+      user.password=md5(user.password);
       await user.save()
 
       res.writeHead(201, { 'Content-Type': 'application/json' })
@@ -397,7 +398,7 @@ async function deleteAlert(req, res, id) {
 }
 
 // @desc    Deletes a Notification
-// @route   DELETE /api/users/alerts/:id
+// @route   DELETE /api/users/notifications/:id
 async function deleteNotification(req, res, id) {
   try {
     await Notification.findByIdAndDelete(id)

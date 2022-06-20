@@ -44,11 +44,9 @@ const server = http.createServer((req, res) => {
           const password = splitReq[5];
           userController.userLogin(req, res, mail, password);
         } else if (req.url.match(/\/api\/users\/notifications$/)) {
-          const id = req.url.split("/")[3];
-          userController.getUser(req, res, id);
+          userController.getNotifications(req, res);
         } else if (req.url.match(/\/api\/users\/alerts$/)) {
-          const id = req.url.split("/")[3];
-          userController.getUser(req, res, id);
+          userController.getAlerts(req, res);
         } else if (
           req.url.match(/\/api\/users\/[0-9a-f]{24}\/notifications$/)
         ) {
@@ -131,12 +129,12 @@ const server = http.createServer((req, res) => {
           const id = req.url.split("/")[3];
           userController.deleteUser(req, res, id);
         } else if (req.url.match(/\/api\/users\/alerts\/[0-9a-f]{24}$/)) {
-          const id = req.url.split("/")[3];
+          const id = req.url.split("/")[4];
           userController.deleteAlert(req, res, id);
         } else if (
           req.url.match(/\/api\/users\/notifications\/[0-9a-f]{24}$/)
         ) {
-          const id = req.url.split("/")[3];
+          const id = req.url.split("/")[4];
           userController.deleteNotification(req, res, id);
         } else if (req.url.match(/\/api\/turbines\/[0-9a-f]{24}$/)) {
           const id = req.url.split("/")[3];

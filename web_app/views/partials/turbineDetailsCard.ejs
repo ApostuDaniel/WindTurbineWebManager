@@ -11,8 +11,18 @@
   </div>
 
   <div class="buttons">
-    <button>Stop</button>
-    <button>Set Private</button>
-    <button>Delete</button>
+    <% if(turbine.turbineState === 'Stopped'){ %>
+      <button onclick="startTurbine(`<%= turbine._id %>`)">Start</button>
+    <% } else{ %>  
+      <button onclick="stopTurbine(`<%= turbine._id %>`)">Stop</button>
+    <% } %>
+
+    <% if(turbine.isPublic){ %>
+      <button onclick="setPrivate(`<%= turbine._id %>`)">Set Private</button>
+    <% } else{ %>  
+      <button onclick="setPublic(`<%= turbine._id %>`)">Set Public</button>
+    <% } %>
+
+    <button onclick="deleteTurbine(`<%= turbine._id %>`)">Delete</button>
   </div>
 </div>
