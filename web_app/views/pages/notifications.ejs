@@ -24,7 +24,7 @@
     </div>
 
     <div class="alerts-wrapper">
-      <% for(alerts of alerts) {%> <%- include(dir +
+      <% for(alert of alerts) {%> <%- include(dir +
         "/views/partials/alert", {alert:alert}) %> <% } %>
     </div>
     <%- include (dir+'/public/scripts/publicownedPageScript'); %>
