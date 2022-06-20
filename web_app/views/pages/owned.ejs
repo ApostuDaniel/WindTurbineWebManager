@@ -22,6 +22,10 @@
     <%- include(dir + "/views/partials/navBar") %> <%- include(dir +
     "/views/partials/filters") %>
 
+    <div class="addTurbine" onclick="location.href='/pages/createTurbine'">
+      <img src=https://webprojectrdv.s3.amazonaws.com/addButton.png>
+    </div>
+
     <div class="cardList">
       <% for(turbine of turbines) {%> <%- include(dir +
       "/views/partials/ownedTurbine", {turbine:turbine, chart:chartData[turbine._id + 'chart']}) %> <% } %>
