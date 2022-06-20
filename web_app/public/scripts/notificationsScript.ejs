@@ -1,19 +1,27 @@
 <script>
-    function redirectToDetailsPage(id, alertId) {
-        const alert = document.getElementById('id' + alertId);
-        console.log(alert);
-        removeAlert(alertId);   
-        alert.parentNode.removeChild(alert);
-        location.href = `http://localhost:5001/pages/turbineDetails/${id}`;
+    function accept(turbineId, buyerId, notificationId) { 
+        transferTurbine(turbineId, buyerId);
+
+        removeNotification(notificationId);
+  
+        // location.href = `http://localhost:5001/pages/owned`;
     }
 
-    async function removeAlert(id) {
-        const delete_alert_api_url = `http://localhost:5000/api/users/alerts/${id}`;
-
-        const response = await fetch(delete_alert_api_url, {
+    async function removeNotification(notificationId) {
+        const notification = document.getElementById('id' + notificationId);
+        notification.parentNode.removeChild(notification);
+        
+        const delete_notification_api_url = `http://localhost:5000/api/users/notifications/${notificationId}`;
+        const response = await fetch(delete_notification_api_url, {
             method: 'DELETE'
         });
+    }
 
-        console.log(response);
+    async function transferTurbine(turbineId, buyerId) {
+        const put_new_user_api_url = `http://localhost:5000/api/turbines/${turbineId}`;
+        const response = await fetch(put_new_user_api_url, {
+            method: 'PUT',
+            body : JSON.stringify({userId: buyerId})
+        });
     }
 </script>
