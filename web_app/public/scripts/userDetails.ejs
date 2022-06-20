@@ -1,9 +1,4 @@
 <script>
-  
-  
-
-
-
   function getCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(";");
@@ -14,11 +9,12 @@
     }
     return null;
   }
-
+  var current_password;
   async function putUserData() {
     const user_id = getCookie("user_id");
     const data = await fetch("http://localhost:5000/api/users/" + user_id);
     const user_data = await data.json();
+    current_password=user_data.password;
     console.log(user_data);
 
     var birthdate = new Date(user_data.birthDate);
@@ -46,12 +42,12 @@
     document.getElementById("cnp").setAttribute("value", user_data.CNP);
     document.getElementById("mail").setAttribute("value", user_data.mail);
     document.getElementById("phone").setAttribute("value", user_data.phone);
-    document.getElementById("address").setAttribute("value", user_data.address);
+    document.getElementById("address").setAttribute("value", user_data.adress);
     document.getElementById("date").setAttribute("value", `${formedData}`);
   }
 
   async function changeDetails() {
-    var firstName = document.getElementById("firstname").getAttribute("value");
+    var firstName = document.getElementById("firstname").value;
 
     var secondName = document.getElementById("secondname").value;
     var company = document.getElementById("company").value;
@@ -108,16 +104,34 @@
               "8 characters minimum";
           } else {
             if (password == confirmPassword) {
-              putTheData(firstName,secondName,company,cnp,mail,phone,address,password)
-              console.log("s a reusit")
+              putTheData(
+                firstName,
+                secondName,
+                company,
+                cnp,
+                mail,
+                phone,
+                address,
+                current_password,
+              );
+              console.log("s a reusit");
             } else {
               document.getElementById("passvalidation").innerText =
                 "password must match";
             }
           }
         } else {
-          putTheData(firstName,secondName,company,cnp,mail,phone,address,user_data.password)
-          console.log("s a reusit")
+          putTheData(
+            firstName,
+            secondName,
+            company,
+            cnp,
+            mail,
+            phone,
+            address,
+            current_password
+          );
+          console.log("s a reusit");
         }
       }
     }
@@ -133,38 +147,25 @@
     address,
     pass
   ) {
-    const id=getCookie("user_id")
-    const newUserData={
+    const id = getCookie("user_id");
+    const newUserData = {
       "firstName": firstName,
-          "lastName": secondName,
-          "company": company,
-          "CNP": cnp,
-          "mail": mail,
-          "phone": phone,
-          "adress": address,
-          "password": pass,
-    }
-    const response = await axios(
-      {
-        method: 'put',
-        url: `http://localhost:5000/api/users/${id}`,
-        data: JSON.stringify(newUserData)
-      }
-    );
-
-    
-    // if (response.status == 201) {
-    //   console.log("Register successful");
-    //   window.location.href = `http://localhost:5001/pages/login/`;
-    // } else {
-    //   console.log("User with this data already exists");
-
-    //   const displayError = document.getElementById("errormessage");
-    //   displayError.innerHTML = "A field is duplicate";
-    // }
+      "lastName": secondName,
+      "company": company,
+      "CNP": cnp,
+      "mail": mail,
+      "phone": phone,
+      "adress"
+      : address,
+      "password": pass,
+    };
+    const response = await axios({
+      method: "put",
+      url: `http://localhost:5000/api/users/${id}`,
+      data: JSON.stringify(newUserData),
+    })
+    console.log(response)
   }
-
-
 
   putUserData();
 
