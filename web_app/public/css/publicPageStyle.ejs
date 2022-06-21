@@ -1,25 +1,10 @@
 <style>
   body {
     margin: 0;
-    background-color: #ecfcff;
-    font-family: "Exo 2", sans-serif;
+    background-color: white;
+    font-family: "Jura", sans-serif;
     user-select: none;
-  }
-
-  .content {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-  }
-
-  .content p {
-    margin: 0;
-    margin-bottom: 7%;
-    font-family: "Exo 2", sans-serif;
-    font-weight: bold;
-    color: #00a8d5;
-    font-size: 20px;
-    padding-left: 5%;
+    letter-spacing: 1px;
   }
 
   .turbines {
@@ -37,6 +22,51 @@
     margin-left: 1.5%;
     transition: 0.3s;
     margin-bottom: 5%;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    background-color: #0a0120;
+    border-bottom: 2px solid #7dd7bd;
+    width: 100%;
+  }
+
+  .header p {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    height: 60px;
+    justify-content: center;
+    color: white;
+    font-size: 25px;
+    font-family: "Jura", sans-serif;
+    font-weight: bold;
+  }
+
+  .content {
+    padding: 0;
+    width: 100%;
+    height: 350px;
+    background-color: #0a0120;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .content p {
+    margin: 0;
+    margin-bottom: 7%;
+    font-family: "Jura", sans-serif;
+    font-weight: bold;
+    color: #7dd7bd;
+    font-size: 20px;
+    padding-left: 5%;
   }
 
   @media screen and (max-width: 1000px) {
@@ -59,50 +89,6 @@
     }
   }
 
-  .header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 70px;
-    background: linear-gradient(
-      to left top,
-      rgba(1, 161, 186, 0.8),
-      rgba(186, 124, 237, 0.8)
-    );
-    width: 100%;
-  }
-
-  .header p {
-    display: flex;
-    align-items: center;
-    margin: 0;
-    height: 60px;
-    justify-content: center;
-    color: #ecfcff;
-    font-size: 25px;
-    font-family: "Exo 2", sans-serif;
-    font-weight: bold;
-  }
-
-  .header img {
-    width: 25px;
-    height: 25px;
-    margin: 0;
-    padding-left: 20px;
-    height: 40px;
-    width: 40px;
-  }
-
-  .content {
-    padding: 0;
-    width: 100%;
-    height: 350px;
-    background-color: #b7e4ed;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-  }
-
   .turbine:hover {
     transition: all 0.3s ease-in;
   }
@@ -113,11 +99,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(
-      to right top,
-      rgba(1, 161, 186, 1),
-      rgba(1, 161, 186, 0.8)
-    );
+    background-color: #0a0120;
     width: 50%;
     height: 400px;
     margin: 0;
@@ -126,7 +108,6 @@
     top: 15%;
     left: 17%;
     margin-left: 100px;
-    opacity: 95%;
   }
 
   .popup.show {
@@ -134,10 +115,10 @@
   }
 
   .fields p {
-    font-family: "Exo 2", sans-serif;
+    font-family: "Jura", sans-serif;
     font-weight: bolder;
     font-size: 15px;
-    color: #ecfcff;
+    color: white;
     padding-left: 10px;
   }
 
@@ -148,7 +129,6 @@
     margin: 15px;
     padding-left: 15px;
     font-weight: bold;
-    border-left: 1vw solid rgba(186, 124, 237, 0.5);
     height: 300px;
   }
 
@@ -181,11 +161,15 @@
     padding-right: 15px;
     outline: none;
     border: none;
-    background-color: rgba(1, 161, 186, 0.8);
+    background-color: #7dd7bd;
+    color: #0a0120;
+    transition: ease-in-out 300ms;
   }
 
   .dButton:hover {
-    background-color: rgba(186, 124, 237, 0.8);
+    background-color: #0a0120;
+    color: #7dd7bd;
+    border: 1px solid #7dd7bd;
   }
 
   @media screen and (max-width: 800px) {
@@ -207,7 +191,7 @@
   }
 
   .spinner {
-    background-color: green;
+    background-color: #7dd7bd;
     height: 10px;
     width: 40px;
     margin-left: 10px;
