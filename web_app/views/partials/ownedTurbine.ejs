@@ -1,18 +1,20 @@
 <% var dir = process.cwd() %>
 <div class="card">
-  <div class="header"><%= turbine.name %></div>
+  <div class="header"><p><%= turbine.name %></p></div>
   <div class="panel">
     <div class="attributes">
-      <div class="attribute">Construction date: <%= turbine.constructionYear %></div>
+      <div class="attribute">Date: <%= turbine.constructionYear.substring(0, 9) %></div>
       <div class="attribute">Suitability: <%= turbine.suitability %></div>
       <div class="attribute">Terrain: <%= turbine.terrain %></div>
       <div class="attribute"><%= turbine.turbineState %></div>
-      <button
-        class="dButton"
-        onclick='location.href="/pages/turbineDetails/<%= turbine._id %>"'
-      >
-        Details
-      </button>
+      <div class="attribute">
+        <button
+          class="dButton"
+          onclick='location.href="/pages/turbineDetails/<%= turbine._id %>"'
+        >
+          Details
+        </button>
+      </div>
     </div>
 
     <div class="imgs">

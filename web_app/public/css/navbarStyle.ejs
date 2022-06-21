@@ -11,21 +11,17 @@
     margin: auto;
     padding: 5px;
     width: 98%;
-    background: linear-gradient(
-      to left top,
-      rgba(1, 161, 186, 0.8),
-      rgba(186, 124, 237, 0.8)
-    );
+    background: linear-gradient(to left top, #0a0120, #0a0120);
     box-shadow: 0px 0px 10px -5px black;
     z-index: 3;
     border-radius: 10px;
   }
 
   ul.navBar li {
-    font-family: "Exo 2", sans-serif;
+    font-family: "Jura", sans-serif;
     font-weight: 700;
     font-size: 20px;
-    color: #ecfcff;
+    color: white;
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
@@ -37,50 +33,45 @@
   }
 
   .clickable:hover {
-    background-color: white;
-    color: rgba(186, 124, 237, 0.8);
-    border-radius: 50px;
-    opacity: 0.7;
     cursor: pointer;
-    padding-left: 15px;
-    padding-right: 15px;
+    color: #7dd7bd;
   }
 
   .menuPopUp {
     list-style-type: none;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     visibility: hidden;
     width: auto;
     height: auto;
-    background: linear-gradient(
-      to left top,
-      rgba(1, 161, 186, 0.8),
-      rgba(186, 124, 237, 0.8)
-    );
+    background-color: #0a0120;
     position: absolute;
     z-index: 1;
     top: 50px;
-    margin-left: -40px;
+    margin-left: -55px;
+    width: 100px;
   }
 
   .menuPopUp div {
-    width: auto;
-    padding: 10px;
-    font-family: "Exo 2", sans-serif;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-family: "Jura", sans-serif;
     font-weight: bolder;
     font-size: 15px;
-    color: #ecfcff;
+    color: white;
+    margin: auto;
+  }
+
+  .menuPopUp div p {
+    margin: 10px;
   }
 
   .menuPopUp div:hover {
-    background: linear-gradient(
-      to left top,
-      rgba(1, 161, 186, 0.5),
-      rgba(186, 124, 237, 0.5)
-    );
+    background-color: #7dd7bd;
+    color: #0a0120;
     cursor: pointer;
   }
 
@@ -93,18 +84,18 @@
   }
 
   #title1 {
-    font-family: "Exo 2", sans-serif;
+    font-family: "Jura", sans-serif;
     font-weight: bold;
     font-size: 30px;
-    color: #ecfcff;
+    color: white;
     margin-right: auto;
   }
 
   #title2 {
-    font-family: "Exo 2", sans-serif;
+    font-family: "Jura", sans-serif;
     font-weight: bold;
     font-size: 20px;
-    color: #05595b;
+    color: #7dd7bd;
   }
 
   @media screen and (max-width: 500px) {
