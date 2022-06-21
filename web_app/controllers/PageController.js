@@ -32,11 +32,11 @@ async function getPublicPage(req, res, id) {
       "utf8"
     );
 
-    const turbineData = await getTurbines();
+    const turbineData = await restAPIInteraction.getTurbines();
     const chartData = {};
 
     for (turbine of turbineData) {
-      const allTurbineData = await getTurbineAllData(turbine._id);
+      const allTurbineData = await restAPIInteraction.getTurbineAllData(turbine._id);
       let timeLabels = allTurbineData.historicData.map((x) =>
         new Date(x.timeStamp).getTime()
       );
@@ -61,6 +61,7 @@ async function getPublicPage(req, res, id) {
       turbines: turbineData,
       chartData,
       companies,
+      userId: id
     })
 
     res.end(htmlRenderized);
@@ -77,11 +78,11 @@ async function getPrivatePage(req, res, id) {
       "utf8"
     );
 
-    const ownedTurbineData = await getOwnedTurbines(id);
+    const ownedTurbineData = await restAPIInteraction.getOwnedTurbines(id);
     const chartData = {};
 
     for (turbine of ownedTurbineData) {
-      const allTurbineData = await getTurbineAllData(turbine._id);
+      const allTurbineData = await restAPIInteraction.getTurbineAllData(turbine._id);
       let timeLabels = allTurbineData.historicData.map((x) =>
         new Date(x.timeStamp).getTime()
       );
@@ -99,10 +100,14 @@ async function getPrivatePage(req, res, id) {
       };
     }
 
+    const companies = await restAPIInteraction.getAllCompanies()
+
     var htmlRenderized = ejs.render(htmlContent, {
       filename: "owned.ejs",
       turbines: ownedTurbineData,
       chartData,
+      companies,
+      userId: id
     });
 
     res.end(htmlRenderized);
@@ -173,15 +178,15 @@ async function getNotificationsPage(req, res, id) {
       "utf8"
     );
 
-    const notifications = await getNotifications(id);
-    const alerts = await getAlerts(id);
+    const notifications = await restAPIInteraction.getNotifications(id);
+    const alerts = await restAPIInteraction.getAlerts(id);
     const notificationsWithNames = [];
     const alertsWithNames = [];
 
     for (notification of notifications) {
-      const buyer = await getUser(notification.idBuyer);
-      const seller = await getUser(notification.idSeller);
-      const turbine = await getTurbine(notification.idTurbine);
+      const buyer = await restAPIInteraction.getUser(notification.idBuyer);
+      const seller = await restAPIInteraction.getUser(notification.idSeller);
+      const turbine = await restAPIInteraction.getTurbine(notification.idTurbine);
       if (seller._id === id) {
         notificationsWithNames.push({
           buyer: buyer,
@@ -193,8 +198,8 @@ async function getNotificationsPage(req, res, id) {
     }
 
     for (alert of alerts) {
-      const user = await getUser(alert.idUser);
-      const turbine = await getTurbine(alert.idTurbine);
+      const user = await restAPIInteraction.getUser(alert.idUser);
+      const turbine = await restAPIInteraction.getTurbine(alert.idTurbine);
       alertsWithNames.push({
         user: user,
         turbine: turbine,
@@ -240,10 +245,10 @@ async function getTurbineDetailsPage(req, res, id) {
       "utf8"
     );
 
-    const turbineData = await getTurbine(id);
-    const userData = await getUser(turbineData.userId);
-    const turbineNewData = await getTurbineNewData(id);
-    const allTurbineData = await getTurbineAllData(id);
+    const turbineData = await restAPIInteraction.getTurbine(id);
+    const userData = await restAPIInteraction.getUser(turbineData.userId);
+    const turbineNewData = await restAPIInteraction.getTurbineNewData(id);
+    const allTurbineData = await restAPIInteraction.getTurbineAllData(id);
 
     const timeLabels = allTurbineData.historicData.map((x) =>
       new Date(x.timeStamp).getTime()
@@ -346,70 +351,12 @@ async function getResetPassPage(req, res) {
   }
 }
 
-async function getTurbines() {
-  const data = await fetch("http://localhost:5000/api/turbines/public");
-  const turbineData = await data.json();
-
-  return turbineData;
-}
-
-async function getOwnedTurbines(id) {
-  const data = await fetch("http://localhost:5000/api/turbines/private/" + id);
-  const ownedTurbineData = await data.json();
-
-  return ownedTurbineData;
-}
-
-async function getTurbine(id) {
-  const data = await fetch(`http://localhost:5000/api/turbines/${id}`);
-  const turbine = await data.json();
-
-  return turbine;
-}
-
-async function getUser(id) {
-  const data = await fetch("http://localhost:5000/api/users/" + id);
-  const user = await data.json();
-
-  return user;
-}
-
-async function getTurbineNewData(id) {
-  const data = await fetch(`http://localhost:5000/api/turbines/data/${id}/new`);
-  const turbineData = await data.json();
-
-  return turbineData;
-}
-
-async function getTurbineAllData(id) {
-  const data = await fetch(`http://localhost:5000/api/turbines/data/${id}`);
-  const turbineData = await data.json();
-
-  return turbineData;
-}
-
-async function getNotifications(id) {
-  const data = await fetch(
-    `http://localhost:5000/api/users/${id}/notifications`
-  );
-  const notifications = await data.json();
-
-  return notifications;
-}
-
-async function getAlerts(id) {
-  const data = await fetch(`http://localhost:5000/api/users/${id}/alerts`);
-  const alerts = await data.json();
-
-  return alerts;
-}
 
 module.exports = {
   getPublicPage,
   getPrivatePage,
   getLoginPage,
   getLandingPage,
-  getOwnedTurbines,
   getRegisterPage,
   getCreateTurbinePage,
   getTurbineDetailsPage,
