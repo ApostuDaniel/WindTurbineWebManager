@@ -2,7 +2,7 @@
   html {
     height: 100%;
     user-select: none;
-    font-family: 'Jura', sans-serif;
+    font-family: "Jura", sans-serif;
     font-weight: bold;
     color: white;
     letter-spacing: 1px;
@@ -25,7 +25,7 @@
   .card {
     width: 700px;
     height: auto;
-    background-color: #0A0120;
+    background-color: #0a0120;
     margin-bottom: 100px;
     display: flex;
     flex-direction: row;
@@ -39,12 +39,12 @@
     justify-content: center;
     padding-top: 10px;
     padding-bottom: 10px;
-    background-color: #7DD7BD;
+    background-color: #7dd7bd;
   }
 
   .header p {
     transform-origin: center;
-    color: #0A0120;
+    color: #0a0120;
     transform: rotate(-90deg);
   }
 
@@ -86,6 +86,14 @@
   }
 
   .dButton {
+    background-color: #0a0120;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dButton p {
     padding: 5px;
     padding-left: 15px;
     padding-right: 15px;
@@ -94,10 +102,10 @@
     background-color: #0a0120;
     color: #7dd7bd;
     transition: ease-in-out 300ms;
-    font-family: 'Jura', sans-serif;
+    font-family: "Jura", sans-serif;
   }
 
-  .dButton:hover {
+  .dButton p:hover {
     background-color: #7dd7bd;
     color: #0a0120;
     cursor: pointer;
@@ -115,5 +123,13 @@
 
   .addTurbine img {
     width: 30px;
+  }
+
+  .stopped {
+    color: red;
+  }
+
+  .running {
+    color: rgb(18, 211, 18);
   }
 </style>
