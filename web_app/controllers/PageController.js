@@ -37,8 +37,8 @@ async function getPublicPage(req, res, id) {
     const turbines = [];
 
     for (turbineData of turbinesData) {
-      // const location = await restAPIInteraction.getLocation(turbineData);
-      const location = 'Not shown yet';
+      const location = await restAPIInteraction.getLocation(turbineData);
+      // const location = 'Not shown yet';
       turbines.push({
         turbineData, 
         location
