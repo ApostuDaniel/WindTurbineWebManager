@@ -4,7 +4,10 @@
     height: 100%;
     margin: 0;
     padding: 0;
-    font-family: "Exo 2", sans-serif;
+    font-family: "Jura", sans-serif;
+    user-select: none;
+    letter-spacing: 1px;
+    color: #7dd7bd;
   }
 
   .wrapper {
@@ -19,11 +22,7 @@
   .configuration-panel {
     width: 50%;
     height: 100%;
-    background: linear-gradient(
-      to left top,
-      rgba(1, 161, 186, 0.5),
-      rgba(186, 124, 237, 0.5)
-    );
+    background-color: #0a0120;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -40,42 +39,39 @@
     width: 50%;
     height: auto;
     border-radius: 10px;
-    border-top: 3px solid rgba(186, 124, 237);
-    border-bottom: 3px solid rgba(186, 124, 237);
-    background: linear-gradient(
-      to left top,
-      rgba(1, 161, 186, 0.3),
-      rgba(186, 124, 237, 0.3)
-    );
+    background-color: #0a0120;
+    border: 1px solid #7dd7bd;
   }
 
   .attribute {
     margin: 15px;
     padding-left: 15px;
     font-weight: bold;
-    border-left: 1vw solid rgba(186, 124, 237, 0.5);
+    color: #7dd7bd;
   }
 
   #form {
     height: auto;
     width: 50%;
     border-radius: 10px;
-    border-top: 3px solid rgba(186, 124, 237);
-    border-bottom: 3px solid rgba(186, 124, 237);
-    background: linear-gradient(
-      to left top,
-      rgba(1, 161, 186, 0.3),
-      rgba(186, 124, 237, 0.3)
-    );
+    border-radius: 10px;
+    background-color: #0a0120;
+    border: 1px solid #7dd7bd;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    color: #7dd7bd;
   }
 
   #form label {
     width: 50%;
     font-weight: bolder;
+    color: #7dd7bd;
+  }
+
+  ::-webkit-calendar-picker-indicator {
+    filter: invert(1);
   }
 
   #form input {
@@ -83,9 +79,14 @@
     width: 50%;
     height: 25px;
     border-radius: 5px;
-    background-color: rgba(186, 124, 237, 0.3);
+    background-color: #0a0120;
+    border: 1px solid #7dd7bd;
     outline: none;
-    border: 1px solid rgba(186, 124, 237, 0.5);
+    color: #7dd7bd;
+  }
+
+  ::placeholder {
+    color: #7dd7bd;
   }
 
   #form input #image {
