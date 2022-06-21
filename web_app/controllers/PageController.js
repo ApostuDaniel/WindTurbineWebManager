@@ -46,7 +46,7 @@ async function getPublicPage(req, res, id) {
 
     let turbinesData;
     if(!queryObject || Object.keys(queryObject).length === 0){
-      turbinesData = await getTurbines()
+      turbinesData = await restAPIInteraction.getTurbines()
     }
     else{
       let query = createServerQueryString(queryObject)
@@ -88,7 +88,8 @@ async function getPublicPage(req, res, id) {
       turbines,
       chartData,
       companies,
-      userId: id
+      userId: id,
+      queryObject
     })
 
     res.end(htmlRenderized);
@@ -189,7 +190,7 @@ async function getPrivatePage(req, res, id) {
 
      let ownedTurbineData
      if (!queryObject || Object.keys(queryObject).length === 0) {
-       ownedTurbineData = await getOwnedTurbines(id)
+       ownedTurbineData = await restAPIInteraction.getOwnedTurbines(id)
      } else {
        let query = createServerQueryString(queryObject)
        ownedTurbineData = await restAPIInteraction.filterPrivateTurbines(
@@ -201,7 +202,9 @@ async function getPrivatePage(req, res, id) {
     const chartData = {};
 
     for (turbine of ownedTurbineData) {
-      const allTurbineData = await getTurbineAllData(turbine._id);
+      const allTurbineData = await restAPIInteraction.getTurbineAllData(
+        turbine._id
+      )
       let timeLabels = allTurbineData.historicData.map((x) =>
         new Date(x.timeStamp).getTime()
       );
