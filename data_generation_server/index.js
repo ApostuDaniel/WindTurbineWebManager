@@ -51,14 +51,13 @@ async function updateStoppedTurbine(turbine) {
   const data = await fetch(turbine_latest_data_api_url);
   const turbineData = await data.json();
   let newData;
-
+  const date = Date.now();
   //   console.log("Old:");
   //   console.log(turbineData);
   if (turbineData.message === undefined) {
     // console.log("Old");
     const oldTurbineWear = turbineData.turbineWear;
     const oldPowerGenerated = turbineData.powerGenerated;
-    const date = Date.now();
     newData = {
       windSpeed: 0,
       turbineWear: oldTurbineWear,

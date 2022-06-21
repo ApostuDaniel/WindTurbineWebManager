@@ -1,6 +1,7 @@
 <style>
   html {
     height: 100%;
+    user-select: none;
   }
 
   body {
@@ -11,21 +12,17 @@
   }
 
   #moto {
-    font-family: "Exo 2", sans-serif;
+    font-family: "Jura", sans-serif;
     font-weight: bold;
     font-size: 3vw;
-    color: #01a1ba;
+    color: #7dd7bd;
   }
 
   #sidebar {
     position: absolute;
     top: 0;
     left: 0;
-    background: linear-gradient(
-      to left top,
-      rgba(1, 161, 186, 0.5),
-      rgba(186, 124, 237, 0.5)
-    );
+    background-color: #0a0120;
     width: 50vw;
     height: 100%;
   }
@@ -39,45 +36,43 @@
 
   #auth {
     padding: 15px;
-    background-color: #01a1ba;
     width: 40%;
     border: 0;
     margin-top: 40px;
-    font-family: "Exo 2", sans-serif;
+    font-family: "Jura", sans-serif;
     font-weight: bold;
     font-size: 15px;
-    color: #ecfcff;
+    background-color: #0a0120;
+    color: #7dd7bd;
     transition: 400ms ease-in-out;
+    border: 1px solid #7dd7bd;
     border-radius: 50px;
   }
 
   #auth:hover {
-    transform: skewX(-5deg) skewY(-5deg);
-    box-shadow: 5px 5px 0px rgba(186, 124, 237, 0.5);
+    background-color: #7dd7bd;
+    color: #0a0120;
   }
 
   #title1 {
-    position: absolute;
-    font-family: "Exo 2", sans-serif;
+    font-family: "Jura", sans-serif;
     font-weight: bolder;
     font-size: 3vw;
-    color: #01a1ba;
-    margin-left: 35%;
-    transition: 500ms ease-in-out;
+    color: #E9FEF7;
     z-index: 1;
   }
 
   #title2 {
-    font-family: "Exo 2", sans-serif;
+    font-family: "Jura", sans-serif;
     font-weight: bolder;
     font-size: 2vw;
-    color: #05595b;
+    color: #7dd7bd;
   }
 
   @media screen and (max-width: 800px) {
     #auth {
       padding: 10px;
-      font-family: "Exo 2", sans-serif;
+      font-family: "Jura", sans-serif;
       font-size: 9px;
     }
   }

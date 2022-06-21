@@ -1,23 +1,18 @@
 <style>
   html {
     height: 130%;
-    font-family: "Exo 2", sans-serif;
+    font-family: "Jura", sans-serif;
   }
 
   body {
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(
-      to left top,
-      rgba(1, 161, 186, 0.8),
-      rgba(186, 124, 237, 0.8)
-    );
+    background-color: #0a0120;
     margin: 0;
     width: 100%;
     height: 100%;
     display: flex;
-
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
 
   .login {
@@ -27,20 +22,16 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border-top: 2px solid rgba(186, 124, 237, 1);
-    border-bottom: 2px solid rgba(186, 124, 237, 1);
     border-radius: 10px;
-    background: linear-gradient(
-      to left top,
-      rgba(1, 161, 186, 0.5),
-      rgba(186, 124, 237, 0.5)
-    );
+    border: 1px solid #7dd7bd;
+    background-color: #0a0120;
   }
 
   .login label {
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: 40px;
+    color: #7dd7bd;
   }
 
   .login input {
@@ -51,9 +42,10 @@
     outline: none;
     padding: 10px;
     border-radius: 5px;
-    background-color: rgba(186, 124, 237, 0.9);
+    background-color: #0a0120;
     outline: none;
-    border: 1px solid rgba(186, 124, 237);
+    border: 1px solid #7dd7bd;
+    color: #7dd7bd;
     transition: ease-in-out 700ms;
   }
 
@@ -65,10 +57,18 @@
     outline: none;
     padding: 10px;
     border-radius: 5px;
-    background-color: rgba(186, 124, 237, 0.9);
     outline: none;
-    border: 1px solid rgba(186, 124, 237);
-    transition: ease-in-out 700ms;
+    border: 1px solid #0a0120;
+    background-color: #7dd7bd;
+    color: #0a0120;
+    transition: ease-in-out 300ms;
+  }
+
+  .bottomButtons:hover {
+    background-color: #0a0120;
+    color: #7dd7bd;
+    border: 1px solid #7dd7bd;
+    cursor: pointer;
   }
 
   .buttons {
@@ -78,24 +78,18 @@
   }
 
   #title1 {
-    font-family: "Exo 2", sans-serif;
+    font-family: "Jura", sans-serif;
     font-weight: bolder;
     font-size: 3vw;
-    color: #01a1ba;
-    margin-bottom: 10%;
-    transition: 500ms ease-in-out;
-    margin-top: 3%;
+    color: #E9FEF7;
+    z-index: 1;
   }
 
   #title2 {
-    font-family: "Exo 2", sans-serif;
+    font-family: "Jura", sans-serif;
     font-weight: bolder;
     font-size: 2vw;
-    color: #05595b;
-    margin-top: 3%;
-  }
-  .login input:focus {
-    border-bottom: 2px solid black;
+    color: #7dd7bd;
   }
 
   #errormessage {

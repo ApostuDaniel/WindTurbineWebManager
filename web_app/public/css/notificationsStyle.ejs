@@ -3,17 +3,14 @@
     height: 100%;
     width: 100%;
     margin: 0;
-    font-family: "Exo 2", sans-serif;
+    font-family: "Jura", sans-serif;
     font-weight: bold;
     user-select: none;
+    color: #7dd7bd;
   }
 
   body {
-    background: linear-gradient(
-      to left top,
-      rgba(1, 161, 186, 0.8),
-      rgba(186, 124, 237, 0.8)
-    );
+    background-color: #92CCFF;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -23,27 +20,29 @@
   }
 
   .notifications {
-    background: rgba(1, 161, 186, 0.8);
-    padding-top: 5px;
-    padding-bottom: 5px;
-    width: 2%;
+    background-color: #0a0120;
+    padding: 5px;
+    width: 10%;
     transition: ease-in-out 500ms;
   }
 
   .notifications:hover {
     width: 100%;
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 50px;
   }
 
   .alerts {
-    background: red;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    width: 2%;
+    background-color: red;
+    padding: 5px;
+    width: 10%;
     transition: ease-in-out 500ms;
   }
 
   .alerts:hover {
     width: 100%;
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 50px;
   }
 
   .notification-wrapper {
@@ -57,10 +56,10 @@
 
   .notification {
     height: 100px;
-    background-color: rgba(142, 232, 246, 0.8);
+    background-color: #0a0120;
     margin-top: 10px;
     margin-bottom: 10px;
-    border-left: 5px solid rgba(1, 161, 186, 0.8);
+    border-left: 5px solid #7dd7bd;
     border-bottom-right-radius: 20px;
     transition: ease-in-out 300ms;
     display: flex;
@@ -70,16 +69,22 @@
   }
 
   .notification:hover {
-    border-left: 10px solid rgba(1, 161, 186, 0.8);
+    border-left: 15px solid #7dd7bd;
   }
 
   .notification button, .alert button {
     outline: none;
     border: none;
     padding: 5px;
+    background-color: #7dd7bd;
+    color: #0a0120;
+    border: 1px solid #0a0120;
   }
 
   .notification button:hover, .alert button:hover {
+    background-color: #0a0120;
+    color: #7dd7bd;
+    border: 1px solid #7dd7bd;
     cursor: pointer;
   }
 
@@ -94,7 +99,7 @@
 
   .alert {
     height: 100px;
-    background-color: rgb(246, 215, 215);
+    background-color: #0a0120;
     margin-top: 10px;
     margin-bottom: 10px;
     border-left: 5px solid red;
@@ -107,6 +112,25 @@
   }
 
   .alert:hover {
-    border-left: 10px solid red;
+    border-left: 15px solid red;
+  }
+
+  .wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+
+  .text {
+    width: 90%;
+  }
+
+  .close {
+    padding: 10px;
+    border-radius: 50%;
+    background-color: red;
   }
 </style>

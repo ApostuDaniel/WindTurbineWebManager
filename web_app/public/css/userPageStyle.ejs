@@ -1,17 +1,14 @@
 <style>
   body {
-    font-family: "Exo 2", sans-serif;
+    font-family: "Jura", sans-serif;
     font-weight: bold;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(
-      to left top,
-      rgba(1, 161, 186, 0.8),
-      rgba(186, 124, 237, 0.8)
-    );
+    background-color: #E9FEF7;
     margin: 0;
     width: 100%;
     height: auto;
+    color: #7dd7bd;
   }
 
   label {
@@ -29,13 +26,12 @@
     margin-bottom: 20px;
     width: 40%;
     margin-right: 30px;
-    border: none;
-    outline: none;
     padding: 10px;
     border-radius: 5px;
-    background-color: rgba(186, 124, 237, 0.9);
+    background-color: #0a0120;
     outline: none;
-    border: 1px solid rgba(186, 124, 237);
+    border: 1px solid #7dd7bd;
+    color: #7dd7bd;
     transition: ease-in-out 700ms;
   }
 
@@ -43,11 +39,8 @@
     margin-left: 5%;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(
-      to left top,
-      rgba(1, 161, 186, 0.5),
-      rgba(186, 124, 237, 0.5)
-    );
+    background-color: #0a0120;
+    border: 1px solid #7dd7bd;
     align-items: center;
   }
 
@@ -55,11 +48,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(
-      to left top,
-      rgba(1, 161, 186, 0.5),
-      rgba(186, 124, 237, 0.5)
-    );
+    background-color: #0a0120;
+    border: 1px solid #7dd7bd;
     margin-right: 10%;
   }
 
@@ -67,23 +57,26 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 10%;
+    margin-top: 5%;
   }
 
   .button {
-    margin-top: 5%;
     margin-bottom: 10%;
-    width: 20%;
-
-    margin-left: 70%;
-    border: none;
-    outline: none;
+    width: 10%;
     padding: 10px;
-    border-radius: 5px;
-    background-color: rgba(186, 124, 237, 0.9);
+    margin-left: 70%;
+    background-color: #7dd7bd;
     outline: none;
-    border: 1px solid rgba(186, 124, 237);
-    transition: ease-in-out 700ms;
+    border: none;
+    color: #0a0120;
+    transition: ease-in-out 300ms;
+  }
+
+  .button:hover {
+    background-color: #0a0120;
+    color: #7dd7bd;
+    border: 1px solid #7dd7bd;
+    cursor: pointer;
   }
 
   .text {
