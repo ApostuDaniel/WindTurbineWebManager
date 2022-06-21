@@ -5,6 +5,7 @@
     <div class="attributes">
       <div class="attribute">Construction date: <%= turbine.constructionYear %></div>
       <div class="attribute">Suitability: <%= turbine.suitability %></div>
+      <div class="attribute">Terrain: <%= turbine.terrain %></div>
       <div class="attribute"><%= turbine.turbineState %></div>
       <button
         class="dButton"
@@ -16,8 +17,6 @@
 
     <div class="imgs">
       <img src=<%= turbine.imageLink %> alt="Image placeholder" /> 
-      <!--<img src=https://webprojectrdv.s3.amazonaws.com/images/mockGraph.jpg alt="Graph
-      placeholder" />-->
       <%- include (dir + '/views/partials/cumulativeChart', chart) %>
     </div>
   </div>

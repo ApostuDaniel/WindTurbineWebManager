@@ -26,7 +26,7 @@
     <div class="turbines">
       <% for(turbine of turbines) {%> <%- include(dir +
       "/views/partials/publicTurbine", {turbine:turbine,
-      chart:chartData[turbine._id + 'chart'], userId:userId}) %> <% } %>
+      chart:chartData[turbine.turbineData._id + 'chart'], userId:userId}) %> <% } %>
     </div>
     <%- include (dir+'/public/scripts/protectedRouteScript'); %> 
     <%- include (dir+'/public/scripts/publicownedPageScript'); %>

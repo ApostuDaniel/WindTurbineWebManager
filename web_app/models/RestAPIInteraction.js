@@ -66,6 +66,15 @@ async function getAlerts(id) {
   return alerts;
 }
 
+async function getLocation(turbine) {
+  const weather_api_url = `http://api.weatherapi.com/v1/current.json?key=2407cb95cd0e4b31971101252221306&q=${turbine.latitude},${turbine.longitude}&aqi=no`;
+  const response = await fetch(weather_api_url);
+  const json = await response.json();
+
+  const location = json.location.name + ', ' + json.location.region + ', ' + json.location.country;
+  return location;
+}
+
 module.exports = {
   getAllCompanies,
   getTurbines,
@@ -76,4 +85,5 @@ module.exports = {
   getTurbineAllData,
   getNotifications,
   getAlerts,
+  getLocation
 };

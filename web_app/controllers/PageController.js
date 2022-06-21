@@ -32,16 +32,23 @@ async function getPublicPage(req, res, id) {
       "utf8"
     );
 
-    const turbineData = await restAPIInteraction.getTurbines();
+    const turbinesData = await restAPIInteraction.getTurbines();
     const chartData = {};
+    const turbines = [];
 
-    for (turbine of turbineData) {
-      const allTurbineData = await restAPIInteraction.getTurbineAllData(turbine._id);
+    for (turbineData of turbinesData) {
+      const location = await restAPIInteraction.getLocation(turbineData);
+      turbines.push({
+        turbineData, 
+        location
+      })
+
+      const allTurbineData = await restAPIInteraction.getTurbineAllData(turbineData._id);
       let timeLabels = allTurbineData.historicData.map((x) =>
         new Date(x.timeStamp).getTime()
       );
-      chartData[turbine._id + "chart"] = {
-        canvasId: turbine._id + "chart",
+      chartData[turbineData._id + "chart"] = {
+        canvasId: turbineData._id + "chart",
         timeLabels: timeLabels,
         data: allTurbineData.historicData.map((x) => x.turbineWear),
         lineTitle: "Periodic Turbine Wear",
@@ -58,7 +65,7 @@ async function getPublicPage(req, res, id) {
 
     var htmlRenderized = ejs.render(htmlContent, {
       filename: 'public.ejs',
-      turbines: turbineData,
+      turbines,
       chartData,
       companies,
       userId: id
