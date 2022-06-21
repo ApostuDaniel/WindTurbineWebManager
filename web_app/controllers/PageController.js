@@ -107,7 +107,6 @@ async function getPrivatePage(req, res, id) {
       turbines: ownedTurbineData,
       chartData,
       companies,
-      userId: id
     });
 
     res.end(htmlRenderized);
@@ -237,7 +236,7 @@ async function getCreateTurbinePage(req, res) {
   }
 }
 
-async function getTurbineDetailsPage(req, res, id) {
+async function getTurbineDetailsPage(req, res, id, userId) {
   try {
     res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
@@ -246,6 +245,12 @@ async function getTurbineDetailsPage(req, res, id) {
     );
 
     const turbineData = await restAPIInteraction.getTurbine(id);
+
+    if(userId !== turbineData.userId) {
+      getUnauthorizedPage(req, res);
+      return;
+    }
+
     const userData = await restAPIInteraction.getUser(turbineData.userId);
     const turbineNewData = await restAPIInteraction.getTurbineNewData(id);
     const allTurbineData = await restAPIInteraction.getTurbineAllData(id);

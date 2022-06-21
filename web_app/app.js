@@ -33,7 +33,9 @@ const server = http.createServer((req, res) => {
       PageController.getNotificationsPage(req, res, id);
     } else if (req.url.match(/\/pages\/turbineDetails\/\w+$/)) {
       const id = req.url.split("/")[3];
-      PageController.getTurbineDetailsPage(req, res, id);
+      const cookies = parseCookies(req);
+      const userId = cookies.user_id;
+      PageController.getTurbineDetailsPage(req, res, id, userId);
     } else if (req.url === "/unauthorized") {
       PageController.getUnauthorizedPage(req, res);
     } else {
