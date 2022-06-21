@@ -4,6 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include (dir+'/public/scripts/protectedRouteScript'); %> 
     <link rel="icon" href=https://webprojectrdv.s3.amazonaws.com/favicon.png>
     <%- include(dir+'/public/css/publicPageStyle'); %> <%-
     include(dir+'/public/css/navBarStyle'); %> <%-
@@ -25,7 +26,7 @@
       "/views/partials/publicTurbine", {turbine:turbine,
       chart:chartData[turbine.turbineData._id + 'chart'], userId:userId}) %> <% } %>
     </div>
-    <%- include (dir+'/public/scripts/protectedRouteScript'); %> 
+    
     <%- include (dir+'/public/scripts/publicownedPageScript'); %>
     <%- include (dir+'/public/scripts/purchaseScript'); %>
   </body>
