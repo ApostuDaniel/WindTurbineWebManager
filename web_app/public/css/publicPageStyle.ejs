@@ -3,6 +3,7 @@
     margin: 0;
     background-color: #ecfcff;
     font-family: "Exo 2", sans-serif;
+    user-select: none;
   }
 
   .content {
@@ -121,7 +122,7 @@
     height: 400px;
     margin: 0;
     position: fixed;
-    z-index: 0;
+    z-index: 100;
     top: 15%;
     left: 17%;
     margin-left: 100px;
@@ -202,6 +203,25 @@
 
     .popup {
       margin-left: 10%;
+    }
+  }
+
+  .spinner {
+    background-color: green;
+    height: 10px;
+    width: 40px;
+    margin-left: 10px;
+    animation: rotation 2s linear infinite;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+
+  @keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
     }
   }
 </style>

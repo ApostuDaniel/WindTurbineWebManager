@@ -1,15 +1,18 @@
 <% var dir = process.cwd() %>
 <div onclick="showPublicTurbine(`<%= turbine._id %>`,`<%= turbine.userId %>`)" class="turbine">
   <div class="header">
-    <img src=https://webprojectrdv.s3.amazonaws.com/images/menu.png alt="spinner placeholder" />
+     <% if(turbine.turbineState === 'Running'){ %>
+      <div class="spinner"></div>
+    <% } else{ %>  
+      <div class="spinner" style="visibility: hidden"></div>
+    <% } %>
     <p><%= turbine.name %></p>
-    <p style="visibility: hidden">ab</p>
+    <p style="visibility: hidden"></p>
   </div>
   <div class="content">
     <p>Latitude: <%= turbine.latitude %></p>
     <p>Longitude: <%= turbine.longitude %></p>
     <p>Terrain: <%= turbine.terrain %></p>
-    
   </div>
 </div>
 
