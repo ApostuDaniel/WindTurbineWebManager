@@ -20,7 +20,7 @@
   </head>
   <body>
     <%- include(dir + "/views/partials/navBar") %> <%- include(dir +
-    "/views/partials/filters") %>
+    "/views/partials/filters",{companies:{}, queryObject, isPublic:false}) %>
 
     <div class="cardList">
       <% for(turbine of turbines) {%> <%- include(dir +

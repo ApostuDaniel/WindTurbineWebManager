@@ -1,0 +1,12 @@
+<script>
+function setFilterFromQuery(queryStringJson){
+    console.log(queryStringJson)
+    const queryObject = JSON.parse(queryStringJson)
+    console.log('in set filter from Query')
+    console.log(queryObject)
+    for(prop in queryObject){
+        const inputField = document.getElementById(prop)
+        inputField.value = queryObject[prop]
+    }
+}
+</script>

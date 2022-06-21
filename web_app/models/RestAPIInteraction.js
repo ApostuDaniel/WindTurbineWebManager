@@ -8,4 +8,20 @@ async function getAllCompanies() {
   return users.map((user) => user.company)
 }
 
-module.exports = { getAllCompanies }
+async function filterPublicTurbines(query){
+  const data = await fetch(`http://localhost:5000/api/turbines/filter${query}`)
+  const filteredTurbines = await data.json()
+  return filteredTurbines
+}
+
+async function filterPrivateTurbines(id, query){
+  const data = await fetch(`http://localhost:5000/api/turbines/filter/${id}${query}`)
+  const filteredTurbines = await data.json()
+  return filteredTurbines
+}
+
+module.exports = {
+  getAllCompanies,
+  filterPublicTurbines,
+  filterPrivateTurbines,
+}

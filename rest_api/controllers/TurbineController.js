@@ -169,6 +169,11 @@ async function getNewestTurbineData(req, res, id) {
 async function filterTurbines(req, res, id) {
   try {
     const queryObject = url.parse(req.url, true).query
+    let company = null
+    if(queryObject['company'] && !(queryObject['company'] === '')){
+      company = queryObject['company'];
+      delete queryObject['company'];
+    }
     if (!queryObject) {
       if (!id) {
         await getPublicTurbines(req, res)
@@ -184,7 +189,10 @@ async function filterTurbines(req, res, id) {
           searchObject['isPublic'] = true
         }
         console.log(searchObject)
-        const turbines = await Turbine.find(searchObject)
+        let turbines = await Turbine.find(searchObject)
+        if(company){
+          turbines = await filterByCompany(turbines, company)
+        }
         res.writeHead(200, { 'Content-Type': 'application/json' })
         res.end(JSON.stringify(turbines))
       } catch (err) {
@@ -196,6 +204,17 @@ async function filterTurbines(req, res, id) {
   } catch (error) {
     console.log(error)
   }
+}
+
+async function filterByCompany(turbines, company){
+  const filteredTurbines = []
+  for(const turbine of turbines){
+    const user = await User.findById(turbine.userId)
+    if(user.company === company){
+      filteredTurbines.push(turbine)
+    }
+  }
+  return filteredTurbines;
 }
 
 //POST

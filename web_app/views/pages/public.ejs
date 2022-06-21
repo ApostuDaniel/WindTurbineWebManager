@@ -21,12 +21,12 @@
   </head>
   <body>
     <%- include(dir + "/views/partials/navBar") %> <%- include(dir +
-    "/views/partials/filters",{companies}) %>
+    "/views/partials/filters",{companies, queryObject, isPublic:true}) %>
 
     <div class="turbines">
       <% for(turbine of turbines) {%> <%- include(dir +
       "/views/partials/publicTurbine", {turbine:turbine,
-      chart:chartData[turbine._id + 'chart'], userId:userId}) %> <% } %>
+      chart:chartData[turbine._id + 'chart'], userId:turbine.userId}) %> <% } %>
     </div>
     <%- include (dir+'/public/scripts/protectedRouteScript'); %> 
     <%- include (dir+'/public/scripts/publicownedPageScript'); %>

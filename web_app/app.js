@@ -9,36 +9,36 @@ const server = http.createServer((req, res) => {
   try {
     if (req.url === "/pages") {
       PageController.getLandingPage(req, res);
-    } else if (req.url === "/pages/public") {
-      const cookies = parseCookies(req);
-      const id = cookies.user_id;
-      PageController.getPublicPage(req, res, id);
-    } else if (req.url === "/pages/owned") {
-      const cookies = parseCookies(req);
-      const id = cookies.user_id;
-      PageController.getPrivatePage(req, res, id);
-    } else if (req.url === "/pages/createTurbine") {
-      PageController.getCreateTurbinePage(req, res);
-    } else if (req.url === "/pages/login") {
-      PageController.getLoginPage(req, res);
-    } else if (req.url === "/pages/userDetails") {
-      PageController.getUserDetailsPage(req, res);
-    } else if (req.url === "/pages/register") {
-      PageController.getRegisterPage(req, res);
-    } else if (req.url === "/pages/resetpass") {
-      PageController.getResetPassPage(req, res);
-    } else if(req.url === "/pages/notifications") {
-      const cookies = parseCookies(req);
-      const id = cookies.user_id;
-      PageController.getNotificationsPage(req, res, id);
+    } else if (req.url.match(/\/pages\/public\??(?:&?[^=&]*=[^=&]*)*$/)) {
+      const cookies = parseCookies(req)
+      const id = cookies.user_id
+      PageController.getPublicPage(req, res, id)
+    } else if (req.url.match(/\/pages\/owned\??(?:&?[^=&]*=[^=&]*)*$/)) {
+      const cookies = parseCookies(req)
+      const id = cookies.user_id
+      PageController.getPrivatePage(req, res, id)
+    } else if (req.url === '/pages/createTurbine') {
+      PageController.getCreateTurbinePage(req, res)
+    } else if (req.url === '/pages/login') {
+      PageController.getLoginPage(req, res)
+    } else if (req.url === '/pages/userDetails') {
+      PageController.getUserDetailsPage(req, res)
+    } else if (req.url === '/pages/register') {
+      PageController.getRegisterPage(req, res)
+    } else if (req.url === '/pages/resetpass') {
+      PageController.getResetPassPage(req, res)
+    } else if (req.url === '/pages/notifications') {
+      const cookies = parseCookies(req)
+      const id = cookies.user_id
+      PageController.getNotificationsPage(req, res, id)
     } else if (req.url.match(/\/pages\/turbineDetails\/\w+$/)) {
-      const id = req.url.split("/")[3];
-      PageController.getTurbineDetailsPage(req, res, id);
-    } else if (req.url === "/unauthorized") {
-      PageController.getUnauthorizedPage(req, res);
+      const id = req.url.split('/')[3]
+      PageController.getTurbineDetailsPage(req, res, id)
+    } else if (req.url === '/unauthorized') {
+      PageController.getUnauthorizedPage(req, res)
     } else {
-      res.writeHead(404, { "Content-Type": "text/html" });
-      res.end("<h1>404 NOT FOUND</h1>");
+      res.writeHead(404, { 'Content-Type': 'text/html' })
+      res.end('<h1>404 NOT FOUND</h1>')
     }
   } catch (error) {
     console.log(error);
