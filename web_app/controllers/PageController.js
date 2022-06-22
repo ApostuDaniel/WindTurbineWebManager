@@ -156,11 +156,12 @@ async function getPrivatePage(req, res, id) {
     const companies = await restAPIInteraction.getAllCompanies();
 
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: "public.ejs",
+      filename: "owned.ejs",
       turbines: ownedTurbineData,
       chartData,
       companies,
       queryObject,
+      userId:id
     });
 
     res.end(htmlRenderized);

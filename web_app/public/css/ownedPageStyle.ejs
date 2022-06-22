@@ -111,19 +111,49 @@
     cursor: pointer;
   }
 
-  .addTurbine {
-    background-color: #0a0120;
-    padding: 10px;
-    position: fixed;
-    top: 50vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.sideButtonsWrapper{
+  position: fixed;
+  top: 50vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.sideButton {
+  background-color: #0a0120;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
   }
 
-  .addTurbine img {
+  .sideButton img {
     width: 30px;
   }
+
+  .tooltip {
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #0a0120;
+  color: #7dd7bd;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  top: -5px;
+  left: 105%;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
 
   .stopped {
     color: red;

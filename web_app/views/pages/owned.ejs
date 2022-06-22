@@ -22,10 +22,17 @@
   <body>
     <%- include(dir + "/views/partials/navBar") %> <%- include(dir +
     "/views/partials/filters",{companies:{}, queryObject, isPublic:false}) %>
-
-    <div class="addTurbine" onclick="location.href='/pages/createTurbine'">
-      <img src=https://webprojectrdv.s3.amazonaws.com/addIcon.png>
+    <div class="sideButtonsWrapper">
+      <div class="sideButton tooltip" onclick="location.href='/pages/createTurbine'">
+        <span class="tooltiptext">Add Turbine</span>
+        <img src="https://webprojectrdv.s3.amazonaws.com/addIcon.png">
+      </div>
+      <div class="sideButton tooltip" onclick="downloadTurbinesCSV()">
+        <span class="tooltiptext">Export Turbines to CSV</span>
+        <img src="https://cdn-icons-png.flaticon.com/512/724/724827.png">
+      </div>
     </div>
+    <%- include(dir + "/public/scripts/turbineCSV", {userId}) %>
 
     <% if(turbines.length > 0){ %>
       <div class="cardList">
