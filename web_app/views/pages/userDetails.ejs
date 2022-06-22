@@ -2,9 +2,12 @@
 <html>
   <% var dir = process.cwd() %> <link rel="icon"
   href=https://webprojectrdv.s3.amazonaws.com/favicon.png>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Jura:wght@300&display=swap"
+    rel="stylesheet"
+  />
   <%- include(dir+'/public/css/navBarStyle'); %> <%-
   include(dir+'/public/css/userPageStyle'); %>
   <head>
@@ -16,28 +19,18 @@
     <div class="main">
       <div class="mainforms">
         <div class="form">
-          <form action="/action_page.php">
+          <form action="" id="firstForm">
             <div class="detail">
               <label for="firstname">First name:</label>
               <input type="text" id="firstname" name="firstname" value="" />
             </div>
             <div class="detail">
               <label for="secondname">Second name:</label>
-              <input
-                type="text"
-                id="secondname"
-                name="secondname"
-                value=""
-              />
+              <input type="text" id="secondname" name="secondname" value="" />
             </div>
             <div class="detail">
               <label for="company">Company:</label>
-              <input
-                type="text"
-                id="company"
-                name="company"
-                value=""
-              />
+              <input type="text" id="company" name="company" value="" />
             </div>
             <div class="detail">
               <label for="CNP">CNP:</label>
@@ -49,12 +42,7 @@
             </div>
             <div class="detail">
               <label for="phone">Phone:</label>
-              <input
-                type="number"
-                id="phone"
-                name="phone"
-                value=""
-              />
+              <input type="number" id="phone" name="phone" value="" />
             </div>
             <div class="detail">
               <label for="address">Address</label>
@@ -69,13 +57,14 @@
               <label for="date">Date:</label>
               <input type="" id="date" name="date" value="2021-06-20" />
             </div>
-            <!-- <input type="submit" value="Submit" /> -->
+
+            <button class="button" onclick="firstForm()">Done</button>
           </form>
           <p class="errorMessage" id="error"></p>
         </div>
         <div class="form2">
           <p class="text">Reset Password</p>
-          <form action="/action_page.php">
+          <form action="" id="secondForm">
             <div class="detail">
               <label for="newpass">New Password:</label>
               <input type="password" id="newpass" name="newpass" value="" />
@@ -84,19 +73,16 @@
               <label for="confirmpass">Confirm password:</label>
               <input type="password" id="confpass" name="confpass" value="" />
             </div>
+            <button class="button" onclick="secondForm()">Done</button>
           </form>
           <p class="errorMessage" id="passvalidation"></p>
         </div>
       </div>
-      <button class="button" onclick="buttonClick()">Done</button>
     </div>
     <%- include (dir+'/public/scripts/userDetails'); %>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    
 
-    <%- include
-    (dir+'/public/scripts/protectedRouteScript'); %>
-    <%- include
+    <%- include (dir+'/public/scripts/protectedRouteScript'); %> <%- include
     (dir+'/public/scripts/publicownedPageScript'); %>
   </body>
 </html>

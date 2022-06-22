@@ -40,14 +40,14 @@
     document.getElementById("address").setAttribute("value", user_data.adress);
     document.getElementById("date").setAttribute("value", `${formedData}`);
   }
-  async function changeDetails() {
+  async function changeDetailsFirstForm() {
     var firstName = document.getElementById("firstname").value;
     var secondName = document.getElementById("secondname").value;
     var company = document.getElementById("company").value;
     var mail = document.getElementById("mail").value;
     var phone = document.getElementById("phone").value;
     var address = document.getElementById("address").value;
-
+    var validationMessage = "";
     console.log(mail);
     if (
       firstName == "" ||
@@ -61,7 +61,6 @@
       document.getElementById("error").innerText =
         "All fields should be filled";
     } else {
-      var validationMessage = "";
       if (!firstName.match(/^[A-Za-z ]+$/)) {
         validationMessage =
           "First name is not correct! It should contain only letters";
@@ -79,57 +78,22 @@
       if (!address.match(/[a-zA-Z0-9_/-/./_ ]+$/)) {
         validationMessage = "Address should be correct";
       }
-      if (validationMessage != "") {
-        document.getElementById("error").innerText = validationMessage;
-      } else {
-        document.getElementById("error").innerText = validationMessage;
-        password = document.getElementById("newpass").value;
-        confirmPassword = document.getElementById("confpass").value;
-        if (password != "") {
-          if (!password.match(/^[a-zA-Z0-9_/-/./=/_]{8}/)) {
-            document.getElementById("passvalidation").innerText =
-              "8 characters minimum";
-          } else {
-            if (password == confirmPassword) {
-              document.getElementById("passvalidation").innerText ="";
-              putTheData(
-                firstName,
-                secondName,
-                company,
-                mail,
-                phone,
-                address,
-                password
-              );
-              console.log("s a reusit");
-            } else {
-              document.getElementById("passvalidation").innerText =
-                "password must match";
-            }
-          }
-        } else {
-          putTheData(
-            firstName,
-            secondName,
-            company,
-            mail,
-            phone,
-            address,
-            null
-          );
-          console.log("s a reusit");
-        }
-      }
+    }
+    if (validationMessage != "") {
+      document.getElementById("error").innerText = validationMessage;
+    } else {
+      putTheDataFirstForm(firstName, secondName, company, mail, phone, address);
+      document.getElementById("error").innerText = "User details changed";
     }
   }
-  async function putTheData(
+
+  async function putTheDataFirstForm(
     firstName,
     secondName,
     company,
     mail,
     phone,
-    address,
-    pass
+    address
   ) {
     const id = getCookie("user_id");
     const newUserData = {
@@ -139,7 +103,19 @@
       mail: mail,
       phone: phone,
       adress: address,
-      password: pass,
+    };
+    console.log(newUserData);
+    const response = await axios({
+      method: "put",
+      url: `http://localhost:5000/api/users/${id}`,
+      data: JSON.stringify(newUserData),
+    });
+  }
+
+  async function putTheDataSecondForm(password) {
+    const id = getCookie("user_id");
+    const newUserData = {
+      password: password,
     };
     const response = await axios({
       method: "put",
@@ -147,9 +123,47 @@
       data: JSON.stringify(newUserData),
     });
   }
+
+  function changeDetailsSecondForm() {
+    password = document.getElementById("newpass").value;
+    confirmPassword = document.getElementById("confpass").value;
+    if (password != "") {
+      if (!password.match(/^[a-zA-Z0-9_/-/./=/_]{8}/)) {
+        document.getElementById("passvalidation").innerText =
+          "8 characters minimum";
+      } else {
+        if (password == confirmPassword) {
+          document.getElementById("passvalidation").innerText = "";
+          putTheDataSecondForm(password);
+          document.getElementById("passvalidation").innerText =
+            "Password changed";
+          console.log("s a reusit");
+        } else {
+          document.getElementById("passvalidation").innerText =
+            "password must match";
+        }
+      }
+    }
+  }
+
+  function preventForm() {
+    document.getElementById("firstForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+    });
+
+    document.getElementById("secondForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+    });
+  }
+  preventForm();
   putUserData();
-  function buttonClick() {
+  function firstForm() {
     console.log("apasat");
-    changeDetails();
+    changeDetailsFirstForm();
+  }
+
+  function secondForm() {
+    console.log("apasat");
+    changeDetailsSecondForm();
   }
 </script>
