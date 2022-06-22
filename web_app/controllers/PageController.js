@@ -1,11 +1,11 @@
 const fs = require("fs");
 const ejs = require("ejs");
-const url = require("url")
+const url = require("url");
 
 const fetch = (url) =>
   import("node-fetch").then(({ default: fetch }) => fetch(url));
 
-const restAPIInteraction = require("./../models/RestAPIInteraction")
+const restAPIInteraction = require("./../models/RestAPIInteraction");
 
 async function getLandingPage(req, res) {
   try {
@@ -33,24 +33,23 @@ async function getPublicPage(req, res, id) {
       "utf8"
     );
 
-    const queryObject = url.parse(req.url, true).query
+    const queryObject = url.parse(req.url, true).query;
     let noDataQueryObject = true;
-    for(prop in queryObject){
-      if(!queryObject[prop] && queryObject[prop] === ''){
-        delete queryObject[prop] 
+    for (prop in queryObject) {
+      if (!queryObject[prop] && queryObject[prop] === "") {
+        delete queryObject[prop];
       }
     }
 
-    if (queryObject['state'] === 'Any') delete queryObject['state']
-    if (queryObject['company'] === 'Any Company') delete queryObject['company']
+    if (queryObject["state"] === "Any") delete queryObject["state"];
+    if (queryObject["company"] === "Any Company") delete queryObject["company"];
 
     let turbinesData;
-    if(!queryObject || Object.keys(queryObject).length === 0){
-      turbinesData = await restAPIInteraction.getTurbines()
-    }
-    else{
-      let query = createServerQueryString(queryObject)
-      turbinesData = await restAPIInteraction.filterPublicTurbines(query)
+    if (!queryObject || Object.keys(queryObject).length === 0) {
+      turbinesData = await restAPIInteraction.getTurbines();
+    } else {
+      let query = createServerQueryString(queryObject);
+      turbinesData = await restAPIInteraction.filterPublicTurbines(query);
     }
     const chartData = {};
     const turbines = [];
@@ -59,11 +58,13 @@ async function getPublicPage(req, res, id) {
       const location = await restAPIInteraction.getLocation(turbineData);
       // const location = 'Not shown yet';
       turbines.push({
-        turbineData, 
-        location
-      })
+        turbineData,
+        location,
+      });
 
-      const allTurbineData = await restAPIInteraction.getTurbineAllData(turbineData._id);
+      const allTurbineData = await restAPIInteraction.getTurbineAllData(
+        turbineData._id
+      );
       let timeLabels = allTurbineData.historicData.map((x) =>
         new Date(x.timeStamp).getTime()
       );
@@ -81,16 +82,16 @@ async function getPublicPage(req, res, id) {
       };
     }
 
-    const companies = await restAPIInteraction.getAllCompanies()
+    const companies = await restAPIInteraction.getAllCompanies();
 
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: 'public.ejs',
+      filename: "public.ejs",
       turbines,
       chartData,
       companies,
       userId: id,
-      queryObject
-    })
+      queryObject,
+    });
 
     res.end(htmlRenderized);
   } catch (error) {
@@ -110,7 +111,9 @@ async function getPrivatePage(req, res, id) {
     const chartData = {};
 
     for (turbine of ownedTurbineData) {
-      const allTurbineData = await restAPIInteraction.getTurbineAllData(turbine._id);
+      const allTurbineData = await restAPIInteraction.getTurbineAllData(
+        turbine._id
+      );
       let timeLabels = allTurbineData.historicData.map((x) =>
         new Date(x.timeStamp).getTime()
       );
@@ -128,15 +131,15 @@ async function getPrivatePage(req, res, id) {
       };
     }
 
-    const companies = await restAPIInteraction.getAllCompanies()
+    const companies = await restAPIInteraction.getAllCompanies();
 
     var htmlRenderized = ejs.render(htmlContent, {
-      filename: 'public.ejs',
+      filename: "public.ejs",
       turbines: turbineData,
       chartData,
       companies,
-      queryObject
-    })
+      queryObject,
+    });
 
     res.end(htmlRenderized);
   } catch (error) {
@@ -144,30 +147,30 @@ async function getPrivatePage(req, res, id) {
   }
 }
 
-function createServerQueryString(queryObject){
-  let query = '?'
-  if (queryObject['name']) {
-    query += `name=regex:${queryObject['name']}&`
+function createServerQueryString(queryObject) {
+  let query = "?";
+  if (queryObject["name"]) {
+    query += `name=regex:${queryObject["name"]}&`;
   }
-  if (queryObject['state']) {
-    query += `turbineState=${queryObject['state']}&`
+  if (queryObject["state"]) {
+    query += `turbineState=${queryObject["state"]}&`;
   }
-  if (queryObject['company']) {
-    query += `company=${queryObject['company']}&`
+  if (queryObject["company"]) {
+    query += `company=${queryObject["company"]}&`;
   }
-  if (queryObject['yearGTE']) {
-    const gte = new Date(Number(queryObject['yearGTE']), 0)
-    query += `constructionYear=gte:${gte.toISOString()}&`
+  if (queryObject["yearGTE"]) {
+    const gte = new Date(Number(queryObject["yearGTE"]), 0);
+    query += `constructionYear=gte:${gte.toISOString()}&`;
   }
-  if (queryObject['yearLTE']) {
-    const lte = new Date(Number(queryObject['yearLTE']), 0)
-    query += `constructionYear=lte:${lte.toISOString()}`
+  if (queryObject["yearLTE"]) {
+    const lte = new Date(Number(queryObject["yearLTE"]), 0);
+    query += `constructionYear=lte:${lte.toISOString()}`;
   }
-  if (query.charAt(query.length - 1) === '&') {
-    query = query.substring(0, query.length - 1)
+  if (query.charAt(query.length - 1) === "&") {
+    query = query.substring(0, query.length - 1);
   }
 
-  return query
+  return query;
 }
 
 async function getPrivatePage(req, res, id) {
@@ -178,33 +181,33 @@ async function getPrivatePage(req, res, id) {
       "utf8"
     );
 
-     const queryObject = url.parse(req.url, true).query
-     let noDataQueryObject = true
-     for (prop in queryObject) {
-       if (!queryObject[prop] && queryObject[prop] === '') {
-         delete queryObject[prop]
-       }
-     }
+    const queryObject = url.parse(req.url, true).query;
+    let noDataQueryObject = true;
+    for (prop in queryObject) {
+      if (!queryObject[prop] && queryObject[prop] === "") {
+        delete queryObject[prop];
+      }
+    }
 
-     if (queryObject['state'] === 'Any') delete queryObject['state']
+    if (queryObject["state"] === "Any") delete queryObject["state"];
 
-     let ownedTurbineData
-     if (!queryObject || Object.keys(queryObject).length === 0) {
-       ownedTurbineData = await restAPIInteraction.getOwnedTurbines(id)
-     } else {
-       let query = createServerQueryString(queryObject)
-       ownedTurbineData = await restAPIInteraction.filterPrivateTurbines(
-         id,
-         query
-       )
-     }
+    let ownedTurbineData;
+    if (!queryObject || Object.keys(queryObject).length === 0) {
+      ownedTurbineData = await restAPIInteraction.getOwnedTurbines(id);
+    } else {
+      let query = createServerQueryString(queryObject);
+      ownedTurbineData = await restAPIInteraction.filterPrivateTurbines(
+        id,
+        query
+      );
+    }
 
     const chartData = {};
 
     for (turbine of ownedTurbineData) {
       const allTurbineData = await restAPIInteraction.getTurbineAllData(
         turbine._id
-      )
+      );
       let timeLabels = allTurbineData.historicData.map((x) =>
         new Date(x.timeStamp).getTime()
       );
@@ -226,7 +229,7 @@ async function getPrivatePage(req, res, id) {
       filename: "owned.ejs",
       turbines: ownedTurbineData,
       chartData,
-      queryObject
+      queryObject,
     });
 
     res.end(htmlRenderized);
@@ -305,13 +308,15 @@ async function getNotificationsPage(req, res, id) {
     for (notification of notifications) {
       const buyer = await restAPIInteraction.getUser(notification.idBuyer);
       const seller = await restAPIInteraction.getUser(notification.idSeller);
-      const turbine = await restAPIInteraction.getTurbine(notification.idTurbine);
+      const turbine = await restAPIInteraction.getTurbine(
+        notification.idTurbine
+      );
       if (seller._id === id) {
         notificationsWithNames.push({
           buyer: buyer,
           seller: seller,
           turbine: turbine,
-          id: notification._id
+          id: notification._id,
         });
       }
     }
@@ -323,7 +328,7 @@ async function getNotificationsPage(req, res, id) {
         user: user,
         turbine: turbine,
         id: alert._id,
-        timeStamp: alert.timeStamp
+        timeStamp: alert.timeStamp,
       });
     }
 
@@ -366,7 +371,7 @@ async function getTurbineDetailsPage(req, res, id, userId) {
 
     const turbineData = await restAPIInteraction.getTurbine(id);
 
-    if(userId !== turbineData.userId) {
+    if (userId !== turbineData.userId) {
       getUnauthorizedPage(req, res);
       return;
     }
@@ -476,6 +481,23 @@ async function getResetPassPage(req, res) {
   }
 }
 
+async function getDocumentaionPage(req, res) {
+  try {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    var htmlContent = fs.readFileSync(
+      __dirname + "/../views/pages/scholarlyDoc.ejs",
+      "utf8"
+    );
+
+    var htmlRenderized = ejs.render(htmlContent, {
+      filename: "scholaryDoc.ejs",
+    });
+
+    res.end(htmlRenderized);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 
 module.exports = {
   getPublicPage,
@@ -489,4 +511,5 @@ module.exports = {
   getResetPassPage,
   getUserDetailsPage,
   getNotificationsPage,
+  getDocumentaionPage
 };

@@ -38,6 +38,8 @@ const server = http.createServer((req, res) => {
       PageController.getTurbineDetailsPage(req, res, id, userId);
     } else if (req.url === "/unauthorized") {
       PageController.getUnauthorizedPage(req, res);
+    } else if (req.url === '/pages/doc') {
+      PageController.getDocumentaionPage(req, res);
     } else {
       res.writeHead(404, { 'Content-Type': 'text/html' })
       res.end('<h1>404 NOT FOUND</h1>')
