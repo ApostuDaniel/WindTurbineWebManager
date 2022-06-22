@@ -8,16 +8,18 @@ async function getAllCompanies() {
   return users.map((user) => user.company);
 }
 
-async function filterPublicTurbines(query){
-  const data = await fetch(`http://localhost:5000/api/turbines/filter${query}`)
-  const filteredTurbines = await data.json()
-  return filteredTurbines
+async function filterPublicTurbines(query) {
+  const data = await fetch(`http://localhost:5000/api/turbines/filter${query}`);
+  const filteredTurbines = await data.json();
+  return filteredTurbines;
 }
 
-async function filterPrivateTurbines(id, query){
-  const data = await fetch(`http://localhost:5000/api/turbines/filter/${id}${query}`)
-  const filteredTurbines = await data.json()
-  return filteredTurbines
+async function filterPrivateTurbines(id, query) {
+  const data = await fetch(
+    `http://localhost:5000/api/turbines/filter/${id}${query}`
+  );
+  const filteredTurbines = await data.json();
+  return filteredTurbines;
 }
 
 async function getTurbines() {
@@ -83,7 +85,12 @@ async function getLocation(turbine) {
   const response = await fetch(weather_api_url);
   const json = await response.json();
 
-  const location = json.location.name + ', ' + json.location.region + ', ' + json.location.country;
+  const location =
+    json.location.name +
+    ", " +
+    json.location.region +
+    ", " +
+    json.location.country;
   return location;
 }
 
@@ -100,4 +107,4 @@ module.exports = {
   getLocation,
   filterPublicTurbines,
   filterPrivateTurbines,
-}
+};

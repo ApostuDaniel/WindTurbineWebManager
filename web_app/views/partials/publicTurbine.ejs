@@ -2,7 +2,7 @@
 <div onclick="showPublicTurbine(`<%= turbine.turbineData._id %>`,`<%= turbine.turbineData.userId %>`)" class="turbine">
   <div class="header">
      <% if(turbine.turbineData.turbineState === 'Running'){ %>
-      <div class="spinner"></div>
+      <div id="id<%= turbine.turbineData._id %>" class="spinner"></div>
     <% } else{ %>  
       <div class="spinner" style="visibility: hidden"></div>
     <% } %>

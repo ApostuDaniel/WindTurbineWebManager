@@ -19,7 +19,7 @@
     <%- include(dir+'/public/scripts/chartCreation'); %>
     <title>Public turbines</title>
   </head>
-  <body>
+  <body onLoad='setSpinnersAttributes(<%- JSON.stringify(turbines) %>)'>
     <%- include(dir + "/views/partials/navBar") %> <%- include(dir +
     "/views/partials/filters",{companies, queryObject, isPublic:true}) %>
 

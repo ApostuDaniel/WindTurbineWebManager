@@ -56,10 +56,12 @@ async function getPublicPage(req, res, id) {
 
     for (const turbineData of turbinesData) {
       const location = await restAPIInteraction.getLocation(turbineData);
+      const newestData = await restAPIInteraction.getTurbineNewData(turbineData._id);
       // const location = 'Not shown yet';
       turbines.push({
         turbineData,
         location,
+        newestData
       });
 
       const allTurbineData = await restAPIInteraction.getTurbineAllData(
@@ -107,7 +109,27 @@ async function getPrivatePage(req, res, id) {
       "utf8"
     );
 
-    const ownedTurbineData = await restAPIInteraction.getOwnedTurbines(id);
+    let ownedTurbineData;
+    
+    const queryObject = url.parse(req.url, true).query;
+    let noDataQueryObject = true;
+    for (prop in queryObject) {
+      if (!queryObject[prop] && queryObject[prop] === "") {
+        delete queryObject[prop];
+      }
+    }
+
+    if (queryObject["state"] === "Any") delete queryObject["state"];
+
+    if (!queryObject || Object.keys(queryObject).length === 0) {
+      ownedTurbineData = await restAPIInteraction.getOwnedTurbines(id);
+    } else {
+      let query = createServerQueryString(queryObject);
+      ownedTurbineData = await restAPIInteraction.filterPrivateTurbines(
+        id,
+        query
+      );
+    }
     const chartData = {};
 
     for (turbine of ownedTurbineData) {
@@ -135,7 +157,7 @@ async function getPrivatePage(req, res, id) {
 
     var htmlRenderized = ejs.render(htmlContent, {
       filename: "public.ejs",
-      turbines: turbineData,
+      turbines: ownedTurbineData,
       chartData,
       companies,
       queryObject,
@@ -173,70 +195,70 @@ function createServerQueryString(queryObject) {
   return query;
 }
 
-async function getPrivatePage(req, res, id) {
-  try {
-    res.writeHead(200, { "Content-Type": "text/html" });
-    var htmlContent = fs.readFileSync(
-      __dirname + "/../views/pages/owned.ejs",
-      "utf8"
-    );
+// async function getPrivatePage(req, res, id) { -- duplicate????
+//   try {
+//     res.writeHead(200, { "Content-Type": "text/html" });
+//     var htmlContent = fs.readFileSync(
+//       __dirname + "/../views/pages/owned.ejs",
+//       "utf8"
+//     );
 
-    const queryObject = url.parse(req.url, true).query;
-    let noDataQueryObject = true;
-    for (prop in queryObject) {
-      if (!queryObject[prop] && queryObject[prop] === "") {
-        delete queryObject[prop];
-      }
-    }
+//     const queryObject = url.parse(req.url, true).query;
+//     let noDataQueryObject = true;
+//     for (prop in queryObject) {
+//       if (!queryObject[prop] && queryObject[prop] === "") {
+//         delete queryObject[prop];
+//       }
+//     }
 
-    if (queryObject["state"] === "Any") delete queryObject["state"];
+//     if (queryObject["state"] === "Any") delete queryObject["state"];
 
-    let ownedTurbineData;
-    if (!queryObject || Object.keys(queryObject).length === 0) {
-      ownedTurbineData = await restAPIInteraction.getOwnedTurbines(id);
-    } else {
-      let query = createServerQueryString(queryObject);
-      ownedTurbineData = await restAPIInteraction.filterPrivateTurbines(
-        id,
-        query
-      );
-    }
+//     let ownedTurbineData;
+//     if (!queryObject || Object.keys(queryObject).length === 0) {
+//       ownedTurbineData = await restAPIInteraction.getOwnedTurbines(id);
+//     } else {
+//       let query = createServerQueryString(queryObject);
+//       ownedTurbineData = await restAPIInteraction.filterPrivateTurbines(
+//         id,
+//         query
+//       );
+//     }
 
-    const chartData = {};
+//     const chartData = {};
 
-    for (turbine of ownedTurbineData) {
-      const allTurbineData = await restAPIInteraction.getTurbineAllData(
-        turbine._id
-      );
-      let timeLabels = allTurbineData.historicData.map((x) =>
-        new Date(x.timeStamp).getTime()
-      );
-      chartData[turbine._id + "chart"] = {
-        canvasId: turbine._id + "chart",
-        timeLabels: timeLabels,
-        data: allTurbineData.historicData.map((x) => x.turbineWear),
-        lineTitle: "Periodic Turbine Wear",
-        chartName: "Turbine Wear Over Time",
-        yAxisLabel: "Time",
-        xAxisLabel: "Turbine Wear",
-        colorPoints: "rgba(255, 0, 0, 1)",
-        colorLine: "rgba(0, 255, 0, 1)",
-        colorUnderLine: "rgba(0, 0, 255, 1)",
-      };
-    }
+//     for (turbine of ownedTurbineData) {
+//       const allTurbineData = await restAPIInteraction.getTurbineAllData(
+//         turbine._id
+//       );
+//       let timeLabels = allTurbineData.historicData.map((x) =>
+//         new Date(x.timeStamp).getTime()
+//       );
+//       chartData[turbine._id + "chart"] = {
+//         canvasId: turbine._id + "chart",
+//         timeLabels: timeLabels,
+//         data: allTurbineData.historicData.map((x) => x.turbineWear),
+//         lineTitle: "Periodic Turbine Wear",
+//         chartName: "Turbine Wear Over Time",
+//         yAxisLabel: "Time",
+//         xAxisLabel: "Turbine Wear",
+//         colorPoints: "rgba(255, 0, 0, 1)",
+//         colorLine: "rgba(0, 255, 0, 1)",
+//         colorUnderLine: "rgba(0, 0, 255, 1)",
+//       };
+//     }
 
-    var htmlRenderized = ejs.render(htmlContent, {
-      filename: "owned.ejs",
-      turbines: ownedTurbineData,
-      chartData,
-      queryObject,
-    });
+//     var htmlRenderized = ejs.render(htmlContent, {
+//       filename: "owned.ejs",
+//       turbines: ownedTurbineData,
+//       chartData,
+//       queryObject,
+//     });
 
-    res.end(htmlRenderized);
-  } catch (error) {
-    console.log(error.message);
-  }
-}
+//     res.end(htmlRenderized);
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// }
 
 async function getLoginPage(req, res) {
   try {
