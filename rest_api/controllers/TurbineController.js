@@ -12,6 +12,8 @@ const {
   createMongooseSearchObject,
 } = require('../utils')
 
+const {turbinesToCSV} = require('./../scripts/jsonToCSV')
+
 //GET
 
 // @desc    Gets All turbines
@@ -66,6 +68,22 @@ async function getPrivateTurbines(req, res, userId) {
     })
     res.writeHead(200, { 'Content-Type': 'application/json' })
     res.end(JSON.stringify(privateTurbines))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// @desc    Gets the private turbines in csv format for id
+// @route   GET /api/turbines/private/:id/csv
+async function getPrivateTurbinesCSV(req, res, userId) {
+  try {
+    const privateTurbines = await Turbine.find({
+      userId: userId,
+    })
+
+    const privateTurbinesCSV = await turbinesToCSV(privateTurbines)
+    res.writeHead(200, { 'Content-Type': 'text/csv' })
+    res.end(privateTurbinesCSV)
   } catch (error) {
     console.log(error)
   }
@@ -422,4 +440,5 @@ module.exports = {
   helperDeleteTurbineRelatedData,
   deleteTurbine,
   filterTurbines,
+  getPrivateTurbinesCSV,
 }

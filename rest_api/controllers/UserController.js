@@ -10,6 +10,7 @@ const Notification = require('./../schemas/Notification')
 const Alert = require('./../schemas/Alert')
 const Turbine = require('./../schemas/Turbine')
 const { helperDeleteTurbineRelatedData } = require('./TurbineController')
+const {usersToCSV} = require('./../scripts/jsonToCSV')
 
 // @desc    Gets All Users
 // @route   GET /api/users
@@ -18,6 +19,19 @@ async function getUsers(req, res) {
     const users = await User.find()
     res.writeHead(200, { 'Content-Type': 'application/json' })
     res.end(JSON.stringify(users))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+// @desc    Gets All Users in csv format without password information
+// @route   GET /api/users/csv
+async function getUsersCSV(req, res) {
+  try {
+    const users = await User.find()
+    const csvUsers = await usersToCSV(users)
+    res.writeHead(200, { 'Content-Type': 'text/csv' })
+    res.end(csvUsers)
   } catch (error) {
     console.log(error)
   }
@@ -425,4 +439,5 @@ module.exports = {
   deleteUser,
   deleteAlert,
   deleteNotification,
+  getUsersCSV,
 }

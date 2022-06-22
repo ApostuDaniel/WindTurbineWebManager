@@ -30,70 +30,76 @@ const server = http.createServer((req, res) => {
       case "GET":
         if (req.url === "/api/users") {
           userController.getUsers(req, res);
+        }
+        else if (req.url === '/api/users/csv') {
+          userController.getUsersCSV(req, res)
         } else if (req.url.match(/\/api\/users\/[0-9a-f]{24}$/)) {
-          const id = req.url.split("/")[3];
-          userController.getUser(req, res, id);
+          const id = req.url.split('/')[3]
+          userController.getUser(req, res, id)
         } else if (req.url.match(/\/api\/users\/mail\/[A-Za-z0-9_\%\.]+$/)) {
-          const mail = req.url.split("/")[4];
-          userController.getUserByMail(req, res, mail);
+          const mail = req.url.split('/')[4]
+          userController.getUserByMail(req, res, mail)
         } else if (
           req.url.match(/\/api\/users\/login\/[A-Za-z0-9_\%\.]+\/[a-z0-9]+$/)
         ) {
-          const splitReq = req.url.split("/");
-          const mail = splitReq[4];
-          const password = splitReq[5];
-          userController.userLogin(req, res, mail, password);
+          const splitReq = req.url.split('/')
+          const mail = splitReq[4]
+          const password = splitReq[5]
+          userController.userLogin(req, res, mail, password)
         } else if (req.url.match(/\/api\/users\/notifications$/)) {
-          userController.getNotifications(req, res);
+          userController.getNotifications(req, res)
         } else if (req.url.match(/\/api\/users\/alerts$/)) {
-          userController.getAlerts(req, res);
+          userController.getAlerts(req, res)
         } else if (
           req.url.match(/\/api\/users\/[0-9a-f]{24}\/notifications$/)
         ) {
-          const id = req.url.split("/")[3];
-          userController.getUserNotifications(req, res, id);
+          const id = req.url.split('/')[3]
+          userController.getUserNotifications(req, res, id)
         } else if (req.url.match(/\/api\/users\/[0-9a-f]{24}\/alerts$/)) {
-          const id = req.url.split("/")[3];
-          userController.getUserAlerts(req, res, id);
-        } else if (req.url === "/api/turbines") {
-          turbineController.getTurbines(req, res);
-        } else if (req.url === "/api/turbines/public") {
-          turbineController.getPublicTurbines(req, res);
+          const id = req.url.split('/')[3]
+          userController.getUserAlerts(req, res, id)
+        } else if (req.url === '/api/turbines') {
+          turbineController.getTurbines(req, res)
+        } else if (req.url === '/api/turbines/public') {
+          turbineController.getPublicTurbines(req, res)
         } else if (req.url.match(/\/api\/turbines\/[0-9a-f]{24}$/)) {
-          const id = req.url.split("/")[3];
-          turbineController.getTurbine(req, res, id);
+          const id = req.url.split('/')[3]
+          turbineController.getTurbine(req, res, id)
         } else if (req.url.match(/\/api\/turbines\/data\/[0-9a-f]{24}$/)) {
-          const turbineid = req.url.split("/")[4];
-          turbineController.getTurbineData(req, res, turbineid);
+          const turbineid = req.url.split('/')[4]
+          turbineController.getTurbineData(req, res, turbineid)
         } else if (req.url.match(/\/api\/turbines\/data\/[0-9a-f]{24}\/new$/)) {
-          const turbineid = req.url.split("/")[4];
-          turbineController.getNewestTurbineData(req, res, turbineid);
+          const turbineid = req.url.split('/')[4]
+          turbineController.getNewestTurbineData(req, res, turbineid)
         } else if (req.url.match(/\/api\/turbines\/private\/[0-9a-f]{24}$/)) {
-          const userId = req.url.split("/")[4];
-          turbineController.getPrivateTurbines(req, res, userId);
+          const userId = req.url.split('/')[4]
+          turbineController.getPrivateTurbines(req, res, userId)
+        } else if (req.url.match(/\/api\/turbines\/private\/[0-9a-f]{24}\/csv$/)) {
+          const userId = req.url.split('/')[4]
+          turbineController.getPrivateTurbinesCSV(req, res, userId)
         } else if (req.url.match(/\/api\/turbines\/public\/\w+$/)) {
-          const name = req.url.split("/")[4];
-          turbineController.getPublicTurbineByName(req, res, name);
+          const name = req.url.split('/')[4]
+          turbineController.getPublicTurbineByName(req, res, name)
         } else if (
           req.url.match(/\/api\/turbines\/private\/[0-9a-f]{24}\/\w+$/)
         ) {
-          const urlSplit = req.url.split("/");
-          const userId = urlSplit[4];
-          const name = urlSplit[5];
-          turbineController.getPrivateTurbineByName(req, res, userId, name);
+          const urlSplit = req.url.split('/')
+          const userId = urlSplit[4]
+          const name = urlSplit[5]
+          turbineController.getPrivateTurbineByName(req, res, userId, name)
         } else if (
           req.url.match(
             /\/api\/turbines\/filter\/[0-9a-f]{24}\??(?:&?[^=&]*=[^=&]*)*$/
           )
         ) {
-          const turbineId = req.url.split("/")[4].substring(0, 24);
-          turbineController.filterTurbines(req, res, turbineId);
+          const turbineId = req.url.split('/')[4].substring(0, 24)
+          turbineController.filterTurbines(req, res, turbineId)
         } else if (
           req.url.match(/\/api\/turbines\/filter\??(?:&?[^=&]*=[^=&]*)*$/)
         ) {
-          turbineController.filterTurbines(req, res, null);
+          turbineController.filterTurbines(req, res, null)
         } else {
-          throw new Error("GET route not found");
+          throw new Error('GET route not found')
         }
 
         break;
