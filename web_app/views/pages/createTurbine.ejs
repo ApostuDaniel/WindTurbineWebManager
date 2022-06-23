@@ -55,15 +55,10 @@
             name="image"
             placeholder="Turbine image link"
           />
-
-          <label for="image">Set turbine public</label>
-          <input
-            type="text"
-            id="public"
-            name="public"
-            placeholder="true/false"
-          />
-
+          <div class="setPublic">
+            <div id="public" onclick="togglePublic()"></div>
+            <p>Public</p>
+          </div>
           <input type="submit" value="Create" />
         </form>
         <p>

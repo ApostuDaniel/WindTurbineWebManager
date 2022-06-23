@@ -1,4 +1,6 @@
 <script>
+  let public = false;
+
   function getCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(";");
@@ -37,7 +39,6 @@
       document.getElementById("name"),
       document.getElementById("cons-date"),
       document.getElementById("image"),
-      document.getElementById("public"),
     ];
 
     for (field of fields) {
@@ -72,11 +73,6 @@
         }
       }
 
-      if (canPost && formFields[3].value != "true" && formFields[3].value != "false") {
-        err.innerHTML = "*Value must be true/false";
-        canPost = false;
-      }
-
       var uid = getCookie("user_id");
 
       if (canPost) {
@@ -91,7 +87,7 @@
           altitude: fields[2].innerText,
           terrain: fields[3].innerText,
           suitability: fields[4].innerText,
-          isPublic: formFields[3].value,
+          isPublic: public,
           turbineState: "Running",
         };
 
@@ -102,6 +98,20 @@
         console.log(turbine);
       }
     });
+  }
+
+  function togglePublic() {
+    const checkbox = document.getElementById('public');
+    public = !public;
+
+    if(public) {
+      checkbox.style.backgroundColor = '#7dd7bd';
+    }
+    else {
+      checkbox.style.backgroundColor = 'white';
+    }
+
+    console.log(public);
   }
 
   getCreateTurbineData();

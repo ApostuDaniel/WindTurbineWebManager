@@ -84,6 +84,14 @@
     font-weight: bold;
   }
 
+  .wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .details {
     width: 100%;
     height: auto;
@@ -138,8 +146,34 @@
   }
 
   .image img {
-    width: 80%;
+    width: 60%;
     height: 80%;
+  }
+
+  @media only screen and (max-width: 1400px) {
+    .wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .details {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      flex-direction: column;
+    }
+
+    .attributes {
+      width: 100%;
+    }
+
+    .buttons {
+      width: 100%;
+    }
   }
 
   #panel {
