@@ -11,15 +11,11 @@ async function getLandingPage(req, res) {
   try {
     res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + "/../views/pages/landing.ejs",
+      __dirname + "/../views/pages/landing.html",
       "utf8"
     );
 
-    var htmlRenderized = ejs.render(htmlContent, {
-      filename: "landing.ejs",
-    });
-
-    res.end(htmlRenderized);
+    res.end(htmlContent)
   } catch (error) {
     console.log(error.message);
   }
@@ -196,84 +192,15 @@ function createServerQueryString(queryObject) {
   return query;
 }
 
-// async function getPrivatePage(req, res, id) { -- duplicate????
-//   try {
-//     res.writeHead(200, { "Content-Type": "text/html" });
-//     var htmlContent = fs.readFileSync(
-//       __dirname + "/../views/pages/owned.ejs",
-//       "utf8"
-//     );
-
-//     const queryObject = url.parse(req.url, true).query;
-//     let noDataQueryObject = true;
-//     for (prop in queryObject) {
-//       if (!queryObject[prop] && queryObject[prop] === "") {
-//         delete queryObject[prop];
-//       }
-//     }
-
-//     if (queryObject["state"] === "Any") delete queryObject["state"];
-
-//     let ownedTurbineData;
-//     if (!queryObject || Object.keys(queryObject).length === 0) {
-//       ownedTurbineData = await restAPIInteraction.getOwnedTurbines(id);
-//     } else {
-//       let query = createServerQueryString(queryObject);
-//       ownedTurbineData = await restAPIInteraction.filterPrivateTurbines(
-//         id,
-//         query
-//       );
-//     }
-
-//     const chartData = {};
-
-//     for (turbine of ownedTurbineData) {
-//       const allTurbineData = await restAPIInteraction.getTurbineAllData(
-//         turbine._id
-//       );
-//       let timeLabels = allTurbineData.historicData.map((x) =>
-//         new Date(x.timeStamp).getTime()
-//       );
-//       chartData[turbine._id + "chart"] = {
-//         canvasId: turbine._id + "chart",
-//         timeLabels: timeLabels,
-//         data: allTurbineData.historicData.map((x) => x.turbineWear),
-//         lineTitle: "Periodic Turbine Wear",
-//         chartName: "Turbine Wear Over Time",
-//         yAxisLabel: "Time",
-//         xAxisLabel: "Turbine Wear",
-//         colorPoints: "rgba(255, 0, 0, 1)",
-//         colorLine: "rgba(0, 255, 0, 1)",
-//         colorUnderLine: "rgba(0, 0, 255, 1)",
-//       };
-//     }
-
-//     var htmlRenderized = ejs.render(htmlContent, {
-//       filename: "owned.ejs",
-//       turbines: ownedTurbineData,
-//       chartData,
-//       queryObject,
-//     });
-
-//     res.end(htmlRenderized);
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// }
-
 async function getLoginPage(req, res) {
   try {
     res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + "/../views/pages/login.ejs",
+      __dirname + "/../views/pages/login.html",
       "utf8"
     );
 
-    var htmlRenderized = ejs.render(htmlContent, {
-      filename: "login.ejs",
-    });
-
-    res.end(htmlRenderized);
+    res.end(htmlContent)
   } catch (error) {
     console.log(error.message);
   }
@@ -301,15 +228,11 @@ async function getRegisterPage(req, res) {
   try {
     res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + "/../views/pages/register.ejs",
+      __dirname + "/../views/pages/register.html",
       "utf8"
     );
 
-    var htmlRenderized = ejs.render(htmlContent, {
-      filename: "register.ejs",
-    });
-
-    res.end(htmlRenderized);
+    res.end(htmlContent)
   } catch (error) {
     console.log(error.message);
   }
@@ -371,14 +294,11 @@ async function getCreateTurbinePage(req, res) {
   try {
     res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + "/../views/pages/createTurbine.ejs",
+      __dirname + "/../views/pages/createTurbine.html",
       "utf8"
     );
 
-    var htmlRenderized = ejs.render(htmlContent, {
-      filename: "createTurbine.ejs",
-    });
-    res.end(htmlRenderized);
+    res.end(htmlContent)
   } catch (error) {
     console.log(error.message);
   }
@@ -473,14 +393,11 @@ async function getUnauthorizedPage(req, res) {
   try {
     res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + "/../views/pages/unauthorized.ejs",
+      __dirname + "/../views/pages/unauthorized.html",
       "utf8"
     );
 
-    var htmlRenderized = ejs.render(htmlContent, {
-      filename: "unauthorized.ejs",
-    });
-    res.end(htmlRenderized);
+    res.end(htmlContent)
   } catch (error) {
     console.log(error.message);
   }
@@ -490,15 +407,10 @@ async function getResetPassPage(req, res) {
   try {
     res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + "/../views/pages/resetPassword.ejs",
+      __dirname + "/../views/pages/resetPassword.html",
       "utf8"
     );
-
-    var htmlRenderized = ejs.render(htmlContent, {
-      filename: "resetPassword.ejs",
-    });
-
-    res.end(htmlRenderized);
+    res.end(htmlContent)
   } catch (error) {
     console.log(error.message);
   }
@@ -508,15 +420,11 @@ async function getDocumentationPage(req, res) {
   try {
     res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
-      __dirname + "/../views/pages/scholarlyDoc.ejs",
+      __dirname + "/../views/pages/scholarlyDoc.html",
       "utf8"
     );
 
-    var htmlRenderized = ejs.render(htmlContent, {
-      filename: "scholaryDoc.ejs",
-    });
-
-    res.end(htmlRenderized);
+    res.end(htmlContent)
   } catch (error) {
     console.log(error.message);
   }

@@ -4,10 +4,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href=https://webprojectrdv.s3.amazonaws.com/favicon.png>
-    <%- include (dir+'/public/scripts/protectedRouteScript'); %>
-    <%- include(dir + '/public/css/navBarStyle'); %> <%- include(dir +
-    '/public/css/notificationsStyle'); %>
+    <link rel="icon" href="https://webprojectrdv.s3.amazonaws.com/favicon.png">
+    <script src="../../public/scripts/protectedRouteScript.js"></script>
+    <link rel="stylesheet" href="../../public/css/navbarStyle.css">
+    <link rel="stylesheet" href="../../public/css/notificationsStyle.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300&display=swap" rel="stylesheet">
@@ -27,9 +27,8 @@
       <% for(alert of alerts) {%> <%- include(dir +
         "/views/partials/alert", {alert:alert}) %> <% } %>
     </div>
-
-    <%-include (dir+'/public/scripts/alertsScript'); %>
-    <%-include (dir+'/public/scripts/notificationsScript'); %>
-    <%- include (dir+'/public/scripts/publicownedPageScript'); %>
+    <script src="../../public/scripts/alertsScript.js"></script>
+    <script src="../../public/scripts/notificationsScript.js"></script>
+    <script src="../../public/scripts/publicownedPageScript.js"></script>
   </body>
 </html>

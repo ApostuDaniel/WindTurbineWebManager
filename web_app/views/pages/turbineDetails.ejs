@@ -4,14 +4,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href=https://webprojectrdv.s3.amazonaws.com/favicon.png>
-    <%- include(dir+'/public/css/turbineDetailsStyle'); %> <%-
-    include(dir+'/public/css/navBarStyle'); %>
+    <link rel="icon" href="https://webprojectrdv.s3.amazonaws.com/favicon.png">
+    <link rel="stylesheet" href="../../public/css/turbineDetailsStyle.css">
+    <link rel="stylesheet" href="../../public/css/navBarStyle.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <%- include(dir+'/public/scripts/chartCreation'); %>
+    <script src="../../public/scripts/chartCreation.js"></script>
+    <script src="../../public/scripts/protectedRouteScript.js"></script>
     <title>Turbine Details</title>
   </head>
 
@@ -50,8 +51,7 @@
       </div>
     </div>
 
-    <%- include(dir + "/public/scripts/turbineDetailsScript") %> <%- include
-    (dir+'/public/scripts/protectedRouteScript'); %>
-    <%- include (dir+'/public/scripts/publicownedPageScript'); %>
+    <script src="../../public/scripts/turbineDetailsScript.js"></script> 
+    <script src="../../public/scripts/publicownedPageScript.js"></script>
   </body>
 </html>

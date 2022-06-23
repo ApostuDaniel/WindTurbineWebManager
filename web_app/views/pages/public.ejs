@@ -4,11 +4,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%- include (dir+'/public/scripts/protectedRouteScript'); %> <link
-    rel="icon" href=https://webprojectrdv.s3.amazonaws.com/favicon.png> <%-
-    include(dir+'/public/css/publicPageStyle'); %> <%-
-    include(dir+'/public/css/navBarStyle'); %> <%-
-    include(dir+'/public/css/filtersStyle'); %>
+    <script src="../../public/scripts/protectedRouteScript.js"></script>
+    <link rel="icon" href="https://webprojectrdv.s3.amazonaws.com/favicon.png">
+    <link rel="stylesheet" href="../../public/css/publicPageStyle.css">
+    <link rel="stylesheet" href="../../public/css/navBarStyle.css">
+    <link rel="stylesheet" href="../../public/css/filtersStyle.css">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,10 +16,10 @@
       rel="stylesheet"
     />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <%- include(dir+'/public/scripts/chartCreation'); %>
+    <script src="../../public/scripts/chartCreation.js"></script>
     <title>Public turbines</title>
   </head>
-  <body onLoad='setSpinnersAttributes(<%- JSON.stringify(turbines) %>)'>
+  <body onload='setSpinnersAttributes(<%- JSON.stringify(turbines) %>)'>
     <%- include(dir + "/views/partials/navBar") %> <%- include(dir +
     "/views/partials/filters",{companies, queryObject, isPublic:true}) %>
 
@@ -34,8 +34,8 @@
       <div class="no-turbines"><p>There are no public turbines available for viewing</p></div>
     <% } %>
 
-    <%- include (dir+'/public/scripts/publicownedPageScript'); %> <%- include
-    (dir+'/public/scripts/purchaseScript'); %>
+    <script src="../../public/scripts/publicownedPageScript.js"></script>
+    <script src="../../public/scripts/purchaseScript.js"></script>
     <p>
       <a href="http://jigsaw.w3.org/css-validator/check/referer">
         <img

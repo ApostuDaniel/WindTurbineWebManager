@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
-  <% var dir = process.cwd() %> <link rel="icon"
-  href=https://webprojectrdv.s3.amazonaws.com/favicon.png>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Jura:wght@300&display=swap"
-    rel="stylesheet"
-  />
-  <%- include(dir+'/public/css/navBarStyle'); %> <%-
-  include(dir+'/public/css/userPageStyle'); %>
+  <% var dir = process.cwd() %> 
   <head>
+    <link rel="icon" href="https://webprojectrdv.s3.amazonaws.com/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jura:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../public/css/navBarStyle.css">
+    <link rel="stylesheet" href="../../public/css/userPageStyle.css">
+    <script src="../../public/scripts/protectedRouteScript.js"></script>
     <title>User details</title>
   </head>
 
@@ -79,10 +80,8 @@
         </div>
       </div>
     </div>
-    <%- include (dir+'/public/scripts/userDetails'); %>
+    <script src="../../public/scripts/userDetails.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-    <%- include (dir+'/public/scripts/protectedRouteScript'); %> <%- include
-    (dir+'/public/scripts/publicownedPageScript'); %>
+    <script src="../../public/scripts/publicownedPageScript.js"></script>
   </body>
 </html>

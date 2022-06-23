@@ -101,18 +101,22 @@ async function getLocation(turbine) {
   return location;
 }
 
-async function getTurbinesCSV(userId){
-  const endpoint =
-    'http://localhost:5000/api/turbines/private/' + userId + '/csv'
-  const data = await fetch(endpoint)
+async function getCSV(path){
+  const data = await fetch(path)
   const csvData = await data.blob()
+  return csvData
+}
+
+async function getTurbinesCSV(userId){
+  const csvData = await getCSV(
+    'http://localhost:5000/api/turbines/private/' + userId + '/csv'
+  )
   return csvData
 }
 
 async function getUsersCSV(){
   const endpoint = 'http://localhost:5000/api/users/csv'
-  const data = await fetch(endpoint)
-  const csvData = await data.blob()
+  const csvData = await getCSV('http://localhost:5000/api/users/csv')
   return csvData
 }
 
