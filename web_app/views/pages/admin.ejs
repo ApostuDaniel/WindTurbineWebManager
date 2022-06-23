@@ -9,10 +9,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Jura:wght@300&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Jura:wght@300;500;700&display=swap"
       rel="stylesheet"
     />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../public/scripts/usersCSVcopy.js"></script>
     <title>Admin</title>
   </head>
   <body>
@@ -24,6 +24,12 @@
     <% } else{ %>
     <div class="no-users"><p>There are no users</p></div>
     <% } %>
+
+    <%- include(dir + "/public/scripts/usersCSV") %>
+    <div class="exportUsers" onclick="downloadUsersCSV()">
+      <p>Export Users</p>
+      <img src="https://cdn-icons-png.flaticon.com/512/724/724827.png">
+    </div>
 
     <%- include (dir + "/public/scripts/adminScript") %>
     <p>

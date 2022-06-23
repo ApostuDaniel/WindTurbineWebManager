@@ -43,8 +43,15 @@ const server = http.createServer((req, res) => {
     } else if(req.url === '/pages/admin') {
       PageController.getAdminPage(req, res);
     } else {
-      res.writeHead(404, { 'Content-Type': 'text/html' })
-      res.end('<h1>404 NOT FOUND</h1>')
+      fs.readFile(__dirname + req.url, function (err, data) {
+        if (err) {
+          res.writeHead(404)
+          res.end(JSON.stringify(err))
+          return
+        }
+        res.writeHead(200)
+        res.end(data)
+      })
     }
   } catch (error) {
     console.log(error);

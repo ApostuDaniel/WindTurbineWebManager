@@ -101,6 +101,23 @@ async function getLocation(turbine) {
   return location;
 }
 
+async function getTurbinesCSV(userId){
+  const endpoint =
+    'http://localhost:5000/api/turbines/private/' + userId + '/csv'
+  const data = await fetch(endpoint)
+  const csvData = await data.blob()
+  return csvData
+}
+
+async function getUsersCSV(){
+  const endpoint = 'http://localhost:5000/api/users/csv'
+  const data = await fetch(endpoint)
+  const csvData = await data.blob()
+  return csvData
+}
+
+
+
 module.exports = {
   getAllCompanies,
   getTurbines,
@@ -115,4 +132,6 @@ module.exports = {
   getLocation,
   filterPublicTurbines,
   filterPrivateTurbines,
-};
+  getTurbinesCSV,
+  getUsersCSV
+}
