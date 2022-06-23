@@ -504,7 +504,7 @@ async function getResetPassPage(req, res) {
   }
 }
 
-async function getDocumentaionPage(req, res) {
+async function getDocumentationPage(req, res) {
   try {
     res.writeHead(200, { "Content-Type": "text/html" });
     var htmlContent = fs.readFileSync(
@@ -514,6 +514,27 @@ async function getDocumentaionPage(req, res) {
 
     var htmlRenderized = ejs.render(htmlContent, {
       filename: "scholaryDoc.ejs",
+    });
+
+    res.end(htmlRenderized);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+async function getAdminPage(req, res) {
+  try {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    var htmlContent = fs.readFileSync(
+      __dirname + "/../views/pages/admin.ejs",
+      "utf8"
+    );
+
+    const users = await restAPIInteraction.getUsers();
+
+    var htmlRenderized = ejs.render(htmlContent, {
+      filename: "admin.ejs",
+      users
     });
 
     res.end(htmlRenderized);
@@ -534,5 +555,6 @@ module.exports = {
   getResetPassPage,
   getUserDetailsPage,
   getNotificationsPage,
-  getDocumentaionPage
+  getDocumentationPage,
+  getAdminPage
 };

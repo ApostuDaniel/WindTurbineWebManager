@@ -50,6 +50,13 @@ async function getUser(id) {
   return user;
 }
 
+async function getUsers() {
+  const data = await fetch("http://localhost:5000/api/users");
+  const users = await data.json();
+
+  return users;
+}
+
 async function getTurbineNewData(id) {
   const data = await fetch(`http://localhost:5000/api/turbines/data/${id}/new`);
   const turbineData = await data.json();
@@ -100,6 +107,7 @@ module.exports = {
   getOwnedTurbines,
   getTurbine,
   getUser,
+  getUsers,
   getTurbineNewData,
   getTurbineAllData,
   getNotifications,

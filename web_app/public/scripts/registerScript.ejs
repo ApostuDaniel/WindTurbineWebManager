@@ -21,7 +21,7 @@
         var phone = document.querySelector("#phone").value;
         var adresa = document.querySelector("#adresa").value;
         var pass = document.querySelector("#registerpass").value;
-        
+
         if (
           nume == "" ||
           prenume == "" ||
@@ -38,7 +38,6 @@
           var validationMessage = "";
 
           //validation for name
-          
 
           if (!nume.match(/^[A-Za-z ]+$/)) {
             validationMessage =
@@ -116,8 +115,7 @@
   }
 
   const registerForm = document.querySelector(".signup");
- 
-  console.log("aici");
+  
   if (registerForm) {
     const fields = [
       "nume",

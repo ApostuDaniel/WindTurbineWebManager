@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <% var dir = process.cwd() %> <link rel="icon"
+  href=https://webprojectrdv.s3.amazonaws.com/favicon.png>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include(dir+'/public/css/adminStyle'); %>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jura:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Admin</title>
+  </head>
+  <body>
+    <% if(users.length > 0){ %>
+    <div class="users">
+      <% for(user of users) {%> <%- include(dir + "/views/partials/user",
+      {user:user}) %> <% } %>
+    </div>
+    <% } else{ %>
+    <div class="no-users"><p>There are no users</p></div>
+    <% } %>
+
+    <%- include (dir + "/public/scripts/adminScript") %>
+    <p>
+      <a href="http://jigsaw.w3.org/css-validator/check/referer">
+        <img
+          style="border: 0; width: 88px; height: 31px"
+          src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+          alt="CSS valid!"
+        />
+      </a>
+    </p>
+  </body>
+</html>

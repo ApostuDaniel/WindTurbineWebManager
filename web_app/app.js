@@ -39,7 +39,9 @@ const server = http.createServer((req, res) => {
     } else if (req.url === "/unauthorized") {
       PageController.getUnauthorizedPage(req, res);
     } else if (req.url === '/pages/doc') {
-      PageController.getDocumentaionPage(req, res);
+      PageController.getDocumentationPage(req, res);
+    } else if(req.url === '/pages/admin') {
+      PageController.getAdminPage(req, res);
     } else {
       res.writeHead(404, { 'Content-Type': 'text/html' })
       res.end('<h1>404 NOT FOUND</h1>')

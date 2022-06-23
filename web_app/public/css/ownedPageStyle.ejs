@@ -4,13 +4,13 @@
     user-select: none;
     font-family: "Jura", sans-serif;
     font-weight: bold;
-    color: #E9FEF7;
+    color: #e9fef7;
     letter-spacing: 1px;
   }
 
   body {
     margin: 0;
-    background-color: #E9FEF7;
+    background-color: #e9fef7;
   }
 
   .cardList {
@@ -111,20 +111,20 @@
     cursor: pointer;
   }
 
-.sideButtonsWrapper{
-  position: fixed;
-  top: 50vh;
-  display: flex;
-  flex-direction: column;
-}
+  .sideButtonsWrapper {
+    position: fixed;
+    top: 50vh;
+    display: flex;
+    flex-direction: column;
+  }
 
-.sideButton {
-  background-color: #0a0120;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+  .sideButton {
+    background-color: #0a0120;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
   }
 
   .sideButton img {
@@ -132,28 +132,29 @@
   }
 
   .tooltip {
-}
+    z-index: 101;
+  }
 
-/* Tooltip text */
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: #0a0120;
-  color: #7dd7bd;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
- 
-  /* Position the tooltip text - see examples below! */
-  position: absolute;
-  top: -5px;
-  left: 105%;
-  z-index: 1;
-}
+  /* Tooltip text */
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #0a0120;
+    color: #7dd7bd;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
 
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-}
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    top: -5px;
+    left: 105%;
+    z-index: 101;
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
 
   .stopped {
     color: red;

@@ -32,7 +32,7 @@
     document.cookie = name + "=" + (value || "") + expires + "; path=/"; // no expires for session cookie expires=0
   }
 
-  // function for getting the user data to theck the login
+  // function for getting the user data to check the login
   async function getId(mail, password) {
     const response = await fetch(
       `http://localhost:5000/api/users/login/${mail}/${password}`
