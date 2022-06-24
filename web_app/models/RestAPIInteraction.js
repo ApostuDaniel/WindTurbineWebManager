@@ -151,6 +151,18 @@ async function getUsersCSV() {
   return csvData;
 }
 
+async function postTurbine(turbine) {
+  const turbine_post_new_data_api_url = `http://localhost:5000/api/turbines`
+  const response = await fetch(turbine_post_new_data_api_url, {
+    method: 'POST',
+    mode: 'cors',
+    body: JSON.stringify(turbine),
+    headers: { 'Content-Type': 'application/json' },
+  })
+
+  console.log(response)
+}
+
 module.exports = {
   getAllCompanies,
   getTurbines,
@@ -171,4 +183,5 @@ module.exports = {
   getPublicTurbines,
   getAllNotifications,
   getAllAlerts,
+  postTurbine
 };

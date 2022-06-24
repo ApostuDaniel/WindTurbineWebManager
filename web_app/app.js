@@ -45,7 +45,9 @@ const server = http.createServer((req, res) => {
     } else if (req.url === '/pages/admin') {
       PageController.getAdminPage(req, res)
     } else if (req.url === '/import/turbines' && req.method === 'POST') {
-      PageController.uploadCSV(req, res)
+      const cookies = parseCookies(req)
+      const id = cookies.user_id
+      PageController.uploadCSV(req, res, id)
     } else {
       fs.readFile(__dirname + req.url, function (err, data) {
         if (err) {

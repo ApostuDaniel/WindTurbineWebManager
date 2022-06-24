@@ -106,14 +106,17 @@ const server = http.createServer((req, res) => {
       case "POST":
         if (req.url === "/api/turbines") {
           turbineController.createTurbine(req, res);
-        } else if (req.url === "/api/users") {
-          userController.createUser(req, res);
-        } else if (req.url === "/api/users/notifications") {
-          userController.createNotification(req, res);
-        } else if (req.url === "/api/users/alerts") {
-          userController.createAlert(req, res);
+        } else if (req.url === '/api/users') {
+          userController.createUser(req, res)
+        } else if (req.url === '/api/turbines/import') {
+          console.log("in import")
+          turbineController.importTurbines(req, res)
+        } else if (req.url === '/api/users/notifications') {
+          userController.createNotification(req, res)
+        } else if (req.url === '/api/users/alerts') {
+          userController.createAlert(req, res)
         } else {
-          throw new Error("POST route not found");
+          throw new Error('POST route not found')
         }
         break;
       case "PUT":

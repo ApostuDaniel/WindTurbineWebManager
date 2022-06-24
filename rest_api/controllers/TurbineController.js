@@ -408,6 +408,8 @@ async function updateTurbine(req, res, id) {
   }
 }
 
+// @desc    Deletes a turbine
+// @route   DELETE /api/turbines/:id
 async function deleteTurbine(req, res, id) {
   try {
     await helperDeleteTurbineRelatedData(id)
@@ -416,6 +418,17 @@ async function deleteTurbine(req, res, id) {
   } catch (error) {
     console.log(error)
   }
+}
+
+// @desc    imports data from csv
+// @route   POST /api/turbines/import
+async function importTurbines(req, res){
+  const body = await getRequestData(req)
+  console.log("Obtained request body")
+  console.log(body)
+
+  res.writeHead(201, { 'Content-Type': 'application/json' })
+  res.end(JSON.stringify({message : "imported Succesfuly"}))
 }
 
 async function helperDeleteTurbineRelatedData(id) {
@@ -441,4 +454,5 @@ module.exports = {
   deleteTurbine,
   filterTurbines,
   getPrivateTurbinesCSV,
+  importTurbines,
 }

@@ -32,16 +32,16 @@
         <span class="tooltiptext">Add Turbine</span>
         <img src="https://webprojectrdv.s3.amazonaws.com/addIcon.png" />
       </div>
-      <div class="sideButton tooltip" id="exportTurbines" onclick="downloadTurbinesCSV('<%= userId %>')">
       <div
         class="sideButton tooltip"
+        id="exportTurbines"
         onclick="downloadTurbinesCSV('<%= userId %>')"
       >
         <span class="tooltiptext">Export Turbines to CSV</span>
         <img src="https://img.icons8.com/dusk/344/export-csv.png">
       </div>
       <div class="sideButton tooltip" id="importTurbines">
-        <form action="http://localhost:5001/import/turbines" method="post" accept="text/csv" id="csvUploadForm">
+        <form action="http://localhost:5001/import/turbines" method="post" accept="text/csv" enctype="multipart/form-data" id="csvUploadForm">
           <input type="file" name="csvfile-input" id="csvfile-input">
         </form>
         <span class="tooltiptext">Import Turbines from CSV</span>

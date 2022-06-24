@@ -17,3 +17,19 @@ const importDiv = document.getElementById('importTurbines')
 const form = document.forms['csvUploadForm']
 importDiv.addEventListener('click', () => importInput.click(), false)
 importInput.addEventListener('change', () => form.submit())
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault()
+  const formData = new FormData(form)
+  console.log(formData.keys())
+  await postDataToServer(formData)
+
+  location.reload()
+})
+
+async function postDataToServer(data){
+  await fetch('http://localhost:5000/api/turbines/import', {
+    method: 'POST',
+    body: data,
+  })
+}

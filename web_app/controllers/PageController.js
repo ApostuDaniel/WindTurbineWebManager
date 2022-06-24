@@ -484,7 +484,7 @@ async function uploadCSV(req, res, userId){
           if(object.userId == null || object.userId != userId) throw new Error("turbine doesn't belong to logged user")
         }
          for (object of objectArray) {
-           
+           restAPIInteraction.postTurbine(object)
          }
 
       }
