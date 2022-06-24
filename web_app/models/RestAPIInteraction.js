@@ -85,6 +85,13 @@ async function getTurbineAllData(id) {
   return turbineData;
 }
 
+
+async function getAllTurbines() {
+  const data = await fetch(`http://localhost:5000/api/turbines`);
+  const turbineData = await data.json();
+  return turbineData;
+}
+
 async function getNotifications(id) {
   const data = await fetch(
     `http://localhost:5000/api/users/${id}/notifications`
@@ -183,5 +190,6 @@ module.exports = {
   getPublicTurbines,
   getAllNotifications,
   getAllAlerts,
-  postTurbine
+  postTurbine,
+  getAllTurbines,
 };
