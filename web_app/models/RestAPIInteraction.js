@@ -50,6 +50,13 @@ async function getUser(id) {
   return user;
 }
 
+async function getPublicTurbines() {
+  const data = await fetch("http://localhost:5000/api/turbines/public");
+  const publicTurbines = await data.json();
+
+  return publicTurbines;
+}
+
 async function getUsers() {
   const data = await fetch("http://localhost:5000/api/users");
   const users = await data.json();
@@ -64,6 +71,13 @@ async function getTurbineNewData(id) {
   return turbineData;
 }
 
+async function getUserByEmail(email) {
+  const data = await fetch(`http://localhost:5000/api/users/mail/${email}`);
+  const userData = await data.json();
+
+  return userData;
+}
+
 async function getTurbineAllData(id) {
   const data = await fetch(`http://localhost:5000/api/turbines/data/${id}`);
   const turbineData = await data.json();
@@ -74,6 +88,23 @@ async function getTurbineAllData(id) {
 async function getNotifications(id) {
   const data = await fetch(
     `http://localhost:5000/api/users/${id}/notifications`
+  );
+  const notifications = await data.json();
+
+  return notifications;
+}
+async function getAllNotifications() {
+  const data = await fetch(
+    `http://localhost:5000/api/users/notifications`
+  );
+  const notifications = await data.json();
+
+  return notifications;
+}
+
+async function getAllAlerts() {
+  const data = await fetch(
+    `http://localhost:5000/api/users/alerts`
   );
   const notifications = await data.json();
 
@@ -101,26 +132,24 @@ async function getLocation(turbine) {
   return location;
 }
 
-async function getCSV(path){
-  const data = await fetch(path)
-  const csvData = await data.blob()
-  return csvData
+async function getCSV(path) {
+  const data = await fetch(path);
+  const csvData = await data.blob();
+  return csvData;
 }
 
-async function getTurbinesCSV(userId){
+async function getTurbinesCSV(userId) {
   const csvData = await getCSV(
-    'http://localhost:5000/api/turbines/private/' + userId + '/csv'
-  )
-  return csvData
+    "http://localhost:5000/api/turbines/private/" + userId + "/csv"
+  );
+  return csvData;
 }
 
-async function getUsersCSV(){
-  const endpoint = 'http://localhost:5000/api/users/csv'
-  const csvData = await getCSV('http://localhost:5000/api/users/csv')
-  return csvData
+async function getUsersCSV() {
+  const endpoint = "http://localhost:5000/api/users/csv";
+  const csvData = await getCSV("http://localhost:5000/api/users/csv");
+  return csvData;
 }
-
-
 
 module.exports = {
   getAllCompanies,
@@ -137,5 +166,9 @@ module.exports = {
   filterPublicTurbines,
   filterPrivateTurbines,
   getTurbinesCSV,
-  getUsersCSV
-}
+  getUsersCSV,
+  getUserByEmail,
+  getPublicTurbines,
+  getAllNotifications,
+  getAllAlerts,
+};
