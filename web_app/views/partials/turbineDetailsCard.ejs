@@ -12,10 +12,10 @@
     </div>
 
     <div class="buttons">
-      <% if(turbine.turbineState === 'Stopped'){ %>
+      <% if(turbine.turbineState === 'Maintenance'){ %>
         <button onclick="startTurbine(`<%= turbine._id %>`)">Start</button>
       <% } else{ %>  
-        <button onclick="stopTurbine(`<%= turbine._id %>`)">Stop</button>
+        <button onclick="maintainTurbine(`<%= turbine._id %>`)">Maintenance</button>
       <% } %>
 
       <% if(turbine.isPublic){ %>
