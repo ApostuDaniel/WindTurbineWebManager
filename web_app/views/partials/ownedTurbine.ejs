@@ -8,7 +8,10 @@
       <div class="attribute">Terrain: <%= turbine.terrain %></div>
       <% if(turbine.turbineState === 'Stopped'){ %>
         <div class="attribute"><p class="stopped"><%= turbine.turbineState %></p></div>
-      <% } else{ %>  
+      <% } else  %>  
+        <% if(turbine.turbineState === 'Maintenance'){ %>
+          <div class="attribute"><p class="maintenance"><%= turbine.turbineState %></p></div>
+        <% } else { %>  
         <div class="attribute"><p class="running"><%= turbine.turbineState %></p></div>
       <% } %>
       <div class="attribute">

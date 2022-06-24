@@ -18,10 +18,10 @@ for(let index = 0; index < buttons.length; index++) {
   })
 }
 
-async function stopTurbine(id) {
+async function maintainTurbine(id) {
   const put_turbine_api_url = `http://localhost:5000/api/turbines/${id}`;
   const newState = {
-    turbineState: 'Stopped'
+    turbineState: 'Maintenance'
   }
 
   await fetch(put_turbine_api_url, {
