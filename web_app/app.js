@@ -42,18 +42,22 @@ const server = http.createServer((req, res) => {
       PageController.getUnauthorizedPage(req, res);
     } else if (req.url === "/pages/doc") {
       PageController.getDocumentationPage(req, res);
-    } else if (req.url === "/pages/admin") {
-      PageController.getAdminPage(req, res);
+    } else if (req.url === '/pages/admin') {
+      PageController.getAdminPage(req, res)
+    } else if (req.url === '/import/turbines' && req.method === 'POST') {
+      const cookies = parseCookies(req)
+      const id = cookies.user_id
+      PageController.uploadCSV(req, res, id)
     } else {
       fs.readFile(__dirname + req.url, function (err, data) {
         if (err) {
-          res.writeHead(404);
-          res.end(JSON.stringify(err));
-          return;
+          res.writeHead(404)
+          res.end(JSON.stringify(err))
+          return
         }
-        res.writeHead(200);
-        res.end(data);
-      });
+        res.writeHead(200)
+        res.end(data)
+      })
     }
   } catch (error) {
     console.log(error);

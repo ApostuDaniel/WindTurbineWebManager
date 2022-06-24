@@ -183,6 +183,10 @@ body {
   margin: auto;
 }
 
+#csvfile-input{
+  display:none;
+}
+
 
 .map-wrapper {
   width: 70%;
