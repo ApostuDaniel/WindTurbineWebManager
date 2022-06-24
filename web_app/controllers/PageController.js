@@ -20,7 +20,19 @@ async function getLandingPage(req, res) {
     console.log(error.message);
   }
 }
+async function getApiDocumentationPage(req, res) {
+  try {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    var htmlContent = fs.readFileSync(
+      __dirname + "/../views/pages/apiDocumentation.html",
+      "utf8"
+    );
 
+    res.end(htmlContent)
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 async function getPublicPage(req, res, id) {
   try {
     res.writeHead(200, { "Content-Type": "text/html" });
@@ -464,5 +476,6 @@ module.exports = {
   getUserDetailsPage,
   getNotificationsPage,
   getDocumentationPage,
-  getAdminPage
+  getAdminPage,
+  getApiDocumentationPage
 };
