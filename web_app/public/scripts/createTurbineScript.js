@@ -93,7 +93,7 @@ function getCreateTurbineData() {
       console.log(turbine);
       postTurbine(turbine);
 
-      window.location.href = "/pages/public";
+      window.location.href = "/pages/owned";
       console.log(turbine);
     }
   });

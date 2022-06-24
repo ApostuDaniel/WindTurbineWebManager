@@ -62,6 +62,8 @@
 </form>
 <script type="text/javascript">
   document.getElementById("reset").onclick = function () {
-    location.href = "http://localhost:5001/pages/public";
+     if(window.location.href.search('owned') != -1)
+        {location.href = "http://localhost:5001/pages/owned"}
+     else {location.href = "http://localhost:5001/pages/public"}
   };
 </script>

@@ -61,8 +61,8 @@ const server = http.createServer((req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.writeHead(404, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ message: "Route Not Found" }));
+    res.writeHead(404, { "Content-Type": "text/html" });
+    res.end("<h1>404 NOT FOUND</h1>");
   }
 });
 

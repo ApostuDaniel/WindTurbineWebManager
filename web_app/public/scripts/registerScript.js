@@ -112,7 +112,7 @@ class Register {
     console.log(response);
     if (response.status == 201) {
       console.log("Register successful");
-      window.location.href = 'http://localhost:5001/pages/login/';
+      window.location.href = 'http://localhost:5001/pages/login';
     } else {
       console.log("User with this data already exists");
 

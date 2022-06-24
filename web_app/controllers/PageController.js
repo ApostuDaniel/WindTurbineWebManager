@@ -364,7 +364,7 @@ async function getTurbineDetailsPage(req, res, id, userId) {
       lineTitle: "Measured Wind Speed",
       chartName: "Wind Speed",
       yAxisLabel: "Time",
-      xAxisLabel: "Wind Speed (km/h)",
+      xAxisLabel: "Wind Speed (m/s)",
       isAsccendingGreen: false,
     };
 
