@@ -1,6 +1,6 @@
 const assert = require("assert");
 const {
-  getAllNotifications,
+  getAllAlerts,
   getUsers,
 } = require("../models/RestAPIInteraction");
 
@@ -8,18 +8,18 @@ const {
 
 async function test() {
   var users = await getUsers();
-  var notifications = await getAllNotifications();
-  var validate = false;
-  for (notification of notifications) {
+  var alerts = await getAllAlerts();
+  var validation = false;
+  for (currentAlert of alerts) {
     for (user of users) {
       if (
-        notification.idBuyer == user._id ||
-        notification.idSeller == user._id
+        currentAlert.idUser == user._id 
+        
       ) {
         validation = true;
       }
     }
   }
-  assert(validation === true, "Notification does not belong to anyone");
+  assert(validation === true, "Alert does not belong to anyone");
 }
 test();

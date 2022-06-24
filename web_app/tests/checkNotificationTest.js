@@ -9,7 +9,7 @@ const {
 async function test() {
   var users = await getUsers();
   var notifications = await getAllNotifications();
-  var validate = false;
+  var validation = false;
   for (notification of notifications) {
     for (user of users) {
       if (
