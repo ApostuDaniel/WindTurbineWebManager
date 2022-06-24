@@ -180,3 +180,7 @@ body {
   color: #0a0120;
   margin: auto;
 }
+
+#csvfile-input{
+  display:none;
+}
