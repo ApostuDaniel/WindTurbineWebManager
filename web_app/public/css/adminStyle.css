@@ -33,7 +33,7 @@ body {
   border-radius: 20px;
 }
 
-.exportUsers{
+.exportUsers {
   width: 30%;
   height: 35px;
   display: flex;
@@ -49,7 +49,7 @@ body {
   cursor: pointer;
 }
 
-.exportUsers img{
+.exportUsers img {
   height: 90%;
 }
 
@@ -112,16 +112,16 @@ button:hover {
   margin: auto;
 }
 
-.exitPage{
+.exitPage {
   width: 20px;
   height: 20px;
   background-color: white;
   position: fixed;
   border-radius: 5px;
-  top:10%;
-  left:10%;
+  top: 10%;
+  left: 10%;
   cursor: pointer;
 }
-.exitPage img{
+.exitPage img {
   height: 15px;
 }
