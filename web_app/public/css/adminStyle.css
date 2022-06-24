@@ -115,7 +115,7 @@ button:hover {
 .exitPage {
   width: 20px;
   height: 20px;
-  background-color: white;
+  background-color: #0a0120;
   position: fixed;
   border-radius: 5px;
   top: 10%;

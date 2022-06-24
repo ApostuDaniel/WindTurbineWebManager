@@ -186,13 +186,14 @@ body {
 
 .map-wrapper {
   width: 70%;
-  border: 1px solid #0a0120;
+  border: 1px solid #7dd7bd;
   margin-bottom: 10px;
   border-radius: 20px;
   margin: auto;
   margin-top: 10px;
   padding-left: 10px;
   padding-right: 10px;
+  background-color: #0a0120;
 }
 
 .map-header {
@@ -202,7 +203,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  color: #0a0120;
+  color: #7dd7bd;
 }
 
 .map-header img {

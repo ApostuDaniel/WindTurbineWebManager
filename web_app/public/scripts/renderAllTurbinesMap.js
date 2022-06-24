@@ -18,7 +18,6 @@ function initMap() {
     center: { lat: 47.397, lng: 27.644 },
   });
 
-  console.log(turbines);
   for (turbine of turbines) {
     marker = new google.maps.Marker({
       map,
