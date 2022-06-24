@@ -94,7 +94,8 @@ async function putTheDataFirstForm(
   phone,
   address
 ) {
-  const id = getCookie("user_id");
+
+  const id = getCookie("user_id").valueOf();
   const newUserData = {
     firstName: firstName,
     lastName: secondName,
@@ -112,7 +113,7 @@ async function putTheDataFirstForm(
 }
 
 async function putTheDataSecondForm(password) {
-  const id = getCookie("user_id");
+  const id = getCookie("user_id").valueOf();
   const newUserData = {
     password: password,
   };

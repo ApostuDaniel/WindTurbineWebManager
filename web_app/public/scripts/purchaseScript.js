@@ -27,6 +27,11 @@ async function checkIfExists(buyerId, turbineId) {
   return false;
 }
 
+async function sendNotification()
+{
+  
+}
+
 async function createNotification(buyerId, sellerId, turbineId) {
   const post_notification_api_url =
     "http://localhost:5000/api/users/notifications";
@@ -41,6 +46,30 @@ async function createNotification(buyerId, sellerId, turbineId) {
     method: "POST",
     body: JSON.stringify(requestBody),
   });
+
+
+  const userName = await fetch(
+    `http://localhost:5000/api/users/${sellerId}`
+  );
+  const data = await userName.json();
+
+  const turbineName = await fetch(
+    `http://localhost:5000/api/turbines/${turbineId}`
+  );
+  const turbineData = await turbineName.json();
+
+  var params = {
+    username: data.firstName,
+    turbinename: turbineData.name,
+    email: data.mail,
+  };
+  console.log(params)
+  emailjs
+    .send("service_wih0602", "template_n6lzaru", params)
+    .then(function (res) {
+      console.log("succes", res.status);
+    });
+
 }
 
 function setSpinnersAttributes(turbines) {

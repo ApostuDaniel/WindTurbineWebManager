@@ -13,5 +13,5 @@ var checkCookie=getCookie("user_id");
 
 if (!checkCookie)
 {
-    window.location.href=`http://localhost:5001/unauthorized`
+    window.location.href=`http://localhost:5001/pages/login`
 }
