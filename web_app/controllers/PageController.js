@@ -1,6 +1,10 @@
 const fs = require("fs");
+const fsp = fs.promises
 const ejs = require("ejs");
 const url = require("url");
+const formidable = require('formidable')
+const csv = require('csvtojson')
+
 
 const fetch = (url) =>
   import("node-fetch").then(({ default: fetch }) => fetch(url));
@@ -463,6 +467,35 @@ async function getAdminPage(req, res) {
   }
 }
 
+async function uploadCSV(req, res, userId){
+  let form = new formidable.IncomingForm()
+
+  //Process the file upload in Node
+  form.parse(req, async function (error, fields, file) {
+    let filepath = file.fileupload.filepath
+    let newpath = __dirname + '../data/'
+    newpath += file.fileupload.originalFilename
+
+    await fsp.rename(filepath, newpath)
+    csv().fromFile(newpath).then((objectArray) => {
+      try{
+        for(object of objectArray)
+        {
+          if(object.userId == null || object.userId != userId) throw new Error("turbine doesn't belong to logged user")
+        }
+         for (object of objectArray) {
+           
+         }
+
+      }
+      catch(error){
+        console.log(error.message)
+      }
+      getPrivatePage(req, res, id)
+    })
+  })
+}
+
 module.exports = {
   getPublicPage,
   getPrivatePage,
@@ -477,5 +510,6 @@ module.exports = {
   getNotificationsPage,
   getDocumentationPage,
   getAdminPage,
-  getApiDocumentationPage
+  getApiDocumentationPage,
+  uploadCSV
 };

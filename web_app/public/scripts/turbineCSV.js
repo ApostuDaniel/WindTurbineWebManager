@@ -11,3 +11,9 @@ async function downloadTurbinesCSV(userId){
   a.download = "turbines" + userId
   a.click()
 }
+
+const importInput = document.getElementById('csvfile-input')
+const importDiv = document.getElementById('importTurbines')
+const form = document.forms['csvUploadForm']
+importDiv.addEventListener('click', () => importInput.click(), false)
+importInput.addEventListener('change', () => form.submit())
