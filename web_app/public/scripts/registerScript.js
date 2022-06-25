@@ -1,27 +1,26 @@
 class Register {
-    constructor(registerForm, fields) {
-      this.registerForm = registerForm;
-      this.fields = fields;
+  constructor(registerForm, fields) {
+    this.registerForm = registerForm;
+    this.fields = fields;
 
-      this.validateOnSubmit();
-    }
+    this.validateOnSubmit();
+  }
 
-    validateOnSubmit() {
-      let self = this;
+  validateOnSubmit() {
+    let self = this;
 
-      this.registerForm.addEventListener("submit", (e) => {
-        e.preventDefault();
+    this.registerForm.addEventListener("submit", (e) => {
+      e.preventDefault();
 
-        var nume = document.querySelector("#nume").value;
-        var prenume = document.querySelector("#prenume").value;
-        var firma = document.querySelector("#firma").value;
-        var cnp = document.querySelector("#cnp").value;
-        var mail = document.querySelector("#registermail").value;
-        var phone = document.querySelector("#phone").value;
-        var adresa = document.querySelector("#adresa").value;
-        var pass = document.querySelector("#registerpass").value;
-        if (mail!="turbinemanager13@gmail.com")
-        {
+      var nume = document.querySelector("#nume").value;
+      var prenume = document.querySelector("#prenume").value;
+      var firma = document.querySelector("#firma").value;
+      var cnp = document.querySelector("#cnp").value;
+      var mail = document.querySelector("#registermail").value;
+      var phone = document.querySelector("#phone").value;
+      var adresa = document.querySelector("#adresa").value;
+      var pass = document.querySelector("#registerpass").value;
+      if (mail != "turbinemanager13@gmail.com") {
         if (
           nume == "" ||
           prenume == "" ||
@@ -70,69 +69,66 @@ class Register {
             postTheData(nume, prenume, firma, cnp, mail, phone, adresa, pass);
           }
         }
-      }
-      else
-      {
+      } else {
         const displayError = document.getElementById("errormessage");
-          displayError.innerHTML = "You can't use this email";
-        
+        displayError.innerHTML = "You can't use this email";
       }
-      });
-    }
-  }
-
-  async function postTheData(
-    nume,
-    prenume,
-    firma,
-    cnp,
-    mail,
-    phone,
-    adresa,
-    pass
-  ) {
-    const response = await fetch("http://localhost:5000/api/users", {
-      method: "POST",
-      body: JSON.stringify({
-        firstName: nume,
-        lastName: prenume,
-        company: firma,
-        CNP: cnp,
-        mail: mail,
-        phone: phone,
-        adress: adresa,
-        password: pass,
-      }),
-      headers: {
-        "Content-type": "application/json;",
-      },
     });
-
-    const data = await response.json();
-    console.log(response);
-    if (response.status == 201) {
-      console.log("Register successful");
-      window.location.href = 'http://localhost:5001/pages/login';
-    } else {
-      console.log("User with this data already exists");
-
-      const displayError = document.getElementById("errormessage");
-      displayError.innerHTML = "A field is duplicate";
-    }
   }
+}
 
-  const registerForm = document.querySelector(".signup");
-  
-  if (registerForm) {
-    const fields = [
-      "nume",
-      "prenume",
-      "firma",
-      "cnp",
-      "mail",
-      "phone",
-      "adresa",
-      "pass",
-    ];
-    const validator = new Register(registerForm, fields);
+async function postTheData(
+  nume,
+  prenume,
+  firma,
+  cnp,
+  mail,
+  phone,
+  adresa,
+  pass
+) {
+  const response = await fetch("http://localhost:5000/api/users", {
+    method: "POST",
+    body: JSON.stringify({
+      firstName: nume,
+      lastName: prenume,
+      company: firma,
+      CNP: cnp,
+      mail: mail,
+      phone: phone,
+      adress: adresa,
+      password: pass,
+    }),
+    headers: {
+      "Content-type": "application/json;",
+    },
+  });
+
+  const data = await response.json();
+  console.log(response);
+  if (response.status == 201) {
+    console.log("Register successful");
+    window.location.href = "http://localhost:5001/pages/login";
+  } else {
+    console.log("User with this data already exists");
+
+    const displayError = document.getElementById("errormessage");
+    displayError.innerHTML = "A field is duplicate";
   }
+}
+
+const registerForm = document.querySelector(".signup");
+
+if (registerForm) {
+  const fields = [
+    "nume",
+    "prenume",
+    "firma",
+    "cnp",
+    "mail",
+    "phone",
+    "adresa",
+    "pass",
+  ];
+  const validator = new Register(registerForm, fields);
+}

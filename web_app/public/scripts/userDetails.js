@@ -57,8 +57,7 @@ async function changeDetailsFirstForm() {
     phone == "" ||
     address == ""
   ) {
-    document.getElementById("error").innerText =
-      "All fields should be filled";
+    document.getElementById("error").innerText = "All fields should be filled";
   } else {
     if (!firstName.match(/^[A-Za-z ]+$/)) {
       validationMessage =
@@ -94,7 +93,6 @@ async function putTheDataFirstForm(
   phone,
   address
 ) {
-
   const id = getCookie("user_id").valueOf();
   const newUserData = {
     firstName: firstName,

@@ -29,9 +29,9 @@ function initMap() {
 }
 
 function expand(img) {
-    const content = document.getElementById('map-content');
-    content.classList.toggle('expand');
-    img.classList.toggle('rotate');
+  const content = document.getElementById("map-content");
+  content.classList.toggle("expand");
+  img.classList.toggle("rotate");
 }
 
 window.initMap = initMap;

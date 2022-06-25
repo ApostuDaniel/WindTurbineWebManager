@@ -3,10 +3,6 @@ function redirectToDetailsPage(id, alertId) {
     location.href = `http://localhost:5001/pages/turbineDetails/${id}`;
 }
 
-function removeAlert(alertId) {
-    removeAlert(alertId);
-}
-
 async function removeAlert(alertId) {
     const alert = document.getElementById('id' + alertId);
     console.log(alert);
