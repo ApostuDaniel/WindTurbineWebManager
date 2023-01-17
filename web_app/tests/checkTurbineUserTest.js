@@ -3,7 +3,7 @@ const {
   getAllTurbines,
   getUsers,
 } = require("../models/RestAPIInteraction");
-
+//check if all turbines are asigned to a user
 async function test()
 {
     var users=await getUsers()
